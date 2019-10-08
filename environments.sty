@@ -1,0 +1,101 @@
+% --- begin package declaration
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{environments}
+
+\RequirePackage{xparse} % better environment definitions
+\RequirePackage{changepage} % indent environment
+\RequirePackage{xcolor} % colors
+\RequirePackage{mdframed} % background colors of environments
+\RequirePackage{hyperref} % referencing
+\RequirePackage{enumitem} % defining list environments
+%\RequirePackage{etoolbox} % parskip bugfix
+
+% --- parskip bugfix
+%\AtBeginDocument{
+%	\newlength{\currentparskip}
+%	\setlength{\currentparskip}{\parskip}
+%	\AtBeginEnvironment{minipage}{
+%		\setlength{\parskip}{\currentparskip}
+%	}
+%	%\AfterBeginEnvironment{minipage}{
+%	%	\setlength{\parskip}{\currentparskip}
+%	%}
+%}
+
+% --- define environments
+
+%\definecolor{verylightgray}{HTML}{F5F5F5}
+\definecolor{verylightgray}{HTML}{FFFFFF}
+
+\NewDocumentEnvironment{tab}{o}
+{
+	\begin{adjustwidth}{\IfNoValueTF{#1}{1cm}{#1}}{}
+}{
+	\end{adjustwidth}
+}
+
+\makeatletter
+\newcounter{theoremcounter}[subsection]
+\renewcommand{\thetheoremcounter}{\thesubsection.\arabic{theoremcounter}}
+
+\NewDocumentEnvironment{@theoremenvironment}{mm}
+{
+	\vspace{6pt}
+	\begin{mdframed}[backgroundcolor=verylightgray,leftline=true,rightline=false,topline=false,bottomline=false,linecolor=black,linewidth=1pt,leftmargin=-6pt,innerleftmargin=5pt,rightmargin=-6pt,innerrightmargin=5pt,innertopmargin=6pt]\refstepcounter{theoremcounter}\textbf{#1 \thetheoremcounter}\IfNoValueTF{#2}{}{ (#2)}
+	%\underline{\textbf{Definition 2.1.3}}
+	%\begin{tab}[.7cm]
+	\vspace{3pt}\newline%\itshape
+}{
+	%\end{tab}
+	\end{mdframed}
+}
+
+\NewDocumentEnvironment{definition}{o}
+{\begin{@theoremenvironment}{Definition}{#1}}{\end{@theoremenvironment}}
+
+\NewDocumentEnvironment{construction}{o}
+{\begin{@theoremenvironment}{Construction}{#1}}{\end{@theoremenvironment}}
+
+\NewDocumentEnvironment{lemma}{o}
+{\begin{@theoremenvironment}{Lemma}{#1}}{\end{@theoremenvironment}}
+
+\NewDocumentEnvironment{proposition}{o}
+{\begin{@theoremenvironment}{Proposition}{#1}}{\end{@theoremenvironment}}
+
+\NewDocumentEnvironment{theorem}{o}
+{\begin{@theoremenvironment}{Theorem}{#1}}{\end{@theoremenvironment}}
+
+\NewDocumentEnvironment{corollary}{o}
+{\begin{@theoremenvironment}{Corollary}{#1}}{\end{@theoremenvironment}}
+
+\NewDocumentEnvironment{remark}{o}
+{\begin{@theoremenvironment}{Remark}{#1}}{\end{@theoremenvironment}}
+
+\newlist{@prooflist}{enumerate}{5}
+\setlist[@prooflist]{topsep=.5\baselineskip, align=left, labelwidth=1cm, leftmargin=1.15cm}
+
+\NewDocumentEnvironment{@proofenvironment}{mm}
+{
+	\begin{@prooflist}[label={\textit{#1}}]
+		\item
+}{
+	%dirtyhacksbeingdirty
+	\textcolor{white}{.}\hfill #2\end{@prooflist}
+}
+
+\NewDocumentEnvironment{proof}{}
+{\begin{@proofenvironment}{Proof}{$\square$}}{\end{@proofenvironment}}
+
+\NewDocumentEnvironment{sketch}{}
+{\begin{@proofenvironment}{Sketch}{$\Diamond$}}{\end{@proofenvironment}}
+
+\NewDocumentEnvironment{claim}{}
+{\begin{@proofenvironment}{Claim}{}}{\end{@proofenvironment}}
+\makeatother
+
+
+
+% --- end package declaration
+
+\endinput

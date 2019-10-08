@@ -1,0 +1,171 @@
+% --- begin package declaration
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{notation}
+
+\RequirePackage{mathtools} %required for coloneqq
+\RequirePackage{graphicx} %required for rescaling mono tails
+\RequirePackage{semantic} % required for mathlig
+\RequirePackage{xparse} % better command definitions
+%\RequirePackage{extpfeil}
+\RequirePackage{xcolor} % colored todo command
+\RequirePackage{mathbbol} % mathbb 1234
+
+%TODO add extendable arrows via extpfeil
+
+
+% --- basics
+\NewDocumentCommand{\TODO}{m}{{\color{red}#1}}
+\NewDocumentCommand{\TOBI}{m}{{\color{blue}#1}}
+
+
+% --- arrows
+
+\makeatletter
+
+\newcommand{\@mysucc}{\resizebox{4pt}{\height}{$\succ$}}
+%\newcommand{\@mysucc}{\rarrowhead} % TODO ask columbus
+\newcommand{\@myprec}{\resizebox{4pt}{\height}{$\prec$}}
+
+\newcommand{\longrightepi}{\longrightarrow\mathrel{\mkern-25mu}\longrightarrow}
+\newcommand{\longleftepi}{\longleftarrow\mathrel{\mkern-25mu}\longleftarrow}
+\newcommand{\rightepi}{\rightarrow\mathrel{\mkern-25mu}\rightarrow}
+\newcommand{\leftepi}{\leftarrow\mathrel{\mkern-25mu}\rightarrow}
+
+\newcommand{\longrightmono}{\;\@mysucc\!\!\!\longrightarrow}
+\newcommand{\longleftmono}{\longleftarrow\!\!\!\@myprec\;}
+\newcommand{\rightmono}{\;\@mysucc\!\!\!\rightarrow}
+\newcommand{\leftmono}{\leftarrow\!\!\!\@myprec\;}
+
+\newcommand{\longrightincl}{\lhook\!\longrightarrow}
+\newcommand{\longleftincl}{\longleftarrow\!\rhook}
+\newcommand{\rightincl}{\lhook\!\rightarrow}
+\newcommand{\leftincl}{\leftarrow\!\rhook}
+
+\makeatother
+
+
+% --- ligatures
+
+\mathlig{:<==>}{\colon\iff}
+\mathlig{<==>}{\iff}
+\mathlig{==>}{\implies}
+\mathlig{<==}{\impliedby}
+
+\mathlig{>=}{\geq}
+\mathlig{<=}{\leq}
+\mathlig{!=}{\neq}
+
+\mathlig{:=}{\coloneqq}
+\mathlig{:}{\colon}
+\mathlig{=:}{\eqqcolon}
+
+\mathlig{|}{\mid}
+
+\mathlig{-->>}{\longrightepi}
+\mathlig{<<--}{\longleftepi}
+\mathlig{>-->}{\longrightmono}
+\mathlig{<--<}{\longleftmono}
+%\mathlig{(-->}{\longrightincl}
+%\mathlig{<--)}{\longleftincl}
+\mathlig{-->}{\longrightarrow}
+\mathlig{<--}{\longleftarrow}
+
+%TODO add -0-> arrow
+%TODO add ~~> arrow
+
+% --- double stroke characters
+\newcommand\A{\mathbb{A}}
+\newcommand\B{\mathbb{B}}
+\newcommand\C{\mathbb{C}}
+\newcommand\D{\mathbb{D}}
+\newcommand\E{\mathbb{E}}
+\newcommand\F{\mathbb{F}}
+\newcommand\G{\mathbb{G}} 
+\renewcommand\H{\mathbb{H}} %todo what does this originally do???
+\newcommand\I{\mathbb{I}}
+\newcommand\J{\mathbb{J}}
+\newcommand\K{\mathbb{K}}
+\renewcommand\L{\mathbb{L}} %todo what does this originally do???
+\newcommand\M{\mathbb{M}}
+\newcommand\N{\mathbb{N}}
+\renewcommand\O{\mathbb{O}} %todo what does this originally do???
+\renewcommand\P{\mathbb{P}} %todo what does this originally do???
+\newcommand\Q{\mathbb{Q}}
+\newcommand\R{\mathbb{R}}
+\let\parsymb\S
+\renewcommand\S{\mathbb{S}} %todo what does this originally do???
+\newcommand\T{\mathbb{T}}
+\newcommand\U{\mathbb{U}}
+\newcommand\V{\mathbb{V}}
+\newcommand\W{\mathbb{W}}
+\newcommand\X{\mathbb{X}}
+\newcommand\Y{\mathbb{Y}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\1{\mathbbm{1}}
+\newcommand\2{\mathbbm{2}}
+\newcommand\3{\mathbbm{3}}
+
+% --- symbol names
+\newcommand{\intersection}{\cap}
+\newcommand{\Intersection}{\bigcap}
+\newcommand{\union}{\cup}
+\newcommand{\Union}{\bigcup}
+\newcommand{\Sum}{\sum}
+\newcommand{\product}{\mathbin{\Pi}}
+\newcommand{\Product}{\prod}
+\newcommand{\coproduct}{\amalg}
+\newcommand{\Coproduct}{\coprod}
+\newcommand{\tensor}{\otimes}
+\newcommand{\Tensor}{\bigotimes}
+\newcommand{\join}{\vee}
+\renewcommand{\Join}{\bigvee}
+\newcommand{\meet}{\wedge}
+\newcommand{\Meet}{\bigwedge}
+
+\newcommand{\isom}{\cong}
+
+%\newcommand{}{}
+
+\NewDocumentCommand{\cat}{m}{\mathcal{#1}}
+%\NewDocumentCommand{\ncat}{m}{\underline{\textsf{\smash{#1}}}}
+\NewDocumentCommand{\ncat}{m}{\textsf{#1}}
+\NewDocumentCommand{\fun}{m}{\mathcal{#1}}
+
+
+% --- operators
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Iso}{Iso}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
+%\DeclareMathOperator{\Int}{Int}
+%\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tot}{Tot}
+\DeclareMathOperator{\Par}{Par}
+\DeclareMathOperator{\Fun}{Fun}
+\DeclareMathOperator{\Add}{Add}
+%\DeclareMathOperator{\Lax}{Lax}
+%\DeclareMathOperator{\Oplax}{Oplax}
+\DeclareMathOperator{\Lan}{Lan}
+\DeclareMathOperator{\Ran}{Ran}
+\DeclareMathOperator{\Cell}{Cell}
+\DeclareMathOperator{\Comp}{Comp}
+\DeclareMathOperator{\Poly}{Poly}
+\DeclareMathOperator{\Split}{Split}
+
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\cod}{cod}
+%\DeclareMathOperator{\lim}{lim} % already defined
+\DeclareMathOperator{\colim}{colim}
+\DeclareMathOperator{\eq}{eq}
+\DeclareMathOperator{\coeq}{coeq}
+%\DeclareMathOperator{\ker}{ker} % already defined
+\DeclareMathOperator{\coker}{coker}
+
+
+
+% --- end package declaration
+
+\endinput
