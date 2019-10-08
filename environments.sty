@@ -3,12 +3,12 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{environments}
 
-\RequirePackage{xparse} % better environment definitions
-\RequirePackage{changepage} % indent environment
-\RequirePackage{xcolor} % colors
-\RequirePackage{mdframed} % background colors of environments
-\RequirePackage{hyperref} % referencing
-\RequirePackage{enumitem} % defining list environments
+\RequirePackage{xparse} 		% better environment definitions
+\RequirePackage{changepage} 	% indent environment
+\RequirePackage{xcolor} 		% colors
+\RequirePackage{mdframed} 		% background colors of environments
+\RequirePackage{hyperref} 		% referencing
+\RequirePackage{enumitem} 		% defining list environments
 %\RequirePackage{etoolbox} % parskip bugfix
 
 % --- parskip bugfix
@@ -28,6 +28,10 @@
 %\definecolor{verylightgray}{HTML}{F5F5F5}
 \definecolor{verylightgray}{HTML}{FFFFFF}
 
+\NewDocumentCommand{\partitle}{mo}{
+	\subsubsection*{\parsymb\;#1}\IfNoValueTF{#2}{}{\label{#2}\addcontentsline{toc}{subsubsection}{\textcolor[HTML]{555555}{\hspace{1em}#1}}}
+}
+
 \NewDocumentEnvironment{tab}{o}
 {
 	\begin{adjustwidth}{\IfNoValueTF{#1}{1cm}{#1}}{}
@@ -39,10 +43,10 @@
 \newcounter{theoremcounter}[subsection]
 \renewcommand{\thetheoremcounter}{\thesubsection.\arabic{theoremcounter}}
 
-\NewDocumentEnvironment{@theoremenvironment}{mm}
+\NewDocumentEnvironment{@theoremenvironment}{mmm}
 {
 	\vspace{6pt}
-	\begin{mdframed}[backgroundcolor=verylightgray,leftline=true,rightline=false,topline=false,bottomline=false,linecolor=black,linewidth=1pt,leftmargin=-6pt,innerleftmargin=5pt,rightmargin=-6pt,innerrightmargin=5pt,innertopmargin=6pt]\refstepcounter{theoremcounter}\textbf{#1 \thetheoremcounter}\IfNoValueTF{#2}{}{ (#2)}
+	\begin{mdframed}[backgroundcolor=verylightgray,leftline=true,rightline=false,topline=false,bottomline=false,linecolor=black,linewidth=1pt,leftmargin=-6pt,innerleftmargin=5pt,rightmargin=-6pt,innerrightmargin=5pt,innertopmargin=6pt,nobreak=true\IfNoValueTF{#3}{}{,#3}]\refstepcounter{theoremcounter}\textbf{#1 \thetheoremcounter}\IfNoValueTF{#2}{}{ (#2)}
 	%\underline{\textbf{Definition 2.1.3}}
 	%\begin{tab}[.7cm]
 	\vspace{3pt}\newline%\itshape
@@ -51,26 +55,26 @@
 	\end{mdframed}
 }
 
-\NewDocumentEnvironment{definition}{o}
-{\begin{@theoremenvironment}{Definition}{#1}}{\end{@theoremenvironment}}
+\NewDocumentEnvironment{definition}{oo}
+{\begin{@theoremenvironment}{Definition}{#1}{#2}}{\end{@theoremenvironment}}
 
-\NewDocumentEnvironment{construction}{o}
-{\begin{@theoremenvironment}{Construction}{#1}}{\end{@theoremenvironment}}
+\NewDocumentEnvironment{construction}{oo}
+{\begin{@theoremenvironment}{Construction}{#1}{#2}}{\end{@theoremenvironment}}
 
-\NewDocumentEnvironment{lemma}{o}
-{\begin{@theoremenvironment}{Lemma}{#1}}{\end{@theoremenvironment}}
+\NewDocumentEnvironment{lemma}{oo}
+{\begin{@theoremenvironment}{Lemma}{#1}{#2}}{\end{@theoremenvironment}}
 
-\NewDocumentEnvironment{proposition}{o}
-{\begin{@theoremenvironment}{Proposition}{#1}}{\end{@theoremenvironment}}
+\NewDocumentEnvironment{proposition}{oo}
+{\begin{@theoremenvironment}{Proposition}{#1}{#2}}{\end{@theoremenvironment}}
 
-\NewDocumentEnvironment{theorem}{o}
-{\begin{@theoremenvironment}{Theorem}{#1}}{\end{@theoremenvironment}}
+\NewDocumentEnvironment{theorem}{oo}
+{\begin{@theoremenvironment}{Theorem}{#1}{#2}}{\end{@theoremenvironment}}
 
-\NewDocumentEnvironment{corollary}{o}
-{\begin{@theoremenvironment}{Corollary}{#1}}{\end{@theoremenvironment}}
+\NewDocumentEnvironment{corollary}{oo}
+{\begin{@theoremenvironment}{Corollary}{#1}{#2}}{\end{@theoremenvironment}}
 
-\NewDocumentEnvironment{remark}{o}
-{\begin{@theoremenvironment}{Remark}{#1}}{\end{@theoremenvironment}}
+\NewDocumentEnvironment{remark}{oo}
+{\begin{@theoremenvironment}{Remark}{#1}{#2}}{\end{@theoremenvironment}}
 
 \newlist{@prooflist}{enumerate}{5}
 \setlist[@prooflist]{topsep=.5\baselineskip, align=left, labelwidth=1cm, leftmargin=1.15cm}

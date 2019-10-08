@@ -1,0 +1,307 @@
+\input{../header.tex}
+
+\title{Summath(Abelian Categories)}
+\author{Jonas Linßen}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+
+	\newpage
+	\section{Abelian Categories}
+	\subsection{Pointed Categories}
+
+	\begin{definition}[pointed category]
+		A category $\cat{C}$ is \textbf{pointed}, if it has a \textit{zero object}, i.e. an object $0$, which is both initial and terminal. Recall that for given objects $X,Y$ in $\cat{C}$ the unique morphism $0_{XY}:X-->0-->Y$ is called the \textit{zero morphism} from $X$ to $Y$.
+	\end{definition}
+
+	\begin{definition}[kernel, cokernel]
+		Let $\cat{C}$ be a pointed category and $f:X-->Y$ be a morphism in $\cat{C}$.
+
+		The \textit{equalizer} $\ker f := \eq (f,0_{XY})$ is called the \textbf{kernel} of $f$, if it exists.\\
+		Dually, the \textit{coequalizer} $\coker f := \coeq(f,0_{XY})$ is called \textbf{cokernel} of $f$, if it exists.
+	\end{definition}
+
+	\begin{lemma}[properties of kernels and cokernels]
+		Let $\cat{C}$ be a pointed category. Then
+		\begin{enumerate}[(i)]
+			\item{
+				The kernel of $0:X-->Y$ is given by $1_X$ (up to isomorphism).\\
+				Dually, the cokernel of $0:X-->Y$ is given by $1_Y$ (up to isomorphism)
+			}
+			\item{
+				For ever monomorphism $f:X\longrightmono Y$ is holds that $\ker f = 0_{0X}$.\\
+				Dually, for every epimorphism $f:X \longrightepi Y$ it holds that $\coker f = 0_{Y0}$
+			}
+			\item{
+				For any morphisms $f:X-->Y$ and monomorphism $g:Y \longrightmono Z$ we have $\ker gf = \ker f$.\\
+				Dually, for any epmorphisms $f:X \longrightepi Y$ and morphism $g:Y \longrightmono Z$ we have the identity $\coker gf = \coker g$.
+			}
+		\end{enumerate}
+	\end{lemma}
+	\begin{sketch}
+		\begin{minipage}{\textwidth}
+		\begin{center}
+		\begin{tabular}{l|l}
+			\makecell{
+				(i) Consider\\
+				\begin{diagram}
+					\threebytwo
+						{}{T}{}
+						{X}{X}{Y}
+					\arrow[dashed]{n}{sw}{}
+					\arrow{n}{s}{t}[right]
+					\arrow{sw}{s}{1_X}[below]
+					\arrow[higher]{s}{se}{0_{XY}}[above]
+					\arrow[lower]{s}{se}{0_{XY}}[below]
+				\end{diagram}
+			}
+			&
+			\makecell{
+				(ii) Consider\\
+				\begin{diagram}
+					\threebytwo
+						{}{T}{}
+						{0}{X}{Y}
+					\arrow[dashed]{n}{sw}{}
+					\arrow{n}{s}{t}[right]
+					\arrow{sw}{s}{0_{0X}}[below]
+					\arrow[higher,mono]{s}{se}{f}[above]
+					\arrow[lower]{s}{se}{0_{XY}}[below]
+				\end{diagram}\vspace{1em}\\
+				and calculate $ft = 0t = 0 = f0$.
+			}\\
+			\hline
+			\makecell{
+				(iii) Consider\\
+				\begin{diagram}
+					\threebytwo
+						{}{T}{}
+						{K}{X}{Z}
+					\arrow[dashed]{n}{sw}{}
+					\arrow{n}{s}{t}[right]
+					\arrow{sw}{s}{\ker gf}[below]
+					\arrow[higher]{s}{se}{gf}[above]
+					\arrow[lower]{s}{se}{0_{XZ}}[below]
+				\end{diagram}\vspace{1em}\\
+				and observe that\\
+				$gft = 0t = g0t$ implies $ft = 0t$.
+			}
+		\end{tabular}
+		\end{center}
+		\end{minipage}
+	\end{sketch}
+
+	Note that a kernel is always mono and a cokernel is always epi. This leads to the following definition.
+
+	\begin{definition}[normal mono, normal epi]
+		Let $\cat{C}$ be a pointed category.
+
+		A monomorphism is \textbf{normal}, if it is a kernel.\\
+		Dually, an epimorphism is \textbf{normal}, if it is a cokernel.
+	\end{definition}
+
+	\begin{lemma}[characterization of normal morphisms]
+		Let $\cat{C}$ be a pointed category, $f:X-->Y$ be a morphism in $\cat{C}$ and assume that the following kernels and cokernels exist.
+
+		Then $f$ is a normal monomorphism if and only if $f = \ker \coker f$.\\
+		Dually, $f$ is a normal epimorphism if and only if $f = \coker \ker f$.
+	\end{lemma}
+	\begin{sketch}
+		TODO
+	\end{sketch}
+
+	\subsection{$\ncat{Ab}$-enriched, Additive and Abelian Categories}
+
+	\begin{definition}[$\ncat{Ab}$--enriched category]
+		A locally small category $\cat{A}$ is \textbf{$\ncat{Ab}$-enriched}, if every homset $\cat{A}(A,B)$ is an abelian group and the composition $\circ_{ABC}: \cat{A}(B,C) \times \cat{A}(A,B) --> \cat{A}(A,C)$ is a group homomorphism in both variables.
+	\end{definition}
+
+	\begin{definition}[biproduct]
+		Let $\cat{A}$ be an $\ncat{Ab}$-enriched category and $A,B$ be two objects. The \textbf{biproduct} $A \oplus B$ of $A$ and $B$ is an object $C$, which satisfies one of the following equivalent conditions.
+		\begin{enumerate}[(i)]
+			\item{
+				There are morphisms
+				$$
+					\begin{matrix}
+						\pi_A:C-->A,&\iota_A:A-->C,\\
+						\pi_B:C-->B,&\iota_B:B-->C,
+					\end{matrix}
+				$$
+				which satisfy the equations
+				\begin{align*}
+					\pi_A\iota_A, = 1_A, \hspace{1cm}\pi_B\iota_A = 0,\\
+					\pi_B\iota_B, = 1_B, \hspace{1cm}\pi_A\iota_B = 0,\\
+					\iota_A\pi_A + \iota_B\pi_B = 1_C\hspace{.7cm}
+				\end{align*}
+			}
+			\item{
+				$C$ is the product $A \times B$.
+			}
+			\item{
+				$C$ is the coproduct $A + B$.
+			}
+		\end{enumerate}
+	\end{definition}
+	\begin{sketch}
+		TODO
+	\end{sketch}
+
+	\begin{definition}[additive category, abelian category]
+		A locally small category $\cat{A}$ is \textbf{additive}, if
+		\begin{enumerate}[$\circ$]
+			\item{it is pointed, i.e. has a zero object,}
+			\item{is $\ncat{Ab}$-enriched}
+			\item{and has all binary biproducts.}
+		\end{enumerate}
+
+		An \textbf{abelian} category is an additive category, which
+		\begin{enumerate}[$\circ$]
+			\item{has all kernels and cokernels}
+			\item{and for which ever mono- or epimorphism is normal.}
+		\end{enumerate}
+	\end{definition}
+
+	\begin{proposition}[characterization of equalizers and coequalizers]
+		Let $\cat{A}$ be an additive category and $f_1,f_2$ be parallel morphisms.
+
+		Then, if the equalizer $\eq(f_1,f_2)$, the kernel $\ker(f_1-f_2)$ or the kernel $\ker(f_2-f_1)$ exists, so do the others and they are isomorphic.\\
+		Dually, if the coequalizer $\coeq(f_1,f_2)$, the cokernel $\coker(f_1-f_2)$ or the cokernel $\coker(f_2-f_1)$ exists, so do the others and they are isomorphic.
+	\end{proposition}
+	\begin{sketch}
+		TODO
+	\end{sketch}
+
+	\begin{corollary}[(Co-)Completeness of Abelian Categories]
+		Any abelian category is complete and cocomplete.
+	\end{corollary}
+	\begin{sketch}
+		TODO
+	\end{sketch}
+
+	\begin{theorem}[Uniqueness of additive structure]
+		The $\ncat{Ab}$-enrichment of an abelian group is unique (up to group isomorphism).
+	\end{theorem}
+	\begin{sketch}
+		TODO
+	\end{sketch}
+
+	\begin{corollary}[characterization of abelian categories]
+		A locally small category $\cat{A}$ is an abelian category if and only if it is a complete and cocomplete category with finite biproducts, where every monomorphism and every epimorphism is normal.
+	\end{corollary}
+
+	\begin{proposition}[characterization of monos, epis and isos]
+		Let $\cat{A}$ be an abelian category and $f:A-->B$ be a morphism.
+		
+		~\\
+		Then the following are equivalent.
+		\begin{enumerate}[(i)]
+			\item{
+				The morphism $f$ is a monomorphism.
+			}
+			\item{
+				The kernel of $f$ satisfies $\ker f = 0$.
+			}
+			\item{
+				For any morphism $t:T-->A$ it holds that $ft = 0$ implies $t = 0$.
+			}
+		\end{enumerate}
+		Dually, the following are equivalent.
+		\begin{enumerate}[(i)]
+			\item{
+				The morphism $f$ is an epimorphism.
+			}
+			\item{
+				The cokernel of $f$ satisfies $\coker f = 0$.
+			}
+			\item{
+				For any morphism $t:B-->T$ it holds that $tf = 0$ implies $t = 0$.
+			}
+		\end{enumerate}
+
+		~\\
+		Moreover it holds that $f$ is an isomorphism, if and only if it is both mono and epi.
+	\end{proposition}
+	\begin{sketch}
+		TODO
+	\end{sketch}
+
+	\begin{theorem}[epi-mono factorization]
+		Let $\cat{A}$ be an abelian category. Every morphism $f:A-->B$ admits a factorization $f=ip$, where $i = \ker \coker f$ and $p = \coker \ker f$, which is unique (up to isomorphism).
+	\end{theorem}
+	\begin{sketch}
+		TODO
+	\end{sketch}
+
+	\begin{definition}[image]
+		Let $\cat{C}$ be a pointed category and $f:X-->Y$ be a morphism.
+
+		The \textbf{image} of $f$ is defined to be $\im f := \ker \coker f$, if the corresponding kernel and cokernel exist.
+	\end{definition}
+
+	\begin{theorem}[isomorphism theorem]
+		TODO
+	\end{theorem}
+
+	\begin{definition}[quotient]
+		TODO
+	\end{definition}
+
+	\TODO{pullbacks and pushouts?}
+
+	\subsection{Additive Functors}
+
+	\begin{definition}[additive functor]
+		TODO
+	\end{definition}
+
+	\begin{lemma}[representables are additive]
+		TODO
+	\end{lemma}
+
+	\begin{lemma}[$\Add(A,B)$ is $\ncat{Ab}$-enriched]
+		TODO
+	\end{lemma}
+
+	\begin{theorem}[Additive Yoneda Lemma]
+		TODO
+	\end{theorem}
+
+	\begin{proposition}[characterization of additive functors]
+		TODO
+	\end{proposition}
+
+	\subsection{Exact Sequences and Exact Functors}
+
+	\begin{definition}[exact sequence]
+		TODO
+	\end{definition}
+
+	\begin{lemma}[properties of exact sequences]
+		TODO
+	\end{lemma}
+
+	\begin{definition}[split exact sequence]
+		TODO
+	\end{definition}
+
+	\begin{lemma}[characterization of split exact sequences]
+		TODO
+	\end{lemma}
+
+	\begin{definition}[exact functor]
+		TODO
+	\end{definition}
+
+	\begin{lemma}[characterization of exact functors]
+		TODO
+	\end{lemma}
+
+	\newpage
+	\section{The Freyd Mitchel Embedding Theorem}
+
+	\newpage
+	\section{(Co-)Homology and Derived Functors}
+	\subsection{(Co-)Chain Complexes and (Co-)Homology}
+	\subsection{Derived Functors}
+\end{document}

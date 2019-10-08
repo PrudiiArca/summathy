@@ -1,0 +1,52 @@
+\documentclass{article}
+
+% --- text layout
+\usepackage[parfill]{parskip}
+\usepackage{geometry}
+\geometry{a4paper, margin=3cm}
+\usepackage{romanbar}
+\usepackage{placeins} %FloatBarrier
+\usepackage[utf8]{inputenc}
+
+\usepackage{sectsty}
+\sectionfont{\color[HTML]{990000}}
+\subsectionfont{\color[HTML]{990000}}
+\subsubsectionfont{\color[HTML]{990000}}
+% \usepackage{algpseudocode} --> better pseudo code?
+%\usepackage[pagewise]{lineno} % row numbers
+
+% --- syncing, referencing, citing
+\usepackage{pdfsync} 			% synchronization LaTeX <--> PDF
+\usepackage[hidelinks]{hyperref} % hidelinks avoids red boxes around links
+\usepackage{csquotes}			% enquote
+\usepackage{cleveref}
+\usepackage{pdfpages}
+
+\usepackage[backend=bibtex,style=alphabetic,url=false]{biblatex}
+\addbibresource{sources.bib}
+% define bibliography filter like
+%\defbibfilter{computability-pca}{
+%	keyword=computability or keyword=pca
+%}
+
+% --- lists and tables
+\usepackage[shortlabels]{enumitem}
+\usepackage{tabularx}
+\usepackage{tabu}
+\usepackage{makecell}
+
+% --- graphics
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+% --- math
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fixmath} % whyyy? "bug": italic PI and SIGMA
+\usepackage{mathtools}
+\usepackage{mathrsfs} %mathscr
+
+% --- own packages
+\usepackage{../notation}
+\usepackage{../diagrams}
+\usepackage{../environments}
