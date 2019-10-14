@@ -1,6 +1,9 @@
 \input{../header.tex}
 
-\title{Summath(Abelian Categories)}
+\title{
+	$\Sum \text{math}(y)$\\
+	Abelian Categories
+}
 \author{Jonas Linßen}
 
 \begin{document}
@@ -184,15 +187,26 @@
 
 	\begin{definition}[Biproduct]
 		Let $\cat{A}$ be an $\ncat{Ab}$-enriched category and $A,B$ be two objects. The \textbf{biproduct} $A \oplus B$ of $A$ and $B$ is an object $C$, which satisfies one of the following equivalent conditions.
+
 		\begin{enumerate}[(i)]
 			\item{
 				There are morphisms
-				$$
-					\begin{matrix}
-						\pi_A:C-->A,&\iota_A:A-->C,\\
-						\pi_B:C-->B,&\iota_B:B-->C,
-					\end{matrix}
-				$$
+				\begin{equation*}
+					\begin{diagram}
+						\threebyone
+							{A}{C}{B}
+						\arrow[higher]{c}{w}{\pi_A}[above]
+						\arrow[lower]{w}{c}{\iota_A}[below]
+						\arrow[higher]{c}{e}{\pi_B}[above]
+						\arrow[lower]{e}{c}{\iota_A}[below]
+					\end{diagram}
+				\end{equation*}
+				% $$
+				% 	\begin{matrix}
+				% 		\pi_A:C-->A,&\iota_A:A-->C,\\
+				% 		\pi_B:C-->B,&\iota_B:B-->C,
+				% 	\end{matrix}
+				% $$
 				which satisfy the equations
 				\begin{align*}
 					\pi_A\iota_A, = 1_A, \hspace{1cm}\pi_B\iota_A = 0,\\
@@ -208,8 +222,15 @@
 			}
 		\end{enumerate}
 	\end{definition}
+	We have to show that (i) - (iii) are indeed equivalent
 	\begin{sketch}
-		TODO
+		\enquote{(i) $==>$ (ii)}:\\
+		For $t_A:T-->A,t_B:T-->B$ note that $t := \iota_At_A + \iota_Bt_B$ satisfies the universal property of the product.
+
+		\enquote{(ii) $==>$ (i)}:\\
+		Use the first four equations to define $\iota_A$ and $\iota_B$ via the universal property. Observe that $\pi_A(\iota_A\pi_A + \iota_B\pi_B) = \pi_A$ and $\pi_B(\iota_A\pi_A + \iota_B\pi_B) = \pi_B$ and use the universal property to derive the fifth equation.
+
+		\enquote{(i) $<==>$ (iii)}: By duality.
 	\end{sketch}
 
 	\begin{definition}[Additive category, Abelian category]

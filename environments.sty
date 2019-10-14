@@ -55,6 +55,9 @@
 	\end{mdframed}
 }
 
+\NewDocumentEnvironment{convention}{oo}
+{\begin{@theoremenvironment}{Convention}{#1}{#2}}{\end{@theoremenvironment}}
+
 \NewDocumentEnvironment{definition}{oo}
 {\begin{@theoremenvironment}{Definition}{#1}{#2}}{\end{@theoremenvironment}}
 
@@ -75,6 +78,9 @@
 
 \NewDocumentEnvironment{remark}{oo}
 {\begin{@theoremenvironment}{Remark}{#1}{#2}}{\end{@theoremenvironment}}
+
+\NewDocumentEnvironment{example}{oo}
+{\begin{@theoremenvironment}{Example}{#1}{#2}}{\end{@theoremenvironment}}
 
 \newlist{@prooflist}{enumerate}{5}
 \setlist[@prooflist]{topsep=.5\baselineskip, align=left, labelwidth=1cm, leftmargin=1.15cm}
