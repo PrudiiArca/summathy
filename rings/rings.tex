@@ -1,0 +1,335 @@
+\input{../header.tex}
+
+\title{
+	$\Sum \text{math}(y)$\\
+	Rings
+}
+\author{Jonas Linßen}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+
+	\newpage
+	\section{Rings}
+	\subsection{Rings}
+	\begin{definition}
+		A \textbf{(unital) ring} is a set $R$ together with a \textbf{addition} $+: R \times R --> R$ and a \textbf{multiplication} $\cdot: R \times R --> R$ such that 
+		\begin{enumerate}
+			\item{
+				$(R,+)$ is an \textit{abelian group}, i.e. $+$ is associative and commutative, any element $a$ has a unique additive inverse $-a$ and there is an additive identity element $0$. 
+			}
+			\item{
+				$(R,\cdot)$ is a \textit{monoid}, i.e. $\cdot$ is associative and there is a multiplicative identity element $1$.
+			}
+			\item{
+				the following \textit{distributive laws} hold
+				\begin{align*}
+					a \cdot (b+c) &= a \cdot b + a \cdot c\\
+					(a+b) \cdot c &= a \cdot c + b \cdot c
+				\end{align*}
+			}
+		\end{enumerate}
+
+		A ring is said to be \textbf{commutative}, if $\cdot$ is commutative.
+
+		If $0 = 1$ the ring necessessarily becomes $R = \{0\}$, which is called the \textbf{zero ring} or \textbf{trivial ring}.
+	\end{definition}
+	%\footnotetext{Some authors drop the requirement of a multiplicative identity and mark its presence by saying unital ring.}
+	%\footnotetext{For binary operators like $+$ it is common to use infix notation $a+b$ instead of $+(a,b)$. Moreover we use the convention \enquote{multiplication before addition}.}
+	\TODO{examples: Z, End(A)?}
+
+	\TODO{infix notation, dropping $\cdot$}
+
+	\begin{definition}
+		A \textbf{morphism of rings} is a function $f:R --> S$ between rings $R$ and $S$, which satisfies
+		\begin{equation*}
+			f(ab + c) = f(a)f(b) + f(c) \;\;\;\;\text{and}\;\;\;\; f(1) = 1.
+		\end{equation*}
+		As the identity function $1_R: R --> R$ is a morphism of rings for any ring $R$ and morphisms of rings are closed under composition, we get a category $\ncat{Ring}$.
+	\end{definition}
+
+	\begin{lemma}[Properties of $\ncat{Ring}$]
+		In $\ncat{Ring}$ the following holds.
+		\begin{enumerate}[(i)]
+			\item{
+				A morphism of rings $f:R-->S$ is a morphism of the underlying \textit{abelian groups} $(R,+)$ and $(S,+)$, i.e. there is a forgetful functor $\fun{U}:\ncat{Ring} --> \ncat{Ab}$. In particular it holds that
+				\begin{equation*}
+					f(0) = 0 \;\;\;\;\text{and}\;\;\;\; f(-a) = -f(a).
+				\end{equation*}
+			}
+			\item{
+				A morphism of rings $f:R --> S$ is epi if and only if it is surjective.
+			}
+			\item{
+				A morphism of rings $f:R --> S$ is mono if and only if it is injective. Using (i) this is equivalent to the equation $\ker f := \{x \in R \mid f(x) = 0\} = \{0\}$.
+			}
+			\item{
+				The trivial ring $1$ is terminal.
+			}
+			\item{
+				The ring of integers $\Z$ is initial.
+			}
+			\item{
+				$\ncat{Ring}$ has arbitrary products, where the ring structure on the underlying set $\Product \limits_{i \in I} R_i$ is defined componentwise.
+			}
+		\end{enumerate}
+	\end{lemma}
+	\begin{sketch}
+		\begin{enumerate}[(i)]
+			\item{
+				By definition.
+			}
+			\item{
+				Clearly surjective implies epi. \TODO{converse?}
+			}
+			\item{
+				Injective implies mono. \TODO{converse?}
+			}
+			\item{
+				By definition.
+			}
+			\item{
+				Note that $n = 1 + ... + 1$ in $\Z$ and use the definition of morphism of rings. 
+			}
+			\item{
+				It suffices to check that the unique morphism into $\Product \limits_{i \in I} R_i$ of the universal property in $\ncat{Set}$ is a morphism of rings.
+			}
+		\end{enumerate}\vspace{-2em}
+	\end{sketch}
+
+	Example $(1,0)\cdot(0,1)$.
+
+	\begin{definition}
+		A \textbf{zero divisor} in a ring $R$ is an element $a$, such that there exists a nonzero element $b$ such that
+		\begin{equation*}
+			ab = 0 \;\;\;\;\text{or}\;\;\;\; ba = 0.
+		\end{equation*}
+		\TODO{nilpotent}
+		An element, which is not a zero divisor, is sometimes called \textbf{regular}. 
+
+		A commutative ring, which does not possess any zero divisors besides $0$, is called an \textbf{integral domain}.
+	\end{definition}
+
+	\TODO{0 zero divisor unless zero ring}
+
+	\begin{definition}
+		A \textbf{unit} in a ring $R$ is an element $a$, for which there exists a \textbf{multiplicative inverse}, i.e. an element $a^{-1}$ satisfying
+		\begin{equation*}
+			aa^{-1} = 1 = a^{-1}a.
+		\end{equation*}
+		The subset of all units in $R$ will be denoted by $R^\times$. 
+
+		A commutative ring, in which every element except $0$ is a unit, is a \textbf{field}.
+	\end{definition}
+
+	\begin{lemma}[Properties of Units and Zero Divisors]
+		\vspace{-1.5em}\begin{enumerate}[(i)]
+			\item{
+				No zero divisor is a unit and vice versa.
+			}
+			\item{
+				Let $f:R --> S$ be a morphism of rings. If $a$ is a zero divisor / unit in $R$, then $f(a)$ is a zero divisor / unit in $S$.
+			}
+			\item{
+				Let $f: K --> R$ be a morphism of rings, where $K$ is a field. Then $f$ is mono.
+			}
+			\item{
+				\TODO{1 - nilpotent is unit}
+			}
+		\end{enumerate}
+	\end{lemma}
+	\begin{sketch}
+		\begin{enumerate}[(i)]
+			\item{
+				Holds for the trivial ring by definition. In a nontrivial ring being both gives a contradiction.
+			}
+			\item{
+				By definition.
+			}
+			\item{
+				Follows from (ii) via $\ker f = \{0\}$.
+			}
+		\end{enumerate}\vspace{-2em}
+	\end{sketch}
+
+	\subsection{Ideals, Factor Rings and Spectrum}
+	\begin{definition}
+		Let $R$ be a commutative ring. An \textbf{ideal} $\ideal{a}$ is an \textit{abelian subgroup} $\ideal{a} \leq_\ncat{Ab} R$, which is closed under multiplication with $R$. We write $\ideal{a} \diveq R$.
+
+		The \textbf{ideal generated by} a set of elements $X$ is given by $\Gen{X} = \Intersection \limits_{X \subseteq \ideal{a} \diveq R} \ideal{a}$.
+	\end{definition}
+
+	\begin{lemma}[Properties of Ideals]
+		\vspace{-1.5em}\begin{enumerate}[(i)]
+			\item{ring of ideals, coprime ideals intersection property}
+			\item{
+				Let $R$ be a commutative ring and $\ideal{a},\ideal{b} \diveq R$ ideals. Then $\ideal{ab} = \{ab \mid a \in \ideal{a}, b \in \ideal{b}\}$ is an ideal and $\ideal{ab} \subseteq \ideal{a} \intersection \ideal{b}$.
+			}
+			\item{
+				Let $f:R --> S$ be a morphism of rings and $\ideal{b} \diveq S$ be an ideal in $S$.
+
+				Then $\ker f \diveq R$ and $f^{-1}(\ideal{b}) \diveq R$ are ideals in $R$.
+			}
+			\item{
+				Let $f:R -->> S$ be an epimorphism of commutative rings and $\ideal{a} \diveq R$ be an ideal in $R$.
+
+				Then $f(\ideal{a}) \diveq S$ is an ideal in $S$.
+			}
+		\end{enumerate}
+	\end{lemma}
+
+	\begin{definition}
+		Let $R$ be a commutative ring and $\ideal{a} \diveq R$ be an ideal in $R$. 
+
+		As $\ideal{a} \leq_\ncat{Ab} R$ is an abelian subgroup we can build the factor group $R/\ideal{a}$, with addition given by
+		\begin{equation*}
+			(x + \ideal{a}) + (y + \ideal{a}) = (x+y) + \ideal{a}.
+		\end{equation*}
+		Furthermore, since $\ideal{a}$ is closed under multiplication with $R$, the canonic multiplication
+		\begin{equation*}
+			(x + \ideal{a}) \cdot (y + \ideal{a}) = (x \cdot y) + \ideal{a}
+		\end{equation*}
+		is well defined, turning $R / \ideal{a}$ into a commutative \textbf{factor ring} (or \textbf{quotient ring} or \textbf{residue class ring}). This construction yields a canonic \textbf{projection morphism} $\pi: R -->> R/\ideal{a}$, which is epi.
+	\end{definition}
+
+	\begin{theorem}[Isomorphism Theorem]
+		Let $f:R --> S$ be a morphism of commutative rings such that $\ideal{a} \subseteq \ker f$, where $\ideal{a} \diveq R$ is an ideal in $R$. Then the following universal property holds.
+		\begin{equation*}
+			\begin{diagram}
+				\threebytwo[small]
+					{R}{}{S}
+					{}{R/\ideal{a}}{}
+
+				\arrow{nw}{ne}{f}[above]
+				\arrow[epi]{nw}{s}{\pi}[below left]
+				\arrow[dashed]{s}{ne}{\exists!\tilde{f}}[below right]
+			\end{diagram}
+		\end{equation*}
+		In particular, for $\ideal{a} = \ker{f}$ we get a epi-mono-factorization (i.e. $\tilde f$ is mono) and 
+		$$R / {\ker f} \isom \Im f.$$
+	\end{theorem}
+	\begin{sketch}
+		Check that 
+		\begin{equation*}
+			\tilde{f}:
+			\begin{array}{rrcl}
+					R/\ideal{a}	&\longrightarrow	&S\\
+					x+\ideal{a}	&\longmapsto 		&f(x)
+			\end{array}
+		\end{equation*}
+		is a well defined morphism of rings. Uniqueness follows from $\pi$ being epi.
+	\end{sketch}
+
+	\begin{theorem}[Chinese Remainder Theorem]
+		Let $R$ be a commutative ring and $\ideal{a}_1, ..., \ideal{a}_n \diveq R$ be a ideals in $R$ such that $\ideal{a}_i + \ideal{a}_j = R$ for all $i \neq j$. Then
+		\begin{equation*}
+			R / {\Intersection \limits_{i=1...n} \ideal{a}_i} \isom R/\ideal{a}_1 \times ... \times R/\ideal{a}_n.
+		\end{equation*}
+	\end{theorem}
+	\begin{sketch}
+		The morphism
+		\begin{equation*}
+			f:
+			\begin{array}{rrcl}
+					R	&\longrightarrow	&R/\ideal{a}_1 \times ... \times R/\ideal{a}_n\\
+					r	&\longmapsto 		&(r+\ideal{a}_1, ..., r + \ideal{a}_n)
+			\end{array}
+		\end{equation*}
+		satisfies $\Intersection \limits_{i=1...n} \ideal{a}_i = \ker f$.
+		\TODO{use coprimality to show surjectivity}
+	\end{sketch}
+
+	\begin{definition}
+		Let $R$ be a commutative ring. A \textbf{prime ideal} is an ideal $\ideal{p}$, which satisfies one of the following equivalent conditions.
+		\begin{enumerate}[(i)]
+			\item{
+				The factor ring $R/\ideal{p}$ is an integral domain.
+			}
+			\item{
+				It holds that $ab \in \ideal{p}$ implies that $a \in \ideal{p}$ or $b \in \ideal{p}$.
+			}
+			\item{
+				For ideals $\ideal{a},\ideal{b} \diveq R$ it holds that $\ideal{a}\ideal{b} \subseteq \ideal{p}$ implies $\ideal{a} \subseteq \ideal{p}$ or $\ideal{b} \subseteq \ideal{p}$.
+			}
+			% \item{
+			% 	\TODO{For ideals $\ideal{a},\ideal{b} \diveq R$ it holds that $\ideal{a} \intersection \ideal{b} \subseteq \ideal{p}$ implies $\ideal{a} \subseteq \ideal{p}$ or $\ideal{b} \subseteq \ideal{p}$.}
+			% }
+			\item{
+				The set $R \setminus \ideal{p}$ is a multiplicative system, i.e. contains $1$ and is closed under multiplication.
+			}
+		\end{enumerate}
+		The set of all prime ideals is called the \textbf{spectrum} of $R$ and is denoted by $\Spec R$.
+	\end{definition}
+
+	\begin{lemma}[Properties of Prime Ideals]
+		TODO R integral domain then (0) prime, preimage of primes are prime, any prime contains minimal prime
+	\end{lemma}
+
+	\begin{definition}
+		Let $R$ be a commutative ring. A \textbf{maximal ideal} is an ideal $\ideal{m} \diveq R$, which satisfies one of the following equivalent conditions.
+		\begin{enumerate}[(i)]
+			\item{
+				The factor ring $R/\ideal{m}$ is a field.
+			}
+			\item{
+				The ideal $\ideal{m}$ is maximal in $\{\ideal{a} \lneq R\}$ with respect to inclusion.
+			}
+			\item{
+				The ideal $\ideal{m}$ is maximal in $\{\ideal{p} \divneq R \mid \ideal{p} \text{ prime}\}$ with respect to inclusion.
+			}
+		\end{enumerate}
+		By definition any maximal ideal is prime. The set of all maximal ideals is denoted by $\mSpec R$.
+	\end{definition}
+
+	\begin{lemma}[Properties of Maximal Ideals]
+		TODO any ideal is in maximal ideal
+	\end{lemma}
+
+	\begin{definition}
+		Let $R$ be a commutative ring and $\ideal{a} \diveq R$ be an ideal. 
+
+		The \textbf{radical} of $\ideal{a}$ is the ideal 
+		\begin{equation*}
+			\sqrt{\ideal{a}} = \{x \in R \mid \exists n \in \N: x^n \in \ideal{a}\}.
+		\end{equation*}
+		An ideal $\ideal{a}$, which satisfies $\ideal{a} = \sqrt{\ideal{a}}$ is said to be \textbf{radical}.
+
+		The \textbf{nilradical} of $R$ is the radical ideal
+		\begin{align*}
+			\nrad R &= \{x \in R \mid \exists n \in \N: x^n = 0\} \\
+			&= \Intersection \limits_{\ideal{p} \in \Spec R} \ideal{p} \overset{?}{=} \{x \in R \mid \exists n \in \N: 1 - x^n \in R^\times\}.
+		\end{align*}
+
+		The \textbf{Jacobson radical} of $R$ is the radical ideal
+		\begin{equation*}
+			\jrad R = \Intersection \limits_{\ideal{m} \in \mSpec R} \ideal{m} = \{x \in R \mid \forall r \in R: 1 - rx \in R^\times\}.
+		\end{equation*}
+	\end{definition}
+
+	\begin{lemma}[Properties of Radical Ideals]
+		Let $R$ be a commutative ring and $\ideal{a},\ideal{b} \diveq R$ be two ideals in R.
+		\begin{enumerate}[(i)]
+			\item{
+				For any $n \in \N$ we have $\sqrt{\sqrt{\ideal{a}}} = \sqrt{\ideal{a}} = \sqrt{\ideal{a}^n}$.
+			}
+			\item{
+				It holds that $\ideal{a} \subseteq \sqrt{\ideal{a}}$ and that $\ideal{a} \subseteq \ideal{b}$ implies $\sqrt{\ideal{a}} \subseteq \sqrt{\ideal{b}}$.
+			}
+			\item{
+				We have $\sqrt{\ideal{a} \intersection \ideal{b}} = \sqrt{\ideal{a}} \intersection \sqrt{\ideal{b}}$
+			}
+			\item{
+				The equation $\sqrt{\ideal{a}} = \sqrt{\ideal{b}}$ is equivalent to having $n,m \in \N$ such that $\ideal{a}^m \subseteq \sqrt{\ideal{b}}$ and $\ideal{b}^n \subseteq \sqrt{\ideal{a}}$.
+			}
+		\end{enumerate}
+	\end{lemma}
+
+	\subsection{Localization}
+	\subsection{Principal Ideal Domains and Factorial Rings}
+	\subsection{Dedekind Domains?}
+	\subsection{Noetherian and Artinian Rings}
+	\subsection{Adic Topology}
+	\section{Algebras}
+	\subsection{Algebras}
+\end{document}

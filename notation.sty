@@ -10,6 +10,8 @@
 %\RequirePackage{extpfeil}
 \RequirePackage{xcolor} % colored todo command
 \RequirePackage{mathbbol} % mathbb 1234
+%\RequirePackage{MnSymbol} % llangle
+\RequirePackage{stackengine} %topinsert
 
 %TODO add extendable arrows via extpfeil
 
@@ -125,7 +127,24 @@
 
 \newcommand{\isom}{\cong}
 
-%\newcommand{}{}
+%\newcommand{\trianglerightneq}{\mathrel{\ooalign{\raisebox{-0.5ex}{\reflectbox{\rotatebox{90}{$\nshortmid$}}}\cr$\triangleright$\cr}\mkern-3mu}}
+%\newcommand{\triangleleftneq}{\mathrel{\reflectbox{$\trianglerightneq$}}}
+% see https://tex.stackexchange.com/questions/22371/subseteq-circ-as-a-single-symbol-open-subset
+\newcommand{\triangleleftneq}{
+	%\mathrel{\ensurestackMath{\topinset{\triangleleft}{\rotatebox{90}{$\nshortmid$}}{-5pt}{.5pt}}}
+	\mathrel{\ensurestackMath{\topinset{\rotatebox{90}{$\nshortmid$}}{\triangleleft}{5pt}{-.5pt}}}
+}
+
+\newcommand{\diveq}{\trianglelefteq}
+\newcommand{\divneq}{\triangleleftneq}
+
+% --- named environments
+\NewDocumentCommand{\norm}{m}{\vert #1 \vert}
+\NewDocumentCommand{\Norm}{m}{\Vert #1 \Vert}
+\NewDocumentCommand{\gen}{m}{\langle #1 \rangle}
+\NewDocumentCommand{\Gen}{m}{\langle\!\langle #1 \rangle\!\rangle}
+
+\NewDocumentCommand{\ideal}{m}{\mathfrak{#1}}
 
 \NewDocumentCommand{\cat}{m}{\mathcal{#1}}
 %\NewDocumentCommand{\ncat}{m}{\underline{\textsf{\smash{#1}}}}
@@ -134,6 +153,13 @@
 
 
 % --- operators
+
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\mSpec}{mSpec}
+\DeclareMathOperator{\nrad}{nrad}
+\DeclareMathOperator{\jrad}{jrad}
+
+
 \DeclareMathOperator{\Ob}{Ob}
 \DeclareMathOperator{\Mor}{Mor}
 \DeclareMathOperator{\Hom}{Hom}
