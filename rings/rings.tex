@@ -162,9 +162,11 @@
 
 	\begin{lemma}[Properties of Ideals]
 		\vspace{-1.5em}\begin{enumerate}[(i)]
-			\item{ring of ideals, coprime ideals intersection property}
 			\item{
 				Let $R$ be a commutative ring and $\ideal{a},\ideal{b} \diveq R$ ideals. Then $\ideal{ab} = \{ab \mid a \in \ideal{a}, b \in \ideal{b}\}$ is an ideal and $\ideal{ab} \subseteq \ideal{a} \intersection \ideal{b}$.
+			}
+			\item{
+				coprime ideals intersection property
 			}
 			\item{
 				Let $f:R --> S$ be a morphism of rings and $\ideal{b} \diveq S$ be an ideal in $S$.
@@ -207,7 +209,9 @@
 			\end{diagram}
 		\end{equation*}
 		In particular, for $\ideal{a} = \ker{f}$ we get a epi-mono-factorization (i.e. $\tilde f$ is mono) and 
-		$$R / {\ker f} \isom \Im f.$$
+		\begin{equation*}
+			R / {\ker f} \isom \Im f.
+		\end{equation*}
 	\end{theorem}
 	\begin{sketch}
 		Check that 
@@ -263,7 +267,7 @@
 	\end{definition}
 
 	\begin{lemma}[Properties of Prime Ideals]
-		TODO R integral domain then (0) prime, preimage of primes are prime, any prime contains minimal prime
+		\TODO{ R integral domain then (0) prime, preimage of primes are prime, any prime contains minimal prime}
 	\end{lemma}
 
 	\begin{definition}
@@ -273,7 +277,7 @@
 				The factor ring $R/\ideal{m}$ is a field.
 			}
 			\item{
-				The ideal $\ideal{m}$ is maximal in $\{\ideal{a} \lneq R\}$ with respect to inclusion.
+				The ideal $\ideal{m}$ is maximal in $\{\ideal{a} \divneq R\}$ with respect to inclusion.
 			}
 			\item{
 				The ideal $\ideal{m}$ is maximal in $\{\ideal{p} \divneq R \mid \ideal{p} \text{ prime}\}$ with respect to inclusion.
@@ -283,7 +287,7 @@
 	\end{definition}
 
 	\begin{lemma}[Properties of Maximal Ideals]
-		TODO any ideal is in maximal ideal
+		\TODO{ any ideal is in maximal ideal}
 	\end{lemma}
 
 	\begin{definition}
@@ -291,14 +295,14 @@
 
 		The \textbf{radical} of $\ideal{a}$ is the ideal 
 		\begin{equation*}
-			\sqrt{\ideal{a}} = \{x \in R \mid \exists n \in \N: x^n \in \ideal{a}\}.
+			\sqrt{\ideal{a}} = \{x \in R \mid \exists n \in \N: x^n \in \ideal{a}\} = \Intersection \limits_{\ideal{a} \subseteq \ideal{p} \in \Spec R} \ideal{p}.
 		\end{equation*}
 		An ideal $\ideal{a}$, which satisfies $\ideal{a} = \sqrt{\ideal{a}}$ is said to be \textbf{radical}.
 
 		The \textbf{nilradical} of $R$ is the radical ideal
 		\begin{align*}
-			\nrad R &= \{x \in R \mid \exists n \in \N: x^n = 0\} \\
-			&= \Intersection \limits_{\ideal{p} \in \Spec R} \ideal{p} \overset{?}{=} \{x \in R \mid \exists n \in \N: 1 - x^n \in R^\times\}.
+			\nrad R &= \{x \in R \mid \exists n \in \N: x^n = 0\} = \Intersection \limits_{\ideal{p} \in \Spec R} \ideal{p}\\
+			& \overset{?}{=} \{x \in R \mid \exists n \in \N: 1 - x^n \in R^\times\}.
 		\end{align*}
 
 		The \textbf{Jacobson radical} of $R$ is the radical ideal
@@ -322,8 +326,25 @@
 			\item{
 				The equation $\sqrt{\ideal{a}} = \sqrt{\ideal{b}}$ is equivalent to having $n,m \in \N$ such that $\ideal{a}^m \subseteq \sqrt{\ideal{b}}$ and $\ideal{b}^n \subseteq \sqrt{\ideal{a}}$.
 			}
+			\item{
+				Any prime ideal $\ideal{p}$ is radical, i.e. satisfies $\sqrt{\ideal{p}} = \ideal{p}$.
+			}
 		\end{enumerate}
 	\end{lemma}
+
+	\begin{theorem}[Correspondence Theorem]
+		Let $R$ be a commutative ring and $\ideal{a} \diveq R$ be an ideal. The canonic projection $\pi: R -->> R/\ideal{a}$ exhibits bijections
+		\begin{equation*}
+			\begin{array}{rcl}
+				\{\text{ideals containing }\ideal{a}\} &\overset{\sim}{\longrightarrow} &\{\text{ideals in } R/\ideal{a}\}\\
+				\{\text{radical ideals containing }\ideal{a}\} &\overset{\sim}{\longrightarrow} &\{\text{radical ideals in } R/\ideal{a}\}\\
+				\{\text{prime ideals containing }\ideal{a}\} &\overset{\sim}{\longrightarrow} &\{\text{prime ideals in } R/\ideal{a}\}\\
+				\{\text{maximal ideals containing }\ideal{a}\} &\overset{\sim}{\longrightarrow} &\{\text{maximal ideals in } R/\ideal{a}\}\\\\
+				\ideal{b} &\longmapsto &\pi(\ideal{b})\\
+				\pi^{-1}(\ideal{b}) &\reflectbox{$\longmapsto$} &\widetilde{\ideal{b}}
+			\end{array}
+		\end{equation*}
+	\end{theorem}
 
 	\subsection{Localization}
 	\subsection{Principal Ideal Domains and Factorial Rings}
