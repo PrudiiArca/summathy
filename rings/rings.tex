@@ -14,24 +14,21 @@
 	\section{Rings}
 	\subsection{Rings}
 	\begin{definition}
-		A \textbf{(unital) ring} is a set $R$ together with a \textbf{addition} $+: R \times R --> R$ and a \textbf{multiplication} $\cdot: R \times R --> R$ such that 
+		A \textbf{(commutative, unital) ring} is a set $R$ together with a \textbf{addition} $+: R \times R --> R$ and a \textbf{multiplication} $\cdot: R \times R --> R$ such that 
 		\begin{enumerate}
 			\item{
 				$(R,+)$ is an \textit{abelian group}, i.e. $+$ is associative and commutative, any element $a$ has a unique additive inverse $-a$ and there is an additive identity element $0$. 
 			}
 			\item{
-				$(R,\cdot)$ is a \textit{monoid}, i.e. $\cdot$ is associative and there is a multiplicative identity element $1$.
+				$(R,\cdot)$ is a commutative \textit{monoid}, i.e. $\cdot$ is associative and commutative and there is a multiplicative identity element $1$.
 			}
 			\item{
-				the following \textit{distributive laws} hold
+				the following \textit{distributive law} holds for any $a,b,c \in R$:
 				\begin{align*}
-					a \cdot (b+c) &= a \cdot b + a \cdot c\\
-					(a+b) \cdot c &= a \cdot c + b \cdot c
+					a \cdot (b+c) &= a \cdot b + a \cdot c
 				\end{align*}
 			}
 		\end{enumerate}
-
-		A ring is said to be \textbf{commutative}, if $\cdot$ is commutative.
 
 		If $0 = 1$ the ring necessessarily becomes $R = \{0\}$, which is called the \textbf{zero ring} or \textbf{trivial ring}.
 	\end{definition}
@@ -46,14 +43,14 @@
 		\begin{equation*}
 			f(ab + c) = f(a)f(b) + f(c) \;\;\;\;\text{and}\;\;\;\; f(1) = 1.
 		\end{equation*}
-		As the identity function $1_R: R --> R$ is a morphism of rings for any ring $R$ and morphisms of rings are closed under composition, we get a category $\ncat{Ring}$.
+		As the identity function $1_R: R --> R$ is a morphism of rings for any ring $R$ and morphisms of rings are closed under composition, we get a category $\ncat{CRing}$.
 	\end{definition}
 
-	\begin{lemma}[Properties of $\ncat{Ring}$]
-		In $\ncat{Ring}$ the following holds.
+	\begin{lemma}[Properties of $\ncat{CRing}$]
+		In $\ncat{CRing}$ the following holds.
 		\begin{enumerate}[(i)]
 			\item{
-				A morphism of rings $f:R-->S$ is a morphism of the underlying \textit{abelian groups} $(R,+)$ and $(S,+)$, i.e. there is a forgetful functor $\fun{U}:\ncat{Ring} --> \ncat{Ab}$. In particular it holds that
+				A morphism of rings $f:R-->S$ is a morphism of the underlying \textit{abelian groups} $(R,+)$ and $(S,+)$, i.e. there is a forgetful functor $\fun{U}:\ncat{CRing} --> \ncat{Ab}$. In particular it holds that
 				\begin{equation*}
 					f(0) = 0 \;\;\;\;\text{and}\;\;\;\; f(-a) = -f(a).
 				\end{equation*}
@@ -71,7 +68,7 @@
 				The ring of integers $\Z$ is initial.
 			}
 			\item{
-				$\ncat{Ring}$ has arbitrary products, where the ring structure on the underlying set $\Product \limits_{i \in I} R_i$ is defined componentwise.
+				$\ncat{CRing}$ has arbitrary products, where the ring structure on the underlying set $\Product \limits_{i \in I} R_i$ is defined componentwise.
 			}
 		\end{enumerate}
 	\end{lemma}
@@ -101,26 +98,19 @@
 	Example $(1,0)\cdot(0,1)$.
 
 	\begin{definition}
-		A \textbf{zero divisor} in a ring $R$ is an element $a$, such that there exists a nonzero element $b$ such that
-		\begin{equation*}
-			ab = 0 \;\;\;\;\text{or}\;\;\;\; ba = 0.
-		\end{equation*}
-		\TODO{nilpotent}
+		A \textbf{zero divisor} in a ring $R$ is an element $a$, such that there exists a nonzero element $b$ such that $ab = 0$. A \textbf{nilpotent element} $a$ satisfies that $a^n = 0$ for some $n \in \N$. In particular nilpotent elements are zero divisors.
 		An element, which is not a zero divisor, is sometimes called \textbf{regular}. 
 
-		A commutative ring, which does not possess any zero divisors besides $0$, is called an \textbf{integral domain}.
+		A ring, which does not possess any zero divisors besides $0$, is called an \textbf{integral domain}.
 	\end{definition}
 
 	\TODO{0 zero divisor unless zero ring}
 
 	\begin{definition}
-		A \textbf{unit} in a ring $R$ is an element $a$, for which there exists a \textbf{multiplicative inverse}, i.e. an element $a^{-1}$ satisfying
-		\begin{equation*}
-			aa^{-1} = 1 = a^{-1}a.
-		\end{equation*}
+		A \textbf{unit} in a ring $R$ is an element $a$, for which there exists a \textbf{multiplicative inverse}, i.e. an element $a^{-1}$ satisfying $aa^{-1} = 1 \;{\color{gray}(= a^{-1}a)}$.
 		The subset of all units in $R$ will be denoted by $R^\times$. 
 
-		A commutative ring, in which every element except $0$ is a unit, is a \textbf{field}.
+		A ring, in which every element except $0$ is a unit, is a \textbf{field}.
 	\end{definition}
 
 	\begin{lemma}[Properties of Units and Zero Divisors]
@@ -155,7 +145,7 @@
 
 	\subsection{Ideals, Factor Rings and Spectrum}
 	\begin{definition}
-		Let $R$ be a commutative ring. An \textbf{ideal} $\ideal{a}$ is an \textit{abelian subgroup} $\ideal{a} \leq_\ncat{Ab} R$, which is closed under multiplication with $R$. We write $\ideal{a} \diveq R$.
+		Let $R$ be a ring. An \textbf{ideal} $\ideal{a}$ is an \textit{abelian subgroup} $\ideal{a} \leq_\ncat{Ab} R$, which is closed under multiplication with $R$. We write $\ideal{a} \diveq R$.
 
 		The \textbf{ideal generated by} a set of elements $X$ is given by $\Gen{X} = \Intersection \limits_{X \subseteq \ideal{a} \diveq R} \ideal{a}$.
 	\end{definition}
@@ -163,10 +153,20 @@
 	\begin{lemma}[Properties of Ideals]
 		\vspace{-1.5em}\begin{enumerate}[(i)]
 			\item{
-				Let $R$ be a commutative ring and $\ideal{a},\ideal{b} \diveq R$ ideals. Then $\ideal{ab} = \{ab \mid a \in \ideal{a}, b \in \ideal{b}\}$ is an ideal and $\ideal{ab} \subseteq \ideal{a} \intersection \ideal{b}$.
+				
 			}
 			\item{
-				coprime ideals intersection property
+				Let $R$ be a ring and $\ideal{a},\ideal{b} \diveq R$ ideals. Then
+				\begin{align*}
+					\ideal{ab} &= \{ab \mid a \in \ideal{a}, b \in \ideal{b}\}\\
+					\ideal{a} \intersection \ideal{b} &= \{r \mid r \in \ideal{a}, r \in \ideal{b}\}\\
+					\ideal{a} + \ideal{b} &= \{a + b \mid a \in \ideal{a}, b \in \ideal{b}\}
+				\end{align*}
+				are ideals and it holds that 
+				\begin{equation*}
+					\ideal{ab} \subseteq \ideal{a} \intersection \ideal{b} \subseteq \ideal{a}, \ideal{b} \subseteq \ideal{a} + \ideal{b}.
+				\end{equation*}
+				If $\ideal{a}$ and $\ideal{b}$ are \textit{comaximal}, i.e. $\ideal{a} + \ideal{b} = R$, the equation $\ideal{ab} = \ideal{a} \intersection \ideal{b}$ holds.
 			}
 			\item{
 				Let $f:R --> S$ be a morphism of rings and $\ideal{b} \diveq S$ be an ideal in $S$.
@@ -174,7 +174,7 @@
 				Then $\ker f \diveq R$ and $f^{-1}(\ideal{b}) \diveq R$ are ideals in $R$.
 			}
 			\item{
-				Let $f:R -->> S$ be an epimorphism of commutative rings and $\ideal{a} \diveq R$ be an ideal in $R$.
+				Let $f:R -->> S$ be an epimorphism of rings and $\ideal{a} \diveq R$ be an ideal in $R$.
 
 				Then $f(\ideal{a}) \diveq S$ is an ideal in $S$.
 			}
@@ -182,9 +182,9 @@
 	\end{lemma}
 
 	\begin{definition}
-		Let $R$ be a commutative ring and $\ideal{a} \diveq R$ be an ideal in $R$. 
+		Let $R$ be a ring and $\ideal{a} \diveq R$ be an ideal in $R$. 
 
-		As $\ideal{a} \leq_\ncat{Ab} R$ is an abelian subgroup we can build the factor group $R/\ideal{a}$, with addition given by
+		As $\ideal{a} \leq_\ncat{Ab} R$ is an abelian subgroup we can construct the factor group $R/\ideal{a}$, with addition given by
 		\begin{equation*}
 			(x + \ideal{a}) + (y + \ideal{a}) = (x+y) + \ideal{a}.
 		\end{equation*}
@@ -192,11 +192,11 @@
 		\begin{equation*}
 			(x + \ideal{a}) \cdot (y + \ideal{a}) = (x \cdot y) + \ideal{a}
 		\end{equation*}
-		is well defined, turning $R / \ideal{a}$ into a commutative \textbf{factor ring} (or \textbf{quotient ring} or \textbf{residue class ring}). This construction yields a canonic \textbf{projection morphism} $\pi: R -->> R/\ideal{a}$, which is epi.
+		is well defined, turning $R / \ideal{a}$ into a \textbf{factor ring} (or \textbf{quotient ring} or \textbf{residue class ring}). This construction yields a canonic \textbf{projection morphism} $\pi: R -->> R/\ideal{a}$, which is epi and satisfies $\ker \pi = \ideal{a}$.
 	\end{definition}
 
 	\begin{theorem}[Isomorphism Theorem]
-		Let $f:R --> S$ be a morphism of commutative rings such that $\ideal{a} \subseteq \ker f$, where $\ideal{a} \diveq R$ is an ideal in $R$. Then the following universal property holds.
+		Let $f:R --> S$ be a morphism of rings such that $\ideal{a} \subseteq \ker f$, where $\ideal{a} \diveq R$ is an ideal in $R$. Then the following universal property holds.
 		\begin{equation*}
 			\begin{diagram}
 				\threebytwo[small]
@@ -226,7 +226,7 @@
 	\end{sketch}
 
 	\begin{theorem}[Chinese Remainder Theorem]
-		Let $R$ be a commutative ring and $\ideal{a}_1, ..., \ideal{a}_n \diveq R$ be a ideals in $R$ such that $\ideal{a}_i + \ideal{a}_j = R$ for all $i \neq j$. Then
+		Let $R$ be a ring and $\ideal{a}_1, ..., \ideal{a}_n \diveq R$ be a ideals in $R$ such that $\ideal{a}_i + \ideal{a}_j = R$ for all $i \neq j$. Then
 		\begin{equation*}
 			R / {\Intersection \limits_{i=1...n} \ideal{a}_i} \isom R/\ideal{a}_1 \times ... \times R/\ideal{a}_n.
 		\end{equation*}
@@ -245,7 +245,7 @@
 	\end{sketch}
 
 	\begin{definition}
-		Let $R$ be a commutative ring. A \textbf{prime ideal} is an ideal $\ideal{p}$, which satisfies one of the following equivalent conditions.
+		Let $R$ be a ring. A \textbf{prime ideal} is an ideal $\ideal{p}$, which satisfies one of the following equivalent conditions.
 		\begin{enumerate}[(i)]
 			\item{
 				The factor ring $R/\ideal{p}$ is an integral domain.
@@ -271,7 +271,7 @@
 	\end{lemma}
 
 	\begin{definition}
-		Let $R$ be a commutative ring. A \textbf{maximal ideal} is an ideal $\ideal{m} \diveq R$, which satisfies one of the following equivalent conditions.
+		Let $R$ be a ring. A \textbf{maximal ideal} is an ideal $\ideal{m} \diveq R$, which satisfies one of the following equivalent conditions.
 		\begin{enumerate}[(i)]
 			\item{
 				The factor ring $R/\ideal{m}$ is a field.
@@ -291,7 +291,7 @@
 	\end{lemma}
 
 	\begin{definition}
-		Let $R$ be a commutative ring and $\ideal{a} \diveq R$ be an ideal. 
+		Let $R$ be a ring and $\ideal{a} \diveq R$ be an ideal. 
 
 		The \textbf{radical} of $\ideal{a}$ is the ideal 
 		\begin{equation*}
@@ -312,7 +312,7 @@
 	\end{definition}
 
 	\begin{lemma}[Properties of Radical Ideals]
-		Let $R$ be a commutative ring and $\ideal{a},\ideal{b} \diveq R$ be two ideals in R.
+		Let $R$ be a ring and $\ideal{a},\ideal{b} \diveq R$ be two ideals in R.
 		\begin{enumerate}[(i)]
 			\item{
 				For any $n \in \N$ we have $\sqrt{\sqrt{\ideal{a}}} = \sqrt{\ideal{a}} = \sqrt{\ideal{a}^n}$.
@@ -333,7 +333,7 @@
 	\end{lemma}
 
 	\begin{theorem}[Correspondence Theorem]
-		Let $R$ be a commutative ring and $\ideal{a} \diveq R$ be an ideal. The canonic projection $\pi: R -->> R/\ideal{a}$ exhibits bijections
+		Let $R$ be a ring and $\ideal{a} \diveq R$ be an ideal. The canonic projection $\pi: R -->> R/\ideal{a}$ exhibits bijections
 		\begin{equation*}
 			\begin{array}{rcl}
 				\{\text{ideals containing }\ideal{a}\} &\overset{\sim}{\longrightarrow} &\{\text{ideals in } R/\ideal{a}\}\\
@@ -347,9 +347,74 @@
 	\end{theorem}
 
 	\subsection{Localization}
-	\subsection{Principal Ideal Domains and Factorial Rings}
+	\subsection{Factorial Rings and Principal Ideal Domains}
+
+	\begin{definition}
+		Let $R$ be a ring. An element $a$ \textbf{divides} another element $r$ (or is a \textbf{divisor} of $r$), if there is an element $b$ such that $ab = r$. In this case we write $a \mid r$.
+
+		Two elements $a$ and $b$ are \textbf{associate}, if there is a unit $u$ such that $au = b$. Being associate defines an equivalence relation on $R$ and we denote the equivalence class corresponding to $a$ by $aR^\times$. 
+	\end{definition}
+
+	\begin{lemma}
+		\begin{enumerate}[(i)]
+			\item{
+				If $a \mid r$ and $a$ is a zero divisor then $r$ is a zero divisor. If $a$ is not a zero divisor then the corresponding factor $b$ with $ab = r$ is unique.
+			}
+			\item{
+				\TODO{all zero divisors are associate? one zero divisor then all associate zero divisors?}
+			}
+			\item{
+				If $R$ is an integral domain, then divisibility defines a partial? order on the set $R/_\sim$.
+			}
+		\end{enumerate}
+	\end{lemma}
+
+	\begin{definition}
+		Let $R$ be a ring. 
+
+		An element $r$ is \textbf{irreducible}, if it is not a unit and $ab = r$ implies that either $a$ or $b$ are a unit. Note that the first condition makes this an exclusive or and the second condition can be reformulated as any divisor is associate to $r$.
+
+		An \TODO{nonzero} element $p$ is \textbf{prime}, if it is not a unit and for any two elements $a,b$ the statement $p \mid ab$ implies $p \mid a$ or $p \mid b$.
+	\end{definition}
+
+	\begin{lemma}
+		Let $R$ be a ring. The following statements hold.
+		\begin{enumerate}[(i)]
+			\item{
+				Irreducible elements are not zero divisors and are inparticular nonzero.
+			}
+			\item{
+				In an integral domain any prime element is irreducible
+			}
+		\end{enumerate}
+	\end{lemma}
+	\begin{proof}
+		\begin{enumerate}[(i)]
+			\item{
+				If $R$ is trivial $0$ is a unit.
+			}
+			\item{
+
+			}
+		\end{enumerate}
+	\end{proof}
+
+	\begin{definition}
+		Let $R$ be a ring and $I$ be a system of representatives
+		An integral domain $R$ is a \textbf{factorial ring} (or unique factorization domain), if every element has a unique decomposition into irreducible elements
+	\end{definition}
+
+	\begin{definition}
+		Let $R$ be a ring. A \textbf{principal ideal} is an ideal, which is generated by one element. A \textbf{principal ideal domain} is an integral domain, in which every ideal is a principal ideal.
+	\end{definition}
+
+	\begin{theorem}[Fundamental Theorem of Arithmetic]
+		Let $R$ be a principal ideal domain. Then $R$ is a factorial ring, i.e. every element has a (in some sense) unique decomposition into irreducible elements.
+	\end{theorem}
+
 	\subsection{Dedekind Domains?}
 	\subsection{Noetherian and Artinian Rings}
+	\subsection{Polynomial Rings}
 	\subsection{Adic Topology}
 	\section{Algebras}
 	\subsection{Algebras}
