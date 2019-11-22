@@ -1,0 +1,226 @@
+\input{../header.tex}
+
+\title{$\Sum \text{math}(y)$\\Topological Spaces}
+\author{Jonas Linssen}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\newpage
+\section{Topological Spaces}
+\subsection{Topological Spaces}
+
+\begin{definition}
+	A \textbf{topological space} $(X,\mathcal{O})$ is a set $X$ together with a family of sets $\mathcal{O} \subseteq \mathcal{P}(X)$ called \textbf{topology}, which satisfies the following axioms. Sets contained in $\mathcal{O}$ are called \textbf{open} in $X$.
+	\begin{enumerate}[$\bullet$]
+		\item{
+			Both $\emptyset$ and $X$ are open.
+		}
+		\item{
+			Finite intersections of open sets are open.
+		}
+		\item{
+			Arbitrary unions of open sets are open.
+		}
+	\end{enumerate}
+	The relative complement $X \setminus O$ of an open set $O$ is called \textbf{closed} in $X$. By de'Morgan one may define a topology as the set of relative complements of a family $\mathcal{C} \subseteq \mathcal{P}(X)$ of closed sets, which satisfies the following axioms.
+	\begin{enumerate}[$\bullet$]
+		\item{
+			Both $\emptyset$ and $X$ are closed.
+		}
+		\item{
+			Arbitrary intersections of closed sets are closed.
+		}
+		\item{
+			Finite unions of closed sets are closed.
+		}
+	\end{enumerate}
+\end{definition}
+
+\TODO{neighborhood, (sub)basis of topology, first/second countable}
+
+\TODO{interiour closure boundary density}
+
+\begin{definition}
+	Let $(X,\mathcal{O}_X)$ and $(Y,\mathcal{O}_Y)$ be topological spaces. A function $f:X-->Y$ is said to be \textbf{continuous}, if it satisfies one of the following equivalent conditions.
+	\begin{enumerate}[(i)]
+		\item{
+			Preimages of open sets are open.
+		}
+		\item{
+			Preimages of closed sets are open.
+		}
+		\item{
+			For every point $x$ in $X$ and neighborhood $N$ of $f(x)$ in $Y$, the preimage $f^{-1}(N)$ is a neighborhood of $x$.
+		}
+	\end{enumerate}
+	Clearly continouity is preserved by composition and the identity functions are continuous. Thus we get a category $\ncat{Top}$ of topological spaces and continuous functions.
+\end{definition}
+
+\TODO{morphism vs cont function}
+
+\begin{definition}
+	Let $f:X --> Y$ be a morphism in $\ncat{Top}$. It is said to be
+	\begin{enumerate}[$\bullet$]
+		\item{
+			\textbf{open}, if the image of any open set in $X$ is open in $Y$.
+		}
+		\item{
+			\textbf{closed}, if the image of any closed set in $X$ is closed in $Y$.
+		}
+		\item{
+			a \textbf{homeomorphism}, if it satisfies one of the following equivalent conditions.
+			\begin{enumerate}[(i)]
+				\item{
+					$f$ is an isomorphism in $\ncat{Top}$.
+				}
+				\item{
+					$f$ is a (continuous) bijection and open.
+				}
+				\item{
+					$f$ is a (continuous) bijection and closed.
+				}
+			\end{enumerate}
+		}
+	\end{enumerate}
+\end{definition}
+
+\begin{lemma}[Properties of $\ncat{Top}$]
+	In $\ncat{Top}$ the following holds.
+	\begin{enumerate}[(i)]
+		\item{
+			A morphism of topological spaces $f:(X,\mathcal{O}_X)-->(Y,\mathcal{O}_Y)$ is mono/epi if and only if it is injective/surjective.
+		}
+		\item{
+			The forgetful functor $\fun{U}:\ncat{Top} --> \ncat{Set}$ is left adjoint / right adjoint to the functors
+			\begin{equation*}
+				\begin{array}{rcl}
+					\ncat{Set} & \xrightarrow{(-)_\text{disc}} & \ncat{Top}\\
+					X & \longmapsto & X_\text{disc}\\
+					(f:X \rightarrow Y) & \longmapsto & (f:X \rightarrow Y)
+				\end{array}
+				\hspace{.5cm}\text{resp.}\hspace{.5cm}
+				\begin{array}{rcl}
+					\ncat{Set} & \xrightarrow{(-)_\text{chaot}} & \ncat{Top}\\
+					X & \longmapsto & X_\text{chaot}\\
+					(f:X \rightarrow Y) & \longmapsto & (f:X \rightarrow Y)
+				\end{array}.
+			\end{equation*}
+			% \begin{equation*}
+			% 	\begin{diagram}
+			% 		\twobyone[wide]{\ncat{Set}}{\ncat{Top}}
+			% 		\arrow[out=50,in=130]{w}{e}{(-)_\text{disc}}[above]
+			% 		\arrow{e}{w}{\fun{U}}[ontop]
+			% 		\arrow[out=-50,in=-130]{w}{e}{(-)_\text{chaot}}[below]
+			% 		\node at (0,.4) {$\bot$};
+			% 		\node at (0,-.35) {$\bot$};
+			% 	\end{diagram}
+			% \end{equation*}
+		}
+		\item{
+			$\ncat{Top}$ is complete and cocomplete.
+		}
+	\end{enumerate}
+\end{lemma}
+\TODO{examples: Pullbacks, Equalizers/subspaces, Products, Coproducts, Pushouts, Coequealizers}
+
+\subsection{Separation Axioms, Connectivity}
+
+\begin{definition}
+	A topological space $(X, \mathcal{O})$ is \textbf{Frechét} or \textbf{T1}, if it satisfies one of the following equivalent conditions.
+	\begin{enumerate}[(i)]
+		\item{
+			For any two points $x_1,x_2$ there are (open) neighborhoods $U_1$ and $U_2$ of $x_1,x_2$ respectively, such that $x_1 \notin U_1$ and $x_2 \notin U_1$.
+		}
+		\item{
+			Every singleton set $\{x\}$ is closed.
+		}
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	A topological space $(X, \mathcal{O})$ is \textbf{Hausdorff} or \textbf{T2}, if it satisfies one of the following equivalent conditions.
+	\begin{enumerate}[(i)]
+		\item{
+			For any two points $x_1,x_2$ there are (open) neighborhoods $U_1$ and $U_2$ of $x_1,x_2$ respectively, such that $U_1$ and $U_2$ are disjoint.
+		}
+		\item{
+			The diagonal $\Delta_X \subseteq X \times X$ is closed.
+		}
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	A topological space $(X, \mathcal{O})$ is \textbf{connected}, if it satisfies one of the following equivalent conditions.
+	\begin{enumerate}[(i)]
+		\item{
+			For any decomposition $U_1 \union U_2$ of $X$ into open,  disjoint subsets either $U_1$ or $U_2$ are empty.
+		}
+		\item{
+			$\emptyset$ and $X$ are the only subsets of $X$, which are both open and closed.
+		}
+		\item{
+			Any continuous map into a discrete space is constant.
+		}
+	\end{enumerate}
+\end{definition}
+
+\begin{lemma}[Properties of Connectivity]
+	\TODO{todo}
+\end{lemma}
+
+\begin{definition}
+	Let $(X, \mathcal{O})$ be a topological space. The \textbf{connected component} of $x$ is the maximal connected neighborhood of $x$ i.e. given by the identity
+	\begin{equation*}
+		[x]_{\pi_0} = \Union \limits_{x \in N \subseteq X\\N\text{ connected}} N.
+	\end{equation*}
+
+	$X$ is \textbf{totally disconnected}, if for any $x$ in $X$ the identity $[x]_{\pi_0} = \{x\}$ holds.
+\end{definition}
+
+\begin{lemma}
+	\TODO{Toptd reflective subcat of Top}
+\end{lemma}
+
+\begin{definition}
+	A topological space $(X, \mathcal{O})$ is \textbf{path-connected}, if for every two points $x_0, x_1$ in $X$ there is a continuous function $\gamma: \I^1 --> X$ satisfying $\gamma(0) = x_0$ and $\gamma(1) = x_1$.
+\end{definition}
+
+\subsection{Compactness}
+
+\begin{definition}
+	\TODO{cover, subcover}
+\end{definition}
+
+\begin{definition}
+	A topological space $(X,\mathcal{O})$ is \textbf{quasicompact}, if it satisfies one of the following equivalent conditions.
+	\begin{enumerate}[(i)]
+		\item{
+			Every open cover has a finite subcover.
+		}
+		\item{
+			\TODO{Alexander's subbase theorem}
+		}
+		\item{
+			Every family of closed subsets, where any finite subfamily has nonempty intersection, has nonempty intersection.
+		}
+		\item{
+			\TODO{every net has convergent subnet, every filter has convergent refinement, every ultrafilter converges to at least one point}
+		}
+	\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Tychonoff]
+	Let $(X_i, \mathcal{O}_i)_{i\in I}$ be a family of quasicompact spaces. Then $\Product \limits_{i \in I} X_i$ is quasicompact.
+\end{theorem}
+
+\subsection{Local Properties}
+\subsection{Topological Groups}
+\subsection{Topological Manifolds}
+\subsection{Covering Spaces}
+\subsection{Homotopy}
+\section{Homology}
+
+\end{document}
