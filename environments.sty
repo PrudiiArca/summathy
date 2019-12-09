@@ -46,9 +46,7 @@
 \NewDocumentEnvironment{@theoremenvironment}{mmm}
 {
 	\vspace{6pt}
-	\begin{mdframed}[backgroundcolor=verylightgray,leftline=true,rightline=false,topline=false,bottomline=false,linecolor=black,linewidth=1pt,leftmargin=-6pt,innerleftmargin=5pt,rightmargin=-6pt,innerrightmargin=5pt,innertopmargin=6pt,nobreak=true\IfNoValueTF{#3}{}{,#3}]\refstepcounter{theoremcounter}\textbf{#1 \thetheoremcounter}\IfNoValueTF{#2}{}{ (#2)}
-	%\underline{\textbf{Definition 2.1.3}}
-	%\begin{tab}[.7cm]
+	\begin{mdframed}[backgroundcolor=verylightgray,leftline=true,rightline=false,topline=false,bottomline=false,linecolor=black,linewidth=1pt,leftmargin=-6pt,innerleftmargin=5pt,rightmargin=-6pt,innerrightmargin=5pt,innertopmargin=6pt,nobreak=true\IfNoValueTF{#3}{}{, #3}]\refstepcounter{theoremcounter}\textbf{#1 \thetheoremcounter}\IfNoValueTF{#2}{}{ (#2)}
 	\vspace{3pt}\newline%\itshape
 }{
 	%\end{tab}

@@ -41,7 +41,36 @@
 	A subset $N$ in $X$ is called a \textbf{neighborhood} of a given point $x$, if there is a open set $U$, which satisfies $x \in U \subseteq N$. The set of all neighborhoods of $x$ is the \textbf{neighborhood filter} of $x$ and denoted by $\mathcal{N}(x)$.
 \end{definition}
 
-Any set can be equipped with two canonical topologies. The \textbf{discrete topology} on $X$ is given by $\mathcal{O}_\text{disc} = \mathcal{P}(X)$. The \textbf{chaotic topology} on $X$ is the topology given by $\mathcal{O}_\text{chaot} = \{\emptyset, X\}$. 
+\begin{example}\vspace{-2em}
+	\begin{enumerate}[(i)]
+		\item{
+			Any set can be equipped with two canonical topologies. The \textbf{discrete topology} on $X$ is given by $\mathcal{O}_\text{disc} = \mathcal{P}(X)$. The \textbf{chaotic topology} on $X$ is the topology given by $\mathcal{O}_\text{chaot} = \{\emptyset, X\}$.
+		}
+		\item{
+			The \textbf{empty space} is the unique topological space without any points $(\emptyset,\{\emptyset\})$.
+
+			The \textbf{singleton space} $(\{*\}, \{\emptyset,\{*\}\})$, is the unique topological space with exactly one point.
+
+			On a two element set $\{x,y\}$ there are precisely three different topologies (up to switching the roles of $x$ and $y$):
+			\begin{enumerate}[$\bullet$]
+				\item{
+					The discrete topology $\{\emptyset, \{x\}, \{y\}, \{x,y\}\}$. We will denote this space by $\{\circ, \circ\}$ or $\{\bullet, \bullet\}$.
+				}
+				\item{
+					The topology $\{\emptyset, \{x\}, \{x,y\}\}$. This defines the so called \textbf{Sierpinski Space}, which we will denote with $\{\circ, \bullet\}$.
+				}
+				\item{
+					The chaotic topology $\{\emptyset, \{x,y\}\}$. We will denote the corresponding space with $\{*, *\}$.
+				}
+			\end{enumerate}
+		}
+		\item{
+			Given a topological space $(X,\mathcal{O}_X)$ any subset $M \subseteq X$ can be equipped with the \textbf{subspace topology}, which is given by $\mathcal{O}_X \intersection M = \{O \intersection M \mid O \in \mathcal{O}_X\}$.
+		}
+	\end{enumerate}
+\end{example}
+
+ 
 
 \begin{definition}
 	Let $(X, \mathcal{O})$ be a topological space. 
@@ -146,7 +175,7 @@ Any set can be equipped with two canonical topologies. The \textbf{discrete topo
 	(v) $==>$ (i), since preimages commute with arbitrary unions and arbitrary intersections
 \end{sketch}
 
-\TODO{morphism vs cont function}
+In the following we will commonly refer to \textit{continuous functions} synonymously as \textit{continuous maps} and \textit{morphisms (of topological spaces)}.
 
 \begin{definition}
 	Let $f:(X, \mathcal{O}_X) --> (Y, \mathcal{O}_Y)$ be a morphism in $\ncat{Top}$. It is said to be
@@ -158,7 +187,7 @@ Any set can be equipped with two canonical topologies. The \textbf{discrete topo
 			\textbf{closed}, if the image of any closed set in $X$ is closed in $Y$.
 		}
 		\item{
-			a \textbf{homeomorphism}, if it satisfies one of the following equivalent conditions.
+			a \textbf{homeomorphism}, if it satisfies one of the following equivalent conditions (using the fact that preimages under $f$ are images under $f^{-1}$).
 			\begin{enumerate}[(i)]
 				\item{
 					$f$ is an isomorphism in $\ncat{Top}$.
@@ -174,14 +203,13 @@ Any set can be equipped with two canonical topologies. The \textbf{discrete topo
 	\end{enumerate}
 \end{definition}
 
+\TODO{open does not imply closed and vice versa}
+
 \begin{lemma}[Properties of $\ncat{Top}$]
 	In $\ncat{Top}$ the following holds.
 	\begin{enumerate}[(i)]
 		\item{
-			A morphism of topological spaces $f:(X,\mathcal{O}_X)-->(Y,\mathcal{O}_Y)$ is mono/epi if and only if it is injective/surjective.
-		}
-		\item{
-			The forgetful functor $\fun{U}:\ncat{Top} --> \ncat{Set}$ is left adjoint / right adjoint to the functors
+			The forgetful functor $\fun{U}:\ncat{Top} --> \ncat{Set}$ has left adjoint / right adjoint functors
 			\begin{equation*}
 				\begin{array}{rcl}
 					\ncat{Set} & \xrightarrow{(-)_\text{disc}} & \ncat{Top}\\
@@ -209,11 +237,112 @@ Any set can be equipped with two canonical topologies. The \textbf{discrete topo
 		\item{
 			$\ncat{Top}$ is complete and cocomplete.
 		}
+		\item{
+			A morphism of topological spaces $f:(X,\mathcal{O}_X)-->(Y,\mathcal{O}_Y)$ is mono/epi if and only if it is injective/surjective.
+		}
 	\end{enumerate}
 \end{lemma}
-\TODO{examples: Pullbacks, Equalizers/subspaces, Products, Coproducts, Pushouts, Coequealizers}
+\begin{sketch}
+	\begin{enumerate}[(i)]
+		\item{
+			The described functors satisfy the universal properties
+			\begin{equation*}
+				\begin{diagram}
+					\twobytwo[verywide]
+					{X}{}
+					{\fun{U}(X_\text{disc})}{\fun{U}(T)}
+					\arrow[equals]{nw}{sw}{}
+					\arrow{nw}{se}{f}[above right]
+					\arrow[dashed]{sw}{se}{\fun{U}(f)}[below]
+				\end{diagram}
+				\hspace{.5cm}\text{resp.}\hspace{.5cm}
+				\begin{diagram}
+					\twobytwo[verywide]
+					{\fun{U}(T)}{\fun{U}(X_\text{chaot})}
+					{}{X}
+					\arrow{nw}{se}{f}[below left]
+					\arrow[equals]{ne}{se}{}
+					\arrow[dashed]{nw}{ne}{\fun{U}(f)}[above]
+				\end{diagram}
+			\end{equation*}
+		}
+		\item{
+			From (i) we know that, if a limit / colimit in $\ncat{Top}$ exists, its underlying set has to be the corresponding limit / colimit in $\ncat{Set}$. It thus suffices to give the corresponding topologies and to verify that the functions of the underlying universal properties are continuous.
 
-\subsection{Separation Axioms, Connectivity}
+			For a limit given by projection functions $\pi_i:\lim_{i \in I} X_i --> X_i$ use the topology generated by all the preimages $\pi_i^{-1}(U_i)$ with $U_i \in \mathcal{O}_{X_i}$. This is the coarsest topology on $\lim_{i \in I} X_i$ making all projections continuous.
+
+			For a colimit given by inclusion functions $\iota_i: X_i --> \colim_{i \in I} X_i$ use the topology generated by all the sets \TODO{$\iota_i(V_i)$}, where $V_i = \iota_i^{-1}(M) \in \mathcal{O}_{X_i}$ for some $M \subseteq \colim_{i \in I} X_i$. This is the finest topology on $\colim_{i \in I} X_i$, which makes all the inclusions continuous.
+		}
+	\end{enumerate}
+\end{sketch}
+
+\begin{example}\vspace{-2em}
+	\begin{enumerate}[(i)]
+		\item{
+			The terminal object in $\ncat{Top}$ is the \textbf{singleton space} $\{*\}$, which is commonly written as $*$. The initial object in $\ncat{Top}$ is the \textbf{empty space} $\emptyset$.
+		}
+		\item{
+			The topology on the product $\Product \limits_{i\in I} X_i$ of topological spaces $(X_i, \mathcal{O}_{X_i})$ is generated by the sets $U_i \times \Product \limits_{j \neq i} X_j$ for open sets $U_i \subseteq X_i$. In particular the sets $U_{i_1} \times \dots \times U_{i_n} \times \Product \limits_{j \notin \{i_1, \dots, i_n\}} X_j$ form a basis of the topology. \TODO{pri(U) = Xi for all but finitely many, contains and contained in cube}
+		}
+		\item{
+			The disjoint union $\Coproduct \limits_{i \in I} X_i$ of topological spaces $(X_i,\mathcal{O}_{X_i})$ has the open sets $U_i$ of $X_i$ as basis.
+		}
+	\end{enumerate}
+\end{example}
+
+\begin{definition}
+	A morphism $f:(X,\mathcal{O}_X)-->(Y,\mathcal{O}_Y)$ of topological spaces is an \textbf{embedding of a subspace} if it satisfies one of the following equivalent conditions.
+	\begin{enumerate}[(i)]
+		\item{
+			$X$ is homeomorphic to its image $f(X)$, when the latter is equipped with the subspace topology. In particular $f$ is injective.
+		}
+		\item{
+			$f$ is a \textit{regular monomorphism}, i.e. an equalizer.
+		}
+		\item{
+			\TODO{pullback}
+		}
+		\item{
+			For any topological space $(W,\mathcal{O}_W)$ and function $k:W-->X$ it holds that $k$ is continuous if and only if $fk$ is continuous.
+		}
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	A morphism $f:(X,\mathcal{O}_X)-->(Y,\mathcal{O}_Y)$ of topological spaces is a \textbf{quotient map} if it satisfies one of the following equivalent conditions.
+	\begin{enumerate}[(i)]
+		% \item{
+		% 	$X$ is homeomorphic to its image $f(X)$, when the latter is equipped with the subspace topology. In particular $f$ is injective.
+		% }
+		\item{
+			$f$ is surjective and a subset $V$ in $Y$ is open if and only if $f^{-1}(V)$ is open in $X$.
+		}
+		\item{
+			$f$ is a \textit{regular epimorphism}, i.e. a coequalizer. Concretely, $Y$ is homeomorphic to the \textbf{quotient} $X/R$ of $X$ by some equivalence relation $R \subseteq X \times X$, equipped with the subspace topology, defined via
+			\begin{equation*}
+				X/R := \coeq(\begin{diagram}
+					\twobyone{R}{X}
+					\arrow[higher]{w}{e}{\pi_1}[above]
+					\arrow[lower]{w}{e}{\pi_2}[below]
+				\end{diagram}).
+			\end{equation*}
+		}
+		\item{
+			\TODO{pushout?}
+		}
+		\item{
+			For any topological space $(Z,\mathcal{O}_Z)$ and function $g:Y-->Z$ it holds that $g$ is continuous if and only if $gf$ is continuous.
+		}
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	\TODO{gluing datum} gluing construction
+\end{definition}
+
+\TODO{examples: Pullbacks, Pushouts}
+
+\subsection{Separation Axioms}
 
 \begin{definition}
 	A topological space $(X, \mathcal{O})$ is \textbf{Frechét} or \textbf{T1}, if it satisfies one of the following equivalent conditions.
@@ -244,6 +373,10 @@ Any set can be equipped with two canonical topologies. The \textbf{discrete topo
 	(i) $==>$ (ii), since $U = \Union \limits_{x_1 \neq x_2} U_1 \times U_2$ is open.\\
 	(ii) $==>$ (i), because for $x_1 \neq x_2$ we have $x_1 \in U_1 := \text{pr}_1^{-1}(U)$, $x_2 \in U_2 := \text{pr}_2^{-1}(U)$ and $U_1 \intersection U_2 = \emptyset$.
 \end{sketch}
+
+\TODO{hausdorffication}
+
+\subsection{Connectivity}
 
 \begin{definition}
 	A topological space $(X, \mathcal{O})$ is \textbf{connected}, if it satisfies one of the following equivalent conditions.
@@ -310,13 +443,15 @@ Any set can be equipped with two canonical topologies. The \textbf{discrete topo
 	\enquote{$==>$} is obvious. For \enquote{$<==$} use contradiction.\\
 	\textit{Assume} $(X,\mathcal{O})$ is \underline{not} quasicompact.
 	\begin{tab}[1.3cm]
-		Use \textit{Zorn's lemma} on the following nonempty set, which is partially ordered wrt. subcovers $\mathcal{U} = \{(U_i)_i \mid (U_i)_i \text{ covers } X \text{ and has no finite subcover}\}$. Obtain maximal element $\mathcal{U}_0$. \TODO{finish}
+		Use \textit{Zorn's lemma} on the set $\mathcal{U} = \{(U_i)_i \mid (U_i)_i \text{ covers } X \text{ but no finite subcover}\}$, which is nonempty and partially ordered wrt. subcovers. Obtain maximal element $\mathcal{U}_0$. \TODO{finish}
 	\end{tab}
 \end{sketch}
 
 \begin{corollary}[Tychonoff's Theorem]
 	Let $(X_i, \mathcal{O}_i)_{i\in I}$ be a family of quasicompact spaces. Then $\Product \limits_{i \in I} X_i$ is quasicompact.
 \end{corollary}
+
+\TODO{one point compactification}
 
 \subsection{Size}
 \TODO{first countable, second countable, separable, combinatorial dimension}
