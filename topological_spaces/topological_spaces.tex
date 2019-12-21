@@ -440,13 +440,53 @@ In the following we will commonly refer to \textit{continuous functions} synonym
 			\TODO{coseperating set / object? see https://mathoverflow.net/a/300982}
 		}
 		\item{
-			\TODO{reflective subcategory}
+			$\ncat{Haus}$ is a \textit{(full) reflective subcategory} of $\ncat{Top}$. The \textit{reflector} $\ncat{Haus} --> \ncat{Top}$ sends a topological space $(X,\mathcal{O}_X)$ to its \textbf{Hausdorff quotient} or \textbf{Hausdorffication}.
 		}
 		\item{
 			\TODO{epimorphisms, see https://arxiv.org/pdf/1810.00778.pdf}
 		}
 	\end{enumerate}
 \end{lemma}
+\begin{sketch}
+	\begin{enumerate}[(i)]
+		\item{
+			The assertion about subspaces is by definition. For Products note that for $x \neq y$ there is some index $i$ with $x_i \neq y_i$ and use Hausdorffness of the corresponding space.
+		}
+		\item{
+			\TODO{whut}
+		}
+		\item{
+			Let $(X,\mathcal{O}_X)$ be a topological space. Denote by $R$ the smallest equivalence relation on $X$, such that $X/R$ is Hausdorff, i.e. 
+			$$R = \Intersection \{S \subseteq X \times X \mid S \text{ equivalence relation and } X/S \text{ Hausdorff}\}.$$
+			By definition $X/R$ is Hausdorff. 
+
+			Given an Hausdorff space $(Y,\mathcal{O}_Y)$ and continuos function $f:X-->Y$ consider the equivalence relation $S$ given by $(x_1,x_2) \in S <==> f(x_1) = f(x_2)$. Note that by construction $X/S$ is Hausdorff. Hence $R \subseteq S$ and we get the diagram
+			\begin{equation*}
+				\begin{diagram}
+					\threebythree
+						{R}{X}{X/R}
+						{S}{X}{X/S}
+						{}{Y}{}
+
+					\arrow[higher]{nw}{n}{}
+					\arrow[lower]{nw}{n}{}
+					\arrow[epi]{n}{ne}{\pi_R}[above]
+
+					\arrow[higher]{w}{c}{}
+					\arrow[lower]{w}{c}{}
+					\arrow[epi]{c}{e}{\pi_S}[above]
+
+					\arrow[incl]{nw}{w}{}
+					\arrow[equals]{n}{c}{}
+					\arrow{c}{s}{f}[left]
+					\arrow[dashed]{ne}{e}{\widetilde{i}}[right]
+					\arrow[dashed]{e}{s}{\widetilde{f}}[below right]
+				\end{diagram}
+			\end{equation*}
+			where $\widetilde{f}$ is induced by the universal property of $X/S$ applied to $f$ and $i$ is induced by the universal property of $X/R$ applied to $\pi_S$. The composition $\widetilde{f}\widetilde{i}$ then gives the desired factorization of $f$, which is unique by $\pi_R$ being epi.
+		}
+	\end{enumerate}
+\end{sketch}
 
 \begin{definition}
 	A topological space $(X,\mathcal{O})$ is \textbf{normal} (not necessarily Hausdorff) if for any two disjoint closed subsets $C_0,C_1$ there are disjoint open sets $U_0,U_1$ containing $C_0$ respectively $C_1$.
@@ -473,6 +513,78 @@ In the following we will commonly refer to \textit{continuous functions} synonym
 		\end{equation*}
 	\end{minipage}
 \end{theorem}
+\begin{proof}\TODO{A short proof of the Tietze Urysohn Extension theorem, Mark Mandelkern}
+
+	\TODO{By reparametrization} it suffices to consider the case $f:C --> [0,1]$.
+
+	For any rational $r \in \Q$ we can define the closed set
+	\begin{equation*}
+		C_r = \{x \in C \mid f(x) \leq r\}.
+	\end{equation*}
+	The strategy of this proof is to give a countable collection of closed subsets $X_r \subseteq X$ (for $r \in \Q$) with the properties
+	\begin{equation}\label{TietzeUrysohnEq1}
+		\begin{array}{rl}
+			X_r = \emptyset & \text{ for } r < 0\\
+			X_r = X & \text{ for } r \geq 1\\
+			X_r \subseteq \interior(X_s) & \text{ for }r<s \text{ in } \Q \intersection [0,1)\\
+			X_r \intersection C = C_r & \text{ for } r \in [0,1],
+		\end{array}
+	\end{equation}
+	and extend $f$ gradually in the sense that $X_r$ satisfies \TODO{$X_r = \{x \in X \mid \widehat{f}(x) \leq r\}$.}\\
+
+	In the following we will consider pairs $(r,s) \in \Q^2$ with $0 \leq r < s < 1$ and will abreviate them by writing $rs$. To construction of the sets $X_r$ will require us to temporarily fix an indexing $(r_n,s_n)_{n \in \N}$ of the countable set of such pairs.
+
+	For $s \in \Q \intersection (0,1)$ we define the open set
+	\begin{equation*}
+		U_s = X \setminus \{x \in C \mid f(x) \geq s\}.
+	\end{equation*}
+	We now inductively construct closed sets $H_{rs}$, which satisfy
+	\begin{align*}
+		C_r \subseteq \interior(H_{rs}) \subseteq H_{rs} \subseteq U_s\\
+		H_{rs} \subseteq \interior(H_{tu}) \text{ for }r<t,s<u.
+	\end{align*}
+
+	For the purpose of induction we will temporarily denote the set $H_{rs}$ by $H_n$, given $r=r_n$ and $s=s_n$. The construction requires  some bookkeeping, so we define the following sets of indices
+	\begin{align*}
+		J_n &= \{j \in \N \mid j < n, r_j < r_n, s_j < s_n\}\\
+		K_n &= \{k \in \N \mid k < n, r_k > r_n, s_k > s_n\}.
+	\end{align*}
+
+	For $n=1$ set \TODO{TODO}.
+
+	For $n>1$ suppose that for $m<n$ we have constructed closed sets $H_m$, which satisfy
+	\begin{align*}
+		C_{r_m} \subseteq \interior H_m \subseteq H_m \subseteq U_{s_m}\\
+		H_j \subseteq \interior H_m \hspace{0.7em}\text{ for } j\in J_m.
+	\end{align*}
+	Since $X$ is normal we find a closed set $H_n$, which satisfies
+	\begin{equation*}
+		C_{r_n} \subseteq C_{r_n} \union \Union \limits_{j \in J_n}H_j \subseteq \interior (H_n) \subseteq H_n \subseteq U_{s_n} \intersection \Intersection \limits_{k \in K_n} \interior (H_k) \subseteq U_{s_n}.
+	\end{equation*}
+
+	We can now define for fixed $r \in \Q \intersection [0,1)$
+	\begin{equation*}
+		X_r = \Intersection \limits_{rs} H_{rs},
+	\end{equation*}
+	and $X_r = \emptyset$ for $r<0$ and $X_r = X$ for $r \geq 1$. We have to check, that these sets satisfy the requirements (\ref{TietzeUrysohnEq1}). Indeed, given $0 \leq r < t < s < 0$ we have
+	\begin{equation*}
+		X_r \subseteq H_{rt} \subseteq \interior(H_{ts}) \subseteq H_{ts} \subseteq \Intersection \limits_{su} H_{su} = X_s
+	\end{equation*}
+	and
+	\begin{equation*}
+		C_r \subseteq C \intersection X_r = C \intersection \Intersection \limits_{rs} H_{rs} \subseteq C \intersection \Intersection \limits_{rs} U_s = C_r.
+	\end{equation*}
+
+	Finally we can define 
+	\begin{equation*}
+		\widehat{f}:X \longrightarrow [0,1],\; \widehat{f}(x) = \inf \{r \mid x \in X_r\}.
+	\end{equation*}
+	Since for $x \in C$ it holds that $f(x) = \inf \{r \mid x \in C_r = X_r \intersection C\}$, we have $\widehat{f}\vert_C = f$. It remains to show that $\widehat{f}$ is continous. Indeed, given an open interval $(a,b) \subseteq \R$ we have
+	\begin{equation*}
+		\widehat{f}^{-1}((a,b)) = \Union \limits_{a<r<s<b}(\interior(X_s) \setminus X_r),
+	\end{equation*}
+	which is open.
+\end{proof}
 
 \begin{corollary}[Urysohn's lemma]
 	A topological space $(X,\mathcal{O})$ is normal, if and only if for any two disjoint closed subsets $C_0,C_1$ there exists an \textbf{Urysohn function}, i.e. a continuous function $u:X --> [0,1]$ satisfying $u\vert_{C_0} = 0$ and $u\vert_{C_1} = 1$.
