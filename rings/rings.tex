@@ -41,7 +41,7 @@
 	\begin{definition}
 		A \textbf{morphism of rings} is a function $f:R --> S$ between rings $R$ and $S$, which satisfies
 		\begin{equation*}
-			f(ab + c) = f(a)f(b) + f(c) \;\;\;\;\text{and}\;\;\;\; f(1) = 1.
+			f(ab + c) = f(a)f(b) + f(c) \;\;\;\;\text{and}\;\;\;\; f(1_R) = 1_S.
 		\end{equation*}
 		As the identity function $1_R: R --> R$ is a morphism of rings for any ring $R$ and morphisms of rings are closed under composition, we get a category $\ncat{CRing}$.
 	\end{definition}
@@ -59,7 +59,7 @@
 				A morphism of rings $f:R --> S$ is epi if and only if it is surjective.
 			}
 			\item{
-				A morphism of rings $f:R --> S$ is mono if and only if it is injective. Using (i) this is equivalent to the equation $\ker f := \{x \in R \mid f(x) = 0\} = \{0\}$.
+				A morphism of rings $f:R --> S$ is mono if and only if it is injective. Using (i) this is equivalent to the equation $\ker f := \{r \in R \mid f(r) = 0\} = \{0\}$.
 			}
 			\item{
 				The trivial ring $1$ is terminal.
@@ -95,7 +95,7 @@
 		\end{enumerate}\vspace{-2em}
 	\end{sketch}
 
-	Example $(1,0)\cdot(0,1)$.
+	Consider the binary product $R^2$ of a ring $R$ with itself. The two elements $(1,0)$ and $(0,1)$ are clearly nonzero, but satisfy $(1,0)\cdot(0,1) = (0,0)$.
 
 	\begin{definition}
 		A \textbf{zero divisor} in a ring $R$ is an element $a$, such that there exists a nonzero element $b$ such that $ab = 0$. A \textbf{nilpotent element} $a$ satisfies that $a^n = 0$ for some $n \in \N$. In particular nilpotent elements are zero divisors.
@@ -104,7 +104,7 @@
 		A ring, which does not possess any zero divisors besides $0$, is called an \textbf{integral domain}.
 	\end{definition}
 
-	\TODO{0 zero divisor unless zero ring}
+	Note that $0$ is a zero divisor unless the ring is the trivial ring.
 
 	\begin{definition}
 		A \textbf{unit} in a ring $R$ is an element $a$, for which there exists a \textbf{multiplicative inverse}, i.e. an element $a^{-1}$ satisfying $aa^{-1} = 1 \;{\color{gray}(= a^{-1}a)}$.
@@ -125,7 +125,7 @@
 				Let $f: K --> R$ be a morphism of rings, where $K$ is a field. Then $f$ is mono.
 			}
 			\item{
-				\TODO{1 - nilpotent is unit}
+				For any nilpotent element $r$ in some ring $R$, the element $1-r$ is a unit.
 			}
 		\end{enumerate}
 	\end{lemma}
@@ -139,6 +139,9 @@
 			}
 			\item{
 				Follows from (ii) via $\ker f = \{0\}$.
+			}
+			\item{
+				Given $r^n = 0$ the inverse of $1-r$ is given by $\smash{\Sum \limits_{k=0}^{n-1}r^k}$.
 			}
 		\end{enumerate}\vspace{-2em}
 	\end{sketch}
@@ -158,7 +161,7 @@
 			\item{
 				Let $R$ be a ring and $\ideal{a},\ideal{b} \diveq R$ ideals. Then
 				\begin{align*}
-					\ideal{ab} &= \{ab \mid a \in \ideal{a}, b \in \ideal{b}\}\\
+					\ideal{ab} &= \Gen{ab \mid a \in \ideal{a}, b \in \ideal{b}}\\
 					\ideal{a} \intersection \ideal{b} &= \{r \mid r \in \ideal{a}, r \in \ideal{b}\}\\
 					\ideal{a} + \ideal{b} &= \{a + b \mid a \in \ideal{a}, b \in \ideal{b}\}
 				\end{align*}
@@ -341,12 +344,63 @@
 				\{\text{prime ideals containing }\ideal{a}\} &\overset{\sim}{\longrightarrow} &\{\text{prime ideals in } R/\ideal{a}\}\\
 				\{\text{maximal ideals containing }\ideal{a}\} &\overset{\sim}{\longrightarrow} &\{\text{maximal ideals in } R/\ideal{a}\}\\\\
 				\ideal{b} &\longmapsto &\pi(\ideal{b})\\
-				\pi^{-1}(\ideal{b}) &\reflectbox{$\longmapsto$} &\widetilde{\ideal{b}}
+				\pi^{-1}(\ideal{b}) &\reflectbox{$\longmapsto$} &\ideal{b}
 			\end{array}
 		\end{equation*}
 	\end{theorem}
 
-	\subsection{Localization}
+	\subsection{Localization and Local Rings}
+
+	\begin{definition}
+		Let $S$ be a multiplicative system in a ring $R$, i.e. contain $1$ and be closed under multiplication. The relation
+		\begin{align*}
+			(r_1,s_1) \sim (r_2,s_2) <==> \exists f\in S: fr_1s_2 = fr_2s_1
+		\end{align*}
+		defines an equivalence relation on $R \times S$. We write $\dfrac{r}{s}$ for the equivalence class of $[(r,s)]$. By setting
+		\begin{equation*}
+			\dfrac{r_1}{s_1} + \dfrac{r_2}{s_2} = \dfrac{r_1s_2 + r_2s_1}{s_1s_2} \hspace{1cm}\text{and}\hspace{1cm} \dfrac{r_1}{s_1} \cdot \dfrac{r_2}{s_2} = \dfrac{r_1r_2}{s_1s_2}
+		\end{equation*}
+		we obtain a ring structure on $R \times S / \sim$. This is the so called \textbf{localization} $S^{-1}R$ of $R$ by $S$.
+	\end{definition}
+
+	\TODO{remark on factor $f$}
+
+	\begin{theorem}[Correspondence Theorem]
+		Let $R$ be a ring and $S$ be a multiplicative system in $R$. The canonic morphism $\iota_S: R --> S^{-1}R$ exhibits bijections
+		\TODO{todo}
+		\begin{equation*}
+			\begin{array}{rcl}
+				\{\text{ideals }\ideal{a}\text{ with } \forall s \in S, r \in R \setminus \ideal{a}: sr \notin \ideal{a}\} &\overset{\sim}{\longrightarrow} &\{\text{ideals in } S^{-1}R\}\\
+				\{\text{radical ideals }\ideal{r}\text{ with } \forall s \in S, r \in R \setminus \ideal{r}: sr \notin \ideal{r}\} &\overset{\sim}{\longrightarrow} &\{\text{radical ideals in } S^{-1}R\}\\
+				\{\text{prime ideals }\ideal{p}\text{ with } \forall s \in S, r \in R \setminus \ideal{p}: sr \notin \ideal{p}\} &\overset{\sim}{\longrightarrow} &\{\text{prime ideals in } S^{-1}R\}\\
+				\{\text{maximal ideals }\ideal{m}\text{ with } \forall s \in S, r \in R \setminus \ideal{m}: sr \notin \ideal{m}\} &\overset{\sim}{\longrightarrow} &\{\text{maximal ideals in } S^{-1}R\}\\\\
+				\ideal{a} &\longmapsto &S^{-1}\ideal{a} = \Gen{\iota_S(\ideal{a})}_{S^{-1}R}\\
+				\iota_S^{-1}(\ideal{b}) &\reflectbox{$\longmapsto$} &\ideal{b}
+			\end{array}
+		\end{equation*}
+	\end{theorem}
+
+	\begin{definition}
+		A ring $R$ is said to be \textbf{local}, if it satisfies one of the following equivalent contitions.
+		\begin{enumerate}[(i)]
+			\item{
+				$R$ has exactly one maximal ideal $\ideal{m}_R$.
+			}
+			\item{
+				The complement $R \setminus R^\times$ is an ideal.
+			}
+			\item{
+				$R$ is nontrivial and for any $r \in R$ it holds that $r$ or $1-r$ are invertible.
+			}
+		\end{enumerate}
+
+		Recall that in general preimages of maximal ideals need not be maximal. A morphism $f:R-->R'$ between local rings is a \textbf{local morphism}, if it satisfies $f^{-1}(\ideal{m}_{R'}) = \ideal{m}_R$ or equivalently that $f(r)$ is invertible if and only if $r$ is invertible.
+	\end{definition}
+
+	\begin{corollary}
+		Let $\ideal{p}$ be a prime ideal in some ring $R$. Recall that by definition the complement $S = R\setminus \ideal{p}$ is a multiplicative system. The localization $R_\ideal{p} = S^{-1}R$ is a local ring with maximal ideal $\ideal{m}_{R_\ideal{p}} = S^{-1}\ideal{p}$.
+	\end{corollary}
+
 	\subsection{Factorial Rings and Principal Ideal Domains}
 
 	\begin{definition}
@@ -414,8 +468,46 @@
 
 	\subsection{Dedekind Domains?}
 	\subsection{Noetherian and Artinian Rings}
-	\subsection{Polynomial Rings}
-	\subsection{Adic Topology}
+
+	\newpage
 	\section{Algebras}
+	\subsection{Polynomial Rings}
 	\subsection{Algebras}
+
+	\begin{definition}
+		Let $R$ be a ring. A \textbf{$R$-algebra} is a ring $A$ together with a morphism of rings $\varphi_A:R-->A$ called the \textbf{structure morphism}. In more explicit terms $A$ is a ring  together with a scalar multiplication $\cdot: R \times A --> A$, such that the multiplication $\cdot: A \times A --> A$ is $R$-bilinear, i.e. satisfies
+		\begin{equation*}
+			 (r\cdot a)\cdot b = r\cdot(a\cdot b) = a \cdot (r \cdot b).
+		\end{equation*}
+		The structure morphism can be recovered from this description by considering
+		\begin{equation*}
+			\begin{array}{rcl}
+				R & \longrightarrow & A\\
+				r & \longmapsto & r\cdot 1_A.
+			\end{array}
+		\end{equation*}
+		\begin{minipage}{\textwidth-4cm}
+			A morphism of $R$-algebras is a morphism of rings $f:A-->B$ compatible with the structure morphisms in the sense that the diagram on the right commutes. Explicitly $f$ has to satisfy the additional requirement that
+			\begin{equation*}
+				f(ra) = rf(a).
+			\end{equation*}
+		\end{minipage}
+		\begin{minipage}{4cm}
+			\begin{equation*}
+				\begin{diagram}
+					\threebytwo[narrow]
+						{}{R}{}
+						{A}{}{B}
+
+					\arrow{n}{sw}{\varphi_A}[above left]
+					\arrow{n}{se}{\varphi_B}[above right]
+					\arrow{sw}{se}{f}[below]
+				\end{diagram}
+			\end{equation*}
+		\end{minipage}
+		By construction the category of $R$-algebras, denoted $\ncat{Alg}_R$, is the comma category $R \downarrow \ncat{CRing}$.
+	\end{definition}
+
+	\section{Topological Rings?}
+	\subsection{Adic Topology}
 \end{document}
