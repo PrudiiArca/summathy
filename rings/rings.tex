@@ -34,7 +34,7 @@
 	\end{definition}
 	%\footnotetext{Some authors drop the requirement of a multiplicative identity and mark its presence by saying unital ring.}
 	%\footnotetext{For binary operators like $+$ it is common to use infix notation $a+b$ instead of $+(a,b)$. Moreover we use the convention \enquote{multiplication before addition}.}
-	\TODO{examples: Z, End(A)?}
+	\TODO{examples: Z, End(A), subring}
 
 	\TODO{infix notation, dropping $\cdot$}
 
@@ -62,13 +62,20 @@
 				A morphism of rings $f:R --> S$ is mono if and only if it is injective. Using (i) this is equivalent to the equation $\ker f := \{r \in R \mid f(r) = 0\} = \{0\}$.
 			}
 			\item{
-				The trivial ring $1$ is terminal.
+				The trivial ring $1$ is terminal and the ring of integers $\Z$ is initial.
 			}
 			\item{
-				The ring of integers $\Z$ is initial.
-			}
-			\item{
-				$\ncat{CRing}$ has arbitrary products, where the ring structure on the underlying set $\Product \limits_{i \in I} R_i$ is defined componentwise.
+				$\ncat{CRing}$ has arbitrary products, where the ring structure on the underlying set $\Product \limits_{i \in I} R_i$ is defined componentwise. It has equalizers
+				\begin{equation*}
+					\eq(
+					\begin{diagram}
+						\twobyone{R}{S}
+						\arrow[higher]{w}{e}{f_1}[above]
+						\arrow[lower]{w}{e}{f_1}[below]
+					\end{diagram}
+					)
+				\end{equation*}
+				given by the subring $\{r \in R \mid f_1(r) = f_2(r)\}$ and its inclusion. Thus $\ncat{CRing}$ is \textit{complete}.
 			}
 		\end{enumerate}
 	\end{lemma}
@@ -84,13 +91,10 @@
 				Injective implies mono. \TODO{converse?}
 			}
 			\item{
-				By definition.
+				The first statement holds by definition. For the second note that $n = 1 + ... + 1$ in $\Z$ and use a morphism of rings has to preserve $1$.
 			}
 			\item{
-				Note that $n = 1 + ... + 1$ in $\Z$ and use the definition of morphism of rings. 
-			}
-			\item{
-				It suffices to check that the unique morphism into $\Product \limits_{i \in I} R_i$ of the universal property in $\ncat{Set}$ is a morphism of rings.
+				 In both cases it suffices to check that the unique morphism into $\Product \limits_{i \in I} R_i$, respectively $\eq(f_1,f_2)$ of the universal property in $\ncat{Set}$ is a morphism of rings.
 			}
 		\end{enumerate}\vspace{-2em}
 	\end{sketch}
@@ -132,7 +136,7 @@
 	\begin{sketch}
 		\begin{enumerate}[(i)]
 			\item{
-				Holds for the trivial ring by definition. In a nontrivial ring being both gives a contradiction.
+				Holds for the trivial ring by definition. In a nontrivial ring use contradiction.
 			}
 			\item{
 				By definition.
@@ -146,6 +150,7 @@
 		\end{enumerate}\vspace{-2em}
 	\end{sketch}
 
+	\newpage
 	\subsection{Ideals, Factor Rings and Spectrum}
 	\begin{definition}
 		Let $R$ be a ring. An \textbf{ideal} $\ideal{a}$ is an \textit{abelian subgroup} $\ideal{a} \leq_\ncat{Ab} R$, which is closed under multiplication with $R$. We write $\ideal{a} \diveq R$.
@@ -155,9 +160,6 @@
 
 	\begin{lemma}[Properties of Ideals]
 		\vspace{-1.5em}\begin{enumerate}[(i)]
-			\item{
-				
-			}
 			\item{
 				Let $R$ be a ring and $\ideal{a},\ideal{b} \diveq R$ ideals. Then
 				\begin{align*}
@@ -183,11 +185,22 @@
 			}
 		\end{enumerate}
 	\end{lemma}
+	\begin{sketch}
+		\begin{enumerate}[(i)]
+			\item{
+				The ideal property and inclusions hold by definition. For the equation assuming comaximality note that $1 = a_0+b_0$ for some $a_0 \in \ideal{a}, b_0 \in \ideal{b}$. Given $r \in \ideal{a}\intersection\ideal{b}$ we then have $r = r\cdot 1 = r\cdot(a_0+b_0) = a_0r + rb_0 \in \ideal{ab}$.
+			}
+			\item{
+				By definition.
+			}
+			\item{
+				By definition.
+			}
+		\end{enumerate}\vspace{-2em}
+	\end{sketch}
 
 	\begin{definition}
-		Let $R$ be a ring and $\ideal{a} \diveq R$ be an ideal in $R$. 
-
-		As $\ideal{a} \leq_\ncat{Ab} R$ is an abelian subgroup we can construct the factor group $R/\ideal{a}$, with addition given by
+		Let $R$ be a ring and $\ideal{a} \diveq R$ be an ideal in $R$. As $\ideal{a} \leq_\ncat{Ab} R$ is an abelian subgroup we can construct the factor group $R/\ideal{a}$, with addition given by
 		\begin{equation*}
 			(x + \ideal{a}) + (y + \ideal{a}) = (x+y) + \ideal{a}.
 		\end{equation*}
@@ -198,8 +211,26 @@
 		is well defined, turning $R / \ideal{a}$ into a \textbf{factor ring} (or \textbf{quotient ring} or \textbf{residue class ring}). This construction yields a canonic \textbf{projection morphism} $\pi: R -->> R/\ideal{a}$, which is epi and satisfies $\ker \pi = \ideal{a}$.
 	\end{definition}
 
+	\begin{lemma}[Properties of the Factor Ring]
+		Let $R$ be a ring and $\ideal{a} \diveq R$ be an ideal.
+		\begin{enumerate}[(i)]
+			\item{
+				Given parallel morphisms of rings $f_1,f_2:R-->S$ define $\ideal{a} = \Gen{s \in S \mid s=f_1(r)=f_2(r) \text{ for some }r \in R}_S$. Then\vspace{-1em}
+				\begin{equation*}
+					S/\ideal{a}=\coeq(
+					\begin{diagram}
+						\twobyone{R}{S}
+						\arrow[higher]{w}{e}{f_1}[above]
+						\arrow[lower]{w}{e}{f_2}[below]
+					\end{diagram}
+					)
+				\end{equation*}
+			}
+		\end{enumerate}
+	\end{lemma}
+
 	\begin{theorem}[Isomorphism Theorem]
-		Let $f:R --> S$ be a morphism of rings such that $\ideal{a} \subseteq \ker f$, where $\ideal{a} \diveq R$ is an ideal in $R$. Then the following universal property holds.
+		Let $f:R --> S$ be a morphism of rings such that $\ideal{a} \diveq R$ is an ideal in $R$, which satisfies $\ideal{a} \subseteq \ker f$. Then the following universal property holds.
 		\begin{equation*}
 			\begin{diagram}
 				\threebytwo[small]
@@ -243,8 +274,18 @@
 					r	&\longmapsto 		&(r+\ideal{a}_1, ..., r + \ideal{a}_n)
 			\end{array}
 		\end{equation*}
-		satisfies $\Intersection \limits_{i=1...n} \ideal{a}_i = \ker f$.
-		\TODO{use coprimality to show surjectivity}
+		satisfies $\Intersection \limits_{i=1...n} \ideal{a}_i = \ker f$ and thus by the isomorphism theorem there is an injective morphism of rings in place of the claimed isomorphism.
+
+		For surjectivity consider $(r_1 + \ideal{a}_1, ..., r_n + \ideal{a}_n) = e_1f(r_1) + ... + e_nf(r_n)$, where $e_i$ denotes the \textit{standard unit vector} $(0,...,1+\ideal{a}_i,...,0)$. Suppose for all $i$ there is $c_i \in R$ with $e_i = f(c_i)$. Then
+		\begin{align*}
+			f(c_1r_1 + ... + c_nr_n) &= f(c_1)f(r_1) + ... + f(c_n)f(r_n)\\
+			&=e_1f(r_1) + ... + e_nf(r_n)\\
+			&=(r_1 + \ideal{a}_1, ..., r_n + \ideal{a}_n).
+		\end{align*}
+		By pairwise comaximality we have $a_{ji} \in \ideal{a}_i$ and $a_{ij} \in \ideal{a}_j$ with $a_{ij} + a_{ji} = 1$ for all $i\neq j$. Setting $c_i = \Product\limits_{j\neq i}a_{ij}$ we obtain $c_i \in \ideal{a}_j$, i.e. $c_i + \ideal{a}_j = 0 + \ideal{a}_j$, for all $j \neq i$ and 
+		\begin{equation*}
+			c_i + \ideal{a}_i = \Product \limits_{j\neq i}(a_{ij}+\ideal{a}_i) = \Product \limits_{j \neq i}(a_{ij} + a_{ji} + \ideal{a}_i) = \Product \limits_{j \neq i}(1 + \ideal{a}_i) = 1 + \ideal{a}_i.\vspace{-2.8em}
+		\end{equation*}
 	\end{sketch}
 
 	\begin{definition}
@@ -268,6 +309,11 @@
 		\end{enumerate}
 		The set of all prime ideals is called the \textbf{spectrum} of $R$ and is denoted by $\Spec R$.
 	\end{definition}
+	\begin{sketch}
+		(i)$<==>$(ii)$<==>$(iv) just reformulations.\\
+		(iii)$==>$(ii) consider the principal ideals $\Gen{a},\Gen{b}$.\\
+		\TODO{todo}
+	\end{sketch}
 
 	\begin{lemma}[Properties of Prime Ideals]
 		\TODO{ R integral domain then (0) prime, preimage of primes are prime, any prime contains minimal prime}
@@ -349,6 +395,7 @@
 		\end{equation*}
 	\end{theorem}
 
+	\newpage
 	\subsection{Localization and Local Rings}
 
 	\begin{definition}
@@ -401,6 +448,7 @@
 		Let $\ideal{p}$ be a prime ideal in some ring $R$. Recall that by definition the complement $S = R\setminus \ideal{p}$ is a multiplicative system. The localization $R_\ideal{p} = S^{-1}R$ is a local ring with maximal ideal $\ideal{m}_{R_\ideal{p}} = S^{-1}\ideal{p}$.
 	\end{corollary}
 
+	\newpage
 	\subsection{Factorial Rings and Principal Ideal Domains}
 
 	\begin{definition}
