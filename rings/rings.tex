@@ -161,6 +161,8 @@
 		\end{equation*}
 	\end{definition}
 
+	Given a subset $X \subseteq R$ and an ideal $\ideal{a}\diveq R$ define the ideal $(\ideal{a}\;:X) = \{r \in R \mid r\cdot X \subseteq \ideal{a}\}$. \TODO{name of this construction?}
+
 	\begin{lemma}[Properties of Ideals]
 		\vspace{-1.5em}\begin{enumerate}[(i)]
 			\item{
@@ -355,8 +357,23 @@
 	\end{sketch}
 
 	\begin{definition}
+		Let $R$ be a ring and $\mathcal{F}$ be a family of ideals with $R \in \mathcal{F}$.
 
+		$\mathcal{F}$ is an \textbf{Oka family}, if for any ideal $\ideal{a} \diveq R$ and element $x \in R$ it holds that $\ideal{a} + \Gen{x} \in \mathcal{F}$ and $(\ideal{a}\;:x) \in \mathcal{F}$ implies $\ideal{a} \in \mathcal{F}$.
+
+		$\mathcal{F}$ is an \textbf{Ako family}, if for any ideal $\ideal{a} \diveq R$ and elements $x,y \in R$ it holds that $\ideal{a} + \Gen{x} \in \mathcal{F}$ and $\ideal{a} + \Gen{y} \in \mathcal{F}$ implies $\ideal{a} + \Gen{xy} \in \mathcal{F}$.
 	\end{definition}
+
+	\begin{lemma}[Lam Reyes Prime Ideal Principle]
+		Let $R$ be a ring and $\mathcal{F}$ be a family of ideals with $R \in \mathcal{F}$. Denote by $\mathcal{F}'$ the set of ideals not in $\mathcal{F}$ and by $\Max \mathcal{F}'$ the set of maximal elements in $\mathcal{F}'$ with respect to inclusion.
+
+		If $\mathcal{F}$ is Oka or Ako family, then $\Max \mathcal{F}' \subseteq \Spec R$.
+	\end{lemma}
+	\begin{proof}
+		By contraposition.
+
+		Suppose $\ideal{a} \in \Max\mathcal{F}'$ is not prime. Since $\ideal{a} \notin \mathcal{F}$ we have $\ideal{a} \neq R$, so there are $x,y \in R\setminus \ideal{a}$ with $xy \in \ideal{a}$. Then $\ideal{a} \subsetneq \ideal{a} + \Gen{x}, \ideal{a}+\Gen{y}, (\ideal{a}\;:x)$, since the former contains $a$ and the latter contain $y$. Hence $\ideal{a} + \Gen{x}, \ideal{a}+\Gen{y}, (\ideal{a}\;:x)$ belong to $\mathcal{F}$. But $\ideal{a}+\Gen{ab} = \ideal{a} \notin \mathcal{F}$, so $\mathcal{F}$ is neither Oka nor Ako.
+	\end{proof}
 
 	\begin{definition}
 		Let $R$ be a ring. A \textbf{maximal ideal} is a proper ideal $\ideal{m} \divneq R$, which satisfies one of the following equivalent conditions.
