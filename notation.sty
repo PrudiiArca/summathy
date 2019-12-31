@@ -131,12 +131,16 @@
 %\newcommand{\triangleleftneq}{\mathrel{\reflectbox{$\trianglerightneq$}}}
 % see https://tex.stackexchange.com/questions/22371/subseteq-circ-as-a-single-symbol-open-subset
 \newcommand{\triangleleftneq}{
-	%\mathrel{\ensurestackMath{\topinset{\triangleleft}{\rotatebox{90}{$\nshortmid$}}{-5pt}{.5pt}}}
 	\mathrel{\ensurestackMath{\topinset{\rotatebox{90}{$\nshortmid$}}{\triangleleft}{5pt}{-.5pt}}}
+}
+\newcommand{\trianglerightneq}{
+	\mathrel{\ensurestackMath{\topinset{\rotatebox{90}{$\nshortmid$}}{\triangleright}{5pt}{-.5pt}}}
 }
 
 \newcommand{\diveq}{\trianglelefteq}
 \newcommand{\divneq}{\triangleleftneq}
+\newcommand{\videq}{\trianglerighteq}
+\newcommand{\vidneq}{\trianglerightneq}
 
 % --- named environments
 \NewDocumentCommand{\norm}{m}{\vert #1 \vert}
