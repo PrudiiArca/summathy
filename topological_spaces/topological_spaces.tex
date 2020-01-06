@@ -348,6 +348,7 @@ In the following we will commonly refer to \textit{continuous functions} synonym
 
 \TODO{examples: Pullbacks, Pushouts}
 
+\newpage
 \subsection{Separation Axioms}
 
 \begin{definition}
@@ -617,6 +618,7 @@ In the following we will commonly refer to \textit{continuous functions} synonym
 	% \end{enumerate}
 	% if it is Frechét (T1) and normal / hereditarily normal / perfectly normal.
 
+\newpage
 \subsection{Connectivity}
 
 \begin{definition}
@@ -659,6 +661,7 @@ In the following we will commonly refer to \textit{continuous functions} synonym
 	A topological space $(X, \mathcal{O})$ is \textbf{path-connected}, if for every two points $x_0, x_1$ in $X$ there is a continuous function $\gamma: [0,1] --> X$ satisfying $\gamma(0) = x_0$ and $\gamma(1) = x_1$.
 \end{definition}
 
+\newpage
 \subsection{Compactness}
 
 \begin{definition}
@@ -696,30 +699,19 @@ In the following we will commonly refer to \textit{continuous functions} synonym
 	Let $(X_i, \mathcal{O}_i)_{i\in I}$ be a family of quasicompact spaces. Then $\Product \limits_{i \in I} X_i$ is quasicompact.
 \end{corollary}
 
-\TODO{one point compactification}
+\TODO{one point compactification, ends}
 
+\newpage
 \subsection{Size}
 \TODO{first countable, second countable, separable, combinatorial dimension}
 
-\subsection{Topological Groups}
-
-\begin{definition}
-	A \textbf{topological group} is a group object in $\ncat{Top}$. Concretely it is a group $G$, equipped with a topology $\mathcal{O}_G$, which satisfies one of the following equivalent conditions:
-	\begin{enumerate}[(i)]
-		\item{
-			The multiplication map $m:G \times G --> G, (g,h) \mapsto gh$ and inverting map $i: G --> G, g \mapsto g^{-1}$ are continuous.
-		}
-		\item{
-			The shear map $s: G \times G --> G \times G, (g,h) \mapsto (gh, h)$ are continuous.
-		}
-	\end{enumerate}
-\end{definition}
-
 \subsection{Local Properties}
-\subsection{Topological Manifolds}
-\subsection{Covering Spaces}
-\subsection{Homotopy}
+\TODO{locally hausdorff? locally connected, locally path connected, locally quasicompact}
 
+\subsection{Locally Quasicompact Hausdorff Spaces and Mapping Spaces}
+
+\newpage
+\subsection{Homotopy}
 \begin{definition}
 	A \textbf{homotopy} between continuous maps $f_0,f_1: (X, \mathcal{O}_X) --> (Y,\mathcal{O}_Y)$ is a continuous map $h:[0,1]\times X --> Y$, satisfying that $f_0 = h|_{\{0\}\times X}$ and $f_1 = h|_{\{1\}\times X}$. In this case $f_0$ and $f_1$ are called \textbf{homotopic}, which is denoted by $f_0 \underset{h}{\sim} f_1$ or simply $f_0 \sim f_1$.
 
@@ -787,6 +779,28 @@ In the following we will commonly refer to \textit{continuous functions} synonym
 		}
 	\end{enumerate}
 \end{definition}
+
+
+\subsection{Topological Groups}
+
+\begin{definition}
+	A \textbf{topological group} is a group object in $\ncat{Top}$. Concretely it is a group $G$, equipped with a topology $\mathcal{O}_G$, which satisfies one of the following equivalent conditions:
+	\begin{enumerate}[(i)]
+		\item{
+			The multiplication map $m:G \times G --> G, (g,h) \mapsto gh$ and inverting map $i: G --> G, g \mapsto g^{-1}$ are continuous.
+		}
+		\item{
+			The shear map $s: G \times G --> G \times G, (g,h) \mapsto (gh, h)$ are continuous.
+		}
+	\end{enumerate}
+\end{definition}
+\subsection{Topological Fields and Topological Vector Spaces}
+
+\newpage
+\section{Bundles}
+\subsection{Fibre Bundles}
+\subsection{$G$-bundles and Vector Bundles}
+\subsection{Covering Spaces}
 
 \newpage
 \section{Homology}
@@ -882,6 +896,7 @@ In the following we will commonly refer to \textit{continuous functions} synonym
 	Let $(H,\partial)$ be a homology theory. The \textbf{reduced homology} is the homology theory obtained by taking $\tilde{H}(X,\emptyset) = \ker(H(X,\emptyset) --> H(*,\emptyset))$ and $\tilde{H}(X,A) = H(X,A)$ otherwise.
 \end{definition}
 
+\newpage
 \section{Topological Manifolds}
 \subsection{Topological Manifolds}
 \subsection{Classification of 1-dimensional Manifolds}
