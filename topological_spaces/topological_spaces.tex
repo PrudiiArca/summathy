@@ -706,7 +706,30 @@ In the following we will commonly refer to \textit{continuous functions} synonym
 \TODO{first countable, second countable, separable, combinatorial dimension}
 
 \subsection{Local Properties}
-\TODO{locally hausdorff? locally connected, locally path connected, locally quasicompact}
+\begin{definition}
+	A topological space is
+	\begin{enumerate}[$\bullet$]
+		\item{
+			\textbf{locally connected}, if every point has a connected neighborhood.
+		}
+		\item{
+			\textbf{locally path connected}, if every point has a path connected neighborhood.
+		}
+		\item{
+			\textbf{locally quasicompact}, if every point has a quasicompact neighborhood.\TODO{???}
+		}
+	\end{enumerate}
+\end{definition}
+
+\begin{lemma}[Local Properties]
+	\TODO{connected implies locally connected\\}
+	\TODO{path connected does not imply locally path connected\\}
+	\TODO{locally path connected + connected implies path connected}
+\end{lemma}
+
+\begin{definition}
+	A morphism $f:(X,\mathcal{O}_X) --> (Y,\mathcal{O}_Y)$ of topological spaces is an \textbf{étale map} or \textbf{local homeomorphism}, if every point $x$ in $X$ admits an open neighborhood $U \subseteq X$ of $x$ such that $f(U) \subseteq Y$ is open in $Y$ and the restriction $f\vert_U: U --> f(U)$ is a homeomorphism. \TODO{???}
+\end{definition}
 
 \subsection{Locally Quasicompact Hausdorff Spaces and Mapping Spaces}
 
