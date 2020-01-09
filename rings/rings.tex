@@ -191,6 +191,9 @@
 			\item{
 				If an ideal $\ideal{a} \diveq R$ in a ring $R$ contains a unit, it satisfies $\ideal{a}=R$. In particular $R$ is a field if and only if it has no proper ideals besides $\Gen{0}$.
 			}
+			\item{
+				Given rings $R_1,R_2$ any ideal in $R_1 \times R_2$ is of the form $\ideal{a}_1 \times \ideal{a}_2$, where $\ideal{a}_i$ is an ideal in $R_i$. \TODO{arbitrary products?}
+			}
 		\end{enumerate}
 	\end{lemma}
 	\begin{sketch}
@@ -198,16 +201,8 @@
 			\item{
 				The ideal property and inclusions hold by definition. For the equation assuming comaximality note that $1 = a_0+b_0$ for some $a_0 \in \ideal{a}, b_0 \in \ideal{b}$. Given $r \in \ideal{a}\intersection\ideal{b}$ we then have $r = r\cdot 1 = r\cdot(a_0+b_0) = a_0r + rb_0 \in \ideal{ab}$.
 			}
-			\item{
-				By definition.
-			}
-			\item{
-				By definition.
-			}
-			\item{
-				By definition.
-			}
-		\end{enumerate}\vspace{-2em}
+		\end{enumerate}
+		\hspace{.15cm}(ii) -- (v) By definition.
 	\end{sketch}
 
 	\begin{definition}
@@ -219,7 +214,7 @@
 		\begin{equation*}
 			(x + \ideal{a}) \cdot (y + \ideal{a}) = (x \cdot y) + \ideal{a}
 		\end{equation*}
-		is well defined, turning $R / \ideal{a}$ into a \textbf{factor ring} (or \textbf{quotient ring} or \textbf{residue class ring}). This construction yields a canonic \textbf{projection morphism} $\pi: R -->> R/\ideal{a}$, which is epi and satisfies $\ker \pi = \ideal{a}$.
+		is well defined, turning $R / \ideal{a}$ into a \textbf{factor ring} (or \textbf{quotient ring} or \textbf{residue class ring}). This construction yields a canonic \textbf{projection morphism} $\pi_\ideal{a}: R -->> R/\ideal{a}$, which is epi and satisfies $\ker \pi_\ideal{a} = \ideal{a}$.
 	\end{definition}
 
 	\begin{lemma}[Properties of the Factor Ring]
@@ -249,7 +244,7 @@
 					{}{R/\ideal{a}}{}
 
 				\arrow{nw}{ne}{f}[above]
-				\arrow[epi]{nw}{s}{\pi}[below left]
+				\arrow[epi]{nw}{s}{\pi_\ideal{a}}[below left]
 				\arrow[dashed]{s}{ne}{\exists!\tilde{f}}[below right]
 			\end{diagram}
 		\end{equation*}
@@ -319,7 +314,8 @@
 	\end{definition}
 	\begin{sketch}
 		(i)$<==>$(ii)$<==>$(iii) just reformulations.\\
-		(iv)$==>$(ii) consider the principal ideals $\Gen{a},\Gen{b}$.
+		(iv)$==>$(ii) consider the principal ideals $\Gen{a},\Gen{b}$.\\
+		\TODO{???$==>$(iv)}
 	\end{sketch}
 
 	\begin{lemma}[Properties of Prime Ideals]\vspace{-1.5em}
@@ -336,6 +332,12 @@
 			\item{
 				Let $\ideal{p}$ be a prime ideal in a ring $R$. For ideals $\ideal{a},\ideal{b} \diveq R$ it holds that $\ideal{a} \intersection \ideal{b} \subseteq \ideal{p}$ implies $\ideal{a} \subseteq \ideal{p}$ or $\ideal{b} \subseteq \ideal{p}$.
 			}
+			\item{
+				The prime ideals in a product of rings $R_1 \times R_2$ are of the form $\ideal{p}_1 \times R_2$ or $R_1 \times \ideal{p}_2$, where $\ideal{p}_i$ is a prime ideal in $R_i$.
+
+				\TODO{This does not hold for arbitrary products, see https://math.stackexchange.com/questions/1049867/prime-ideals-in-an-arbitrary-direct-product-of-rings.}
+				%The prime ideals in a product of rings $\smash{\Product \limits_{i\in I} R_i}$ are of the form $\smash{\ideal{p}_i \times \Product \limits_{j \neq i} R_j}$, where $\ideal{p}_i$ is a prime ideal in $R_i$.
+			}
 		\end{enumerate}
 	\end{lemma}
 	\begin{sketch}
@@ -351,6 +353,9 @@
 			}
 			\item{
 				By $\ideal{ab} \subseteq \ideal{a} \intersection \ideal{b}$.
+			}
+			\item{
+				Note that for $(R_1 \times R_2) / (\ideal{a}_1 \times \ideal{a}_2)$ to be an integral domain, at most one of the $\ideal{a}_i$ can be a proper ideal.
 			}
 			\vspace{-1.8em}
 		\end{enumerate}
@@ -452,11 +457,14 @@
 				\{\text{radical ideals containing }\ideal{a}\} &\overset{\sim}{\longrightarrow} &\{\text{radical ideals in } R/\ideal{a}\}\\
 				\{\text{prime ideals containing }\ideal{a}\} &\overset{\sim}{\longrightarrow} &\{\text{prime ideals in } R/\ideal{a}\}\\
 				\{\text{maximal ideals containing }\ideal{a}\} &\overset{\sim}{\longrightarrow} &\{\text{maximal ideals in } R/\ideal{a}\}\\\\
-				\ideal{b} &\longmapsto &\pi(\ideal{b})\\
-				\pi^{-1}(\ideal{b}) &\reflectbox{$\longmapsto$} &\ideal{b}
+				\ideal{b} &\longmapsto &\pi_\ideal{a}(\ideal{b})\\
+				\pi_\ideal{a}^{-1}(\ideal{b}) &\reflectbox{$\longmapsto$} &\ideal{b}
 			\end{array}
 		\end{equation*}
 	\end{theorem}
+	\begin{sketch}
+		The correspondence for ideals can be checked by composing the mutually inverse maps. That for maximality follows from the former preserving inclusion. The correspondences for prime ideals may be checked by considering elements. The one for radical ideals the follows from the fact that for surjective functions preimages and images respect intersections. 
+	\end{sketch}
 
 	\newpage
 	\subsection{Localization and Local Rings}
@@ -470,22 +478,69 @@
 		\begin{equation*}
 			\dfrac{r_1}{s_1} + \dfrac{r_2}{s_2} = \dfrac{r_1s_2 + r_2s_1}{s_1s_2} \hspace{1cm}\text{and}\hspace{1cm} \dfrac{r_1}{s_1} \cdot \dfrac{r_2}{s_2} = \dfrac{r_1r_2}{s_1s_2}
 		\end{equation*}
-		we obtain a ring structure on $R \times S / \sim$. This is the so called \textbf{localization} $S^{-1}R$ of $R$ by $S$.
-	\end{definition}
-
-	\TODO{remark on factor $f$}
-
-	\begin{theorem}[Correspondence Theorem]
-		Let $R$ be a ring and $S$ be a multiplicative system in $R$. The canonic morphism $\iota_S: R --> S^{-1}R$ exhibits bijections
-		\TODO{todo}
+		we obtain a ring structure on $R \times S / \sim$. This is the so called \textbf{localization} $S^{-1}R$ of $R$ by $S$ and comes with the canonical map
 		\begin{equation*}
 			\begin{array}{rcl}
-				\{\text{ideals }\ideal{a}\text{ with } \forall s \in S, r \in R \setminus \ideal{a}: sr \notin \ideal{a}\} &\overset{\sim}{\longrightarrow} &\{\text{ideals in } S^{-1}R\}\\
-				\{\text{radical ideals }\ideal{r}\text{ with } \forall s \in S, r \in R \setminus \ideal{r}: sr \notin \ideal{r}\} &\overset{\sim}{\longrightarrow} &\{\text{radical ideals in } S^{-1}R\}\\
-				\{\text{prime ideals }\ideal{p}\text{ with } \forall s \in S, r \in R \setminus \ideal{p}: sr \notin \ideal{p}\} &\overset{\sim}{\longrightarrow} &\{\text{prime ideals in } S^{-1}R\}\\
-				\{\text{maximal ideals }\ideal{m}\text{ with } \forall s \in S, r \in R \setminus \ideal{m}: sr \notin \ideal{m}\} &\overset{\sim}{\longrightarrow} &\{\text{maximal ideals in } S^{-1}R\}\\\\
-				\ideal{a} &\longmapsto &S^{-1}\ideal{a} = \Gen{\iota_S(\ideal{a})}_{S^{-1}R}\\
-				\iota_S^{-1}(\ideal{b}) &\reflectbox{$\longmapsto$} &\ideal{b}
+				\iota_S:R & \longrightarrow & S^{-1}R\\
+				r & \longmapsto & \dfrac{r}{1}
+			\end{array}.
+		\end{equation*}
+	\end{definition}
+
+	\TODO{remark on factor $f$, field of fractions}
+
+	\begin{lemma}[Properties of Localization]
+		Let $S$ be a multiplicative system in a ring $R$.
+		\begin{enumerate}[(i)]
+			\item{
+				The canonical map $\iota_S$ is injective, if and only if $S$ does not contain a zero divisor (in particular $S$ does not contain $0$).
+			}
+			\item{
+				\begin{minipage}{\textwidth-4cm}
+				Let $f:R-->R'$ be a morphism of rings and $S'$ be a multiplicative system in $R'$ with $f(S) \subseteq R'^\times$. Then there is a unique morphism $S^{-1}f: S^{-1}R --> R$ making the diagram on the right commute.
+				\end{minipage}
+				\begin{minipage}{4cm}
+					\begin{equation*}
+						\begin{diagram}
+							\twobytwo
+								{S^{-1}R}{R'}
+								{R}{}
+							\arrow{sw}{nw}{\iota_S}[left]
+							\arrow{sw}{ne}{f}[below right]
+							\arrow[dashed]{nw}{ne}{S^{-1}f}[above]
+						\end{diagram}
+					\end{equation*}
+				\end{minipage}
+			}
+			\item{
+				Given an ideal $\ideal{a} \diveq R$ denote $S/\ideal{a} := \pi_\ideal{a}(S)$ and $S^{-1}\ideal{a} := \Gen{\iota_S(\ideal{a})}_{S^{-1}R}$. Then there is a canonical isomorphism
+				\begin{equation*}
+					(S/\ideal{a})^{-1}(R/\ideal{a}) \isom S^{-1}R/S^{-1}\ideal{a}.
+				\end{equation*}
+			}
+			\item{
+				Given a family of ideals $(\ideal{a}_i)_{i \in I}$ in $R$ it holds that $S^{-1}(\Intersection \limits_{i \in I} \ideal{a}_i) = \Intersection \limits_{i \in I} (S^{-1}\ideal{a}_i)$.
+			}
+		\end{enumerate}
+	\end{lemma}
+
+	\begin{theorem}[Correspondence Theorem]
+		Let $R$ be a ring and $S$ be a multiplicative system in $R$. The canonic morphism $\iota_S: R --> S^{-1}R$ induces an inclusion preserving injection
+		\begin{equation*}
+			\begin{array}{rcl}
+				\{\text{ideals in } S^{-1}R\} & \longrightincl & \{\text{ideals }\ideal{a}\text{ with } \forall s \in S, r \in R \setminus \ideal{a}: sr \notin \ideal{a}\}\\
+				\ideal{b} & \longmapsto & \iota_S^{-1}(\ideal{b})
+			\end{array}
+		\end{equation*}
+		with section
+		\begin{equation*}
+			\hspace{-4.2cm}S^{-1}\ideal{a} \;\;\;\; \reflectbox{$\longmapsto$} \;\;\;\; \ideal{a},
+		\end{equation*}
+		which restricts to inclusion preserving bijections
+		\begin{equation*}
+			\begin{array}{rcl}
+				\{\text{radical ideals in } S^{-1}R\} & \overset{\sim}{\longrightarrow} & \{\text{radical ideals }\ideal{r}\text{ with } \forall s \in S, r \in R \setminus \ideal{r}: sr \notin \ideal{r}\}\\
+				\{\text{prime ideals in } S^{-1}R\} & \overset{\sim}{\longrightarrow} & \{\text{prime ideals }\ideal{p}\text{ with } \ideal{p} \intersection S = \emptyset\}\\
 			\end{array}
 		\end{equation*}
 	\end{theorem}
