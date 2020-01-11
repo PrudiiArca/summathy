@@ -1,0 +1,218 @@
+\input{../header.tex}
+
+\title{$\Sum\text{math}(y)$\\Generalized Homology Theories}
+\author{Jonas Linssen}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+
+	\newpage
+	\section{Generalized Homology}
+	\subsection{Definition and Exact Sequences}
+
+	\begin{definition}
+		A \textbf{generalized} (\textbf{unreduced, relative}) \textbf{homology theory} on $\ncat{Top}^2$ is a functor $H_\bullet: \ncat{Top}^2 --> \ncat{Mod}_R^{\Z\text{gr}}$ together with a natural transformation $\partial_\bullet: H_\bullet ==> H_{\bullet-1} \circ R$, the so called \textbf{boundary operator} or \textbf{connecting homomorphism}, which satisfy the following axioms.
+	\begin{enumerate}[$\bullet$]
+		\item{
+			\textit{homotopy invariance}\\
+			$H_\bullet$ factors via $\ncat{hTop}^2$.
+		}
+		\item{
+			\textit{exactness}\\
+			For any object $(X,A)$ in $\ncat{Top}^\rightincl$ the sequence
+			\begin{equation*}
+				...
+				\begin{diagram}
+					\fivebyone[verywide]
+						{H_{\bullet+1}(X,A)}
+						{H_\bullet(A,\emptyset)}
+						{H_\bullet(X,\emptyset)}
+						{H_\bullet(X,A)}
+						{H_{\bullet-1}(A,\emptyset)}
+
+					\arrow{ww}{w}{\partial_{\bullet+1}}[above]
+					\arrow{w}{c}{H_\bullet(i)}[above]
+					\arrow{c}{e}{H_\bullet(j)}[above]
+					\arrow{e}{ee}{\partial_\bullet}[above]
+				\end{diagram}
+				...
+			\end{equation*}
+				is exact, where $i: (A,\emptyset) \longrightincl (X,\emptyset)$ and $j: (X,\emptyset) \longrightincl (X,A)$ are the inclusion maps.
+
+		}
+		\item{
+			\textit{excission}\\
+			For every object $(X,A)$ in $\ncat{Top}^\rightincl$ and subset $U \subseteq \closure U \subseteq \interior A$, the inclusion $(X\setminus U, A \setminus U) \subseteq (X, A)$ induces an isomorphism $$H_\bullet(X\setminus U, A \setminus U) \isom H_\bullet(X,A).$$
+		}
+	\end{enumerate}
+	One might further assume
+	\begin{enumerate}[$\bullet$]
+		\item{
+			\textit{additivity}\\
+			$H_\bullet$ preserves coproducts. Specifically, for any family $(X_i,A_i)_i$ in $\ncat{Top}^\rightincl$ the canonical morphism
+			\begin{equation*}
+				\bigoplus \limits_{i \in I}H_\bullet(X_i,A_i) \longrightarrow H_\bullet(\Coproduct \limits_{i \in I} (X_i,Y_i))
+			\end{equation*}
+			is an isomorphism.
+		}
+		\item{
+			\textit{ordinarity / dimension}\\
+			For all $n \neq 0$ it holds that $H_n(*,\emptyset) = 0$. 
+		}
+	\end{enumerate}
+	\end{definition}
+
+	\begin{lemma}[First Calculations]
+		Let $(H_\bullet, \partial_\bullet)$ be a generalized homology theory.
+		\begin{enumerate}[(i)]
+			\item{
+				If $f:(X_1,A_1) \xrightarrow{\simeq} (X_2,A_2)$ is a homotopy equivalence, then $H_\bullet(X_1,A_1) \isom H_\bullet(X_2,A_2)$.
+			}
+			\item{
+				If $A \subseteq X$ is a homotopy equivalence, then $H_\bullet(X,A) = 0$, in particular $H_\bullet(X,X) = 0$.
+			}
+			\item{
+				If $H_\bullet$ is additive, it holds that $H_\bullet(X_\text{disc}) = \Directsum \limits_X M_\bullet$.
+			}
+		\end{enumerate}
+	\end{lemma}
+
+	By (i) of the previous lemma we have $H_\bullet(*) \isom H_\bullet(\D^n) \isom H_\bullet(\R^n)$ for all $n \in \N$.\\
+	Similarly $\H_\bullet(\S^{n-1}) \isom H_\bullet(\D^n \setminus \{0\})$.
+
+	\begin{proposition}[Mayer Vitoris]
+		Let $(H_\bullet,\partial_\bullet)$ be a generalized homology theory and $B \subseteq A_1,A_2 \subseteq X$ in $\ncat{Top}$, such that $X \subseteq \interior(A_1) \union \interior(A_2)$. Then the following sequence is exact.
+		\begin{equation*}
+			\begin{diagram}
+				\threebythree[hyperwide]
+					{}{}{...H_{\bullet+1}(X,B)}
+					{H_\bullet(A_1 \intersection A_2,B)}{H_\bullet(A_1,B)\directsum H_\bullet(A_2,B)}{H_\bullet(X,B)}
+					{H_{\bullet-1}(A_1 \intersection A_2, B)...}{}{}
+
+				\arrow{w}{c}{H_\bullet(i_1)\directsum H_\bullet(i_2)}[above]
+				\arrow{c}{e}{H_\bullet(j_1) - H_\bullet(j_2)}[above]
+				
+				\draw[->,rounded corners] (ne.east) -| node[auto,pos=.7]{$\partial_{\bullet+1}$}($(ne)+(1.5,-.75)$) -| ($(w)+(-2,0)$) |- (w.west);
+				\draw[->,rounded corners] (e.east) -| node[auto,pos=.7]{$\partial_\bullet$}($(e)+(1.5,-.75)$) -| ($(sw)+(-2,0)$) |- (sw.west);
+			\end{diagram}
+		\end{equation*}
+	\end{proposition}
+
+	\begin{proposition}[Triple Sequence]
+		Let $(H_\bullet,\partial_\bullet)$ be a generalized homology theory and $B \subseteq A \subseteq X$ in $\ncat{Top}$. Given
+		\begin{equation*}
+			\Delta_\bullet :=
+			\begin{diagram}
+				\threebyone[wide]
+					{H_\bullet(X,A)}{H_{\bullet-1}(A)}{H_{\bullet-1}(A,B)}
+				\arrow{w}{c}{\partial_\bullet}[above]
+				\arrow{c}{e}{}
+			\end{diagram}
+		\end{equation*}
+		the following sequence is exact.
+		\begin{equation*}
+			...
+			\begin{diagram}
+				\fivebyone[verywide]
+					{H_{\bullet+1}(X,A)}{H_\bullet(A,B)}{H_\bullet(X,B)}{H_\bullet(X,A)}{H_{\bullet-1}(A,B)}
+
+				\arrow{ww}{w}{\Delta_{\bullet+1}}[above]
+				\arrow{w}{c}{}[above]
+				\arrow{c}{e}{}[above]
+				\arrow{e}{ee}{\Delta_\bullet}[above]
+			\end{diagram}
+			...
+		\end{equation*}
+	\end{proposition}
+
+	\newpage
+	\subsection{Reduced Homology}
+
+	\begin{lemma}
+		Let $(H_\bullet, \partial_\bullet)$ be a generalized homology theory and $x$ be a point in a topological space $X$. Then for any $n \in \Z$ the sequence
+		\begin{equation*}
+			\begin{diagram}
+				\threebyone[wide]
+					{H_n(\{x\})}{H_n(X)}{H_n(X,\{x\})}
+				\arrow{w}{c}{}
+				\arrow{c}{e}{}
+			\end{diagram}
+		\end{equation*}
+		is split exact with section $H_n(c):H_n(X) --> H_n(\{x\})$, where $c: X --> \{x\}$ denotes the constant map.
+
+		In particular it holds that $H_\bullet(X,\{x_1\}) \isom H_\bullet(X,\{x_2\})$ and we get $H_\bullet(X) \isom H_\bullet(*) \oplus H_\bullet(X,*)$.
+	\end{lemma}
+
+	\begin{definition}
+		The \textbf{module of coefficients} of a generalized homology theory $(H_\bullet, \partial_\bullet)$ is the graded module $M_\bullet := H_\bullet(*)$.
+
+		The \textbf{reduced homology} of $H_\bullet$ is the functor \TODO{involve kernel}
+		\begin{equation*}
+			\begin{array}{rcl}
+				\ncat{Top}_* & \xrightarrow{\widetilde{H}_\bullet} & \ncat{Mod}_R^{\Z\text{gr}}\\
+				(X,x_0) & \longmapsto & H_\bullet(X,\{x_0\})\\
+				f:(X,x_0)\rightarrow (Y,y_0) & \longmapsto & H_\bullet(f)
+			\end{array}
+		\end{equation*}
+	\end{definition}
+
+	\begin{remark}
+		\TODO{mapping cone and reduced suspension}
+	\end{remark}
+
+	\begin{lemma}
+		Let $(H_\bullet,\partial_\bullet)$ be a generalized homology theory.
+		\begin{enumerate}[(i)]
+			\item{
+				$\widetilde{H}_\bullet$ is homotopy invariant, i.e. factors via $\ncat{hTop}_{*}$.
+			}
+			\item{
+				Given $i_A:A \longrightincl X$ in $\ncat{Top}$ and $x_0 \in A$ it holds that $H_\bullet(X,A) \isom \widetilde{H}_\bullet(\Cone(i_A), x_0)$.
+			}
+			\item{
+				Given $x_0 \in A$, the long exact sequence of $(X,A)$ induces a long exact sequence.
+				\begin{equation*}
+					\begin{diagram}
+						\threebythree[ultrawide]
+							{}{}{...\widetilde{H}_{\bullet+1}(\Cone(i_A),x_0)}
+							{\widetilde{H}_\bullet(A,x_0)}{\widetilde{H}_\bullet(X,x_0)}{\widetilde{H}_\bullet(\Cone(i_A),x_0)}
+							{\widetilde{H}_{\bullet-1}(A,x_0)...}{}{}
+
+						\arrow{w}{c}{}
+						\arrow{c}{e}{}
+
+						\draw[->,rounded corners] (ne.east) -| node[auto,pos=.7]{$\partial_{\bullet+1}$}($(ne)+(2,-.75)$) -| ($(w)+(-1.5,0)$) |- (w.west);
+						\draw[->,rounded corners] (e.east) -| node[auto,pos=.7]{$\partial_\bullet$}($(e)+(2,-.75)$) -| ($(sw)+(-1.5,0)$) |- (sw.west);
+					\end{diagram}
+				\end{equation*}
+			}
+			\item{
+				\TODO{suspension}
+			}
+		\end{enumerate}
+	\end{lemma}
+
+	\begin{lemma}
+		\TODO{Reduced Mayer Vitoris}
+	\end{lemma}
+
+	\subsection{Examples and Applications}
+
+	\begin{lemma}[Homology of the Sphere]
+		\TODO{Sphere}
+	\end{lemma}
+
+	\begin{theorem}[Invariance of Dimension]
+		Let $U \subseteq \R^m$ and $V \subseteq \R^n$ be open subsets. The existence of a homeomorphism $f:U-->V$ implies $m = n$.
+	\end{theorem}
+
+	\begin{lemma}[Homology of the Oriented Surfaces]
+		\TODO{Torus and higher genus}
+	\end{lemma}
+
+	\section{Simplicial Homology}
+	\subsection{Simplicial Spaces}
+	\subsection{Simplicial Homology}
+	\subsection{Examples and Applications}
+\end{document}
