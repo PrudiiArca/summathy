@@ -20,7 +20,7 @@
 		}
 		\item{
 			\textit{exactness}\\
-			For any object $(X,A)$ in $\ncat{Top}^\rightincl$ the sequence
+			For any object $(X,A)$ in $\ncat{Top}^2$ the sequence
 			\begin{equation*}
 				...
 				\begin{diagram}
@@ -43,14 +43,14 @@
 		}
 		\item{
 			\textit{excission}\\
-			For every object $(X,A)$ in $\ncat{Top}^\rightincl$ and subset $U \subseteq \closure U \subseteq \interior A$, the inclusion $(X\setminus U, A \setminus U) \subseteq (X, A)$ induces an isomorphism $$H_\bullet(X\setminus U, A \setminus U) \isom H_\bullet(X,A).$$
+			For every object $(X,A)$ in $\ncat{Top}^2$ and subset $U \subseteq \closure U \subseteq \interior A$, the inclusion $(X\setminus U, A \setminus U) \subseteq (X, A)$ induces an isomorphism $$H_\bullet(X\setminus U, A \setminus U) \isom H_\bullet(X,A).$$
 		}
 	\end{enumerate}
 	One might further assume
 	\begin{enumerate}[$\bullet$]
 		\item{
 			\textit{additivity}\\
-			$H_\bullet$ preserves coproducts. Specifically, for any family $(X_i,A_i)_i$ in $\ncat{Top}^\rightincl$ the canonical morphism
+			$H_\bullet$ preserves coproducts. Specifically, for any family $(X_i,A_i)_i$ in $\ncat{Top}^2$ the canonical morphism
 			\begin{equation*}
 				\bigoplus \limits_{i \in I}H_\bullet(X_i,A_i) \longrightarrow H_\bullet(\Coproduct \limits_{i \in I} (X_i,Y_i))
 			\end{equation*}
@@ -63,23 +63,48 @@
 	\end{enumerate}
 	\end{definition}
 
+	In the following we will abbreviate $H_\bullet(X,\emptyset)$ to $H_\bullet(X)$.
+
 	\begin{lemma}[First Calculations]
 		Let $(H_\bullet, \partial_\bullet)$ be a generalized homology theory.
 		\begin{enumerate}[(i)]
 			\item{
 				If $f:(X_1,A_1) \xrightarrow{\simeq} (X_2,A_2)$ is a homotopy equivalence, then $H_\bullet(X_1,A_1) \isom H_\bullet(X_2,A_2)$.
+
+				In particular for $n \in \N$ we have
+				\begin{equation*}
+					H_\bullet(*) \isom H_\bullet(\D^n) \isom H_\bullet(\R^n) \hspace{1cm}\text{and}\hspace{1cm} \H_\bullet(\S^{n-1}) \isom H_\bullet(\D^n \setminus \{0\}).
+				\end{equation*}
 			}
 			\item{
-				If $A \subseteq X$ is a homotopy equivalence, then $H_\bullet(X,A) = 0$, in particular $H_\bullet(X,X) = 0$.
+				If $A \subseteq X$ is a homotopy equivalence, then $H_\bullet(X,A) \isom 0$, in particular $H_\bullet(X,X) \isom 0$.
 			}
 			\item{
-				If $H_\bullet$ is additive, it holds that $H_\bullet(X_\text{disc}) = \Directsum \limits_X M_\bullet$.
+				If $H_\bullet$ is additive, it holds that $H_\bullet(X_\text{disc}) = \Directsum \limits_X H_\bullet(*)$.
 			}
 		\end{enumerate}
 	\end{lemma}
-
-	By (i) of the previous lemma we have $H_\bullet(*) \isom H_\bullet(\D^n) \isom H_\bullet(\R^n)$ for all $n \in \N$.\\
-	Similarly $\H_\bullet(\S^{n-1}) \isom H_\bullet(\D^n \setminus \{0\})$.
+	\begin{proof}
+		\begin{enumerate}[(i)]
+			\item{
+				By homotopy invariance $f$ becomes an isomorphism in $\ncat{hTop}$, which is then mapped to a isomorphism in homology.
+			}
+			\item{
+				Consider the long exact sequence
+				\begin{equation*}
+					\begin{diagram}
+						\fivebyone[verywide]
+							{H_{\bullet}(A)}{H_{\bullet}(X)}{H_\bullet(X,A)}{H_{\bullet-1}(A)}{H_{\bullet-1}(X)}
+						\arrow{ww}{w}{}
+						\arrow{w}{c}{}
+						\arrow{c}{e}{\partial_\bullet}[above]
+						\arrow{e}{ee}{}
+					\end{diagram}
+				\end{equation*}
+				and note that as in (i) we have that $H_\bullet(A) --> H_\bullet(X)$ is an isomorphism. Hence by exactness we have $H_\bullet(X,A) \isom 0$.
+			}
+		\end{enumerate}
+	\end{proof}
 
 	\begin{proposition}[Mayer Vitoris]
 		Let $(H_\bullet,\partial_\bullet)$ be a generalized homology theory and $B \subseteq A_1,A_2 \subseteq X$ in $\ncat{Top}$, such that $X \subseteq \interior(A_1) \union \interior(A_2)$. Then the following sequence is exact.
@@ -182,8 +207,8 @@
 						\arrow{w}{c}{}
 						\arrow{c}{e}{}
 
-						\draw[->,rounded corners] (ne.east) -| node[auto,pos=.7]{$\partial_{\bullet+1}$}($(ne)+(2,-.75)$) -| ($(w)+(-1.5,0)$) |- (w.west);
-						\draw[->,rounded corners] (e.east) -| node[auto,pos=.7]{$\partial_\bullet$}($(e)+(2,-.75)$) -| ($(sw)+(-1.5,0)$) |- (sw.west);
+						\draw[->,rounded corners] (ne.east) -| node[auto,pos=.7]{${\partial}_{\bullet+1}$}($(ne)+(2,-.75)$) -| ($(w)+(-1.5,0)$) |- (w.west);
+						\draw[->,rounded corners] (e.east) -| node[auto,pos=.7]{${\partial}_\bullet$}($(e)+(2,-.75)$) -| ($(sw)+(-1.5,0)$) |- (sw.west);
 					\end{diagram}
 				\end{equation*}
 			}
@@ -193,26 +218,141 @@
 		\end{enumerate}
 	\end{lemma}
 
-	\begin{lemma}
-		\TODO{Reduced Mayer Vitoris}
+	\begin{lemma}[Reduced Mayer Vitoris]
+		Let $(H_\bullet,\partial_\bullet)$ be a generalized homology theory and $A_1,A_2 \subseteq X$ in $\ncat{Top}$, such that $X \subseteq \interior(A_1) \union \interior(A_2)$ and $x_0 \in A_1 \intersection A_2$. Then the following sequence is exact.
+		\begin{equation*}
+			\begin{diagram}
+				\threebythree[hyperwide]
+					{}{}{...\widetilde{H}_{\bullet+1}(X,x_0)}
+					{\widetilde{H}_\bullet(A_1 \intersection A_2,x_0)}{\widetilde{H}_\bullet(A_1,x_0)\directsum \widetilde{H}_\bullet(A_2,x_0)}{\widetilde{H}_\bullet(X,x_0)}
+					{\widetilde{H}_{\bullet-1}(A_1 \intersection A_2,x_0)...}{}{}
+
+				\arrow{w}{c}{H_\bullet(i_1)\directsum H_\bullet(i_2)}[above]
+				\arrow{c}{e}{H_\bullet(j_1) - H_\bullet(j_2)}[above]
+				
+				\draw[->,rounded corners] (ne.east) -| node[auto,pos=.7]{$\partial_{\bullet+1}$}($(ne)+(1.5,-.75)$) -| ($(w)+(-2,0)$) |- (w.west);
+				\draw[->,rounded corners] (e.east) -| node[auto,pos=.7]{$\partial_\bullet$}($(e)+(1.5,-.75)$) -| ($(sw)+(-2,0)$) |- (sw.west);
+			\end{diagram}
+		\end{equation*}
 	\end{lemma}
 
+	\newpage
 	\subsection{Examples and Applications}
 
 	\begin{lemma}[Homology of the Sphere]
-		\TODO{Sphere}
+		Let $(H_\bullet, \partial_\bullet)$ be a generalized homology theory satisfying additivity and $n \in \N$. There are isomorphisms
+		\begin{equation*}
+			\widetilde{H}_\bullet(\S^n,*) \isom H_\bullet(\D^n,\S^{n-1}) \isom \widetilde{H}_{\bullet-1}(\S^{n-1},*),
+		\end{equation*}
+		which imply
+		\begin{equation*}
+			H_\bullet(\S^n) \isom M_\bullet \oplus M_{\bullet-n} \hspace{1cm}\text{and}\hspace{1cm} \widetilde{H}_\bullet(\S^n,*) \isom M_{\bullet-n}.
+		\end{equation*}
 	\end{lemma}
+	\begin{proof}
+		Consider the canoncial decomposition $\S^n = \S^n_{+} \union \S^n_{-}$ into upper and lower halfs and let $x_0$ denote the north pole in $\S^n$. Note that by homotopy invariance $\widetilde{H}_\bullet(\S^n_{+},x_0) \isom \widetilde{H}_\bullet(\D^n,0) \isom 0$. Hence by the long exact sequence of $\widetilde{H}_\bullet$ we have
+		\begin{equation*}
+			\begin{diagram}
+				\fourbyone[ultrawide]
+					{0\isom\widetilde{H}_\bullet(\S^n_{+},x_0)}{\widetilde{H}_\bullet(\S^n,x_0)}{H_\bullet(\S^n,\S^n_{+})}{\widetilde{H}_{\bullet-1}(\S^n_{+},x_0)\isom0}
+				\arrow{ww}{w}{}
+				\arrow{w}{e}{}
+				\arrow{e}{ee}{\partial_\bullet}[above]
+			\end{diagram},
+		\end{equation*}
+		which gives an isomorphism $\widetilde{H}_\bullet(\S^n,x_0) \isom H_\bullet(\S^n,\S^n_{+})$. By applying excision of $x_0$ and using homotopy invariance we get a chain of isomorphisms
+		\begin{equation*}
+			\widetilde{H}_\bullet(\S^n,x_0) \isom H_\bullet(\S^n,\S^n_{+}) \isom H_\bullet(\S^n \setminus \{x_0\}, \S^n_{+} \setminus \{x_0\}) \isom H_\bullet(\D^n,\S^{n-1}).
+		\end{equation*}
+		Denote by $x_1$ the north pole in $\S^{n-1}$. Again the long exact sequence of $\widetilde{H}_\bullet$ gives
+		\begin{equation*}
+			\begin{diagram}
+				\fourbyone[ultrawide]
+					{0 \isom \widetilde{H}_\bullet(\D^n,x_1)}{H_\bullet(\D^n,\S^{n-1})}{\widetilde{H}_{\bullet-1}(\S^{n-1},x_1)}{\widetilde{H}_{\bullet-1}(\D^n,x_1) \isom 0}
+				\arrow{ww}{w}{}
+				\arrow{w}{e}{\partial_\bullet}[above]
+				\arrow{e}{ee}{}
+			\end{diagram}
+		\end{equation*}
+		and we get an isomorphism $H_\bullet(\D^n,\S^{n-1}) \isom \widetilde{H}_{\bullet-1}(\S^{n-1})$. We can now explicitly calculate the homology of $\S^n$ (with $n \in \N_0$ now) by induction.
+		\begin{enumerate}
+			\item[(IB)]{
+				For $n=0$ we have by additivity
+				\begin{equation*}
+					H_\bullet(\S^0) = H_\bullet(* \sqcup *) \isom H_\bullet(*) \oplus H_\bullet(*) = M_\bullet \oplus M_\bullet
+				\end{equation*}
+				and further \TODO{why}
+				\begin{equation*}
+					\widetilde{H}_\bullet(\S^n,*) = M_\bullet.
+				\end{equation*}
+			}
+			\item[(IH)]{
+				For $k<n$ it holds that $\widetilde{H}_\bullet(\S^k,*) \isom M_{\bullet-k}$.
+			}
+			\item[(IS)]{
+				For $n$ we calculate
+				\begin{equation*}
+					\widetilde{H}_\bullet(\S^n,*) \isom \widetilde{H}_{\bullet-1}(\S^{n-1},*) \underset{(IH)}{\isom} M_{\bullet-1-(n-1)} = M_{\bullet-n}
+				\end{equation*}
+				and finally
+				\begin{equation*}
+					H_\bullet(\S^n) \isom M_\bullet \oplus H_\bullet(\S^n,*) \isom M_\bullet \oplus M_{\bullet-n}.
+				\end{equation*}
+			}\vspace{-3.5em}
+		\end{enumerate}
+	\end{proof}
 
 	\begin{theorem}[Invariance of Dimension]
+		Suppose there exists a generalized homology theory $(H_\bullet, \partial_\bullet)$, which satisfies additivity and dimension.
+
 		Let $U \subseteq \R^m$ and $V \subseteq \R^n$ be open subsets. The existence of a homeomorphism $f:U-->V$ implies $m = n$.
 	\end{theorem}
+	\begin{proof}
+		Note that for a point $x \in U$ we can calculate by homotopy invariance
+		\begin{equation*}
+			H_\bullet(U,U\setminus\{x\}) \isom H_\bullet(\B^m(x,r),\B^m(x,r)\setminus\{x\}) \isom H_\bullet(\D^m,\S^{m-1}) \isom \widetilde{H}_\bullet(\S^m) \isom M_{\bullet-m}
+		\end{equation*}
+		and similarly for $y \in V$. By the dimension axiom we then have that 
+		\begin{equation*}
+			M_{\bullet-m} \isom H_\bullet(U,U\setminus\{x\}) \isom H_\bullet(V,V\setminus\{f(x)\}) \isom M_{\bullet-n}
+		\end{equation*}
+		implies $m=n$.
+	\end{proof}
+
+	\begin{lemma}[Homology of Wedge Sums of Circles]
+		\TODO{Wedge sums of circles}
+	\end{lemma}
 
 	\begin{lemma}[Homology of the Oriented Surfaces]
 		\TODO{Torus and higher genus}
 	\end{lemma}
 
+	\subsection{Homological Orientation and Fundamental Classes}
+	\begin{remark}
+		Let $(H_\bullet, \partial_\bullet)$ be a generalized homology theory, which satisfies additivity and dimension, and suppose $M_0$ is a cyclic $R$-module (e.g. $R=\Z$ and $M_0 = \Z$ or $M_0 = \Z/n\Z$).
+
+		Let $X$ be an $n$-dimensional topological manifold and $x$ be any point in $X$, which is contained in a chart $\phi_x: U_x \isom \R^n$ with $\phi_x(x) = 0$. By excission (of the complement of $\phi_x^{-1}(\D^n)$) we get a chain of isomorphisms
+		\begin{equation*}
+			H_\bullet(X,X\setminus\{x\}) \isom H_\bullet(\phi_x^{-1}(\D^n),\phi_x^{-1}(\D^n\setminus \{0\})) \isom H_\bullet(\D^n,\D^n\setminus \{0\}) \isom H_\bullet(\D^n,\S^{n-1}) \isom M_{\bullet-n}.
+		\end{equation*}
+		In particular $H_n(X,X\setminus\{x\}) \isom M_0$ is a cyclic $R$-module. Furthermore, if $U \neq X$ is a neighborhood, which is contractible to $\{x\}$ (e.g. $U = \phi_x^{-1}(\D^n)$), we have $H_\bullet(X,X\setminus U) \isom H_\bullet(X,X\setminus\{x\})$ \TODO{by homotopy invariance}, so $H_n(X,X\setminus U) \isom M_0$ is a cyclic $R$-module as well.
+		%
+		% Let $x_1,x_2$ be two points in a shared (path-)connected component of $X$ and $\gamma$ be a $x_1$-$x_2$-path. By homotopy invariance we get a chain of isomorphisms
+		% \begin{equation*}
+		% 	H_\bullet(X,X\setminus\{x_1\}) \isom H_\bullet(X,X\setminus\Im\gamma) \isom H_\bullet(X,X\setminus\{x_2\}).
+		% \end{equation*}
+	\end{remark}
+
+	\begin{definition}
+		Let $(H_\bullet, \partial_\bullet)$ be a generalized homology theory, which satisfies additivity and dimension, and suppose $M_0$ is a cyclic $R$-module.
+
+		Let $X$ be an $n$-dimensional topological manifold.
+
+		An \textbf{$R$-orientation} of $X$ is a choice of generator $m_x \in H_n(X,X\setminus\{x\})$ for each point $x$ in $X$, such that for each $x$ there is an open neighborhood $U \neq X$, \TODO{which is contractible to $\{x\}$}, and a \TODO{generator} $m_U \in H_n(X,X\setminus U)$ such that for all $y \in U$ the induced \TODO{isomorphism} $H_n(X,X\setminus U) \isom H_n(X,X\setminus\{y\})$ maps $m_U$ to $m_y$ (it has to map generators to generators).
+	\end{definition}
+
+	\newpage
 	\section{Simplicial Homology}
 	\subsection{Simplicial Spaces}
 	\subsection{Simplicial Homology}
-	\subsection{Examples and Applications}
 \end{document}
