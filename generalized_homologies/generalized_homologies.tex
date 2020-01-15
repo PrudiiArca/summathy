@@ -327,6 +327,7 @@
 		\TODO{Torus and higher genus}
 	\end{lemma}
 
+	\newpage
 	\subsection{Homological Orientation and Fundamental Classes}
 	\begin{remark}
 		Let $(H_\bullet, \partial_\bullet)$ be a generalized homology theory, which satisfies additivity and dimension, and suppose $M_0$ is a cyclic $R$-module (e.g. $R=\Z$ and $M_0 = \Z$ or $M_0 = \Z/n\Z$).
@@ -352,7 +353,413 @@
 	\end{definition}
 
 	\newpage
-	\section{Simplicial Homology}
+	\section{Singular Homology}
 	\subsection{Simplicial Spaces}
-	\subsection{Simplicial Homology}
+
+	Recall the \textbf{simplex category} $\Delta$ consisting of the total ordered sets $[n] = \{0,...,n\}$ and order preserving maps $[m] --> [n]$. In what comes the following two kinds of morphisms play a special role:
+
+	\begin{minipage}{.65\textwidth}
+		The \textbf{$i$-th boundary} of the $n$-th simplex is the map
+		\begin{equation*}
+			\delta_i^n: [n-1] \longrightarrow [n],\; \delta_i^n(k) = \left\{\begin{array}{ll}
+				k & k<i\\
+				k+1 & k\geq i
+			\end{array}\right..
+		\end{equation*}
+	\end{minipage}
+	\begin{minipage}{.35\textwidth}
+		\vspace{.8cm}
+		\begin{center}
+		\begin{tikzpicture}
+			% \node (x) at (-1.5,1.25) {$[1]$};
+			% \node (y) at (1.5,1.25) {$[2]$};
+			% \draw[->] (x) -- (y);
+			%
+			\node (a0) at (-2,0) {$0$};
+			\node (a1) at (-1,0) {$1$};
+			\draw[->] (a0) -- (a1);
+
+			\node at (0,.25) {$\delta^2_1$};
+			\node at (0,0) {$\longmapsto$};
+
+			\node (b0) at (1,-.4) {$0$};
+			\node[gray] (b1) at (2,-.4) {$1$};
+			\node (b2) at (1.5,.4) {$2$};
+			\draw[->,gray] (b0) -- (b1);
+			\draw[->] (b0) -- (b2);
+			\draw[->,gray] (b1) -- (b2);
+		\end{tikzpicture}
+		\end{center}
+	\end{minipage}
+	\begin{minipage}{.65\textwidth}
+		The \textbf{$i$-th degeneration} of the $n$-th simplex is the map
+		\begin{equation*}
+			\sigma_i^n: [n] \longrightarrow [n-1],\; \sigma_i^n(k) = \left\{\begin{array}{ll}
+				k & k\leq i\\
+				k-1 & k > i
+			\end{array}\right..
+		\end{equation*}
+	\end{minipage}
+	\begin{minipage}{.35\textwidth}
+		\vspace{.6cm}
+		\begin{center}
+		\begin{tikzpicture}
+			\node (a0) at (1,-.4) {$0$};
+			\node (a1) at (2,-.4) {$1$};
+			\node (a2) at (1.5,.4) {$2$};
+			\draw[->] (a0) -- (a1);
+			\draw[->] (a0) -- (a2);
+			\draw[->,thick] (a1) -- (a2);
+
+			\node at (0,.25) {$\sigma^3_1$};
+			\node at (0,0) {$\longmapsto$};
+
+			\node (b0) at (-2.2,-.6) {$0$};
+			\node (b1) at (-.8,-.6) {$1$};
+			\node (b2) at (-1.5,0) {$2$};
+			\node (b3) at (-1.5,.8) {$3$};
+			\draw[->] (b0) -- (b1);
+			\draw[->] (b0) -- (b2);
+			\draw[->] (b0) -- (b3);
+			\draw[->] (b1) -- (b2);
+			\draw[->] (b1) -- (b3);
+			\draw[->,thick] (b2) -- (b3);
+		\end{tikzpicture}
+		\end{center}
+	\end{minipage}
+
+	\begin{lemma}
+		Given $n \in \N$ and $i \leq j \leq n$ the boundary morphisms satisfy the equality
+		\begin{equation*}
+			\delta_{j+1}^{n+1}\delta_i^{n+1} = \delta_i^{n+1}\delta_j^{n}.
+		\end{equation*}
+	\end{lemma}
+	\begin{sketch}
+		If $i=j$ consider
+		\begin{equation*}
+			\hspace{-3em}
+			\begin{tikzpicture}[diagram]
+				\matrix[matrix of nodes,
+		ampersand replacement=\&,column sep=1em,row sep=1em]{
+					\node (m-0-0) {\ensuremath{\bullet}}; \&
+					\node (m-0-1) {\ensuremath{\bullet}}; \&
+					\node (m-0-2) {\ensuremath{\bullet}}; \&
+					\node (m-0-3) {\ensuremath{\bullet}}; \&
+					\node (m-0-4) {\ensuremath{\bullet}}; \&
+					\node (m-0-5) {}; \&
+					\node (m-0-6) {}; \\
+	%
+					\node (m-1-0) {\ensuremath{\bullet}}; \&
+					\node (m-1-1) {\ensuremath{\bullet}}; \&
+					\node (m-1-2) {\ensuremath{\bullet}}; \&
+					\node (m-1-3) {\ensuremath{\bullet}}; \&
+					\node (m-1-4) {\ensuremath{\bullet}}; \&
+					\node (m-1-5) {\ensuremath{\bullet}}; \&
+					\node (m-1-6) {}; \\
+	%
+					\node (m-2-0) {\ensuremath{\bullet}}; \&
+					\node (m-2-1) {\ensuremath{\bullet}}; \&
+					\node (m-2-2) {\ensuremath{\bullet}}; \&
+					\node (m-2-3) {\ensuremath{\bullet}}; \&
+					\node (m-2-4) {\ensuremath{\bullet}}; \&
+					\node (m-2-5) {\ensuremath{\bullet}}; \&
+					\node (m-2-6) {\ensuremath{\bullet}}; \\
+				};
+				\node at ($(m-0-2)+(0,1em)$) {\ensuremath{i}};
+				\node at ($.5*(m-0-0) + .5*(m-1-0) + (-2em,0)$) {\ensuremath{\delta_i^n}};
+				\node at ($.5*(m-1-0) + .5*(m-2-0) + (-2em,0)$) {\ensuremath{\delta_{i+1}^{n+1}}};
+				\draw[->,thick] (m-0-0) -- (m-1-0) -- (m-2-0);
+				\draw[->,thick] (m-0-1) -- (m-1-1) -- (m-2-1);
+				\draw[->,thick] (m-0-2) -- (m-1-3) -- (m-2-4);
+				\draw[->,thick] (m-0-3) -- (m-1-4) -- (m-2-5);
+				\draw[->,thick] (m-0-4) -- (m-1-5) -- (m-2-6);
+				\draw[->,gray] (m-1-2) -- (m-2-2);
+			\end{tikzpicture}
+			\;=\;
+			\begin{tikzpicture}[diagram]
+				\matrix[matrix of nodes,
+		ampersand replacement=\&,column sep=1em,row sep=1em]{
+					\node (m-0-0) {\ensuremath{\bullet}}; \&
+					\node (m-0-1) {\ensuremath{\bullet}}; \&
+					\node (m-0-2) {\ensuremath{\bullet}}; \&
+					\node (m-0-3) {\ensuremath{\bullet}}; \&
+					\node (m-0-4) {\ensuremath{\bullet}}; \&
+					\node (m-0-5) {}; \&
+					\node (m-0-6) {}; \\
+	%
+					\node (m-1-0) {\ensuremath{\bullet}}; \&
+					\node (m-1-1) {\ensuremath{\bullet}}; \&
+					\node (m-1-2) {\ensuremath{\bullet}}; \&
+					\node (m-1-3) {\ensuremath{\bullet}}; \&
+					\node (m-1-4) {\ensuremath{\bullet}}; \&
+					\node (m-1-5) {\ensuremath{\bullet}}; \&
+					\node (m-1-6) {}; \\
+	%
+					\node (m-2-0) {\ensuremath{\bullet}}; \&
+					\node (m-2-1) {\ensuremath{\bullet}}; \&
+					\node (m-2-2) {\ensuremath{\bullet}}; \&
+					\node (m-2-3) {\ensuremath{\bullet}}; \&
+					\node (m-2-4) {\ensuremath{\bullet}}; \&
+					\node (m-2-5) {\ensuremath{\bullet}}; \&
+					\node (m-2-6) {\ensuremath{\bullet}}; \\
+				};
+				\node at ($(m-0-2)+(0,1em)$) {\ensuremath{i}};
+				\node at ($.5*(m-0-0) + .5*(m-1-0) + (-2em,0)$) {\ensuremath{\delta_i^n}};
+				\node at ($.5*(m-1-0) + .5*(m-2-0) + (-2em,0)$) {\ensuremath{\delta_{i}^{n+1}}};
+				\draw[->,thick] (m-0-0) -- (m-1-0) -- (m-2-0);
+				\draw[->,thick] (m-0-1) -- (m-1-1) -- (m-2-1);
+				\draw[->,thick] (m-0-2) -- (m-1-3) -- (m-2-4);
+				\draw[->,thick] (m-0-3) -- (m-1-4) -- (m-2-5);
+				\draw[->,thick] (m-0-4) -- (m-1-5) -- (m-2-6);
+				\draw[->,gray] (m-1-2) -- (m-2-3);
+			\end{tikzpicture}
+		\end{equation*}
+		If $i < j$ consider
+		\begin{equation*}
+			\hspace{-3em}
+			\begin{tikzpicture}[diagram]
+				\matrix[matrix of nodes,
+		ampersand replacement=\&,column sep=1em,row sep=1em]{
+					\node (m-0-0) {\ensuremath{\bullet}}; \&
+					\node (m-0-1) {\ensuremath{\bullet}}; \&
+					\node (m-0-2) {\ensuremath{\bullet}}; \&
+					\node (m-0-3) {\ensuremath{\bullet}}; \&
+					\node (m-0-4) {\ensuremath{\bullet}}; \&
+					\node (m-0-5) {\ensuremath{\bullet}}; \&
+					\node (m-0-6) {}; \&
+					\node (m-0-7) {}; \\
+	%
+					\node (m-1-0) {\ensuremath{\bullet}}; \&
+					\node (m-1-1) {\ensuremath{\bullet}}; \&
+					\node (m-1-2) {\ensuremath{\bullet}}; \&
+					\node (m-1-3) {\ensuremath{\bullet}}; \&
+					\node (m-1-4) {\ensuremath{\bullet}}; \&
+					\node (m-1-5) {\ensuremath{\bullet}}; \&
+					\node (m-1-6) {\ensuremath{\bullet}}; \&
+					\node (m-1-7) {}; \\
+	%
+					\node (m-2-0) {\ensuremath{\bullet}}; \&
+					\node (m-2-1) {\ensuremath{\bullet}}; \&
+					\node (m-2-2) {\ensuremath{\bullet}}; \&
+					\node (m-2-3) {\ensuremath{\bullet}}; \&
+					\node (m-2-4) {\ensuremath{\bullet}}; \&
+					\node (m-2-5) {\ensuremath{\bullet}}; \&
+					\node (m-2-6) {\ensuremath{\bullet}}; \&
+					\node (m-2-7) {\ensuremath{\bullet}}; \\
+				};
+				\node at ($(m-0-2)+(0,1em)$) {\ensuremath{i}};
+				\node at ($(m-0-3)+(0,1em)$) {\ensuremath{j}};
+				\node at ($(m-0-4)+(0,1em)$) {\ensuremath{j+1}};
+				\node at ($.5*(m-0-0) + .5*(m-1-0) + (-2em,0)$) {\ensuremath{\delta_i^n}};
+				\node at ($.5*(m-1-0) + .5*(m-2-0) + (-2em,0)$) {\ensuremath{\delta_{j+1}^{n+1}}};
+				\draw[->,thick] (m-0-0) -- (m-1-0) -- (m-2-0);
+				\draw[->,thick] (m-0-1) -- (m-1-1) -- (m-2-1);
+				\draw[->,thick] (m-0-2) -- (m-1-3) -- (m-2-3);
+				\draw[->,thick] (m-0-3) -- (m-1-4) -- (m-2-5);
+				\draw[->,thick] (m-0-4) -- (m-1-5) -- (m-2-6);
+				\draw[->,thick] (m-0-5) -- (m-1-6) -- (m-2-7);
+				\draw[->,gray] (m-1-2) -- (m-2-2);
+			\end{tikzpicture}
+			\;=\;
+			\begin{tikzpicture}[diagram]
+				\matrix[matrix of nodes,
+		ampersand replacement=\&,column sep=1em,row sep=1em]{
+					\node (m-0-0) {\ensuremath{\bullet}}; \&
+					\node (m-0-1) {\ensuremath{\bullet}}; \&
+					\node (m-0-2) {\ensuremath{\bullet}}; \&
+					\node (m-0-3) {\ensuremath{\bullet}}; \&
+					\node (m-0-4) {\ensuremath{\bullet}}; \&
+					\node (m-0-5) {\ensuremath{\bullet}}; \&
+					\node (m-0-6) {}; \&
+					\node (m-0-7) {}; \\
+	%
+					\node (m-1-0) {\ensuremath{\bullet}}; \&
+					\node (m-1-1) {\ensuremath{\bullet}}; \&
+					\node (m-1-2) {\ensuremath{\bullet}}; \&
+					\node (m-1-3) {\ensuremath{\bullet}}; \&
+					\node (m-1-4) {\ensuremath{\bullet}}; \&
+					\node (m-1-5) {\ensuremath{\bullet}}; \&
+					\node (m-1-6) {\ensuremath{\bullet}}; \&
+					\node (m-1-7) {}; \\
+	%
+					\node (m-2-0) {\ensuremath{\bullet}}; \&
+					\node (m-2-1) {\ensuremath{\bullet}}; \&
+					\node (m-2-2) {\ensuremath{\bullet}}; \&
+					\node (m-2-3) {\ensuremath{\bullet}}; \&
+					\node (m-2-4) {\ensuremath{\bullet}}; \&
+					\node (m-2-5) {\ensuremath{\bullet}}; \&
+					\node (m-2-6) {\ensuremath{\bullet}}; \&
+					\node (m-2-7) {\ensuremath{\bullet}}; \\
+				};
+				\node at ($(m-0-2)+(0,1em)$) {\ensuremath{i}};
+				\node at ($(m-0-3)+(0,1em)$) {\ensuremath{j}};
+				\node at ($(m-0-4)+(0,1em)$) {\ensuremath{j+1}};
+				\node at ($.5*(m-0-0) + .5*(m-1-0) + (-2em,0)$) {\ensuremath{\delta_j^n}};
+				\node at ($.5*(m-1-0) + .5*(m-2-0) + (-2em,0)$) {\ensuremath{\delta_{i}^{n+1}}};
+				\draw[->,thick] (m-0-0) -- (m-1-0) -- (m-2-0);
+				\draw[->,thick] (m-0-1) -- (m-1-1) -- (m-2-1);
+				\draw[->,thick] (m-0-2) -- (m-1-2) -- (m-2-3);
+				\draw[->,thick] (m-0-3) -- (m-1-4) -- (m-2-5);
+				\draw[->,thick] (m-0-4) -- (m-1-5) -- (m-2-6);
+				\draw[->,thick] (m-0-5) -- (m-1-6) -- (m-2-7);
+				\draw[->,gray] (m-1-3) -- (m-2-4);
+			\end{tikzpicture}
+			\vspace{-2.4em}
+		\end{equation*}
+	\end{sketch}
+
+	Now recall that a \textbf{simplicial object} on a category $\cat{C}$ is a just a presheaf $\Delta^{op} --> \cat{C}$ and one denotes by $\ncat{s}\cat{C} = |[\Delta^{op},\cat{C}|]$ the category of simplicial objects. In the case of $\cat{C} = \ncat{Set}$ or $\cat{C} = \ncat{Top}$ simplicial objects are usually called \textbf{simplicial sets} or \textbf{simplicial spaces} respectively.
+
+	%Denote by $\R^\infty$ the real vector space of countable infinite dimension, with standard basis $e_0,e_1,...$.
+
+	\begin{definition}
+		The \textbf{geometric realization} of $\Delta$ is the functor
+		\begin{equation*}
+			\begin{array}{rcl}
+				\Delta & \overset{\mathbb{\Delta}}{\longrightarrow} & \ncat{Top}\\
+				{[n]} & \longmapsto & \mathbb{\Delta}_n := \convex \{e_0,...,e_n\} \subseteq \R^{n+1}\\
+				{[\rho:[m]\rightarrow[n]]} & \longmapsto & {\left[\begin{array}{rcl}\mathbb{\Delta}_m &\rightarrow& \mathbb{\Delta}_n\\e_i &\mapsto& e_{\rho(i)}\end{array}\right]}
+			\end{array}
+		\end{equation*}
+		where $e_0,...,e_n$ denote the standard basis vectors and
+		\begin{equation*}
+			\smash{\convex \{e_0,...,e_n\} = \{(t_0,...,t_n) \mid 0 \leq t_i \text{ and } \Sum \limits_{i=0}^n t_i = 1\}}.
+		\end{equation*}
+		The action on morphisms is defined by linear (and hence continuous) extension.
+	\end{definition}
+
+	\begin{remark}
+		The \textit{convex hull} $\{0,e_0,...,e_n\}$ in $\R^n$ lends itself to two different kinds of parameterizations, namely
+		\begin{equation*}
+			\smash{\convex \{e_0,...,e_n\} = \{(t_0,...,t_n) \mid 0 \leq t_i \text{ and } \Sum \limits_{i=0}^n t_i = 1\}}
+		\end{equation*}
+		and
+		\begin{equation*}
+			\convex \{e_0,...,e_n\} = \{(\varphi_1,...,\varphi_n) \mid 0 \leq \varphi_i \leq 1\}.
+		\end{equation*}
+		We can convert between both parametrizations by letting
+		\begin{equation*}
+			\begin{array}{rcl}
+				(t_0,\,...\,,t_n) & \longmapsto & (t_0,\,t_0+t_1,\,...\,,\,\Sum \limits_{i=0}^{n-1} t_i)\\
+				(\varphi_1,\, \varphi_2 - \varphi_1,\,...\,,\,\varphi_n-\varphi_{n-1},\,1-\varphi_n) & \reflectbox{$\longmapsto$} & (\varphi_1,\, ...\,,\, \varphi_n)
+			\end{array}
+		\end{equation*}
+		\TODO{coordinates and their $d_i^n, s_i^n$}
+	\end{remark}
+
+	\begin{definition}
+		\TODO{subdivision of the cylinder}
+	\end{definition}
+
+	\begin{definition}
+		The \textbf{barycenter} of the standard $n$-simplex $\mathbb{\Delta}_n$ is the point $b_n = (\frac{1}{n+1},...,\frac{1}{n+1}) \in \R^{n+1}$.
+	\end{definition}
+
+	\newpage
+	\subsection{Singular Homology}
+
+	Let $M_\bullet$ be a $\Z$-graded $R$-module. In this section we explicitly construct a generalized homology theory with $M_\bullet$ as its module of coefficients. 
+
+	We start by defining a functor $H:\ncat{Top} --> \ncat{Ab}^{\Z\text{gr}}$ as the composite
+	\begin{equation*}
+		\begin{diagram}
+			\fivebyone[wide]
+				{\ncat{Top}}{\ncat{sSet}}{\ncat{sAb}}{\ncat{Ch}}{\ncat{Ab}^{\Z\text{gr}}}
+
+			\arrow{ww}{w}{\ncat{sing}}[above]
+			\arrow{w}{c}{\Z[-]_{*}}[above]
+			\arrow{c}{e}{C_\bullet}[above]
+			\arrow{e}{ee}{H_{*}}[above]
+		\end{diagram},
+	\end{equation*}
+	of the following functors.
+
+	The first functor is the \TODO{somewhat} canonical way to turn a topological space into a simplicial set.
+	\begin{equation*}
+		\begin{array}{rcl}
+			\ncat{Top} & \xrightarrow{\ncat{sing}} & \ncat{sSet}\\
+			X & \longmapsto & \ncat{Top}(\mathbb{\Delta}-,X)\\
+			{[X\overset{f}{\rightarrow} Y]} & \longmapsto & {[\ncat{Top}(\mathbb{\Delta}-,X) \overset{f_{*}}{\Rightarrow} \ncat{Top}(\mathbb{\Delta}-,Y)]}
+		\end{array}
+	\end{equation*}
+	Note that by construction we have the identifications
+	\begin{align*}
+		\ncat{sing}(X)([0]) &= \ncat{Top}(\mathbb{\Delta}_0,X) \isom \ncat{Top}(*,X) = \{\text{points in }X\}\\
+		\ncat{sing}(X)([1]) &= \ncat{Top}(\mathbb{\Delta}_1,X) \isom \ncat{Top}([0,1],X) = \{\text{paths in }X\}\\
+		\ncat{sing}(X)([2]) &= \ncat{Top}(\mathbb{\Delta}_2,X) \isom \ncat{Top}(\S^1,X) = \{\text{loops in }X\text{ (without basepoint)}\}.
+	\end{align*}
+
+	The \textit{free abelian group functor} $\Z[-]: \ncat{Set} --> \ncat{Ab}$ extends by postcomposition to a functor
+	\begin{equation*}
+		\begin{array}{rcl}
+			\ncat{sSet} & \xrightarrow{\Z[-]_*} & \ncat{sAb}\\
+			{[\Delta^{op}\rightarrow\ncat{Set}]} & \longmapsto & {[\Delta^{op}\rightarrow\ncat{Set}\xrightarrow{\Z[-]}\ncat{Ab}]}\\
+			{[\alpha:g_1\Rightarrow g_2]} & \longmapsto& {[\Z[\alpha]:\Z[g_1] \Rightarrow \Z[g_2]]}
+		\end{array}
+	\end{equation*}
+
+	The next functor is a bit more involed, as it has to turn a simplicial object $\fun{A}:\Delta^{op} --> \ncat{Ab}$ into a chain complex. First recall that the boundary morphisms $\delta_i^n:[n-1]-->[n]$ in $\Delta$ give us morphisms $d_i^n:= \fun{A}(\delta_i^n):\fun{A}([n])-->\fun{A}([n-1])$. Let $C_\bullet(\fun{A})$ be the chain complex given by
+	% \begin{equation*}
+	% 	C_n(\fun{A}) = \left\{\begin{array}{ll} \fun{A}([n]) & n \geq 0\\ 0 & \text{else}\end{array}\right. \hspace{1cm} \partial_n = \left\{\begin{array}{ll}\Sum \limits_{i=0}^n(-1)^i d_i^n & n > 0\\ 0 & \text{else} \end{array}\right.
+	% \end{equation*}
+	\begin{equation*}
+		\begin{diagram}
+			\fivebyone[wide]
+				{...\fun{A}([2])}{\fun{A}([1])}{\fun{A}([0])}{0}{0...}
+
+			\arrow{ww}{w}{\partial_2}[above]
+			\arrow{w}{c}{\partial_1}[above]
+			\arrow{c}{e}{\partial_0}[above]
+			\arrow{e}{ee}{0}[above]
+		\end{diagram},
+	\end{equation*}
+	where
+	\begin{equation*}
+		\partial_n = \Sum \limits_{i=0}^n(-1)^i d_i^n
+	\end{equation*}
+	for $n \in \N$. By definition of a natural transformation $\beta:\fun{A} ==> \fun{B}$ the components $\beta_{[n]}$ make the diagram
+	\begin{equation*}
+		\begin{diagram}
+			\twobytwo[large]
+				{\fun{A}([n])}{\fun{A}([n-1])}
+				{\fun{A}([n])}{\fun{A}([n-1])}
+
+			\arrow{nw}{ne}{\fun{A}(\delta_i^n)}[above]
+			\arrow{sw}{se}{\fun{B}(\delta_i^n)}[below]
+
+			\arrow{nw}{sw}{\beta_{[n]}}[left]
+			\arrow{ne}{se}{\beta_{[n-1]}}[right]
+		\end{diagram}
+		\hspace{1cm}\text{and thus}\hspace{1cm}
+		\begin{diagram}
+			\twobytwo[large]
+				{\fun{A}([n])}{\fun{A}([n-1])}
+				{\fun{A}([n])}{\fun{A}([n-1])}
+
+			\arrow{nw}{ne}{\partial_n}[above]
+			\arrow{sw}{se}{\partial_n}[below]
+
+			\arrow{nw}{sw}{\beta_{[n]}}[left]
+			\arrow{ne}{se}{\beta_{[n-1]}}[right]
+		\end{diagram}
+	\end{equation*}
+	commute, so $C_\bullet(\beta)$ is just the extension of $\beta$ by zeroes in negative degrees.
+
+	To show that this indeed defines a chain complex we use that by Lemma \TODO{cite} the identity
+	\begin{equation*}
+		d_j^nd_i^{n+1} = d_i^nd_{j+1}^{n+1}
+	\end{equation*}
+	holds for $i \leq j \leq n$. With this we compute
+	\begin{align*}
+		\partial_n\partial_{n+1} &= \Sum \limits_{i=0}^n(-1)^i d_i^n \left(\Sum \limits_{j=0}^{n+1}(-1)^j d_j^{n+1}\right)
+		= \Sum \limits_{i=0}^n \Sum \limits_{j=0}^{n+1}(-1)^{i+j}d_i^nd_j^{n+1}\\
+		&=\sum\limits_{i=0}^n\Sum\limits_{j=0}^{i}(-1)^{j+i}d_i^nd_j^{n+1} + \Sum\limits_{i=0}^n\Sum\limits_{j=i+1}^{n+1}(-1)^{i+j}d_i^nd_j^{n+1}\\
+		&=\sum\limits_{i=0}^n\Sum\limits_{j=0}^{i}(-1)^{j+i}d_i^nd_j^{n+1} + \Sum\limits_{i=0}^n\Sum\limits_{j=i}^{n}(-1)^{i+j+1}d_i^nd_{j+1}^{n+1}\\
+		&=\sum\limits_{i=0}^n\Sum\limits_{j=0}^{i}(-1)^{j+i}d_i^nd_j^{n+1} - \Sum\limits_{i=0}^n\Sum\limits_{j=i}^{n}(-1)^{i+j}d_j^nd_i^{n+1}\\
+		&=\sum\limits_{i=0}^n\Sum\limits_{j=0}^{i}(-1)^{j+i}d_i^nd_j^{n+1} - \sum\limits_{j=0}^n\Sum\limits_{i=j}^{n}(-1)^{j+i}d_i^nd_j^{n+1} = 0
+	\end{align*}
+
+
+
+	\subsection{Homological Orientation and Degree}
 \end{document}
