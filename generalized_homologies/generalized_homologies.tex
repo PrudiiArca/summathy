@@ -75,7 +75,7 @@
 
 				In particular for $n \in \N$ we have
 				\begin{equation*}
-					H_\bullet(*) \isom H_\bullet(\D^n) \isom H_\bullet(\R^n) \hspace{1cm}\text{and}\hspace{1cm} \H_\bullet(\S^{n-1}) \isom H_\bullet(\D^n \setminus \{0\}).
+					H_\bullet(*) \isom H_\bullet(\D^n) \isom H_\bullet(\R^n) \hspace{1cm}\text{and}\hspace{1cm} H_\bullet(\S^{n-1}) \isom H_\bullet(\D^n \setminus \{0\}).
 				\end{equation*}
 			}
 			\item{
@@ -153,23 +153,47 @@
 		\end{equation*}
 	\end{proposition}
 
+	\begin{proposition}
+		\TODO{colimit of chain of deformation retracts and telescope?}
+	\end{proposition}
+
 	\newpage
 	\subsection{Reduced Homology}
 
 	\begin{lemma}
-		Let $(H_\bullet, \partial_\bullet)$ be a generalized homology theory and $x$ be a point in a topological space $X$. Then for any $n \in \Z$ the sequence
+		Let $(H_\bullet, \partial_\bullet)$ be a generalized homology theory and $x$ be a point in a topological space $X$. Then
+		\begin{equation*}
+			H_\bullet(X) \isom H_\bullet(\{x\}) \directsum H_\bullet(X,\{x\}) \isom H_\bullet(*) \oplus H_\bullet(X,\{x\}).
+		\end{equation*}
+	\end{lemma}
+	\begin{proof}
+		The constant map $r:X -->> \{x\}$ and the embedding $i:\{x\} \longrightincl X$ form an embedding retraction pair. Hence, by functoriality of $H_\bullet$, $H_\bullet(i)$ is split mono. For $n \in \Z$ the exact sequence
 		\begin{equation*}
 			\begin{diagram}
-				\threebyone[wide]
-					{H_n(\{x\})}{H_n(X)}{H_n(X,\{x\})}
-				\arrow{w}{c}{}
-				\arrow{c}{e}{}
+				\fivebyone[verywide]
+					{H_n(\{x\})}{H_n(X)}{H_n(X,\{x\})}{H_{n-1}(\{x\})}{H_{n-1}(X)}
+
+				\arrow[mono]{ww}{w}{H_n(i)}[above]
+				\arrow[]{w}{c}{}[above]
+				\arrow[]{c}{e}{\partial_n}[above]
+				\arrow[mono]{e}{ee}{H_{n-1}(i)}[above]
 			\end{diagram}
 		\end{equation*}
-		is split exact with section $H_n(c):H_n(X) --> H_n(\{x\})$, where $c: X --> \{x\}$ denotes the constant map.
+		yields $\partial_n = 0$, so $\ker \partial_n = H_n(X,\{x\})$ and we obtain the split exact sequence
+		\begin{equation*}
+			\begin{diagram}
+				\fivebyone[wide]
+					{0}{H_n(\{x\})}{H_n(X)}{H_n(X,\{x\})}{0,}
 
-		In particular it holds that $H_\bullet(X,\{x_1\}) \isom H_\bullet(X,\{x_2\})$ and we get $H_\bullet(X) \isom H_\bullet(*) \oplus H_\bullet(X,*)$.
-	\end{lemma}
+				\arrow{ww}{w}{}
+				\arrow{w}{c}{H_n(i)}[above]
+				\arrow{c}{e}{}[above]
+				\arrow{e}{ee}{}
+				\arrow[bend left]{c}{w}{H_n(r)}[below]
+			\end{diagram}
+		\end{equation*}
+		from which the desired isomorphism can be deduced.
+	\end{proof}
 
 	\begin{definition}
 		The \textbf{module of coefficients} of a generalized homology theory $(H_\bullet, \partial_\bullet)$ is the graded module $M_\bullet := H_\bullet(*)$.
@@ -218,7 +242,36 @@
 				\TODO{suspension}
 			}
 		\end{enumerate}
+		If $H_\bullet$ is additive we further have
+		\begin{enumerate}
+			\item[(v)]{
+				Let $(X_i,x_i)_{i \in I}$ be a family \textit{wellpointed} spaces (i.e. each $x_i$ has a neighborhood, which deformation retracts to it). Then
+				\begin{equation*}
+					H_\bullet(\Join \limits_{i\in I}X_i, x_0) \isom \Directsum \limits_{i \in I}(X_i, x_i).
+				\end{equation*}
+			}
+		\end{enumerate}
 	\end{lemma}
+	\begin{proof}
+		\begin{enumerate}[(i)]
+			\item{}
+			\item{}
+			\item{}
+			\item{}
+			\item{
+				Let $U_i$ be a neighborhood of $x_i$, which deformation retracts to $x_i$. We calculate
+				\begin{equation*}
+					\begin{array}{rcl}
+						H_\bullet(\Join \limits_{i \in I}X_i,x_{*}) &\underset{\text{homotopy}}{\isom}& H_\bullet(\Join \limits_{i \in I} X_i, U_i)\\[1em]
+						&\underset{\text{excission}}{\isom}& H_\bullet((\Join \limits_{i \in I}X_i)\setminus\{x_{*}\},(\Join \limits_{i \in I} U_i) \setminus \{x_{*}\})\\[1em]
+						&=& H_\bullet(\Coproduct \limits_{i \in I}X_i \setminus\{x_i\},\Coproduct \limits_{i \in I}U_i \setminus\{x_i\})\\[1em]
+						&\underset{\text{additivity}}{\isom}& \Directsum \limits_{i \in I}H_\bullet(X_i \setminus \{x_i\}, U_i \setminus \{x_i\})\\[1em]
+						&\underset{\text{excission}}{\isom}& \Directsum \limits_{i \in I}H_\bullet(X_i, U_i) \underset{\text{homotopy}}{\isom} \Directsum \limits_{i \in I} H_\bullet(X_i,x_i).
+					\end{array}
+				\end{equation*}
+			}
+		\end{enumerate}
+	\end{proof}
 
 	\begin{lemma}[Reduced Mayer Vitoris]
 		Let $(H_\bullet,\partial_\bullet)$ be a generalized homology theory and $A_1,A_2 \subseteq X$ in $\ncat{Top}$, such that $X \subseteq \interior(A_1) \union \interior(A_2)$ and $x_0 \in A_1 \intersection A_2$. Then the following sequence is exact.
@@ -439,6 +492,65 @@
 		\end{equation*}
 	\end{remark}
 
+	\newpage
+	\subsection{Homology of CW-complexes}
+
+	\begin{definition}
+		\begin{minipage}{.7\textwidth}
+			A (\textbf{relative}) \textbf{CW-structure} on a pair $(X,A)$ of spaces is a \textit{filtration}
+			\begin{equation*}
+				A \subseteq X_0 \subseteq X_1 \subseteq ... \subseteq \colim \limits_{n \in \N_0} X_n = X
+			\end{equation*}
+			of $X$, such that for every $n \in \N_0$ there is an indexing set $I_n$ and for each $i \in I_n$
+			\vspace{.5em}
+			\begin{enumerate}[--]
+				\item{
+					an \textbf{attaching map} $\chi_i:\S^{n-1} --> X_{n-1}$
+				}
+				\item{
+					a \textbf{characteristic map} $\widetilde{\chi}_i: \D^n --> X_n$
+				}
+			\end{enumerate}
+			\vspace{.5em}
+			which make the diagram on the right a pushout diagram.\\
+			The $X_n$ are called the \textbf{$n$-skeleton} of $X$.\vspace{.5em}
+
+			A (\textbf{relative}) \textbf{CW-complex} is a pair of spaces $(X,A)$, which admits a CW-structure.
+		\end{minipage}
+		\begin{minipage}{.3\textwidth}
+			\begin{equation*}
+				\begin{diagram}
+					\twobytwo[wide]
+						{\Coproduct \limits_{i \in I_n} \S^{n-1}}{X_{n-1}}
+						{\Coproduct \limits_{i \in I_n} \D^n}{X_n}
+
+					\arrow{nw}{ne}{\coproduct \chi_i}[above]
+					\arrow{sw}{se}{\coproduct \widetilde{\chi_i}}[below]
+					\arrow{nw}{sw}{}
+					\arrow{ne}{se}{}
+
+					\node at ($(se)+(-.4,.4)$) {$\secorner$};
+				\end{diagram}
+			\end{equation*}
+			\vspace{1em}
+			\begin{equation*}
+				\S^{-1} := \emptyset,\hspace{1em} X_{-1} := A
+			\end{equation*}
+		\end{minipage}
+	\end{definition}
+
+	\begin{lemma}[Properties of CW-complexes]
+		Let $(X,A)$ be a relative CW-complex with a given CW-structure. 
+		\begin{enumerate}[(i)]
+			\item{
+				$X_n \setminus X_{n-1} \isom \Coproduct \limits_{i \in I_n} (\D^n \setminus \S^{n-1}) = \Coproduct \limits_{i \in I_n} \B^n$
+			}
+			\item{
+				$I_n \isom \pi_0(X_n \setminus X_{n-1})$
+			}
+		\end{enumerate}
+	\end{lemma}
+
 
 	\newpage
 	\section{Singular Homology}
@@ -563,7 +675,7 @@
 				\draw[->,thick] (m-0-4) -- (m-1-5) -- (m-2-6);
 				\draw[->,gray] (m-1-2) -- (m-2-2);
 			\end{tikzpicture}
-			\;=\;
+			=
 			\begin{tikzpicture}[diagram]
 				\matrix[matrix of nodes,
 		ampersand replacement=\&,column sep=1em,row sep=1em]{
@@ -648,7 +760,7 @@
 				\draw[->,thick] (m-0-5) -- (m-1-6) -- (m-2-7);
 				\draw[->,gray] (m-1-2) -- (m-2-2);
 			\end{tikzpicture}
-			\;=\;
+			=
 			\begin{tikzpicture}[diagram]
 				\matrix[matrix of nodes,
 		ampersand replacement=\&,column sep=1em,row sep=1em]{

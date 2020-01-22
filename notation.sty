@@ -121,13 +121,19 @@
 \newcommand{\tensor}{\otimes}
 \newcommand{\Tensor}{\bigotimes}
 \newcommand{\directsum}{\oplus}
-\newcommand{\Directsum}{\bigoplus}
+\newcommand{\Directsum}{\bigoplus} \newcommand{\Oplus}{\bigoplus}
 \newcommand{\join}{\vee}
-\renewcommand{\Join}{\bigvee}
+\let\bowtie\Join
+\let\Join\relax
+\DeclareMathOperator*{\Join}{\bigvee}
 \newcommand{\meet}{\wedge}
 \newcommand{\Meet}{\bigwedge}
 
 \newcommand{\isom}{\cong}
+
+\newcommand{\nwcorner}{\lrcorner}
+%\newcommand{\secorner}{}{\text{\huge\textopencorner}}
+\newcommand{\secorner}{\rotatebox{180}{$\lrcorner$}}
 
 %\newcommand{\trianglerightneq}{\mathrel{\ooalign{\raisebox{-0.5ex}{\reflectbox{\rotatebox{90}{$\nshortmid$}}}\cr$\triangleright$\cr}\mkern-3mu}}
 %\newcommand{\triangleleftneq}{\mathrel{\reflectbox{$\trianglerightneq$}}}
@@ -201,7 +207,7 @@
 \DeclareMathOperator{\dom}{dom}
 \DeclareMathOperator{\cod}{cod}
 %\DeclareMathOperator{\lim}{lim} % already defined
-\DeclareMathOperator{\colim}{colim}
+\DeclareMathOperator*{\colim}{colim}
 \DeclareMathOperator{\eq}{eq}
 \DeclareMathOperator{\coeq}{coeq}
 %\DeclareMathOperator{\ker}{ker} % already defined
