@@ -8,8 +8,15 @@
 	\tableofcontents
 
 	\newpage
+	\setcounter{section}{-1}
+	\section{Requirements}
+	\subsection{Mapping Cone, Suspension}
+	\subsection{Deformation Retracts and Mapping Telescope}
+	\TODO{Kammeyer section 2.4}
+
+	\newpage
 	\section{Generalized Homology}
-	\subsection{Definition and Exact Sequences}
+	\subsection{Definition and Basic Properties}
 
 	\begin{definition}
 		A \textbf{generalized} (\textbf{unreduced, relative}) \textbf{homology theory} on $\ncat{Top}^2$ is a functor $H_\bullet: \ncat{Top}^2 --> \ncat{Mod}_R^{\Z\text{gr}}$ together with a natural transformation $\partial_\bullet: H_\bullet ==> H_{\bullet-1} \circ R$, the so called \textbf{boundary operator} or \textbf{connecting homomorphism}, which satisfy the following axioms.
@@ -108,7 +115,7 @@
 		\end{enumerate}
 	\end{proof}
 
-	\begin{proposition}[Mayer Vitoris]
+	\begin{proposition}[Mayer Vietoris]
 		Let $(H_\bullet,\partial_\bullet)$ be a generalized homology theory and $B \subseteq A_1,A_2 \subseteq X$ in $\ncat{Top}$, such that $X \subseteq \interior(A_1) \union \interior(A_2)$. Then the following sequence is exact.
 		\begin{equation*}
 			\begin{diagram}
@@ -153,9 +160,107 @@
 		\end{equation*}
 	\end{proposition}
 
-	\begin{proposition}
+	\begin{proposition}[Homology of CNDRs]
+		Let $(H_\bullet, \partial_\bullet)$ be a generalized homology theory and $(X,A)$ a pair of spaces such that $A$ is a CNDR of $X$.
+
+		\begin{enumerate}[(i)]
+			\item{
+				The \textit{collapse map} $(X,A) --> (X/A,A/A)$ induces an isomorphism
+				\begin{equation*}
+					H_\bullet(X,A) \isom H_\bullet(X/A,A/A).
+				\end{equation*}
+			}
+			\item{
+				\begin{minipage}[t]{\linewidth-4cm}
+					Recall that a pushout as depicted on the right makes $B$ a CNDR of $Y$. The map corresponding map $(X,A)-->(Y,B)$ induces an isomorphism
+					\begin{equation*}
+						H_\bullet(X,A) \isom H_\bullet(Y,B).
+					\end{equation*}
+				\end{minipage}
+				\begin{minipage}[t]{4cm}
+					\vspace{-1.5em}
+					\begin{equation*}
+						\begin{diagram}
+							\twobytwo[small]
+								{A}{B}
+								{X}{Y}
+							\arrow{nw}{ne}{}[above]
+							\arrow{sw}{se}{}[below]
+							\arrow{nw}{sw}{}
+							\arrow{ne}{se}{}
+
+							\node at ($(se)+(-.4,.4)$) {$\secorner$};
+						\end{diagram}
+					\end{equation*}
+				\end{minipage}
+			}
+		\end{enumerate}
+
 		\TODO{colimit of chain of deformation retracts and telescope?}
 	\end{proposition}
+	\begin{proof}
+		\begin{enumerate}[(i)]
+			\item{
+				Let $A \subseteq U \subseteq X$ be an open neighborhood, which deformation retracts to $A$. As such, the triple exact sequence gives us isomorphisms $H_\bullet(X,A) \isom H_\bullet(X,U)$. Further, by excission we have an isomorphism $H_\bullet(X\setminus A,U \setminus A) \isom H_\bullet(X,U)$. Finally we note that there are canonical homeomorphisms $X \setminus A \isom (X / A) \setminus (A/A)$ and $U \setminus A \isom (U/A)\setminus(A/A)$. Putting things together the commutativity of the following diagram shows the claim.
+				\begin{equation*}
+					\hspace{-.2cm}
+					\begin{diagram}
+						\threebytwo[hyperwide]
+							{H_\bullet(X,A)}{H_\bullet(X,U)}{H_\bullet(X\setminus A, U \setminus A)}
+							{H_\bullet(X/A,A/A)}{H_\bullet(X/A,U/A)}{H_\bullet((X/A)\setminus(A/A), (U/A)\setminus(A/A))}
+
+						\arrow{nw}{n}{\isom}[above]
+						\arrow{sw}{s}{\isom}[below]
+
+						\arrow{ne}{n}{\isom}[above]
+						\arrow{se}{s}{\isom}[below]
+
+						\arrow{nw}{sw}{}
+						\arrow{n}{s}{}
+						\arrow{ne}{se}{\isom}[right]
+					\end{diagram}
+				\end{equation*}
+			}
+			\item{
+				\begin{minipage}[t]{\linewidth-4cm}
+					Let $A \subseteq U \subseteq X$ and $B \subseteq V \subseteq Y$ be open neighborhoods of $A$ and $B$, which deformation retract to $A$ and $B$ respectively and fit into a pushout square as depicted on the right. By construction of pushouts in $\ncat{Top}$ we have that $X \setminus A \isom Y \setminus B$ and $U \setminus A \isom V \setminus B$. Thus we have obtain an isomorphism $H_\bullet(X\setminus A, U \setminus A) \isom H_\bullet(Y \setminus B, V \setminus B)$. Similar to (i) the commutativity of the following diagram gives the desired result.
+				\end{minipage}
+				\begin{minipage}[t]{4cm}
+					\vspace{-1.5em}
+					\begin{equation*}
+						\begin{diagram}
+							\twobytwo[small]
+								{A}{B}
+								{U}{V}
+							\arrow{nw}{ne}{f}[above]
+							\arrow{sw}{se}{f'\vert_U^V}[below]
+							\arrow{nw}{sw}{}
+							\arrow{ne}{se}{}
+
+							\node at ($(se)+(-.4,.4)$) {$\secorner$};
+						\end{diagram}
+					\end{equation*}
+				\end{minipage}
+				\begin{equation*}
+					\begin{diagram}
+						\threebytwo[ultrawide]
+							{H_\bullet(X,A)}{H_\bullet(X,U)}{H_\bullet(X \setminus A, U \setminus A)}
+							{H_\bullet(Y,B)}{H_\bullet(Y,V)}{H_\bullet(Y \setminus B, V \setminus B)}
+
+						\arrow{nw}{n}{\isom}[above]
+						\arrow{sw}{s}{\isom}[below]
+
+						\arrow{ne}{n}{\isom}[above]
+						\arrow{se}{s}{\isom}[below]
+
+						\arrow{nw}{sw}{}
+						\arrow{n}{s}{}
+						\arrow{ne}{se}{\isom}[right]
+					\end{diagram}
+				\end{equation*}
+			}
+		\end{enumerate}
+	\end{proof}
 
 	\newpage
 	\subsection{Reduced Homology}
@@ -444,7 +549,7 @@
 				admits  an $R$-orientation.
 			}
 			\item{
-				\TODO{oriented atlas}
+				\TODO{oriented atlas, oriented tangent microbundle see switzer}
 			}
 		\end{enumerate}
 	\end{definition}
@@ -540,7 +645,7 @@
 	\end{definition}
 
 	\begin{lemma}[Properties of CW-complexes]
-		Let $(X,A)$ be a relative CW-complex with a given CW-structure. 
+		Let $(X,A)$ be a relative CW-complex with a given CW-structure. For any $n \in \N_0$ the following properties hold. 
 		\begin{enumerate}[(i)]
 			\item{
 				$X_n \setminus X_{n-1} \isom \Coproduct \limits_{i \in I_n} (\D^n \setminus \S^{n-1}) = \Coproduct \limits_{i \in I_n} \B^n$
@@ -548,8 +653,73 @@
 			\item{
 				$I_n \isom \pi_0(X_n \setminus X_{n-1})$
 			}
+			\item{
+				$X_{n-1}$ is a closed deformation retract of $X_n$ and $X_n / X_{n-1} \isom \Join \limits_{i \in I} \S^n$.
+
+				\TODO{characteristic map induces homeom see Kammeyer eq (6.1)}
+			}
+			\item{
+				The composition $(\Tel(X),A) --> ([-1,\infty)\times X,[-1,\infty)\times A) --> (X,A)$ is a homotopy equivalence.
+			}
 		\end{enumerate}
 	\end{lemma}
+
+	\begin{corollary}
+		Let $(H_\bullet, \partial_\bullet)$ be an ordinary homology theory and $(X,A)$ be a relative CW-complex with given CW-structure.
+		\begin{enumerate}[(i)]
+			\item{
+				We have $H_\bullet(X_n,X_{n-1}) \isom \Directsum \limits_{i \in I_n}M_{\bullet-n}$.% and in particular
+				% \begin{equation*}
+				% 	H_\bullet(X_n,X_{n-1}) = \left \{ \begin{array}{ll}
+				% 		\Directsum \limits_{i \in I} M_0 & k = n\\ 0 & k \neq n
+				% 	\end{array}\right.
+				% \end{equation*}
+			}
+			\item{
+				It holds that $H_\bullet(X,A) \isom H_\bullet(\Tel (X), A) \isom \colim \limits_{n \in \N_0} H_\bullet(X_n,A)$.
+			}
+		\end{enumerate}
+	\end{corollary}
+
+	\TODO{cellular homology see kammeyer}
+
+	\begin{definition}
+		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory and $(X,A)$ be a relative CW-complex with filtration $(X_n)_n$. 
+
+		The \textbf{cellular chain complex} on $(X,A)$ associated with $(H_\bullet, \partial_\bullet)$ is given by
+		\begin{equation*}
+			\begin{diagram}
+				\threebyone[verywide]
+					{...C_{n+1}^{H_\bullet}(X,A)}{C_n^{H_\bullet}(X,A)}{C_{n-1}^{H_\bullet}(X,A)...}
+				\arrow{w}{c}{\Delta_{n+1}}[above]
+				\arrow{c}{e}{\Delta_n}[above]
+			\end{diagram}
+		\end{equation*}
+		where $C_n^{H_\bullet} := H_n(X_n,X_{n-1})$ and 
+		\begin{equation*}
+			\Delta_{n+1} = 
+			\begin{diagram}
+				\threebyone[verywide]
+					{H_{n+1}(X_{n+1},X_{n})}{H_{n}(X_{n})}{H_n(X_n,X_{n-1})}
+				\arrow{w}{c}{\partial_n}[above]
+				\arrow{c}{e}{}
+			\end{diagram}
+		\end{equation*}
+		is the morphism from the triple exact sequence. Note that this indeed turns $(C_{*}^{H_\bullet}, \Delta_{*})$ into a chain complex.
+
+		The \textbf{cellular homology} of $(X,A)$ with respect to $(H_\bullet, \partial_\bullet)$ is the homology of its cellular chain complex and denoted by $H_\bullet^\text{CW}(X,A)$.
+	\end{definition}
+
+	\begin{theorem}
+		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory and $(X,A)$ be a relative CW-complex. Then there are isomorphisms
+		\begin{equation*}
+			H_\bullet^\text{CW}(X,A) \isom H_\bullet(X,A),
+		\end{equation*}
+		which are natural with respect to \textit{cellular maps}. Moreover on $(*,\emptyset)$ this isomorphism is the identity on $H_\bullet(*)$.
+	\end{theorem}
+	\begin{proof}
+
+	\end{proof}
 
 
 	\newpage
