@@ -223,20 +223,26 @@
 			}
 			\item{
 				\begin{minipage}[t]{\linewidth-4cm}
-					Let $A \subseteq U \subseteq X$ and $B \subseteq V \subseteq Y$ be open neighborhoods of $A$ and $B$, which deformation retract to $A$ and $B$ respectively and fit into a pushout square as depicted on the right. By construction of pushouts in $\ncat{Top}$ we have that $X \setminus A \isom Y \setminus B$ and $U \setminus A \isom V \setminus B$. Thus we have obtain an isomorphism $H_\bullet(X\setminus A, U \setminus A) \isom H_\bullet(Y \setminus B, V \setminus B)$. Similar to (i) the commutativity of the following diagram gives the desired result.
+					Let $A \subseteq U \subseteq X$ and $B \subseteq V \subseteq Y$ be open neighborhoods of $A$ and $B$, which deformation retract to $A$ and $B$ respectively and fit into pushout squares as depicted on the right. By construction of pushouts in $\ncat{Top}$ we have that $X \setminus A \isom Y \setminus B$ and $U \setminus A \isom V \setminus B$. Thus we have obtain an isomorphism $H_\bullet(X\setminus A, U \setminus A) \isom H_\bullet(Y \setminus B, V \setminus B)$. Similar to (i) the commutativity of the following diagram gives the desired result.
 				\end{minipage}
 				\begin{minipage}[t]{4cm}
 					\vspace{-1.5em}
 					\begin{equation*}
 						\begin{diagram}
-							\twobytwo[small]
+							\twobythree[small]
 								{A}{B}
 								{U}{V}
+								{X}{Y}
 							\arrow{nw}{ne}{f}[above]
-							\arrow{sw}{se}{f'\vert_U^V}[below]
-							\arrow{nw}{sw}{}
-							\arrow{ne}{se}{}
+							\arrow{w}{e}{f'\vert_U^V}[below]
+							\arrow{sw}{se}{f'}[below]
 
+							\arrow{nw}{w}{}
+							\arrow{w}{sw}{}
+							\arrow{ne}{e}{}
+							\arrow{e}{se}{}
+
+							\node at ($(e)+(-.4,.4)$) {$\secorner$};
 							\node at ($(se)+(-.4,.4)$) {$\secorner$};
 						\end{diagram}
 					\end{equation*}
@@ -487,6 +493,8 @@
 		\TODO{Torus and higher genus}
 	\end{lemma}
 
+	\TODO{degree and hairy ball theorem, fundamental theorem of algebra}
+
 	\newpage
 	\subsection{Homological Orientation, Fundamental Classes and Degree}
 
@@ -598,7 +606,7 @@
 	\end{remark}
 
 	\newpage
-	\subsection{Homology of CW-complexes}
+	\subsection{CW-complexes and Cellular Homology}
 
 	\begin{definition}
 		\begin{minipage}{.7\textwidth}
@@ -705,7 +713,7 @@
 				\arrow{c}{e}{}
 			\end{diagram}
 		\end{equation*}
-		is the morphism from the triple exact sequence. Note that this indeed turns $(C_{*}^{H_\bullet}, \Delta_{*})$ into a chain complex.
+		is the morphism from the triple exact sequence. Note that this indeed turns $(C_{*}^{H_\bullet}, \Delta_{*})$ into a chain complex. \TODO{remove C notation?}
 
 		The \textbf{cellular homology} of $(X,A)$ with respect to $(H_\bullet, \partial_\bullet)$ is the homology of its cellular chain complex and denoted by $H_\bullet^\text{CW}(X,A)$.
 	\end{definition}
@@ -718,8 +726,35 @@
 		which are natural with respect to \textit{cellular maps}. Moreover on $(*,\emptyset)$ this isomorphism is the identity on $H_\bullet(*)$.
 	\end{theorem}
 	\begin{proof}
+		Recall that for $n \in \N_0$ we have $\smash{H_\bullet(X_n,X_{n-1}) \isom \Oplus \limits_{i \in I_n} M_{\bullet-n}}$ and consider the triple exact sequence for $A \subseteq X_{n-1} \subseteq X_n$.
+		\begin{equation*}
+			\begin{diagram}
+				\fourbyone[ultrawide]
+					{...H_{\bullet+1}(X_n,X_{n-1})}{H_\bullet(X_{n-1},A)}{H_\bullet(X_n,A)}{H_\bullet(X_n,X_{n-1})...}
 
+				\arrow{ww}{w}{\Delta_{\bullet+1}}[above]
+				\arrow{w}{e}{}
+				\arrow{e}{ee}{}
+			\end{diagram}
+		\end{equation*}
+		Hence, for $k \notin \{n,n-1\}$ we get an isomorphism $H_k(X_{n-1},A) \isom H_k(X_n,A)$. In particular for $k > n$ we have
+		\begin{equation*}
+			H_k(X_n,A) \isom H_k(X_{n-1},A) \isom ... \isom H_k(X_{-1},A) = H_k(A,A) = 0
+		\end{equation*}
+		and for $k < n$ we have for any $m > n$
+		\begin{equation*}
+			H_k(X_n,A) \isom H_k(X_{n+1},A) \isom ... \isom H_k(X_m,A).
+		\end{equation*}
+		This yields for any $k$ and arbitrary $m > k$ \TODO{correct?}
+		\begin{equation*}
+			H_k(X,A) \isom \colim \limits_{n \in \N_0} H_k(X_n,A) \isom \colim \limits_{n > k} H_k(X_n,A) \isom H_k(X_m,A).
+		\end{equation*}
+		\TODO{finish}
 	\end{proof}
+
+	\TODO{uniqueness}
+
+	\TODO{Betti Numbers and Euler Characteristic}
 
 
 	\newpage
@@ -1026,7 +1061,7 @@
 	\end{definition}
 
 	\newpage
-	\subsection{Singular Homology}
+	\subsection{Singular Homology and Special Properties}
 
 	Let $M_\bullet$ be a $\Z$-graded $R$-module. In this section we explicitly construct a generalized homology theory with $M_\bullet$ as its module of coefficients. 
 
