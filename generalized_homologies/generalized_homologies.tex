@@ -14,6 +14,125 @@
 	\subsection{Deformation Retracts and Mapping Telescope}
 	\TODO{Kammeyer section 2.4}
 
+	\begin{definition}
+		A morphism $i:A --> X$ of topological spaces is a \textbf{deformation retract}, if there is a retraction $r:X --> A$ and a homotopy $h:ir \sim 1_X$, which satisfies $h(t,i(a)) = a$ for all $a$ in $A$. Note that $i$ being split mono (and thus regular mono) makes it an embedding of a subspace.
+
+		The morphism $i$ is a \textbf{neighborhood deformation retract}, if there exists a neighborhood $U$ of $i(A)$, such that the restricted map $i:A-->U$ is a deformation retract.
+
+		In the case that $i$ is the canonical inclusion we also say that $A$ is a (neighborhood-) deformation retract.
+
+		We abbreviate closed neighborhood deformation retracts, i.e. those where $i(A)$ is a closed subspace, by \textbf{CNDR}.
+	\end{definition}
+
+	\begin{lemma}
+		Deformation retracts / neighborhood deformation retracts / CNDRs are stable under pushouts.
+	\end{lemma}
+	\begin{sketch}
+		\begin{minipage}[t]{\linewidth-4cm}
+			Given an embedding retraction pair $(i,r):A-->X$, a morphism $f:A --> B$ and a pushout square as depicted on the right, we find that the pushout $i'$ of $i$ has a retraction $r'$ given by the universal property of the pushout $Y$. If $h:ir \sim 1_X$ is a homotopy turning $i$ into a deformation retract, we seek to construct a homotopy $k:i'r' \sim 1_Y$ with $k(t,i'(b)) = b$ for all $b$ in $B$.
+		\end{minipage}
+		\begin{minipage}[t]{4cm}
+			\vspace{-1.5em}
+			\begin{equation*}
+				\begin{diagram}
+					\twobytwo[small]
+						{A}{B}
+						{X}{Y}
+
+					\arrow{nw}{ne}{f}[above]
+					\arrow{sw}{se}{f'}[below]
+					\arrow{nw}{sw}{i}[left]
+					\arrow{ne}{se}{i'}[right]
+
+					\node at ($(se)+(-.4,.4)$) {$\secorner$};
+				\end{diagram}
+			\end{equation*}
+		\end{minipage}
+
+		\begin{minipage}[t]{5.5cm}
+			\vspace{-1em}
+			\begin{equation*}
+				\begin{diagram}
+					\threebythree
+						{I \times A}{I \times B}{B}
+						{I \times X}{I \times Y}{}
+						{X}{}{Y}
+
+					\arrow{nw}{n}{I \times f}[above]
+					\arrow{w}{c}{I \times f'}[below]
+					\arrow{nw}{w}{I \times i}[left]
+					\arrow{n}{c}{I \times i'}[right]
+
+					\arrow{n}{ne}{\pi_B}[above]
+					\arrow{ne}{se}{i'}[right]
+					\arrow{w}{sw}{h}[left]
+					\arrow{sw}{se}{f'}[below]
+
+					\arrow[dashed]{c}{se}{k}[above right]
+
+					\node at ($(c)+(-.4,.4)$) {$\secorner$};
+				\end{diagram}
+			\end{equation*}
+		\end{minipage}
+		\begin{minipage}[t]{\linewidth-5.5cm}
+			\vspace{1em}
+			Since $I = [0,1]$ is compact, $I \times -$ preserves colimits and from the diagram on the left we obtain a morphism $k: I \times Y --> Y$, which by construction satisfies $k(t,i'(b)) = b$. It remains to check that $k(0,y) = i'r'(y)$ and $k(1,y) = y$ for all $y$ in $Y$, which can be deduced from the universal property of the pushout $Y$.
+		\end{minipage}
+
+		\begin{minipage}[t]{\linewidth-4.5cm}
+			For $i:A --> X$ being a neighborhood deformation retract with $i(A) \subseteq U \subseteq X$, note that we can factor the pushout as depicted on the right and that $V$ is by definition an open subspace of $Y$, of which $B$ is a deformation retract.
+
+			\vspace{1em}
+			Finally \TODO{recall} that the pushout of a closed morphism is closed.
+		\end{minipage}
+		\begin{minipage}[t]{4.5cm}
+			\vspace{-2.1cm}
+			\begin{equation*}
+				\begin{diagram}
+					\twobythree
+						{A}{B}
+						{U}{V}
+						{X}{Y}
+
+					\arrow{nw}{ne}{f}[above]
+					\arrow{w}{e}{f\vert_U^V}[below]
+					\arrow{sw}{se}{f'}[below]
+
+					\arrow{nw}{w}{i\vert^U}[right]
+					\arrow{w}{sw}{\subseteq}[right]
+					\arrow[bend right]{nw}{sw}{i}[left]
+
+					\arrow{ne}{e}{i'\vert^V}[left]
+					\arrow{e}{se}{\subseteq}[left]
+					\arrow[bend left]{ne}{se}{i'}[right]
+
+					\node at ($(e)+(-.3,.3)$) {$\secorner$};
+					\node at ($(se)+(-.3,.3)$) {$\secorner$};
+				\end{diagram}
+			\end{equation*}
+		\vspace{-2cm}
+		\end{minipage}
+	\end{sketch}
+
+	\begin{lemma}
+		The functor $I \times -$ preserves CNDRs, i.e. f $i:A \rightarrow X$ is a CNDR, then $I \times i: I \times A \rightarrow I \times X$ is a CNDR.
+	\end{lemma}
+	\begin{sketch}
+		For $i(A) \subseteq U \subseteq X$ and retraction $r: U --> A$ we obtain an open neighborhood $I\times i(I \times A) \subseteq I \times U \subseteq I \times X$ and a retraction $I \times r: I \times U --> I \times A$.
+
+		Given the homotopy $h:ir \sim 1_X$ it suffices to verify that
+		\begin{equation*}
+			\begin{diagram}
+				\threebyone[verywide]
+					{k:I \times I \times U}{I \times I \times U}{I \times U}
+
+				\arrow{w}{c}{\tau \times U}[above]
+				\arrow{c}{e}{I \times h}[above]
+			\end{diagram}
+		\end{equation*}
+		satisfies the required properties of a homotopy $k:(I \times ir) --> 1_{I \times U}$, where $\tau: X \times X --> X \times X$ denotes the transposition isomorphism. Finally \TODO{recall} that $I \times -$ preserves closed morphisms.
+	\end{sketch}
+
 	\newpage
 	\section{Generalized Homology}
 	\subsection{Definition and Basic Properties}
