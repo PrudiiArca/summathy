@@ -1,0 +1,130 @@
+\input{../header.tex}
+
+\title{
+	$\Sum \text{math}(y)$\\
+	Manifolds and Bundles
+}
+\author{Jonas Linssen}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+
+	\newpage
+	\section{Topological Manifolds}
+	\subsection{Definition and Basic Properties}
+
+	\begin{proposition}[Bootstrap Lemma]
+		\TODO{Bredon Lem. 7.9}
+		% Let $M$ be a topological manifold write $P_M(A)$ for \enquote{The statement $P_M$ is true for the closed set $A$}.
+
+		% Consider the following properties.
+		% \begin{enumerate}[(1)]
+		% 	\item{
+		% 		If $A$ is a compact and convex subset of an euclidean subset $U \subseteq M$, then $P_M(A)$ holds.
+		% 	}
+		% 	\item{
+		% 		If $A,B$ are closed subsets such that $P_M(A)$, $P_M(B)$ and $P_M(A \intersection B)$ hold, then $P_M(A \union B)$ is true.
+		% 	}
+		% 	\item{
+		% 		If $A_1 \supseteq A_2 \subseteq A_2$
+		% 	}
+		% \end{enumerate}
+	\end{proposition}
+	\subsection{Classification of 1-dimensional Manifolds}
+	\subsection{Classification of 2-dimensional Manifolds}
+
+	\newpage
+	\section{Bundles}
+	\subsection{Fiber Bundles}
+	\begin{definition}
+		\begin{minipage}[t]{\linewidth-4cm}
+			Let $F$ be a topological space. A \textbf{fiber bundle} with \textbf{fiber} $F$ consists of a \textbf{base space} $B$, a \textbf{total space} $E$ and a surjective \textbf{bundle projection} or \textbf{submersion} $p:E-->>X$ subject to the following local triviality condition.
+
+			\vspace{1em}
+			Each point $x$ of $B$ has an open neighborhood $U_x \subseteq B$ and a homeomorphism $t:F \times U_x \isom p^{-1}(U_x)$, such that the diagram on the right commutes. The pair $(U_x,t)$ is called a \textbf{local trivialization} of $p$ at $x$.
+		\end{minipage}
+		\begin{minipage}[t]{4cm}
+			\begin{equation*}
+				\begin{diagram}
+					\twobytwo[wide]
+						{F \times U_x}{p^{-1}(U_x)}
+						{}{B}
+
+					\arrow{nw}{ne}{\begin{array}{c}\isom\\t\end{array}}
+					\arrow{nw}{se}{\pi_{U_x}}[below left]
+					\arrow{ne}{se}{p}[right]
+				\end{diagram}
+			\end{equation*}
+		\end{minipage}
+
+		Note that $F \isom \pi_{U_x}^{-1}(\{x\}) \isom p^{-1}(\{x\})$ is indeed the fiber over each point $x$ in the base space $B$.
+
+		The space $F \times B$ is called the \textbf{trivial fiber bundle} over $B$ with fiber $F$.
+	\end{definition}
+
+	\begin{lemma}[Properties of Fiber Bundles]
+		Let $p:E-->>B$ be a fiber bundle with fiber $F$.
+		\begin{enumerate}[(i)]
+			\item{
+				The submersion $p$ is open and $B$ carries the quotient topology of $E$ by the equivalence relation \TODO{?}
+			}
+			\item{
+				Any fiber bundle over a contractible CW-complex \TODO{space?} is a trivial bundle
+			}
+			\item{
+				\TODO{fiber bundle over manifold is manifold}
+			}
+		\end{enumerate}
+	\end{lemma}
+
+	\begin{definition}
+		\begin{minipage}{\linewidth-4cm}
+			A \textbf{bundle morphism} of fiber bundles $p:E-->>B$ and $p':E'-->>B'$ with fibers $F$ and $F'$ respectively is given by a pair of continous functions $\tilde f:B --> B'$ and $f:E-->E'$ making the diagram on the right commute. Note that by $p$ being epi, the morphism $\tilde f$ is uniquely determined by $f$.
+
+			\vspace{1em}
+			The category of fiber bundles, denoted $\ncat{Bdl}$, hence may be identified as the full subcategory of the arrow category $\ncat{Top}^2$ on the submersions. The full subcategory of all fiber bundles with fiber $F$ will be denoted $\ncat{Bdl}_F$.
+		\end{minipage}
+		\begin{minipage}{4cm}
+			\begin{equation*}
+				\begin{diagram}
+					\twobytwo
+						{E}{E'}
+						{B}{B'}
+
+					\arrow[epi]{nw}{sw}{p}[left]
+					\arrow[epi]{ne}{se}{p'}[right]
+					\arrow{nw}{ne}{f}[above]
+					\arrow{sw}{se}{\tilde f}[below]
+				\end{diagram}
+			\end{equation*}
+		\end{minipage}
+	\end{definition}
+
+	\begin{lemma}[Properties of  $\ncat{Bdl}$ and {$\ncat{Bdl}_F$}]
+		\TODO{??}
+	\end{lemma}
+
+	\TODO{pullback bundle, bundle map over fixed $B$}
+
+	\begin{definition}
+		Let $p:E-->>B$ a fiber bundle. A \textbf{local section} on $U \subseteq B$ is a morphism $s:U --> E$ with $ps = 1_U$. If $U=B$ the section $s$ is a \textbf{global section}.
+
+		Considering the open subsets of $B$ as a poset category, one obtains the \textbf{sheaf of local sections}
+		\begin{equation*}
+			\begin{array}{rcl}
+				\Sigma: B^{op} & \longrightarrow & \ncat{Set}\\
+				U & \longmapsto & \Sigma U := \{\text{local sections of } p\text{ on }U\}\\
+				{[U \supseteq V]} & \longmapsto & {\left[\begin{array}{rcl}\Sigma U \mapsto \Sigma V\\s \mapsto s\vert_V\end{array}\right]}
+			\end{array}
+		\end{equation*}
+	\end{definition}
+
+	\begin{definition}
+		\TODO{$G$-bundle}
+	\end{definition}
+
+	\newpage
+	\subsection{Vector Bundles}
+	\subsection{Covering Spaces}
+\end{document}

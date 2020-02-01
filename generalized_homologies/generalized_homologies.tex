@@ -9,7 +9,7 @@
 
 	\newpage
 	\setcounter{section}{-1}
-	\section{Requirements}
+	\section{Prerequisites}
 	\subsection{Mapping Cone, Suspension}
 	\subsection{Deformation Retracts and Mapping Telescope}
 	\TODO{Kammeyer section 2.4}
@@ -613,116 +613,6 @@
 	\end{lemma}
 
 	\TODO{degree and hairy ball theorem, fundamental theorem of algebra}
-
-	\newpage
-	\subsection{Homological Orientation, Fundamental Classes and Degree}
-
-	\begin{definition}
-		Let $R$ be a (commutative unital) ring. An $R$-\textbf{homology theory} is an ordinary additive homology theory, whose module of coefficients is $M_0 = R$.
-	\end{definition}
-
-	\begin{lemma}
-		Let $(H_\bullet,\partial_\bullet)$ be an $R$-homology theory.
-
-		Let $X$ be an $n$-dimensional topological manifold and $x$ be a point in $X$. Then there is an isomorphism $H_n(X,X\setminus \{x\}) \isom R$ and in particular $H_n(X,X\setminus \{x\})$ is a cyclic $R$-module.
-	\end{lemma}
-	\begin{proof}
-		By definition of a manifold there is a chart $\phi_x: U_x \isom \R^n$ with $\phi_x(x) = 0$. By excission (of the complement of $\phi_x^{-1}(\D^n)$) we get a chain of isomorphisms
-		\begin{equation*}
-			H_\bullet(X,X\setminus\{x\}) \isom H_\bullet(\phi_x^{-1}(\D^n),\phi_x^{-1}(\D^n\setminus \{0\})) \isom H_\bullet(\D^n,\D^n\setminus \{0\}) \isom H_\bullet(\D^n,\S^{n-1}) \isom M_{\bullet-n}.
-		\end{equation*}
-		In particular we have $H_n(X,X\setminus\{x\}) \isom R$. 
-	\end{proof}
-
-	\begin{remark}
-		Note that the property of $H_n(X,X\setminus \{x\})$ being cyclic is implied but does not depend on the specific isomorphism to $R$ we constructed. Hence the set of generators of this cyclic module is in no way linked to this isomorphism.
-	\end{remark}
-
-	\begin{definition}
-		Let $R$ be a ring and $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory. Let $X$ be an $n$-dimensional topological manifold and $x$ be in $X$. 
-
-		A \textbf{local $R$-orientation of $X$ at $x$} is a choice of generator of the cyclic $R$-module $H_n(X,X\setminus\{x\})$.
-
-		Let $U$ be an open neighborhood with $H_n(X,X\setminus U)$ being a nontrivial cyclic $R$-module. A \textbf{local $R$-orientation of $X$ along $U$} is a choice of generator $g_U$ of the cyclic $R$-module $H_n(X,X\setminus U)$. If $g_x$ is a local $R$-orientation a point $x$ in $U$ and $g_U$ is mapped onto $g_x$ under the induced map $H_n(X,X\setminus U) --> H_n(X,X\setminus \{x\})$, we say that $g_U$ is a \textbf{continuation} of $g_x$ onto $U$.
-	\end{definition}
-
-	\begin{lemma}[Continuation Lemma]
-		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory, $X$ be an $n$-dimensional topological manifold and $W \subseteq X$ an open neighborhood of a point $x$ in $X$.
-
-		Then there exists an open neighborhood $U$ of $x$ such that $U \subseteq W$ and $H_n(X,X\setminus U) \isom R$, that is to say $H_n(X,X\setminus U)$ is a nontrivial cyclic $R$-module and thus $X$ admits a local $R$-orienation along $U$.
-
-		Furthermore, given a local $R$-orienation $g_x \in H_n(X,X\setminus\{x\})$, there is a unique continuation $g_U$ of $g_x$ onto $U$.
-	\end{lemma}
-	\begin{proof}
-		By definition of a topological manifold there is a chart $\phi_x: U_x \isom \R^n$ with the property that $\phi_x(x)=0$ and $U_x \subseteq W$. Set $U = \phi_x^{-1}(\B^n)$. By homotopy invariance we have an induced isomorphism
-		\begin{equation*}
-			H_\bullet(X,X\setminus U) \isom H_\bullet(X,X\setminus\{x\})
-		\end{equation*}
-		since $U$ is contractible to $\{x\}$. This isomorphism gives $H_n(X,X\setminus U) \isom R$, which turns $H_n(X,X\setminus U)$ into a nontrivial cyclic $R$-module. Furtheremore under its inverse a generator $g_x$ of $H_n(X,X\setminus\{s\})$ maps uniquely to a generator $g_U$ of $H_n(X,X\setminus U)$. Finally, since $U$ is contractible to any other point $y$ in $U$, we also have an induced isomorphism
-		\begin{equation*}
-			H_\bullet(X,X\setminus U) \isom H_\bullet(X,X\setminus \{y\}),
-		\end{equation*}
-		which in degree $n$ give us generators $g_y$ of $H_n(X,X\setminus \{y\})$ as images of $g_U$.
-	\end{proof}
-
-	\begin{definition}
-		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory and $X$ be an $n$-dimensional topological manifold.
-
-		An \textbf{$R$-orientation} of $X$ consists of a choice of generator $g_x \in H_n(X,X\setminus\{x\})$ for each point $x$ in $X$, such that each $x$ admits an open neighborhood $U$, with $H_n(X,X\setminus U)$ being a nontrivial \TODO{cyclic $R$-module} and having a local $R$-orientation $g_U$, which is a continuation of all $g_y$ for $y$ in $U$.
-
-		$X$ is \textbf{$R$-orientable}, if it satisfies one of the following equivalent conditions.
-		\begin{enumerate}[(i)]
-			\item{
-				admits  an $R$-orientation.
-			}
-			\item{
-				\TODO{oriented atlas, oriented tangent microbundle see switzer}
-			}
-		\end{enumerate}
-	\end{definition}
-
-	\begin{lemma}[Properties of $R$-orientations]\vspace{-1.5em}
-		\begin{enumerate}[(i)]
-			\item{
-				Open submanifolds of $R$-orientable manifolds are $R$-orientable.
-			}
-			\item{
-				A manifold is $R$-orientable, if and only if all its components are $R$-orientable.
-			}
-			\item{
-				Let $X$ be a connected $R$-orientable manifold. Two $R$-orientations, which agree at one point, are equal.
-			}
-		\end{enumerate}
-	\end{lemma}
-
-	\begin{proposition}
-		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory and $X$ be an $n$-dimensional, closed, connected, topological manifold. 
-
-		Then $X$ is $R$-orientable if and only if $H_n(X) \isom R$.
-	\end{proposition}
-	\begin{proof}
-		\TODO{via Mayer Vietoris?}
-	\end{proof}
-
-	\begin{definition}
-		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory and $X$ be an $n$-dimensional, closed, connected, $R$-orientable, topological manifold. A generator $[X]$ of $H_n(X)$ is called a \textbf{fundamental class} of $X$.
-	\end{definition}
-
-	Recall that any morphism of $R$-modules $f:R --> R$ is given by multiplication with $r = f(1)$.
-
-	\begin{definition}
-		Let $(H_\bullet,\partial_\bullet)$ be an $R$-homology theory and fix an isomorphism $H_n(\S^n) \isom R$. The $R$-degree of a continuous function $f:\S^n --> \S^n$ is the element $\deg_R(f) := \tilde{f}(1)$ in $R$ for the morphism $\tilde f$ defined by the composition
-		\begin{equation*}
-			R \isom H_n(\S^n) \xrightarrow{H_n(f)} H_n(\S^n)\isom R
-		\end{equation*}
-	\end{definition}
-
-	\begin{remark}
-		By construction $\deg_R(gf) = \deg_R(g)\deg_R(f)$ and $\deg_R(\id) = 1$ in $R$. Thus we have a morphism of monoids
-		\begin{equation*}
-			\deg_R: \End_\ncat{Top}(\S^n) \longrightarrow (R,\cdot).
-		\end{equation*}
-	\end{remark}
 
 	\newpage
 	\subsection{CW-complexes and Cellular Homology}
@@ -1330,7 +1220,119 @@
 		&=\sum\limits_{i=0}^n\Sum\limits_{j=0}^{i}(-1)^{j+i}d_i^nd_j^{n+1} - \sum\limits_{j=0}^n\Sum\limits_{i=j}^{n}(-1)^{j+i}d_i^nd_j^{n+1} = 0
 	\end{align*}
 
+	\TODO{exhaustion by open sets}
 
+	\TODO{Künneth formular}
 
-	\subsection{Homological Orientation and Degree}
+	\TODO{Universal Coefficient theorem}
+
+	\newpage
+	\subsection{Homological Orientation, Fundamental Classes and Degree}
+
+	\begin{definition}
+		Let $R$ be a (commutative unital) ring. An $R$-\textbf{homology theory} is an ordinary additive homology theory, whose module of coefficients is $M_0 = R$.
+	\end{definition}
+
+	\begin{lemma}
+		Let $(H_\bullet,\partial_\bullet)$ be an $R$-homology theory.
+
+		Let $X$ be an $n$-dimensional topological manifold and $x$ be a point in $X$. Then there is an isomorphism $H_n(X,X\setminus \{x\}) \isom R$ and in particular $H_n(X,X\setminus \{x\})$ is a cyclic $R$-module.
+	\end{lemma}
+	\begin{proof}
+		By definition of a manifold there is a chart $\phi_x: U_x \isom \R^n$ with $\phi_x(x) = 0$. By excission (of the complement of $\phi_x^{-1}(\D^n)$) we get a chain of isomorphisms
+		\begin{equation*}
+			H_\bullet(X,X\setminus\{x\}) \isom H_\bullet(\phi_x^{-1}(\D^n),\phi_x^{-1}(\D^n\setminus \{0\})) \isom H_\bullet(\D^n,\D^n\setminus \{0\}) \isom H_\bullet(\D^n,\S^{n-1}) \isom M_{\bullet-n}.
+		\end{equation*}
+		In particular we have $H_n(X,X\setminus\{x\}) \isom R$. 
+	\end{proof}
+
+	\begin{remark}
+		Note that the property of $H_n(X,X\setminus \{x\})$ being cyclic is implied but does not depend on the specific isomorphism to $R$ we constructed. Hence the set of generators of this cyclic module is in no way linked to this isomorphism.
+	\end{remark}
+
+	\begin{definition}
+		Let $R$ be a ring and $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory. Let $X$ be an $n$-dimensional topological manifold and $x$ be in $X$. 
+
+		A \textbf{local $R$-orientation of $X$ at $x$} is a choice of generator of the cyclic $R$-module $H_n(X,X\setminus\{x\})$.
+
+		Let $U$ be an open neighborhood with $H_n(X,X\setminus U)$ being a nontrivial cyclic $R$-module. A \textbf{local $R$-orientation of $X$ along $U$} is a choice of generator $g_U$ of the cyclic $R$-module $H_n(X,X\setminus U)$. If $g_x$ is a local $R$-orientation a point $x$ in $U$ and $g_U$ is mapped onto $g_x$ under the induced map $H_n(X,X\setminus U) --> H_n(X,X\setminus \{x\})$, we say that $g_U$ is a \textbf{continuation} of $g_x$ onto $U$.
+	\end{definition}
+
+	\begin{lemma}[Continuation Lemma]
+		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory, $X$ be an $n$-dimensional topological manifold and $W \subseteq X$ an open neighborhood of a point $x$ in $X$.
+
+		Then there exists an open neighborhood $U$ of $x$ such that $U \subseteq W$ and $H_n(X,X\setminus U) \isom R$, that is to say $H_n(X,X\setminus U)$ is a nontrivial cyclic $R$-module and thus $X$ admits a local $R$-orienation along $U$.
+
+		Furthermore, given a local $R$-orienation $g_x \in H_n(X,X\setminus\{x\})$, there is a unique continuation $g_U$ of $g_x$ onto $U$.
+	\end{lemma}
+	\begin{proof}
+		By definition of a topological manifold there is a chart $\phi_x: U_x \isom \R^n$ with the property that $\phi_x(x)=0$ and $U_x \subseteq W$. Set $U = \phi_x^{-1}(\B^n)$. By homotopy invariance we have an induced isomorphism
+		\begin{equation*}
+			H_\bullet(X,X\setminus U) \isom H_\bullet(X,X\setminus\{x\})
+		\end{equation*}
+		since $U$ is contractible to $\{x\}$. This isomorphism gives $H_n(X,X\setminus U) \isom R$, which turns $H_n(X,X\setminus U)$ into a nontrivial cyclic $R$-module. Furtheremore under its inverse a generator $g_x$ of $H_n(X,X\setminus\{s\})$ maps uniquely to a generator $g_U$ of $H_n(X,X\setminus U)$. Finally, since $U$ is contractible to any other point $y$ in $U$, we also have an induced isomorphism
+		\begin{equation*}
+			H_\bullet(X,X\setminus U) \isom H_\bullet(X,X\setminus \{y\}),
+		\end{equation*}
+		which in degree $n$ give us generators $g_y$ of $H_n(X,X\setminus \{y\})$ as images of $g_U$.
+	\end{proof}
+
+	\begin{definition}
+		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory and $X$ be an $n$-dimensional topological manifold.
+
+		An \textbf{$R$-orientation} of $X$ consists of a choice of generator $g_x \in H_n(X,X\setminus\{x\})$ for each point $x$ in $X$, such that each $x$ admits an open neighborhood $U$, with $H_n(X,X\setminus U)$ being a nontrivial \TODO{cyclic $R$-module} and having a local $R$-orientation $g_U$, which is a continuation of all $g_y$ for $y$ in $U$.
+
+		$X$ is \textbf{$R$-orientable}, if it satisfies one of the following equivalent conditions.
+		\begin{enumerate}[(i)]
+			\item{
+				admits  an $R$-orientation.
+			}
+			\item{
+				\TODO{oriented atlas, oriented tangent microbundle see switzer}
+			}
+		\end{enumerate}
+	\end{definition}
+
+	\begin{lemma}[Properties of $R$-orientations]\vspace{-1.5em}
+		\begin{enumerate}[(i)]
+			\item{
+				Open submanifolds of $R$-orientable manifolds are $R$-orientable.
+			}
+			\item{
+				A manifold is $R$-orientable, if and only if all its components are $R$-orientable.
+			}
+			\item{
+				Let $X$ be a connected $R$-orientable manifold. Two $R$-orientations, which agree at one point, are equal.
+			}
+		\end{enumerate}
+	\end{lemma}
+
+	\begin{proposition}
+		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory and $X$ be an $n$-dimensional, closed, connected, topological manifold. 
+
+		Then $X$ is $R$-orientable if and only if $H_n(X) \isom R$.
+	\end{proposition}
+	\begin{proof}
+		\TODO{via Mayer Vietoris?}
+	\end{proof}
+
+	\begin{definition}
+		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory and $X$ be an $n$-dimensional, closed, connected, $R$-orientable, topological manifold. A generator $[X]$ of $H_n(X)$ is called a \textbf{fundamental class} of $X$.
+	\end{definition}
+
+	Recall that any morphism of $R$-modules $f:R --> R$ is given by multiplication with $r = f(1)$.
+
+	\begin{definition}
+		Let $(H_\bullet,\partial_\bullet)$ be an $R$-homology theory and fix an isomorphism $H_n(\S^n) \isom R$. The $R$-degree of a continuous function $f:\S^n --> \S^n$ is the element $\deg_R(f) := \tilde{f}(1)$ in $R$ for the morphism $\tilde f$ defined by the composition
+		\begin{equation*}
+			R \isom H_n(\S^n) \xrightarrow{H_n(f)} H_n(\S^n)\isom R
+		\end{equation*}
+	\end{definition}
+
+	\begin{remark}
+		By construction $\deg_R(gf) = \deg_R(g)\deg_R(f)$ and $\deg_R(\id) = 1$ in $R$. Thus we have a morphism of monoids
+		\begin{equation*}
+			\deg_R: \End_\ncat{Top}(\S^n) \longrightarrow (R,\cdot).
+		\end{equation*}
+	\end{remark}
 \end{document}
