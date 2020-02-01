@@ -14,6 +14,67 @@
 	\section{Topological Manifolds}
 	\subsection{Definition and Basic Properties}
 
+	\begin{definition}
+		A \textbf{locally euclidean space} of dimension $n$ is a topological space $X$, such that every point $x$ has an \TODO{open} \textbf{euclidean neighborhood} $U_x$, which is homeomorphic to $\R^n$, or equivalently to $\B^n$, via a (\textbf{coordinate}) \textbf{chart} $\phi_x:U_x \overset{\isom}{-->} \R^n$. Note that euclidean neighborhoods are not unique and in fact form a basis of the topology of $X$. \TODO{make $n$ local}
+
+		A cover of $X$ by euclidean neighborhoods in combination with their charts is called an \textbf{atlas} for $X$.
+	\end{definition}
+
+	\begin{remark}
+		\TODO{invariance of domain implies euclidean neighborhood is open}
+	\end{remark}
+
+	\begin{lemma}[Properties of Locally Euclidean Spaces]
+		\vspace{-1.5em}
+		\begin{enumerate}[(i)]
+			\item{
+				The property of being locally euclidean is preserved under local homeomorphisms, i.e. if $M$ is etalé over $X$, then $X$ is locally euclidean. In particular, if $X$ is homeomorphic to $M$, then it is locally euclidean.
+			}
+			\item{
+				Locally euclidean spaces / $n$-manifolds are locally hausdorff (in particular Frechét), locally compact, locally connected, locally path connected, locally contractible, locally metrizable and first countable.
+			}
+			\item{
+				In an locally euclidean space $X$ all connected components are open, in particular $\pi_0(X)$ is discrete. Moreover $X$ is path-connected, if and only if it is connected.
+			}
+		\end{enumerate}
+	\end{lemma}
+
+	\begin{definition}
+		A \textbf{topological $n$-manifold} is a a second countable, locally euclidean Hausdorff space.
+
+		The category of topological manifolds (of arbitrary dimension) is the corresponding full subcategory of $\ncat{Top}$ and denoted by $\ncat{TopMf}$.
+	\end{definition}
+
+	\begin{lemma}[Properties of $\ncat{TopMf}$]
+		\vspace{-1.5em}
+		\begin{enumerate}[(i)]
+			\item{
+				The cartesian product of an $m$-manifold and an $n$-manifold is again an $(m+n)$-manifold
+			}
+			\item{
+				Every open subset of a $n$-manifold is a submanifold.
+			}
+			\item{
+				The countable disjoint union of $n$-manifolds is again an $n$-manifold. \TODO{make n local}
+			}
+			\item{
+				\TODO{connected sum}
+			}
+		\end{enumerate}
+	\end{lemma}
+
+	\begin{remark}
+		\TODO{paracompact iff metrizable}
+
+		\TODO{second countable iff $\sigma$-compact}
+
+		\TODO{second countable iff paracompact and separable}
+
+		\TODO{paracompact + countable components implies second countable}
+
+		\TODO{compact locally euclidean hausdorff implies paracompact and second countable}
+	\end{remark}
+
 	\begin{proposition}[Bootstrap Lemma]
 		\TODO{Bredon Lem. 7.9}
 		% Let $M$ be a topological manifold write $P_M(A)$ for \enquote{The statement $P_M$ is true for the closed set $A$}.
@@ -31,8 +92,42 @@
 		% 	}
 		% \end{enumerate}
 	\end{proposition}
-	\subsection{Classification of 1-dimensional Manifolds}
-	\subsection{Classification of 2-dimensional Manifolds}
+
+	\newpage
+	\subsection{Embedding Theorems}
+
+	\begin{lemma}
+		Every compact $n$-manifold $M$ embedds into $\R^N$ for some $N > n$ and the inequality is necessarily strict.
+	\end{lemma}
+	\begin{sketch}
+		Let $U_1,...,U_k$ be a finite cover of $M$ by euclidean opens and consider the maps
+		\begin{equation*}
+			f_i: M \longrightarrow M / (M \setminus U_i)\isom \S^n \longrightarrow \R^{n+1}.
+		\end{equation*}
+		Then $(f_1,...,f_k)$ defines an embedding of $M$ into $\R^{k(n+1)}$.
+	\end{sketch}
+
+	\begin{theorem}
+		Every $n$-manifold embedds into $\R^{2n+1}$.
+
+		\TODO{https://mathoverflow.net/questions/34658/is-there-a-whitney-embedding-theorem-for-non-smooth-manifolds}
+	\end{theorem}
+
+	\subsection{Classification of Manifolds}
+
+	\begin{lemma}
+		The $0$-manifolds are precisely the countable discrete spaces.
+	\end{lemma}
+
+	\begin{proposition}
+		$\R$ and $\S^1$ are the only $1$-manifolds.
+	\end{proposition}
+
+	\begin{remark}
+		\TODO{classification of 2-manifolds (next section) and 3-manifolds (Perelman) possible. For 4 unknown? For $\geq 5$ impossible! Problem: test of being simply connected undecidable. Classification of $\geq 5$-manifolds exists.}
+	\end{remark}
+
+	\subsection{Classification of Surfaces}
 
 	\newpage
 	\section{Bundles}
@@ -126,5 +221,6 @@
 
 	\newpage
 	\subsection{Vector Bundles}
+	\subsection{Tangent (Micro)-bundles}
 	\subsection{Covering Spaces}
 \end{document}

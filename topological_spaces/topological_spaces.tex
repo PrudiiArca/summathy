@@ -819,111 +819,105 @@ In the following we will commonly refer to \textit{continuous functions} synonym
 \end{definition}
 \subsection{Topological Fields and Topological Vector Spaces}
 
-\newpage
-\section{Bundles}
-\subsection{Fibre Bundles}
-\subsection{$G$-bundles and Vector Bundles}
-\subsection{Covering Spaces}
+% \newpage
+% \section{Homology}
+% \subsection{Generalized Homology}
 
-\newpage
-\section{Homology}
-\subsection{Generalized Homology}
+% \begin{definition}
+% 	Let $\ncat{Top}^\rightincl$ denote the category, whose objects are pairs $(X,A)$, where $X$ is a topological space and $A$ is a subspace of $X$, and whose morphisms $f:(X,A) --> (Y,B)$ are given by continuous maps $f:X-->Y$ with $f(A) \subseteq B$.
 
-\begin{definition}
-	Let $\ncat{Top}^\rightincl$ denote the category, whose objects are pairs $(X,A)$, where $X$ is a topological space and $A$ is a subspace of $X$, and whose morphisms $f:(X,A) --> (Y,B)$ are given by continuous maps $f:X-->Y$ with $f(A) \subseteq B$.
+% 	There is a canonical restriction functor
+% 	\begin{equation*}
+% 		\begin{array}{rcl}
+% 			\ncat{Top}^\rightincl & \overset{R}{\longrightarrow} & \ncat{Top}^\rightincl\\
+% 			(X,A) & \longmapsto & (A,\emptyset)\\
+% 			(f:(X,A)\rightarrow(Y,B)) & \longmapsto & (f|_A:(A,\emptyset)\rightarrow(B,\emptyset))
+% 		\end{array}
+% 	\end{equation*}
+% \end{definition}
 
-	There is a canonical restriction functor
-	\begin{equation*}
-		\begin{array}{rcl}
-			\ncat{Top}^\rightincl & \overset{R}{\longrightarrow} & \ncat{Top}^\rightincl\\
-			(X,A) & \longmapsto & (A,\emptyset)\\
-			(f:(X,A)\rightarrow(Y,B)) & \longmapsto & (f|_A:(A,\emptyset)\rightarrow(B,\emptyset))
-		\end{array}
-	\end{equation*}
-\end{definition}
+% \TODO{Arr(Top) is complete and cocomplete. Topincl is reflective subcat. homotopy}
 
-\TODO{Arr(Top) is complete and cocomplete. Topincl is reflective subcat. homotopy}
-
-\begin{remark}
-	Let $\cat{A}$ be an abelian category and regard $\Z$ as a discrete category. Recall that the category $\cat{A}^\Z \isom |[\Z,\cat{A}|]$ has all limits and colimits which $\cat{A}$ has and is again an abelian category. In particular there is a notion of complex and exact sequences: A sequence $(A_n)_n --> (B_n)_n --> (C_n)_n$ is complex/exact in $(B_n)_n$, if and only if for all $n \in \Z$ the sequence $A_n --> B_n --> C_n$ is complex/exact in $B_n$.
+% \begin{remark}
+% 	Let $\cat{A}$ be an abelian category and regard $\Z$ as a discrete category. Recall that the category $\cat{A}^\Z \isom |[\Z,\cat{A}|]$ has all limits and colimits which $\cat{A}$ has and is again an abelian category. In particular there is a notion of complex and exact sequences: A sequence $(A_n)_n --> (B_n)_n --> (C_n)_n$ is complex/exact in $(B_n)_n$, if and only if for all $n \in \Z$ the sequence $A_n --> B_n --> C_n$ is complex/exact in $B_n$.
 	
-	On $\cat{A}^\Z$ there are for any $k \in \Z$ canonical shifting functors
-	\begin{equation*}
-		\begin{array}{rcl}
-			\cat{A}^\Z & \overset{S_{k}}{\longrightarrow} & \cat{A}^\Z\\
-			(A_n)_n & \longmapsto & (A_{n+k})_n\\
-			(f_n)_n & \longmapsto & (f_{n+k})_n
-		\end{array}
-	\end{equation*}
-\end{remark}
+% 	On $\cat{A}^\Z$ there are for any $k \in \Z$ canonical shifting functors
+% 	\begin{equation*}
+% 		\begin{array}{rcl}
+% 			\cat{A}^\Z & \overset{S_{k}}{\longrightarrow} & \cat{A}^\Z\\
+% 			(A_n)_n & \longmapsto & (A_{n+k})_n\\
+% 			(f_n)_n & \longmapsto & (f_{n+k})_n
+% 		\end{array}
+% 	\end{equation*}
+% \end{remark}
 
-\begin{definition}
-	A (\textbf{generalized, unreduced}) \textbf{homology theory} on $\ncat{Top}^\rightincl$ is a functor $H: \ncat{Top}^\rightincl --> \cat{A}^\Z$ together with a natural transformation $\partial: H ==> S_{-1} \circ H \circ R$, the so called \textbf{boundary operator} or \textbf{connecting homomorphism}, which satisfy the following axioms.
-	\begin{enumerate}[$\bullet$]
-		\item{
-			\textit{homotopy invariance}
-			\TODO{how to make precise}
-		}
-		\item{
-			\textit{exactness}\\
-			For any object $(X,A)$ in $\ncat{Top}^\rightincl$ the sequence
-			\begin{equation*}
-				\begin{diagram}
-					\fivebyone[verywide]
-						{...\;H_{n+1}(X,A)}
-						{H_n(A,\emptyset)}
-						{H_n(X,\emptyset)}
-						{H_n(X,A)}
-						{H_{n-1}(A,\emptyset)\;...}
+% \begin{definition}
+% 	A (\textbf{generalized, unreduced}) \textbf{homology theory} on $\ncat{Top}^\rightincl$ is a functor $H: \ncat{Top}^\rightincl --> \cat{A}^\Z$ together with a natural transformation $\partial: H ==> S_{-1} \circ H \circ R$, the so called \textbf{boundary operator} or \textbf{connecting homomorphism}, which satisfy the following axioms.
+% 	\begin{enumerate}[$\bullet$]
+% 		\item{
+% 			\textit{homotopy invariance}
+% 			\TODO{how to make precise}
+% 		}
+% 		\item{
+% 			\textit{exactness}\\
+% 			For any object $(X,A)$ in $\ncat{Top}^\rightincl$ the sequence
+% 			\begin{equation*}
+% 				\begin{diagram}
+% 					\fivebyone[verywide]
+% 						{...\;H_{n+1}(X,A)}
+% 						{H_n(A,\emptyset)}
+% 						{H_n(X,\emptyset)}
+% 						{H_n(X,A)}
+% 						{H_{n-1}(A,\emptyset)\;...}
 
-					\arrow{ww}{w}{\partial_{n+1}}[above]
-					\arrow{w}{c}{H_n(i)}[above]
-					\arrow{c}{e}{H_n(j)}[above]
-					\arrow{e}{ee}{\partial_n}[above]
-				\end{diagram}
-			\end{equation*}
-				is exact, where $i: (A,\emptyset) \longrightincl (X,\emptyset)$ and $j: (X,\emptyset) \longrightincl (X,A)$ are the inclusion maps.
+% 					\arrow{ww}{w}{\partial_{n+1}}[above]
+% 					\arrow{w}{c}{H_n(i)}[above]
+% 					\arrow{c}{e}{H_n(j)}[above]
+% 					\arrow{e}{ee}{\partial_n}[above]
+% 				\end{diagram}
+% 			\end{equation*}
+% 				is exact, where $i: (A,\emptyset) \longrightincl (X,\emptyset)$ and $j: (X,\emptyset) \longrightincl (X,A)$ are the inclusion maps.
 
-		}
-		\item{
-			\textit{excission}\\
-			For every object $(X,A)$ in $\ncat{Top}^\rightincl$ and subset $U \subseteq \closure U \subseteq \interior A$, the inclusion $(X\setminus U, A \setminus U) \subseteq (X, A)$ induces an isomorphism $$H(X\setminus U, A \setminus U) \isom H(X,A).$$
-		}
-	\end{enumerate}
-	One might further assume
-	\begin{enumerate}[$\bullet$]
-		\item{
-			\textit{additivity / wedge axiom}\\
-			$H$ preserves coproducts. Specifically, for any family $(X_i,A_i)_i$ in $\ncat{Top}^\rightincl$ the canonical morphism
-			\begin{equation*}
-				\bigoplus \limits_{i \in I}H(X_i,A_i) \longrightarrow H(\Coproduct \limits_{i \in I} (X_i,Y_i))
-			\end{equation*}
-			is an isomorphism.
-		}
-		\item{
-			\textit{ordinarity / dimension}\\
-			For all $n \neq 0$ it holds that $H_n(*,\emptyset) = 0$. 
-		}
-	\end{enumerate}
-\end{definition}
+% 		}
+% 		\item{
+% 			\textit{excission}\\
+% 			For every object $(X,A)$ in $\ncat{Top}^\rightincl$ and subset $U \subseteq \closure U \subseteq \interior A$, the inclusion $(X\setminus U, A \setminus U) \subseteq (X, A)$ induces an isomorphism $$H(X\setminus U, A \setminus U) \isom H(X,A).$$
+% 		}
+% 	\end{enumerate}
+% 	One might further assume
+% 	\begin{enumerate}[$\bullet$]
+% 		\item{
+% 			\textit{additivity / wedge axiom}\\
+% 			$H$ preserves coproducts. Specifically, for any family $(X_i,A_i)_i$ in $\ncat{Top}^\rightincl$ the canonical morphism
+% 			\begin{equation*}
+% 				\bigoplus \limits_{i \in I}H(X_i,A_i) \longrightarrow H(\Coproduct \limits_{i \in I} (X_i,Y_i))
+% 			\end{equation*}
+% 			is an isomorphism.
+% 		}
+% 		\item{
+% 			\textit{ordinarity / dimension}\\
+% 			For all $n \neq 0$ it holds that $H_n(*,\emptyset) = 0$. 
+% 		}
+% 	\end{enumerate}
+% \end{definition}
 
-\begin{example}
-	\TODO{zero functor, other example?, simplicial homology?}
-\end{example}
+% \begin{example}
+% 	\TODO{zero functor, other example?, simplicial homology?}
+% \end{example}
 
-\begin{proposition}[Mayer Vitoris]
-	Let $(H,\partial)$ be a homology theory. Let $X$ be a topological space with open cover $U,V$. \TODO{finish}
-\end{proposition}
+% \begin{proposition}[Mayer Vitoris]
+% 	Let $(H,\partial)$ be a homology theory. Let $X$ be a topological space with open cover $U,V$. \TODO{finish}
+% \end{proposition}
 
-\begin{definition}
-	Let $(H,\partial)$ be a homology theory. The \textbf{reduced homology} is the homology theory obtained by taking $\tilde{H}(X,\emptyset) = \ker(H(X,\emptyset) --> H(*,\emptyset))$ and $\tilde{H}(X,A) = H(X,A)$ otherwise.
-\end{definition}
+% \begin{definition}
+% 	Let $(H,\partial)$ be a homology theory. The \textbf{reduced homology} is the homology theory obtained by taking $\tilde{H}(X,\emptyset) = \ker(H(X,\emptyset) --> H(*,\emptyset))$ and $\tilde{H}(X,A) = H(X,A)$ otherwise.
+% \end{definition}
 
-\newpage
-\section{Topological Manifolds}
-\subsection{Topological Manifolds}
-\subsection{Classification of 1-dimensional Manifolds}
-\subsection{Classification of 2-dimensional Manifolds}
+% \newpage
+% \section{Topological Manifolds}
+% \subsection{Topological Manifolds}
+% \subsection{Classification of 1-dimensional Manifolds}
+% \subsection{Classification of 2-dimensional Manifolds}
 
 
 \end{document}
