@@ -621,6 +621,74 @@
 }
 \makeatother
 
+% A B C
+% D E F
+% G H I
+% J K L
+% M N O
+\makeatletter
+\NewDocumentCommand{\threebyfive}{omomomomo}{
+	\def\tempmatopt{\IfNoValueTF{#1}{}{#1}}
+	\def\tempa{\IfNoValueTF{#2}{}{#2}}
+	\def\tempaopt{\IfNoValueTF{#3}{}{#3}}
+	\def\tempb{\IfNoValueTF{#4}{}{#4}}
+	\def\tempbopt{\IfNoValueTF{#5}{}{#5}}
+	\def\tempc{\IfNoValueTF{#6}{}{#6}}
+	\def\tempcopt{\IfNoValueTF{#7}{}{#7}}
+	\def\tempd{\IfNoValueTF{#8}{}{#8}}
+	\def\tempdopt{\IfNoValueTF{#9}{}{#9}}
+	\@threebyfivecont
+}
+\NewDocumentCommand{\@threebyfivecont}{momomomom}{
+	\def\tempe{\IfNoValueTF{#1}{}{#1}}
+	\def\tempeopt{\IfNoValueTF{#2}{}{#2}}
+	\def\tempf{\IfNoValueTF{#3}{}{#3}}
+	\def\tempfopt{\IfNoValueTF{#4}{}{#4}}
+	\def\tempg{\IfNoValueTF{#5}{}{#5}}
+	\def\tempgopt{\IfNoValueTF{#6}{}{#6}}
+	\def\temph{\IfNoValueTF{#7}{}{#7}}
+	\def\temphopt{\IfNoValueTF{#8}{}{#8}}
+	\def\tempi{\IfNoValueTF{#9}{}{#9}}
+	\@threebyfivecontcont
+}
+\NewDocumentCommand{\@threebyfivecontcont}{omomomomo}{
+	\def\tempiopt{\IfNoValueTF{#1}{}{#1}}
+	\def\tempj{\IfNoValueTF{#2}{}{#2}}
+	\def\tempjopt{\IfNoValueTF{#3}{}{#3}}
+	\def\tempk{\IfNoValueTF{#4}{}{#4}}
+	\def\tempkopt{\IfNoValueTF{#5}{}{#5}}
+	\def\templ{\IfNoValueTF{#6}{}{#6}}
+	\def\templopt{\IfNoValueTF{#7}{}{#7}}
+	\def\tempm{\IfNoValueTF{#8}{}{#8}}
+	\def\tempmopt{\IfNoValueTF{#9}{}{#9}}
+	\@threebyfivecontcontcont
+}
+
+\NewDocumentCommand{\@threebyfivecontcontcont}{momo}{
+	\def\tempn{\IfNoValueTF{#1}{}{#1}}
+	\def\tempnopt{\IfNoValueTF{#2}{}{#2}}
+	\def\tempo{\IfNoValueTF{#3}{}{#3}}
+	\def\tempoopt{\IfNoValueTF{#4}{}{#4}}
+	\matrix[objects,\tempmatopt]{
+		\node[\tempaopt] (nnw) {\ensuremath{\tempa}};\&
+		\node[\tempbopt] (nn) {\ensuremath{\tempb}};\&
+		\node[\tempcopt] (nne) {\ensuremath{\tempc}};\\
+		\node[\tempdopt] (nw) {\ensuremath{\tempd}};\&
+		\node[\tempeopt] (n) {\ensuremath{\tempe}};\&
+		\node[\tempfopt] (ne) {\ensuremath{\tempf}};\\
+		\node[\tempgopt] (w) {\ensuremath{\tempg}};\&
+		\node[\temphopt] (c) {\ensuremath{\temph}};\&
+		\node[\tempiopt] (e) {\ensuremath{\tempi}};\\
+		\node[\tempjopt] (sw) {\ensuremath{\tempj}};\&
+		\node[\tempkopt] (s) {\ensuremath{\tempk}};\&
+		\node[\templopt] (se) {\ensuremath{\templ}};\\
+		\node[\tempmopt] (ssw) {\ensuremath{\tempm}};\&
+		\node[\tempnopt] (ss) {\ensuremath{\tempn}};\&
+		\node[\tempoopt] (sse) {\ensuremath{\tempo}};\\
+	};
+}
+\makeatother
+
 % --- end package declaration
 
 \ProcessOptions\relax

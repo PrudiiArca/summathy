@@ -781,7 +781,7 @@
 				$I_n \isom \pi_0(X_n \setminus X_{n-1})$
 			}
 			\item{
-				$X_{n-1}$ is a closed deformation retract of $X_n$ and $X_n / X_{n-1} \isom \Join \limits_{i \in I} \S^n$.
+				$X_{n-1}$ is a CNDR of $X_n$ and $X_n / X_{n-1} \isom \Join \limits_{i \in I} \S^n$.
 
 				\TODO{characteristic map induces homeom see Kammeyer eq (6.1)}
 			}
@@ -842,7 +842,7 @@
 		\begin{equation*}
 			H_\bullet^\text{CW}(X,A) \isom H_\bullet(X,A),
 		\end{equation*}
-		which are natural with respect to \textit{cellular maps}. Moreover on $(*,\emptyset)$ this isomorphism is the identity on $H_\bullet(*)$.
+		which are natural \TODO{with respect to \textit{cellular maps}} and \TODO{compatible with the boundary morphisms}. Moreover on $(*,\emptyset)$ this isomorphism is the identity on $H_\bullet(*)$.
 	\end{theorem}
 	\begin{proof}
 		Recall that for $n \in \N_0$ we have $\smash{H_\bullet(X_n,X_{n-1}) \isom \Oplus \limits_{i \in I_n} M_{\bullet-n}}$ and consider the triple exact sequence for $A \subseteq X_{n-1} \subseteq X_n$.
@@ -868,7 +868,54 @@
 		\begin{equation*}
 			H_k(X,A) \isom \colim \limits_{n \in \N_0} H_k(X_n,A) \isom \colim \limits_{n > k} H_k(X_n,A) \isom H_k(X_m,A).
 		\end{equation*}
-		\TODO{finish}
+		
+		Now consider the following diagram. Note that the vertical composition is part of the triple exact sequence of $(X_n,X_{n-1},A)$, and that the lower diagonal is an excerpt of the triple exact sequence of $(X_{n-1},X_{n-2},A)$. Furthermore, note that the two triangles commute by definition. By exactness of the vertical and the diagonal sequence and the previous calculations we obtain that the two canonical morphisms are injective, as indicated.
+		\begin{equation*}
+			\begin{diagram}
+				\threebyfive[hyperwide]
+					{}{H_n(X_{n-1},A)=0}{}
+					{}{H_n(X_n,A)}{}
+					{H_{n+1}(X_{n+1},X_n)}{H_n(X_n,X_{n-1})}{H_{n-1}(X_{n-1},X_{n-2})}
+					{}{H_{n-1}(X_{n-1},A)}{}
+					{0=H_{n-1}(X_{n-2},A)}{}{}
+
+				\arrow{w}{c}{\vspace{1em}\Delta_{n+1}^{(n+1,n,n-1)}}[below]
+				\arrow{c}{e}{\Delta_{n}^{(n,n-1,n-2)}}[above]
+
+				\arrow{w}{n}{\Delta_{n+1}^{(n+1,n,A)}}[above left]
+				\arrow[incl]{s}{e}{}
+				\arrow{ssw}{s}{}
+
+				\arrow{nn}{n}{}
+				\arrow[incl]{n}{c}{i}[right]
+				\arrow{c}{s}{\Delta_n^{(n,n-1,A)}}[left]
+			\end{diagram}
+		\end{equation*}
+		Note that $\coker \Delta_{n+1}^{(n+1,n,A)} = H_n(X_n,A) / \im \Delta_{n+1}^{(n+1,n,A)}$ and futhermore exactness yields $H_n(X_n,A) \isom i(H_n(X_n,A)) = \ker \Delta_n^{(n,n-1,A)}$. This gives an isomorphism
+		\begin{align*}
+			H_n^{CW}(X,A) &= \ker \Delta_n^{(n,n-1,n-2)}/\im \Delta_{n+1}^{(n+1,n,n-1)}\\ 
+			&= \ker \Delta_n^{(n,n-1,A)} / \im i\circ \Delta_{n+1}^{(n+1,n,A)}\\
+			&\isom H_n(X_n,A) / \im \Delta_{n+1}^{(n+1,n,A)}\\
+			&= \coker \Delta_{n+1}^{(n+1,n,A)}.
+		\end{align*}
+		Finally, in the following excerpt of the triple exact sequence of $(X_{n+1},X_n,A)$ the rightmost homology group is $0$ by previous calculations, making the arrow $j$ surjective as indicated.
+		\begin{equation*}
+			\begin{diagram}
+				\fourbyone[ultrawide]
+					{...H_{n+1}(X_{n+1},X_n)}{H_n(X_n,A)}{H_n(X_{n+1},A)}{H_n(X_{n+1},X_n)...}
+
+				\arrow{ww}{w}{\Delta_{n+1}^{(n+1,n,A)}}[above]
+				\arrow[epi]{w}{e}{j}[above]
+				\arrow{e}{ee}{}
+			\end{diagram}
+		\end{equation*}
+		Exactness of this sequence, the isomorphism theorem and previous calculations now yield.
+		\begin{align*}
+			H_n^{CW}(X,A) \isom \coker \Delta_{n+1}^{(n+1,n,A)} &= H_n(X_n,A) / \im \Delta_{n+1}^{(n+1,n,A)}\\
+			&\isom H_n(X_n,A)/\ker j\\
+			&\isom H_n(X_n,A)\\
+			&\isom H_n(X,A).
+		\end{align*}
 	\end{proof}
 
 	\TODO{uniqueness}
