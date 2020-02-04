@@ -659,7 +659,11 @@
 				\S^{-1} := \emptyset,\hspace{1em} X_{-1} := A
 			\end{equation*}
 		\end{minipage}
+
+		The \textbf{dimension} of a CW-complex \TODO{with filtration $(X_n), I_n$} is $\dim(X,A) = \sup \{n \mid I_n \neq \emptyset\}$. The CW-complex is said to be \textbf{locally finite}, if the indexing set $I_n$ is finite for all $n$, and is \textbf{finite}, if it is locally finite and has finite dimension, i.e. $\Union\limits_{n \in \N_0}I_n$ is finite.
 	\end{definition}
+
+	\TODO{examples $\S^n,M_k(n),\R\P^n,\R\P^\infty, \C\P^n, \C\P^\infty$}
 
 	\begin{lemma}[Properties of CW-complexes]
 		Let $(X,A)$ be a relative CW-complex with a given CW-structure. For any $n \in \N_0$ the following properties hold. 
@@ -681,7 +685,7 @@
 		\end{enumerate}
 	\end{lemma}
 
-	\begin{corollary}
+	\begin{corollary}[Homology of CW-complexes]
 		Let $(H_\bullet, \partial_\bullet)$ be an ordinary homology theory and $(X,A)$ be a relative CW-complex with given CW-structure.
 		\begin{enumerate}[(i)]
 			\item{
@@ -727,7 +731,7 @@
 		The \textbf{cellular homology} of $(X,A)$ with respect to $(H_\bullet, \partial_\bullet)$ is the homology of its cellular chain complex and denoted by $H_\bullet^\text{CW}(X,A)$.
 	\end{definition}
 
-	\begin{theorem}
+	\begin{theorem}[Cellular Homology]
 		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory and $(X,A)$ be a relative CW-complex. Then there are isomorphisms
 		\begin{equation*}
 			H_\bullet^\text{CW}(X,A) \isom H_\bullet(X,A),
@@ -808,9 +812,55 @@
 		\end{align*}
 	\end{proof}
 
+	\begin{corollary}
+		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory and $(X,A)$ be a relative CW-complex.
+		\begin{enumerate}[(i)]
+			\item{
+				For $k>\dim(X,A)$ it holds that $H_k(X,A) =0$.
+			}
+			\item{
+				If $(X,A)$ is locally finite then for all $k$ the $R$-module $H_k(X,A)$ is finitely generated.
+			}
+		\end{enumerate}
+	\end{corollary}
+	\begin{sketch}
+		For (i) note that $H_k(X,A)$ is a quotient of $C_k(X,A)$, which is finitely generated.\\
+		For (ii) note that in this case $C_k(X,A) = 0$ for $k > \dim(X,A)$.
+	\end{sketch}
+
 	\TODO{uniqueness}
 
-	\TODO{Betti Numbers and Euler Characteristic}
+	\begin{remark}
+		Let $R$ be a integral domain and $M$ be an $R$-module. The \textbf{rank} of $M$ is defined as 
+		\begin{equation*}
+			\rk M = \sup\{n \in \N_0 \mid \text{ ex } R^n \longrightincl M\}.
+		\end{equation*}
+
+		\TODO{https://mathoverflow.net/questions/153659/different-definitions-of-the-rank-of-a-module?noredirect=1\&lq=1}
+	\end{remark}
+
+	\begin{definition}
+		Let $R$ be an integral domain and $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory.
+
+		The \textbf{$n$th $R$-Betti number} of a pair of spaces $(X,A)$ is defined to be
+		\begin{equation*}
+			b_n^R (X,A) = \rk H_n(X,A).
+		\end{equation*}
+
+		Suppose $b_n^R(X,A)$ is finite for all $n$ and there is an $N$ such that $b_n^R(X,A) = 0$ for all $n > N$. In this case the \textbf{$R$-Euler characteristic} is given by
+		\begin{equation*}
+			\chi_R(X,A) = \sum \limits_{n \in \N_0} (-1)^n b_n^R(X,A).
+		\end{equation*}
+	\end{definition}
+
+	\begin{proposition}[Euler Characteristic of Finite CW-complexes]
+		Let $R$ be a integral domain and $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory.
+
+		If $(X,A)$ is a finite relative CW-complex, then
+		\begin{equation*}
+			\chi_R(X,A) = \sum \limits_{n \in \N_0}(-1)^n \#I_n = \sum \limits_{n \in \N_0} (-1)^n \rk C_n(X,A).
+		\end{equation*}
+	\end{proposition}
 
 
 	\newpage
@@ -1117,7 +1167,7 @@
 	\end{definition}
 
 	\newpage
-	\subsection{Singular Homology and Special Properties}
+	\subsection{Construction of Singular Homology}
 
 	Let $M_\bullet$ be a $\Z$-graded $R$-module. In this section we explicitly construct a generalized homology theory with $M_\bullet$ as its module of coefficients. 
 
@@ -1129,7 +1179,7 @@
 
 			\arrow{ww}{w}{\ncat{sing}}[above]
 			\arrow{w}{c}{\Z[-]_{*}}[above]
-			\arrow{c}{e}{C_\bullet}[above]
+			\arrow{c}{e}{D_\bullet}[above]
 			\arrow{e}{ee}{H_{*}}[above]
 		\end{diagram},
 	\end{equation*}
@@ -1159,7 +1209,7 @@
 		\end{array}
 	\end{equation*}
 
-	The next functor is a bit more involed, as it has to turn a simplicial object $\fun{A}:\Delta^{op} --> \ncat{Ab}$ into a chain complex. First recall that the boundary morphisms $\delta_i^n:[n-1]-->[n]$ in $\Delta$ give us morphisms $d_i^n:= \fun{A}(\delta_i^n):\fun{A}([n])-->\fun{A}([n-1])$. Let $C_\bullet(\fun{A})$ be the chain complex given by
+	The next functor $D_\bullet$ is a bit more involed, as it has to turn a simplicial object $\fun{A}:\Delta^{op} --> \ncat{Ab}$ into a chain complex. First recall that the boundary morphisms $\delta_i^n:[n-1]-->[n]$ in $\Delta$ give us morphisms $d_i^n:= \fun{A}(\delta_i^n):\fun{A}([n])-->\fun{A}([n-1])$. Let $D_\bullet(\fun{A})$ be the chain complex given by
 	% \begin{equation*}
 	% 	C_n(\fun{A}) = \left\{\begin{array}{ll} \fun{A}([n]) & n \geq 0\\ 0 & \text{else}\end{array}\right. \hspace{1cm} \partial_n = \left\{\begin{array}{ll}\Sum \limits_{i=0}^n(-1)^i d_i^n & n > 0\\ 0 & \text{else} \end{array}\right.
 	% \end{equation*}
@@ -1204,7 +1254,7 @@
 			\arrow{ne}{se}{\beta_{[n-1]}}[right]
 		\end{diagram}
 	\end{equation*}
-	commute, so $C_\bullet(\beta)$ is just the extension of $\beta$ by zeroes in negative degrees.
+	commute, so $\fun{D}(\beta)$ is just the extension of $\beta$ by zeroes in negative degrees.
 
 	To show that this indeed defines a chain complex we use that by Lemma \TODO{cite} the identity
 	\begin{equation*}
@@ -1219,12 +1269,105 @@
 		&=\sum\limits_{i=0}^n\Sum\limits_{j=0}^{i}(-1)^{j+i}d_i^nd_j^{n+1} - \Sum\limits_{i=0}^n\Sum\limits_{j=i}^{n}(-1)^{i+j}d_j^nd_i^{n+1}\\
 		&=\sum\limits_{i=0}^n\Sum\limits_{j=0}^{i}(-1)^{j+i}d_i^nd_j^{n+1} - \sum\limits_{j=0}^n\Sum\limits_{i=j}^{n}(-1)^{j+i}d_i^nd_j^{n+1} = 0
 	\end{align*}
+	Hence we have constructed the \textit{Dold-Kan functor}
+	\begin{equation*}
+		\begin{array}{rcl}
+			\ncat{sAb} & \xrightarrow{D_\bullet} & \ncat{Ch}\\
+			{[\fun{A}:\ncat{Ab}^{op}\rightarrow\ncat{Set}]} & \longmapsto & {D_\bullet(\fun{A})}\\
+			{[\beta:\fun{A}\Rightarrow \fun{B}]} & \longmapsto& {[\beta:D_\bullet(\fun{A})\rightarrow D_\bullet(\fun{B})].}
+		\end{array}
+	\end{equation*}
 
-	\TODO{exhaustion by open sets}
+	As a side note, this functor indeed gives an equivalence of categories $D_\bullet: \ncat{sAb} \simeq \ncat{Ch}^{+}$ of simplicial abelian groups and the full subcategory $\ncat{Ch}^{+}$ of chain complexes concentrated in nonnegative degree. \TODO{see ncatlab Dold Kan correspondence}
+
+	\begin{definition}
+		The \textbf{(absolute) singular chain complex functor} is the functor given by the composition
+		\begin{equation*}
+			C^\text{sing}:=
+			\begin{diagram}
+				\fourbyone[wide]
+					{\ncat{Top}}{\ncat{sSet}}{\ncat{sAb}}{\ncat{Ch}}
+
+				\arrow{ww}{w}{\ncat{sing}}[above]
+				\arrow{w}{e}{\Z[-]_{*}}[above]
+				\arrow{e}{ee}{D_\bullet}[above]
+			\end{diagram}
+		\end{equation*}
+		and the \textbf{(absolute) singular homology functor} is the corresponding homology functor, obtained by postcomposing with the usual homology functor $H_{*}: \ncat{Ch} --> \ncat{Ab}^{\Z gr}$, i.e. explicitly
+		\begin{equation*}
+			H^\text{sing} := H_{*}\circ C^\text{sing}: \ncat{Top} \longrightarrow \ncat{Ab}^{\Z gr}.
+		\end{equation*}
+	\end{definition}
+
+	Now we extend this to a homology functor on pairs of spaces. Note that for any pair of spaces $(X,A)$ the sequence of chain complexes
+	\begin{align*}
+		0 --> C^\text{sing}(A) --> C^\text{sing}(X) --> C^\text{sing}(X)/C^\text{sing}(A) --> 0
+	\end{align*}
+	is exact and functorial in $(X,A)$. Hence we set
+	\begin{equation*}
+		C^\text{sing}(X,A) := C^\text{sing}(X)/C^\text{sing}(A).
+	\end{equation*}
+
+	Moreover, given a $\Z$-graded abelian group $M$, considered as a chain complex with zero differential, we obtain a short exact sequence of chain complexes
+	\begin{align*}
+		0 --> C^\text{sing}(A) \tensor M --> C^\text{sing}(X) \tensor M --> C^\text{sing}(X,A) \tensor M --> 0,
+	\end{align*}
+
+	since $C^\text{sing}(A)$ is free and hence flat, and $- \tensor M$ preserves quotients.
+
+	\begin{definition}
+		Let $M$ be a $\Z$-graded abelian group.
+
+		The \textbf{(relative) singular chain complex functor with coefficients in $M$} is the functor
+		\begin{equation*}
+			\begin{array}{rcl}
+				\ncat{Top}^2 & \xrightarrow{C^\text{sing}(-,- \,| M)} & \ncat{Ch}\\
+				(X,A) & \longmapsto & C^\text{sing}(X,A \,| M) = C^\text{sing}(X,A) \tensor M\\
+				{[f:(X,A)\rightarrow(Y,B)]} & \longmapsto & {[C^\text{sing}(f) \tensor M: C^\text{sing}(X,A) \tensor M \rightarrow C^\text{sing}(X,A) \tensor M]}
+			\end{array}
+		\end{equation*}
+		Postcomposing with the homology functor $H_{*}$ yields the \textbf{(relative) singular homology functor with coefficients in $M$}
+		\begin{align*}
+			H(-,- | M): \ncat{Top}^2 --> \ncat{Ab}^{\Z gr}.
+		\end{align*}
+		The corresponding boundary operator is given by the boundary map induced by the short exact sequences of the form
+		\begin{align*}
+			0 --> C^\text{sing}(A) \tensor M --> C^\text{sing}(X) \tensor M --> C^\text{sing}(X,A) \tensor M --> 0.
+		\end{align*}
+	\end{definition}
+
+	Before we start to verify that singular homology satisfies the axioms of a generalized homology theory, we want to compute its module of coefficients.
+
+	\TODO{todo}
+
+	\begin{lemma}
+		Relative singular homology satisfies the exactness and the additivity axiom.
+	\end{lemma}
+
+	\begin{proposition}
+		Relative singular homology is homotopy invariant.
+	\end{proposition}
+
+	\begin{theorem}
+		Relative singular homology satisfies excission.
+	\end{theorem}
+
+	\newpage
+	\subsection{Filtration, Künneth Formula and the Universal Coefficient Theorem}
+
+	\begin{lemma}[Filtration]
+		Let $(X,A)$ be a pair of spaces and $A \subseteq U_0 \subseteq U_1 \subseteq ... X = \smash{\colim \limits_{i\in \N_0}U_i}$ a filtration of $X$ by open subsets. Then the canonical morphism
+		\begin{equation*}
+			\colim \limits_{i \in \N_0} H^\text{sing}(U_i,A \,| M) \longrightarrow H^\text{sing}(X,A \,| M)
+		\end{equation*}
+		is an isomorphism.
+	\end{lemma}
 
 	\TODO{Künneth formular}
 
 	\TODO{Universal Coefficient theorem}
+
+
 
 	\newpage
 	\subsection{Homological Orientation, Fundamental Classes and Degree}
