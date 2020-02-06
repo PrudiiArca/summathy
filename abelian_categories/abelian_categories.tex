@@ -179,6 +179,7 @@
 		\end{equation*}
 	\end{proof}
 
+	\newpage
 	\subsection{Ab-enriched, Additive and Abelian Categories}
 
 	\begin{definition}[$\ncat{Ab}$--enriched Category]
@@ -272,10 +273,6 @@
 		TODO
 	\end{sketch}
 
-	\begin{corollary}[Characterization of Abelian Categories]
-		A locally small category $\cat{A}$ is an abelian category if and only if it is a complete and cocomplete category with finite biproducts, where every monomorphism and every epimorphism is normal.
-	\end{corollary}
-
 	\begin{proposition}[Characterization of Monos, Epis and Isos]
 		Let $\cat{A}$ be an abelian category and $f:A-->B$ be a morphism.
 		
@@ -312,6 +309,13 @@
 		TODO
 	\end{sketch}
 
+	\begin{corollary}[Characterization of Abelian Categories]
+		A locally small category $\cat{A}$ is an abelian category if and only if it is a complete and cocomplete category with finite biproducts, where every monomorphism and every epimorphism is normal.
+	\end{corollary}
+
+	\newpage
+	\subsection{Images, Kernels and Cokernels}
+
 	\begin{theorem}[Epi-Mono Factorization]
 		Let $\cat{A}$ be an abelian category. Every morphism $f:A-->B$ admits a factorization $f=ip$, where $i = \ker \coker f$ and $p = \coker \ker f$, which is unique (up to isomorphism).
 	\end{theorem}
@@ -335,10 +339,26 @@
 
 	\TODO{pullbacks and pushouts?}
 
+	\newpage
 	\subsection{Additive Functors}
 
 	\begin{definition}[Additive Functor]
-		TODO
+		A functor $\fun{F}:\cat{A} --> \cat{B}$ between additive categories is \textbf{additive}, if it satisfies one of the following equivalent conditions.
+		\begin{enumerate}[(i)]
+			\item{
+				For any pair of objects $A,A'$ in $\cat{A}$ the map 
+				\begin{equation*}
+					\begin{array}{rcl}
+						F_{AA'}: \cat{A}(A,A') &\longrightarrow& \cat{B}(\fun{F}A, \fun{F}A')\\
+						f & \longmapsto& \fun{F}f
+					\end{array}
+				\end{equation*}
+				is a group homomorphism.
+			}
+			\item{
+				$\fun{F}$ preserves biproducts / products / coproducts
+			}
+		\end{enumerate}
 	\end{definition}
 
 	\begin{lemma}[Representables Are Additive]
@@ -354,40 +374,158 @@
 	\end{theorem}
 
 	\begin{proposition}[Characterization of Additive Functors]
-		TODO
+		
 	\end{proposition}
 
-	\subsection{Exact Sequences and Exact Functors}
+	\newpage
+	\subsection{Exact Sequences, Diagram Lemmas and Exact Functors}
 
-	\begin{definition}[Exact Sequence]
-		TODO
+	\begin{definition}
+		Let $\cat{A}$ be an abelian category. A sequence $A \xrightarrow{f} B \xrightarrow{g} C$ is \textbf{exact in $B$}, if $\im f \isom \ker g$. An arbitrary sequence
+		\begin{align*}
+			... --> A_{n+1} --> A_n --> A_{n-1} --> ...
+		\end{align*}
+		is \textbf{exact}, if it is exact in every (interior) $A_i$.
+
+		A \textbf{short exact sequence} is an exact sequence of the form
+		\begin{align*}
+			0 --> A --> B --> C --> 0
+		\end{align*}
+
+		Note that this definitions are again selfdual.
 	\end{definition}
 
 	\begin{lemma}[Properties of Exact Sequences]
-		TODO
+		Let $\cat{A}$ be an abelian category.
+		\begin{enumerate}[(i)]
+			\item{
+				The sequence $0 --> A \xrightarrow{f} B$ is exact, if and only if $f$ is mono.
+
+				Dually, the sequence $B \xrightarrow{g} C --> 0$ is exact, if and only if $g$ is epi.
+
+				In particular, the sequence $0 --> A \xrightarrow{f} B --> 0$ is exact, if and only if $f$ is an isomorphism.
+			}
+			\item{
+				The sequence $0 --> A \xrightarrow{f} B \xrightarrow{g} C$ is exact, if and only if $f \isom \ker g$.
+
+				Dually, the sequence $A \xrightarrow{f} B \xrightarrow{g} C --> 0$ is exact, if and only if $g \isom \coker f$.
+			}
+			\item{
+				The sequence $A \xrightarrow{f} B \xrightarrow{g} C$ is exact, if and only if the sequence $0 --> I \xrightarrow{i} B \xrightarrow{q} J --> 0$ is a short exact sequence, where $f = ip$, $g=jq$ are image factorizations.
+			}
+		\end{enumerate}
 	\end{lemma}
+	\begin{sketch}
+		For (i) recall that $f$ is mono  iff $\ker f = 0 \;(= \im f)$.\\
+		For (ii) note \TODO{todo}
+		% \begin{enumerate}[(i)]
+		% 	\item{
+				
+		% 	}
+		% \end{enumerate}
+	\end{sketch}
 
 	\begin{definition}[Split Exact Sequence]
-		TODO
-	\end{definition}
+		Let $\cat{A}$ be an abelian category. A short exact sequence $0 --> A \xrightarrow{f} B \xrightarrow{g} C --> 0$ is said to be \textbf{split exact} if it satisfies one of the following equivalent conditions.
+		\begin{enumerate}[(i)]
+			\item{
+				$g$ is split epi i.e. has a section $s:C --> B$
+			}
+			\item{
+				$f$ is split mono i.e. has a retraction $r:B --> A$.
+			}
+			\item{
+				There are morphisms $s:C --> B$ and $r:B-->A$, which turn
+				\begin{equation*}
+					\begin{diagram}
+						\threebyone
+							{A}{B}{C}
 
-	\begin{lemma}[Characterization of Split Exact Sequences]
-		TODO
-	\end{lemma}
+						\arrow[lower]{w}{c}{f}[below]
+						\arrow[higher]{c}{e}{g}[above]
+						\arrow[lower]{e}{c}{s}[below]
+						\arrow[higher]{c}{w}{r}[above]
+					\end{diagram}
+				\end{equation*}
+				into a biproduct $B \isom A \oplus B$.
+			}
+		\end{enumerate}
+	\end{definition}
+	\begin{sketch}
+		(iii)$==>$(i)+(ii) by definition.\\
+		(i)$==>$(iii) Consider $1_B - sg: B --> B$ and note that it satisfies $g(1_B - sg) = 0$. Since $f \isom \ker g$ there is a unique $r$ \TODO{tofu}
+	\end{sketch}
+
+	\begin{theorem}[Snake Lemma]
+		\TODO{todo}
+	\end{theorem}
+
+	\begin{corollary}[Five Lemma]
+		\TODO{todo}
+	\end{corollary}
+
+	\begin{corollary}[Niner Lemma]
+		\TODO{todo}
+	\end{corollary}
 
 	\begin{definition}[Exact Functor]
-		TODO
+		A functor $\fun{F}: \cat{A} --> \cat{B}$ between abelian categories is \textbf{left exact}, if it satisfies one of the following equivalent conditions.
+		\begin{enumerate}[(i)]
+			\item{
+				$\fun{F}$ preserves exact sequences of the form $0 --> A --> B --> C$.
+			}
+			\item{
+				$\fun{F}$ preserves kernels.
+			}
+			\item{
+				$\fun{F}$ preserves finite limits.
+			}
+		\end{enumerate}
+
+		Dually, $\fun{F}$ is called \textbf{right exact} if it satisfies one of the following equivalent conditions.
+		\begin{enumerate}[(i)]
+			\item{
+				$\fun{F}$ preserves exact sequences of the form $A --> B --> C --> 0$.
+			}
+			\item{
+				$\fun{F}$ preserves cokernels.
+			}
+			\item{
+				$\fun{F}$ preserves finite colimits.
+			}
+		\end{enumerate}
+
+		Finally, $\fun{F}$ is \textbf{exact}, if it satisfies one of the following equivalent conditions.
+		\begin{enumerate}[(i)]
+			\item{
+				$\fun{F}$ is both left and right exact.
+			}
+			\item{
+				$\fun{F}$ preserves short exact sequences.
+			}
+			\item{
+				$\fun{F}$ preserves arbitrary exact sequences.
+			}
+		\end{enumerate}
+
+		Note that in particular each left exact / right exact / exact functor is additive.
 	\end{definition}
 
-	\begin{lemma}[Characterization of Exact Functors]
-		TODO
-	\end{lemma}
+	\begin{lemma}
+		Let $\fun{F}: \cat{A} --> \cat{B}$ be a faithful exact functor. Then $\fun{F}$ reflects (not necessarily short) exact sequences.
 
-	\newpage
-	\section{The Freyd Mitchel Embedding Theorem}
+		Analogue statements hold for faithful left exact / right exact functors.
+	\end{lemma}
+	\begin{sketch}
+		Recall that faithful functors reflect all limits and colimits, which they preserve.
+	\end{sketch}
 
 	\newpage
 	\section{(Co-)Homology and Derived Functors}
 	\subsection{(Co-)Chain Complexes and (Co-)Homology}
 	\subsection{Derived Functors}
+
+	\newpage
+	\section{The Freyd Mitchel Embedding Theorem}
+
 \end{document}
