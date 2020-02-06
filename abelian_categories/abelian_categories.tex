@@ -475,7 +475,7 @@
 				$\fun{F}$ preserves exact sequences of the form $0 --> A --> B --> C$.
 			}
 			\item{
-				$\fun{F}$ preserves kernels.
+				$\fun{F}$ is additive and preserves kernels.
 			}
 			\item{
 				$\fun{F}$ preserves finite limits.
@@ -488,7 +488,7 @@
 				$\fun{F}$ preserves exact sequences of the form $A --> B --> C --> 0$.
 			}
 			\item{
-				$\fun{F}$ preserves cokernels.
+				$\fun{F}$ is additive and preserves cokernels.
 			}
 			\item{
 				$\fun{F}$ preserves finite colimits.
@@ -522,7 +522,135 @@
 
 	\newpage
 	\section{(Co-)Homology and Derived Functors}
-	\subsection{(Co-)Chain Complexes and (Co-)Homology}
+	\subsection{Chain Complexes and Homology}
+
+	\begin{definition}
+		Let $\cat{A}$ be an abelian category. A \textbf{chain complex} $C_\bullet$ in $\cat{A}$ is an infinite sequence
+		\begin{align*}
+			... --> C_{n+1} \xrightarrow{\partial_{n+1}} C_{n} \xrightarrow{\partial_n} C_{n-1} --> ...
+		\end{align*}
+		such that $\partial_n \partial_{n+1} = 0$ for all $n \in \Z$. %The morphisms $\partial_\bullet$ are called boundary morphisms or differentials of the chain complex.
+
+		A morphism $f_\bullet: C_\bullet --> D_\bullet$ of chain complexes is a sequence $(f_n: C_n --> B_n)_n$ such that for all $n$ the following diagram commutes.
+		\begin{equation*}
+			\begin{diagram}
+				\fourbytwo
+					{...}{C_{n+1}}{C_n}{...}
+					{...}{D_{n+1}}{D_n}{...}
+
+				\arrow{nww}{nw}{}
+				\arrow{nw}{ne}{\partial_{n+1}}[above]
+				\arrow{ne}{nee}{}
+
+				\arrow{sww}{sw}{}
+				\arrow{sw}{se}{\partial_{n+1}}[below]
+				\arrow{se}{see}{}
+
+				\arrow{nw}{sw}{f_{n+1}}[left]
+				\arrow{ne}{se}{f_{n}}[right]
+			\end{diagram}
+		\end{equation*}
+
+		This defines a category $\Ch(\cat{A})$ of chain complexes over $\cat{A}$.
+
+		A chain complex $C_\bullet$ is \textbf{concentrated in nonnegative degree}, if $C_n = 0$ for all $n < 0$, and \textbf{concentrated in nonpositive degree}, if $C_n = 0$ for all $n > 0$. We write $\Ch(\cat{A})^{+}$ and $\Ch(\cat{A})^{-}$ for the corresponding full subcategories of $\Ch(\cat{A})$.
+	\end{definition}
+
+	% \begin{remark}
+	% 	The chain complexes concentrated in nonpositive degree are sometimes called \textbf{cochain complexes}.
+	% 	To avoid writing negative indices when working with 
+	% \end{remark}
+
+	\begin{lemma}[Properties of $\Ch(\cat{A})$]
+		\TODO{$\Ch(\cat{A})$ is an abelian category}
+
+		\TODO{Tensor product and internal hom}
+	\end{lemma}
+
+	\begin{lemma}
+		\TODO{preparation for homology functor}
+	\end{lemma}
+
+	\begin{definition}
+		Let $\cat{A}$ be an abelian category. The \textbf{$n$-th homology functor} is defined by the assignment
+		\begin{equation*}
+			\begin{array}{rcl}
+				\Ch(\cat{A}) & \xrightarrow{H_n} & \cat{A}\\
+				C_\bullet & \longmapsto & H_n(C_\bullet) := \ker \partial_n / \im \partial_{n+1}\\
+				{[f:C_\bullet \rightarrow D_\bullet]} & \longmapsto & {[H_n(f):H_n(C_\bullet) \rightarrow H_n(D_\bullet)]}
+			\end{array}
+		\end{equation*}
+	\end{definition}
+
+	\newpage
+	\subsection{Projective and Injective Objects}
+
+	\begin{definition}
+		Let $\cat{A}$ be an abelian category. 
+
+		An object $P$ in $\cat{A}$ is \textbf{projective}, if it satisfies one of the following equivalent conditions.
+		\vspace{.5em}
+		\begin{enumerate}[(i)]
+			\item{
+				\begin{minipage}[t]{\linewidth-4cm}
+					For all epimorphisms $T_1 -->> T_2$ and morphisms $P --> T$ there exists a (not necessarily unique) lift as depicted on the right.
+				\end{minipage}
+				\begin{minipage}[t]{4cm}
+					\vspace{-2em}
+					\begin{equation*}
+						\begin{diagram}
+							\twobytwo[small]
+								{}{T_1}
+								{P}{T_2}
+
+							\arrow{sw}{se}{}
+							\arrow[epi]{ne}{se}{}
+							\arrow[dashed]{sw}{ne}{\exists}[above left]
+						\end{diagram}
+					\end{equation*}
+				\end{minipage}
+				\vspace{-3em}
+			}
+			\item{
+				$\cat{A}(P,-): \cat{A} --> \ncat{Ab}$ is exact.
+			}
+			\item{
+				Any epimorphism $T -->> P$ is a split epimorphism.
+			}
+		\end{enumerate}
+
+		Dually, an object $I$ in $\cat{A}$ is \textbf{injective}, if it satisfies one of the following equivalent conditions.
+		\vspace{.5em}
+		\begin{enumerate}[(i)]
+			\item{
+				\begin{minipage}[t]{\linewidth-4cm}
+					For all monomorphisms $T_1 >--> T_2$ and morphisms $T_1 --> I$ there exists a (not necessarily unique) extension as depicted on the right.
+				\end{minipage}
+				\begin{minipage}[t]{4cm}
+					\vspace{-2em}
+					\begin{equation*}
+						\begin{diagram}
+							\twobytwo[small]
+								{T_1}{T_2}
+								{I}{}
+
+							\arrow{nw}{sw}{}
+							\arrow[mono]{nw}{ne}{}
+							\arrow[dashed]{sw}{ne}{\exists}[below right]
+						\end{diagram}
+					\end{equation*}
+				\end{minipage}
+				\vspace{-3em}
+			}
+			\item{
+				$\cat{A}(-,I): \cat{A}^{op} --> \ncat{Ab}$ is exact.
+			}
+			\item{
+				Any monomorphism $I >--> T$ is a split monomorphism.
+			}
+		\end{enumerate}
+	\end{definition}
+
 	\subsection{Derived Functors}
 
 	\newpage
