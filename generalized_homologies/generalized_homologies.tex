@@ -234,24 +234,6 @@
 		\end{enumerate}
 	\end{proof}
 
-	\begin{proposition}[Mayer Vietoris]
-		Let $(H_\bullet,\partial_\bullet)$ be a generalized homology theory and $B \subseteq A_1,A_2 \subseteq X$ in $\ncat{Top}$, such that $X \subseteq \interior(A_1) \union \interior(A_2)$. Then the following sequence is exact.
-		\begin{equation*}
-			\begin{diagram}
-				\threebythree[hyperwide]
-					{}{}{...H_{\bullet+1}(X,B)}
-					{H_\bullet(A_1 \intersection A_2,B)}{H_\bullet(A_1,B)\directsum H_\bullet(A_2,B)}{H_\bullet(X,B)}
-					{H_{\bullet-1}(A_1 \intersection A_2, B)...}{}{}
-
-				\arrow{w}{c}{H_\bullet(i_1)\directsum H_\bullet(i_2)}[above]
-				\arrow{c}{e}{H_\bullet(j_1) - H_\bullet(j_2)}[above]
-				
-				\draw[->,rounded corners] (ne.east) -| node[auto,pos=.7]{$\partial_{\bullet+1}$}($(ne)+(1.5,-.75)$) -| ($(w)+(-2,0)$) |- (w.west);
-				\draw[->,rounded corners] (e.east) -| node[auto,pos=.7]{$\partial_\bullet$}($(e)+(1.5,-.75)$) -| ($(sw)+(-2,0)$) |- (sw.west);
-			\end{diagram}
-		\end{equation*}
-	\end{proposition}
-
 	\begin{proposition}[Triple Sequence]
 		Let $(H_\bullet,\partial_\bullet)$ be a generalized homology theory and $B \subseteq A \subseteq X$ in $\ncat{Top}$. Given
 		\begin{equation*}
@@ -278,6 +260,115 @@
 			...
 		\end{equation*}
 	\end{proposition}
+
+	\begin{proposition}[Mayer Vietoris]
+		Let $(H_\bullet,\partial_\bullet)$ be a generalized homology theory and $B \subseteq A_1,A_2 \subseteq X$ in $\ncat{Top}$, such that $X \subseteq \interior(A_1) \union \interior(A_2)$.
+
+		Name the canonical morphisms temporarily like
+		\begin{equation*}
+			\begin{diagram}
+				\fivebythree[verywide]
+					{}{}{(A_1,B)}{}{(A_1,A_1\intersection A_2)}
+					{(A_1 \intersection A_2)}{(A_1 \intersection A_2, B)}{}{(X,B)}{(X,A_2)}
+					{}{}{(A_2,B)}{}{}
+
+					\arrow{w}{n}{i_1}[above left]
+					\arrow{w}{s}{i_2}[below left]
+					\arrow{n}{e}{j_1}[above right]
+					\arrow{s}{e}{j_2}[below right]
+					\arrow{e}{ee}{b}[above]
+					\arrow{nee}{ee}{e}[left]
+					\arrow{ww}{w}{a}[above]
+					\arrow{n}{nee}{\widetilde{b}}[above]
+			\end{diagram}
+		\end{equation*}
+
+		\TODO{By excission} $H_\bullet(e):H_\bullet(A_1,A_1 \intersection A_2) --> H_\bullet(X,A_2)$ is an isomorphism. Now given the composite morphism
+		\begin{align*}
+			\nu_\bullet := H_\bullet(X,B) \xrightarrow{H_\bullet(b)} H_\bullet(X,A_2) \xrightarrow{H_\bullet(e)^{-1}} H_\bullet(A_1, A_1 \intersection A_2) \xrightarrow{\Delta_\bullet^{(1,12,B)}} H_{\bullet-1} (A_1 \intersection A_2, B)
+		\end{align*}
+		the following sequence is exact.
+		\begin{equation*}
+			\begin{diagram}
+				\threebythree[hyperwide]
+					{}{}{...H_{\bullet+1}(X,B)}
+					{H_\bullet(A_1 \intersection A_2,B)}{H_\bullet(A_1,B)\directsum H_\bullet(A_2,B)}{H_\bullet(X,B)}
+					{H_{\bullet-1}(A_1 \intersection A_2, B)...}{}{}
+
+				\arrow{w}{c}{H_\bullet(i_1)\directsum H_\bullet(i_2)}[above]
+				\arrow{c}{e}{H_\bullet(j_1) - H_\bullet(j_2)}[above]
+				
+				\draw[->,rounded corners] (ne.east) -| node[auto,pos=.7]{$\nu_{\bullet+1}$}($(ne)+(1.5,-.75)$) -| ($(w)+(-2,0)$) |- (w.west);
+				\draw[->,rounded corners] (e.east) -| node[auto,pos=.7]{$\nu_\bullet$}($(e)+(1.5,-.75)$) -| ($(sw)+(-2,0)$) |- (sw.west);
+			\end{diagram}
+		\end{equation*}
+	\end{proposition}
+	\begin{sketch}
+		Consider the following diagram with exact rows given by the exact sequences of the triples $(A_1,A_1 \intersection A_2, B)$ and $(X,A_2,B)$.
+		\begin{equation*}
+			\hspace{-2cm}
+			\begin{diagram}
+				\fivebytwo[ultrawide]
+					{H_{\bullet+1}(A_1,B)}{H_{\bullet+1}(A_1,A_1\intersection A_2)}{H_\bullet(A_1 \intersection A_2,B)}{H_\bullet(A_1,B)}{H_\bullet(A_1,A_1 \intersection A_2)}
+					{H_{\bullet+1}(X,B)}{H_{\bullet+1}(X,A_2)}{H_\bullet(A_2,B)}{H_\bullet(X,B)}{H_\bullet(X,A_2)}
+
+				\node[gray] (c) at ($0.5*(s)+0.5*(ne)$) {$\Oplus$};
+				\arrow[gray,lower]{c}{s}{}
+				\arrow[gray,lower]{c}{ne}{}
+				\arrow[gray,higher]{s}{c}{}
+				\arrow[gray,higher]{ne}{c}{}
+				\arrow[dashed,gray]{n}{c}{}
+
+				\arrow{nww}{nw}{H_{\bullet+1}(\widetilde{b})}[above]
+				\arrow{nw}{n}{\Delta_{\bullet+1}^{(1,12,B)}}[above]
+				\arrow{n}{ne}{H_\bullet(i_1)}[above]
+				\arrow{ne}{nee}{H_\bullet(\widetilde{b})}[above]
+
+				\arrow{sww}{sw}{H_{\bullet+1}(b)}[below]
+				\arrow{sw}{s}{\Delta_{\bullet+1}^{(X,2,B)}}[below]
+				\arrow{s}{se}{H_\bullet(j_2)}[below]
+				\arrow{se}{see}{H_\bullet(b)}[below]
+
+				\arrow{nww}{sww}{H_{\bullet+1}(j_1)}[left]
+				\arrow{nw}{sw}{\hspace{.8cm}\isom\;\;H_{\bullet+1}(e)}
+				\arrow{n}{s}{H_\bullet(i_2)}[right]
+				\arrow{ne}{se}{H_\bullet(j_1)}[right]
+				\arrow{nee}{see}{\hspace{.5cm}\isom\;\;H_\bullet(e)}
+			\end{diagram}
+		\end{equation*}
+
+		Complex at $H_\bullet(A_1 \intersection A_2, B)$, using exactness of rows:
+		\begin{align*}
+			H_\bullet(i_1)\nu_{\bullet+1} &= H_\bullet(i_1)\Delta_{\bullet+1}^{(1,12,B)}H_{\bullet+1}(e)^{-1}H_{\bullet+1}(b) = 0H_{\bullet+1}(e)^{-1}H_{\bullet+1}(b) = 0\\
+			H_\bullet(i_2)\nu_{\bullet+1} &= H_\bullet(i_2)\Delta_{\bullet+1}^{(1,12,B)}H_{\bullet+1}(e)^{-1}H_{\bullet+1}(b) = \Delta_{\bullet+1}^{(X,2,B)}H_\bullet(b) = 0
+		\end{align*}
+
+		Complex at $H_\bullet(A_1,B) \oplus H_\bullet(A_2,B)$:
+		\begin{equation*}
+			H_\bullet(j_1)\pi_1(H_\bullet(i_1)\oplus H_\bullet(i_2)) = H_\bullet(j_1)H_\bullet(i_1) = H_\bullet(j_2)H_\bullet(i_2) = H_\bullet(j_2)\pi_2(H_\bullet(i_1)\oplus H_\bullet(i_2))
+		\end{equation*}
+
+		Complex at $H_\bullet(X,B)$, using exactness of rows:
+		\begin{align*}
+			\nu_\bullet H_\bullet(j_1)\pi_1 &= \Delta_\bullet H_\bullet(e)^{-1}H_\bullet(b)H_\bullet(j_1)\pi_1 = \Delta_\bullet H_\bullet(\widetilde{b})\pi_1 = 0\pi_1 = 0\\
+			\nu_\bullet H_\bullet(j_2)\pi_2 &= \Delta_\bullet H_\bullet(e)^{-1}H_\bullet(b)H_\bullet(j_2)\pi_2 = \Delta_\bullet H_\bullet(e)^{-1}0\pi_2 = 0
+		\end{align*}
+
+		Exactness at $H_\bullet(A_1\intersection A_2,B)$:
+		\begin{tab}
+			Let $x \in \ker H_\bullet(i_1) \intersection \ker H_\bullet(i_2)$. By exactness of the upper row and $H_{\bullet+1}(e)$ being an isomorphism we find $y \in H_{\bullet+1}(X,A_2)$ with $\Delta_{\bullet+1}^{(1,12,B)}H_{\bullet+1}(e)^{-1}(y) = x$. By assumption on $x$, commutativity of the corresponding square and exactness of the lower row we find $y \in \ker \Delta_{\bullet+1}^{(X,2,B)} = \im H_{\bullet+1}(b)$, so there is a $z \in H_{\bullet+1}(X,B)$ with $\nu_{\bullet+1}(z) = x$.
+		\end{tab}
+
+		Exactness at $H_\bullet(A_1,B) \oplus H_\bullet(A_2,B)$:
+		\begin{tab}
+			Let $(x_1,x_2) \in H_\bullet(A_1,B) \oplus H_\bullet(A_2,B)$ with $H_\bullet(i_1)(x_1) - H_\bullet(i_2)(x_2) = 0$. Then $0 = H_\bullet(b)H_\bullet(i_1)(x_1) - H_\bullet(b)H_\bullet(i_2)(x_2) = H_\bullet(b)H_\bullet(i_1)(x_1) = H_\bullet(e) H_\bullet(\widetilde{b})(x_1)$, so $x_1 \in \ker H_\bullet(\widetilde{b}) = \im H_\bullet(i_1)$ and we find $y \in H_\bullet(A_1 \intersection A_2, B)$ with $H_\bullet(i_1)(y) = x_1$. Furthermore $z = H_\bullet(i_2)(y)$ satisfies $H_\bullet(j_2)(z) = H_\bullet(j_2)(x_2)$, so $x_2-z \in \ker H_\bullet(j_2) = \im \Delta_{\bullet+1}^{(X,2,B)} = \im (\Delta_{\bullet+1}H_{\bullet+1}(e))$ and we find a corresponding $w \in H_{\bullet+1}(A_1,A_1\intersection A_2)$. Let $u = \Delta_{\bullet+1}^{(1,12,B)}(w)$ and note that $H_\bullet(i_1)(u+y) = 0+x_1$ and $H_\bullet(i_2)(u+y) = x_2 - z + z$.
+		\end{tab}
+
+		Exactness at $H_\bullet(X,B)$:
+		\begin{tab}
+			Let $x \in \ker \nu_\bullet = \ker \Delta_\bullet^{(1,12,B)}H_\bullet(e)^{-1}H_\bullet(b)$. Now either  $x \in \ker H_\bullet(b) = \im H_\bullet(j_2)$ and we find $z_2 \in H_\bullet(A_2,B)$ with $x = -H_\bullet(i_2)(z_2)$ or $y = H_\bullet(e)^{-1}H_\bullet(b)(x) \in \ker \Delta_\bullet^{(1,12,B)} = \im H_\bullet(\widetilde{b})$. In the latter case there is a $z_1 \in H_\bullet(A_1,B)$ such that $H_\bullet(e)^{-1}H_\bullet(b)H_\bullet(j_1)(z_1) = H_\bullet(\widetilde{b}) = y$. Hence $x$ can be represented as $x = H_\bullet(j_1)(z_1) - H_\bullet(j_2)(z_2)$.
+		\end{tab}
+	\end{sketch}
 
 	\begin{proposition}[Homology of CNDRs]
 		Let $(H_\bullet, \partial_\bullet)$ be a generalized homology theory and $(X,A)$ a pair of spaces such that $A$ is a CNDR of $X$.

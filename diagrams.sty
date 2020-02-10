@@ -4,6 +4,7 @@
 \ProvidesPackage{diagrams}
 
 \RequirePackage{xparse} % better command definition
+\RequirePackage{xstring} % strings
 \RequirePackage{tikz}
 	\usetikzlibrary{matrix} % node placement
 	\usetikzlibrary{calc} % calculation
@@ -400,6 +401,52 @@
 }
 \makeatother
 
+% A B C D E
+% F G H I J
+\makeatletter
+\NewDocumentCommand{\fivebytwo}{omomomomo}{
+	\def\tempmatopt{\IfNoValueTF{#1}{}{#1}}
+	\def\tempa{\IfNoValueTF{#2}{}{#2}}
+	\def\tempaopt{\IfNoValueTF{#3}{}{#3}}
+	\def\tempb{\IfNoValueTF{#4}{}{#4}}
+	\def\tempbopt{\IfNoValueTF{#5}{}{#5}}
+	\def\tempc{\IfNoValueTF{#6}{}{#6}}
+	\def\tempcopt{\IfNoValueTF{#7}{}{#7}}
+	\def\tempd{\IfNoValueTF{#8}{}{#8}}
+	\def\tempdopt{\IfNoValueTF{#9}{}{#9}}
+	\@fivebytwocont
+}
+\NewDocumentCommand{\@fivebytwocont}{momomomom}{
+	\def\tempe{\IfNoValueTF{#1}{}{#1}}
+	\def\tempeopt{\IfNoValueTF{#2}{}{#2}}
+	\def\tempf{\IfNoValueTF{#3}{}{#3}}
+	\def\tempfopt{\IfNoValueTF{#4}{}{#4}}
+	\def\tempg{\IfNoValueTF{#5}{}{#5}}
+	\def\tempgopt{\IfNoValueTF{#6}{}{#6}}
+	\def\temph{\IfNoValueTF{#7}{}{#7}}
+	\def\temphopt{\IfNoValueTF{#8}{}{#8}}
+	\def\tempi{\IfNoValueTF{#9}{}{#9}}
+	\@fivebytwocontcont
+}
+\NewDocumentCommand{\@fivebytwocontcont}{omo}{
+	\def\tempiopt{\IfNoValueTF{#1}{}{#1}}
+	\def\tempj{\IfNoValueTF{#2}{}{#2}}
+	\def\tempjopt{\IfNoValueTF{#3}{}{#3}}
+	\matrix[objects,\tempmatopt]{
+		\node[\tempaopt] (nww) {\ensuremath{\tempa}};\&
+		\node[\tempbopt] (nw) {\ensuremath{\tempb}};\&
+		\node[\tempcopt] (n) {\ensuremath{\tempc}};\&
+		\node[\tempdopt] (ne) {\ensuremath{\tempd}};\&
+		\node[\tempeopt] (nee) {\ensuremath{\tempe}};\\
+		\node[\tempfopt] (sww) {\ensuremath{\tempf}};\&
+		\node[\tempgopt] (sw) {\ensuremath{\tempg}};\&
+		\node[\temphopt] (s) {\ensuremath{\temph}};\&
+		\node[\tempiopt] (se) {\ensuremath{\tempi}};\&
+		\node[\tempjopt] (see) {\ensuremath{\tempj}};\\
+	};
+}
+\makeatother
+
 % A B C
 % D E F
 % G H I
@@ -685,6 +732,74 @@
 		\node[\tempmopt] (ssw) {\ensuremath{\tempm}};\&
 		\node[\tempnopt] (ss) {\ensuremath{\tempn}};\&
 		\node[\tempoopt] (sse) {\ensuremath{\tempo}};\\
+	};
+}
+\makeatother
+
+% A B C
+% D E F
+% G H I
+% J K L
+% M N O
+\makeatletter
+\NewDocumentCommand{\fivebythree}{omomomomo}{
+	\def\tempmatopt{\IfNoValueTF{#1}{}{#1}}
+	\def\tempa{\IfNoValueTF{#2}{}{#2}}
+	\def\tempaopt{\IfNoValueTF{#3}{}{#3}}
+	\def\tempb{\IfNoValueTF{#4}{}{#4}}
+	\def\tempbopt{\IfNoValueTF{#5}{}{#5}}
+	\def\tempc{\IfNoValueTF{#6}{}{#6}}
+	\def\tempcopt{\IfNoValueTF{#7}{}{#7}}
+	\def\tempd{\IfNoValueTF{#8}{}{#8}}
+	\def\tempdopt{\IfNoValueTF{#9}{}{#9}}
+	\@fivebythreecont
+}
+\NewDocumentCommand{\@fivebythreecont}{momomomom}{
+	\def\tempe{\IfNoValueTF{#1}{}{#1}}
+	\def\tempeopt{\IfNoValueTF{#2}{}{#2}}
+	\def\tempf{\IfNoValueTF{#3}{}{#3}}
+	\def\tempfopt{\IfNoValueTF{#4}{}{#4}}
+	\def\tempg{\IfNoValueTF{#5}{}{#5}}
+	\def\tempgopt{\IfNoValueTF{#6}{}{#6}}
+	\def\temph{\IfNoValueTF{#7}{}{#7}}
+	\def\temphopt{\IfNoValueTF{#8}{}{#8}}
+	\def\tempi{\IfNoValueTF{#9}{}{#9}}
+	\@fivebythreecontcont
+}
+\NewDocumentCommand{\@fivebythreecontcont}{omomomomo}{
+	\def\tempiopt{\IfNoValueTF{#1}{}{#1}}
+	\def\tempj{\IfNoValueTF{#2}{}{#2}}
+	\def\tempjopt{\IfNoValueTF{#3}{}{#3}}
+	\def\tempk{\IfNoValueTF{#4}{}{#4}}
+	\def\tempkopt{\IfNoValueTF{#5}{}{#5}}
+	\def\templ{\IfNoValueTF{#6}{}{#6}}
+	\def\templopt{\IfNoValueTF{#7}{}{#7}}
+	\def\tempm{\IfNoValueTF{#8}{}{#8}}
+	\def\tempmopt{\IfNoValueTF{#9}{}{#9}}
+	\@fivebythreecontcontcont
+}
+
+\NewDocumentCommand{\@fivebythreecontcontcont}{momo}{
+	\def\tempn{\IfNoValueTF{#1}{}{#1}}
+	\def\tempnopt{\IfNoValueTF{#2}{}{#2}}
+	\def\tempo{\IfNoValueTF{#3}{}{#3}}
+	\def\tempoopt{\IfNoValueTF{#4}{}{#4}}
+	\matrix[objects,\tempmatopt]{
+		\node[\tempaopt] (nww) {\ensuremath{\tempa}};\&
+		\node[\tempbopt] (nw) {\ensuremath{\tempb}};\&
+		\node[\tempcopt] (n) {\ensuremath{\tempc}};\&
+		\node[\tempdopt] (ne) {\ensuremath{\tempd}};\&
+		\node[\tempeopt] (nee) {\ensuremath{\tempe}};\\
+		\node[\tempfopt] (ww) {\ensuremath{\tempf}};\&
+		\node[\tempgopt] (w) {\ensuremath{\tempg}};\&
+		\node[\temphopt] (c) {\ensuremath{\temph}};\&
+		\node[\tempiopt] (e) {\ensuremath{\tempi}};\&
+		\node[\tempjopt] (ee) {\ensuremath{\tempj}};\\
+		\node[\tempkopt] (sww) {\ensuremath{\tempk}};\&
+		\node[\templopt] (sw) {\ensuremath{\templ}};\&
+		\node[\tempmopt] (s) {\ensuremath{\tempm}};\&
+		\node[\tempnopt] (se) {\ensuremath{\tempn}};\&
+		\node[\tempoopt] (see) {\ensuremath{\tempo}};\\
 	};
 }
 \makeatother
