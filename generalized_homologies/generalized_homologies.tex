@@ -245,7 +245,7 @@
 				\arrow{c}{e}{}
 			\end{diagram}
 		\end{equation*}
-		the following sequence is exact.
+		the following sequence is exact and natural in $(A,B)$.
 		\begin{equation*}
 			...
 			\begin{diagram}
@@ -260,6 +260,142 @@
 			...
 		\end{equation*}
 	\end{proposition}
+	\begin{sketch}
+		Consider the following diagram obtained by braiding the long exact sequences of \textcolor{red}{$(X,A)$}, \textcolor{darkgreen}{$(A,B)$} and \textcolor{blue}{$(X,B)$}.
+		\begin{equation*}
+			\hspace{-.5cm}
+			\begin{diagram}
+				\matrix[objects,wide]{
+					\node[] (a1) {\ensuremath{H_{\bullet+1}(X,A)}};\&\&
+					\node[] (a2) {\ensuremath{H_\bullet(A,B)}};\&\&
+					\node[] (a3) {\ensuremath{H_{\bullet-1}(B)}};\&\&
+					\node[] (a4) {\ensuremath{H_{\bullet-1}(X)}};\\\&
+					\node[] (b1) {\ensuremath{H_\bullet(A)}};\&\&
+					\node[] (b2) {\ensuremath{H_\bullet(X,B)}};\&\&
+					\node[] (b3) {\ensuremath{H_{\bullet-1}(A)}};\&\\
+					\node[] (c1) {\ensuremath{H_\bullet(B)}};\&\&
+					\node[] (c2) {\ensuremath{H_\bullet(X)}};\&\&
+					\node[] (c3) {\ensuremath{H_\bullet(X,A)}};\&\&
+					\node[] (c4) {\ensuremath{H_{\bullet-1}(A,B)}};\\
+				};
+
+				\arrow[red]{a1}{b1}{\partial_{\bullet+1}}[above right]
+				\arrow[red]{b1}{c2}{}
+				\arrow[red,bend right]{c2}{c3}{}
+				\arrow[red]{c3}{b3}{\partial_\bullet}[below right]
+				\arrow[red]{b3}{a4}{}
+
+				\arrow[darkgreen]{c1}{b1}{}
+				\arrow[darkgreen]{b1}{a2}{}
+				\arrow[darkgreen,bend left]{a2}{a3}{\partial_\bullet}[above]
+				\arrow[darkgreen]{a3}{b3}{}
+				\arrow[darkgreen]{b3}{c4}{}
+
+				\arrow[blue,bend right]{c1}{c2}{}
+				\arrow[blue]{c2}{b2}{}
+				\arrow[blue]{b2}{a3}{\partial_\bullet}[above left]
+				\arrow[blue,bend left]{a3}{a4}{}
+
+				\arrow[bend left]{a1}{a2}{\Delta_{\bullet+1}}[above]
+				\arrow{a2}{b2}{H_\bullet(i)}[above right]
+				\arrow{b2}{c3}{H_\bullet(j)}[below left]
+				\arrow[bend right]{c3}{c4}{\Delta_\bullet}[below]
+			\end{diagram}
+		\end{equation*}
+
+		Complex at $H_\bullet(A,B)$ and $H_\bullet(X,A)$ follow immediately from the commutativity of the diagram.
+
+		Complex at $H_\bullet(X,B)$:
+		\begin{tab}
+			The composite $H_\bullet(A,B) --> H_\bullet(X,B) --> H_\bullet(X,A)$ factors through $H_\bullet(A,A) = 0$.
+		\end{tab}
+
+		Exactness at $H_\bullet(A,B)$: Consider $x \in \ker H_\bullet(i)$, find by using exactness of the corresponding long exact sequences elements $y,z,w,v$ via
+		\begin{equation*}
+			\begin{diagram}
+				\matrix[objects,small]{
+					\node[] (a1) {\ensuremath{}};\&\&
+					\node[] (a2) {\ensuremath{x}};\&\&
+					\node[] (a3) {\ensuremath{0}};\\\&
+					\node[] (b1) {\ensuremath{y}};\&\&
+					\node[] (b2) {\ensuremath{0}};\&\\
+					\node[] (c1) {\ensuremath{u}};\&\&
+					\node[] (c2) {\ensuremath{z}};\&\&
+					\node[] (c3) {\ensuremath{}};\\
+				};
+				\node (v) at ($(b1)+(-.5,-.3)$) {\ensuremath{v}};
+
+				\arrow[mapsto,bend left]{a2}{a3}{}
+				\arrow[mapsto]{a2}{b2}{}
+				\arrow[mapsto]{b1}{a2}{}
+				\arrow[mapsto]{b1}{c2}{}
+				\arrow[mapsto]{c2}{b2}{}
+				\arrow[mapsto,bend right]{c1}{c2}{}
+				\arrow[mapsto]{c1}{v}{}
+				\arrow[mapsto]{v}{c2}{}
+			\end{diagram}
+			\text{ and get }
+			\begin{diagram}
+				\matrix[objects,small]{
+					\node[] (a1) {\ensuremath{w}};\&\&
+					\node[] (a2) {\ensuremath{x}};\\\&
+					\node[] (b1) {\ensuremath{y-v}};\&\\
+					\node[] (c1) {\ensuremath{}};\&\&
+					\node[] (c2) {\ensuremath{0}};\\
+				};
+
+				\arrow[mapsto,bend left]{a1}{a2}{}
+				\arrow[mapsto]{a1}{b1}{}
+				\arrow[mapsto]{b1}{c2}{}
+				\arrow[mapsto]{b1}{a2}{}
+			\end{diagram}
+		\end{equation*}
+
+		Exactness at $H_\bullet(X,B)$: Let $x \in \ker H_\bullet(j)$ and by the following diagram chase we find $H_\bullet(i)(z+r) = x$.
+		\begin{equation*}
+			\begin{diagram}
+				\matrix[objects,small]{
+					\node[] (a1) {\ensuremath{z}};\&\&
+					\node[] (a2) {\ensuremath{y}};\&\&
+					\node[] (a3) {\ensuremath{}};\\\&
+					\node[] (b1) {\ensuremath{x}};\&\&
+					\node[] (b2) {\ensuremath{0}};\&\\
+					\node[] (c1) {\ensuremath{}};\&\&
+					\node[] (c2) {\ensuremath{0}};\&\&
+					\node[] (c3) {\ensuremath{}};\\
+				};
+				\node (u) at ($(b1)+(-.3,-.2)$) {\ensuremath{u}};
+
+				\arrow[mapsto,bend left]{a1}{a2}{}
+				\arrow[mapsto]{a2}{b2}{}
+				\arrow[mapsto]{b1}{a2}{}
+				\arrow[mapsto]{b1}{c2}{}
+				\arrow[mapsto]{c2}{b2}{}
+				\arrow[mapsto]{a1}{u}{}
+			\end{diagram}
+			\hspace{-1cm}
+			\text{ and then }
+			\hspace{-1cm}
+			\begin{diagram}
+				\matrix[objects,small]{
+					\node[] (a1) {\ensuremath{}};\&\&
+					\node[] (a2) {\ensuremath{r}};\&\&
+					\node[] (a3) {\ensuremath{}};\\\&
+					\node[] (b1) {\ensuremath{w}};\&\&
+					\node[] (b2) {\ensuremath{x-u}};\&\\
+					\node[] (c1) {\ensuremath{}};\&\&
+					\node[] (c2) {\ensuremath{v}};\&\&
+					\node[] (c3) {\ensuremath{0}};\\
+				};
+
+				\arrow[mapsto]{b2}{c3}{}
+				\arrow[mapsto]{c2}{b2}{}
+				\arrow[mapsto,bend right]{c2}{c3}{}
+				\arrow[mapsto]{b1}{c2}{}
+				\arrow[mapsto]{b1}{a2}{}
+			\end{diagram}
+		\end{equation*}
+	\end{sketch}
 
 	\begin{proposition}[Mayer Vietoris]
 		Let $(H_\bullet,\partial_\bullet)$ be a generalized homology theory and $B \subseteq A_1,A_2 \subseteq X$ in $\ncat{Top}$, such that $X \subseteq \interior(A_1) \union \interior(A_2)$.
@@ -267,19 +403,17 @@
 		Name the canonical morphisms temporarily like
 		\begin{equation*}
 			\begin{diagram}
-				\fivebythree[verywide]
-					{}{}{(A_1,B)}{}{(A_1,A_1\intersection A_2)}
-					{(A_1 \intersection A_2)}{(A_1 \intersection A_2, B)}{}{(X,B)}{(X,A_2)}
-					{}{}{(A_2,B)}{}{}
+				\threebytwo[verywide]
+					{(A_1 \intersection A_2, B)}{(A_1,B)}{(A_1,A_1\intersection A_2)}
+					{(A_2,B)}{(X,B)}{(X,A_2)}
 
-					\arrow{w}{n}{i_1}[above left]
-					\arrow{w}{s}{i_2}[below left]
-					\arrow{n}{e}{j_1}[above right]
-					\arrow{s}{e}{j_2}[below right]
-					\arrow{e}{ee}{b}[above]
-					\arrow{nee}{ee}{e}[left]
-					\arrow{ww}{w}{a}[above]
-					\arrow{n}{nee}{\widetilde{b}}[above]
+					\arrow{nw}{n}{i_1}[above]
+					\arrow{nw}{sw}{i_2}[left]
+					\arrow{n}{s}{j_1}[right]
+					\arrow{sw}{s}{j_2}[below]
+					\arrow{s}{se}{b}[below]
+					\arrow{ne}{se}{e}[right]
+					\arrow{n}{ne}{\widetilde{b}}[above]
 			\end{diagram}
 		\end{equation*}
 
@@ -368,6 +502,7 @@
 		\begin{tab}
 			Let $x \in \ker \nu_\bullet = \ker \Delta_\bullet^{(1,12,B)}H_\bullet(e)^{-1}H_\bullet(b)$. Now either  $x \in \ker H_\bullet(b) = \im H_\bullet(j_2)$ and we find $z_2 \in H_\bullet(A_2,B)$ with $x = -H_\bullet(i_2)(z_2)$ or $y = H_\bullet(e)^{-1}H_\bullet(b)(x) \in \ker \Delta_\bullet^{(1,12,B)} = \im H_\bullet(\widetilde{b})$. In the latter case there is a $z_1 \in H_\bullet(A_1,B)$ such that $H_\bullet(e)^{-1}H_\bullet(b)H_\bullet(j_1)(z_1) = H_\bullet(\widetilde{b}) = y$. Hence $x$ can be represented as $x = H_\bullet(j_1)(z_1) - H_\bullet(j_2)(z_2)$.
 		\end{tab}
+		\TODO{diagram chase as diagrams}
 	\end{sketch}
 
 	\begin{proposition}[Homology of CNDRs]
