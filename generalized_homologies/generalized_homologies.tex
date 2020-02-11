@@ -305,10 +305,7 @@
 
 		Complex at $H_\bullet(A,B)$ and $H_\bullet(X,A)$ follow immediately from the commutativity of the diagram.
 
-		Complex at $H_\bullet(X,B)$:
-		\begin{tab}
-			The composite $H_\bullet(A,B) --> H_\bullet(X,B) --> H_\bullet(X,A)$ factors through $H_\bullet(A,A) = 0$.
-		\end{tab}
+		Complex at $H_\bullet(X,B)$: The composite $H_\bullet(A,B) --> H_\bullet(X,B) --> H_\bullet(X,A)$ factors through $H_\bullet(A,A) = 0$.
 
 		Exactness at $H_\bullet(A,B)$: Consider $x \in \ker H_\bullet(i)$. By the following diagram chase we obtain $\Delta_{\bullet+1}(w) = x$.
 		\begin{equation*}
@@ -794,6 +791,9 @@
 			\end{diagram}
 		\end{equation*}
 	\end{lemma}
+	\begin{sketch}
+		Follows immediately from unreduced Mayer Vietories.
+	\end{sketch}
 
 	\newpage
 	\subsection{Examples and Applications}
@@ -878,6 +878,29 @@
 		implies $m=n$.
 	\end{proof}
 
+	\begin{theorem}[Brouwers Fixed Point Theorem]
+		Let $(H_\bullet, \partial_\bullet)$ be a nontrivial ordinary additive homology theory.
+
+		For any $n\in \N$ $\D^n$ does not retract onto it's boundary $\S^{n-1}$. This is equivalent to the statement that every continuous map $f:\D^n --> \D^n$ has a fixed point.
+	\end{theorem}
+	\begin{sketch}
+		\textit{Assume} there is a retraction $r: \D^n --> \S^{n-1}$ of the embedding $i:\S^{n-1} --> \D^n$.
+		\begin{tab}[1.3cm]
+			Then $\id_{M_0} = \id_{\widetilde{H}_{n-1}(\S^{n-1})} = \widetilde{H}_{n-1}(\id_{\S^{n-1}}) = \widetilde{H}_{n-1}(ri)$ factorizes over $\widetilde{H}_{n-1}(\D^n,p) = 0$, where $p$ is a point on $\S^{n-1}$. A contradiction.
+		\end{tab}
+
+		If $f:\D^n --> \D^n$ has no fixed point, we can define a continous map 
+		\begin{equation*}
+			\begin{array}{rccl}
+				r:&\D^n & \longrightarrow & \S^{n-1}\\
+				&p & \longmapsto & f(p) + \sigma(p)(p - f(p)),
+			\end{array}
+		\end{equation*}
+		where $\sigma:\D^n --> [0,\infty)$ is the continous function calculating the intersection of the ray from $f(p)$ to $p$ with the boundary, ie. satisfying $\Vert f(p) + \sigma(p)(p - f(p))\Vert = 1$. Clearly this defines a retraction of $\S^n$.
+
+		\TODO{converse?}
+	\end{sketch}
+
 	\begin{lemma}[Homology of Wedge Sums of Circles]
 		\TODO{Wedge sums of circles}
 	\end{lemma}
@@ -886,7 +909,50 @@
 		\TODO{Torus and higher genus}
 	\end{lemma}
 
+	To abbreviate following statements, we make the following nonstandard definition.
+
+	\begin{definition}
+		Let $R$ be a (commutative unital) ring. An $R$-\textbf{homology theory} is an ordinary additive homology theory, whose module of coefficients is $M_0 = R$.
+	\end{definition}
+
 	\TODO{degree and hairy ball theorem, fundamental theorem of algebra}
+
+	Recall that any morphism of $R$-modules $f:R --> R$ is given by multiplication with $r = f(1)$.
+
+	\begin{definition}
+		Let $(H_\bullet,\partial_\bullet)$ be an $R$-homology theory and fix an isomorphisms $\widetilde{H}_n(\S^n,x) \isom R$. The \textbf{$R$-degree} of a morphism $f:(\S^n,x_0) --> (\S^n,x_1)$ in $\ncat{Top}_{*}$ is the element $\deg_R(f) := \tilde{f}(1)$ in $R$ for the morphism $\tilde f$ defined by the composition
+		\begin{equation*}
+			R \isom \widetilde{H}_n(\S^n,x_0) \xrightarrow{\widetilde{H}_n(f)} \widetilde{H}_n(\S^n,x_1)\isom R
+		\end{equation*}
+
+		By construction $\deg_R(gf) = \deg_R(g)\deg_R(f)$ and $\deg_R(\id) = 1$ in $R$. Thus we have a morphism of monoids
+		\begin{equation*}
+			\deg_R: \End_\ncat{Top}(\S^n) \longrightarrow (R,\cdot).
+		\end{equation*}
+	\end{definition}
+
+	\begin{theorem}[Fundamental Theorem of Algebra]
+		Every nonconstant polynomial in $\C[X]$ has a zero.
+	\end{theorem}
+	\begin{sketch}
+		\textit{Assume} there is $\smash{p(X) = \sum \limits_{k=0}^n a_kX^k}$ without a zero and consider it as $p:\C --> \C$.
+		\begin{tab}[1.3cm]
+			For any $t \in \R$ the map $f_t$ is nullhomotopic via $h_t$
+			\begin{equation*}
+				\begin{array}{rcc}
+					f_t: \S^1 & \longrightarrow & \D^2\\
+					z & \longmapsto & \dfrac{p(tz)}{\Norm{p(tz)}}
+				\end{array}
+				\hspace{1cm}
+				\begin{array}{rcl}
+					h_t: [0,1] \times \S^1 & \longrightarrow & \D^2\\
+					 (s,z) & \longmapsto & s\dfrac{p(tz)}{\Norm{p(tz)}}
+				\end{array}
+				\hspace{1.5cm}
+			\end{equation*}
+			and thus $\deg f_t = 0$.
+		\end{tab}
+	\end{sketch}
 
 	\newpage
 	\subsection{CW-complexes and Cellular Homology}
@@ -1646,10 +1712,6 @@
 	\newpage
 	\subsection{Homological Orientation, Fundamental Classes and Degree}
 
-	\begin{definition}
-		Let $R$ be a (commutative unital) ring. An $R$-\textbf{homology theory} is an ordinary additive homology theory, whose module of coefficients is $M_0 = R$.
-	\end{definition}
-
 	\begin{lemma}
 		Let $(H_\bullet,\partial_\bullet)$ be an $R$-homology theory.
 
@@ -1736,20 +1798,4 @@
 	\begin{definition}
 		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory and $X$ be an $n$-dimensional, closed, connected, $R$-orientable, topological manifold. A generator $[X]$ of $H_n(X)$ is called a \textbf{fundamental class} of $X$.
 	\end{definition}
-
-	Recall that any morphism of $R$-modules $f:R --> R$ is given by multiplication with $r = f(1)$.
-
-	\begin{definition}
-		Let $(H_\bullet,\partial_\bullet)$ be an $R$-homology theory and fix an isomorphism $H_n(\S^n) \isom R$. The $R$-degree of a continuous function $f:\S^n --> \S^n$ is the element $\deg_R(f) := \tilde{f}(1)$ in $R$ for the morphism $\tilde f$ defined by the composition
-		\begin{equation*}
-			R \isom H_n(\S^n) \xrightarrow{H_n(f)} H_n(\S^n)\isom R
-		\end{equation*}
-	\end{definition}
-
-	\begin{remark}
-		By construction $\deg_R(gf) = \deg_R(g)\deg_R(f)$ and $\deg_R(\id) = 1$ in $R$. Thus we have a morphism of monoids
-		\begin{equation*}
-			\deg_R: \End_\ncat{Top}(\S^n) \longrightarrow (R,\cdot).
-		\end{equation*}
-	\end{remark}
 \end{document}
