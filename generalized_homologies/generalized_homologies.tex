@@ -310,7 +310,7 @@
 			The composite $H_\bullet(A,B) --> H_\bullet(X,B) --> H_\bullet(X,A)$ factors through $H_\bullet(A,A) = 0$.
 		\end{tab}
 
-		Exactness at $H_\bullet(A,B)$: Consider $x \in \ker H_\bullet(i)$, find by using exactness of the corresponding long exact sequences elements $y,z,w,v$ via
+		Exactness at $H_\bullet(A,B)$: Consider $x \in \ker H_\bullet(i)$. By the following diagram chase we obtain $\Delta_{\bullet+1}(w) = x$.
 		\begin{equation*}
 			\begin{diagram}
 				\matrix[objects,small]{
@@ -334,7 +334,7 @@
 				\arrow[mapsto]{c1}{v}{}
 				\arrow[mapsto]{v}{c2}{}
 			\end{diagram}
-			\text{ and get }
+			\text{ and }
 			\begin{diagram}
 				\matrix[objects,small]{
 					\node[] (a1) {\ensuremath{w}};\&\&
@@ -349,6 +349,7 @@
 				\arrow[mapsto]{b1}{c2}{}
 				\arrow[mapsto]{b1}{a2}{}
 			\end{diagram}
+			\hspace{3cm}
 		\end{equation*}
 
 		Exactness at $H_\bullet(X,B)$: Let $x \in \ker H_\bullet(j)$ and by the following diagram chase we find $H_\bullet(i)(z+r) = x$.
@@ -364,7 +365,7 @@
 					\node[] (c2) {\ensuremath{0}};\&\&
 					\node[] (c3) {\ensuremath{}};\\
 				};
-				\node (u) at ($(b1)+(-.3,-.2)$) {\ensuremath{u}};
+				\node (u) at ($(b1)+(-.3,.3)$) {\ensuremath{u}};
 
 				\arrow[mapsto,bend left]{a1}{a2}{}
 				\arrow[mapsto]{a2}{b2}{}
@@ -372,15 +373,16 @@
 				\arrow[mapsto]{b1}{c2}{}
 				\arrow[mapsto]{c2}{b2}{}
 				\arrow[mapsto]{a1}{u}{}
+				\arrow[mapsto]{u}{a2}{}
 			\end{diagram}
 			\hspace{-1cm}
-			\text{ and then }
+			\text{ and }
 			\hspace{-1cm}
 			\begin{diagram}
 				\matrix[objects,small]{
 					\node[] (a1) {\ensuremath{}};\&\&
 					\node[] (a2) {\ensuremath{r}};\&\&
-					\node[] (a3) {\ensuremath{}};\\\&
+					\node[] (a3) {\ensuremath{0}};\\\&
 					\node[] (b1) {\ensuremath{w}};\&\&
 					\node[] (b2) {\ensuremath{x-u}};\&\\
 					\node[] (c1) {\ensuremath{}};\&\&
@@ -393,6 +395,52 @@
 				\arrow[mapsto,bend right]{c2}{c3}{}
 				\arrow[mapsto]{b1}{c2}{}
 				\arrow[mapsto]{b1}{a2}{}
+				\arrow[mapsto]{b2}{a3}{}
+			\end{diagram}
+		\end{equation*}
+
+		Exactness at $H_\bullet(X,A)$: Suppose $x \in \ker \Delta_\bullet$. By the following diagram chase we obtain $H_\bullet(j)(r+u) = x$.
+		\begin{equation*}
+			\begin{diagram}
+				\matrix[objects,small]{
+					\node[] (a1) {\ensuremath{}};\&\&
+					\node[] (a2) {\ensuremath{z}};\&\&
+					\node[] (a3) {\ensuremath{0}};\\\&
+					\node[] (b1) {\ensuremath{u}};\&\&
+					\node[] (b2) {\ensuremath{y}};\&\\
+					\node[] (c1) {\ensuremath{}};\&\&
+					\node[] (c2) {\ensuremath{x}};\&\&
+					\node[] (c3) {\ensuremath{0}};\\
+				};
+				\node (v) at ($(c2)+(-.3,.3)$) {\ensuremath{v}};
+
+				\arrow[mapsto,bend left]{a2}{a3}{}
+				\arrow[mapsto]{a2}{b2}{}
+				\arrow[mapsto]{b1}{a2}{}
+				\arrow[mapsto]{b2}{a3}{}
+				\arrow[mapsto,bend right]{c2}{c3}{}
+				\arrow[mapsto]{c2}{b2}{}
+				\arrow[mapsto]{b2}{c3}{}
+				\arrow[mapsto]{b1}{v}{}
+				\arrow[mapsto]{v}{b2}{}
+			\end{diagram}
+			\text{ and }
+			\begin{diagram}
+				\matrix[objects,small]{
+					\node[] (a1) {\ensuremath{}};\&\&
+					\node[] (a2) {\ensuremath{}};\&\&
+					\node[] (a3) {\ensuremath{}};\\\&
+					\node[] (b1) {\ensuremath{r}};\&\&
+					\node[] (b2) {\ensuremath{0}};\&\\
+					\node[] (c1) {\ensuremath{w}};\&\&
+					\node[] (c2) {\ensuremath{x-v}};\&\&
+					\node[] (c3) {\ensuremath{}};\\
+				};
+
+				\arrow[mapsto,bend right]{c1}{c2}{}
+				\arrow[mapsto]{c2}{b2}{}
+				\arrow[mapsto]{c1}{b1}{}
+				\arrow[mapsto]{b1}{c2}{}
 			\end{diagram}
 		\end{equation*}
 	\end{sketch}
