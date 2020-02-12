@@ -1709,39 +1709,126 @@
 	\newpage
 	\subsection{Special Properties of Singular Homology}
 
-	\begin{lemma}[Filtration]
-		Let $(X,A)$ be a pair of spaces and $A \subseteq U_0 \subseteq U_1 \subseteq ... \;X = \smash{\colim \limits_{i\in \N_0}U_i}$ a filtration of $X$ by open subsets. Then the canonical morphism
+	\begin{lemma}
+		Let $X$ be a topological space. Then there is a natural isomorphism
 		\begin{equation*}
-			\colim \limits_{i \in \N_0} H^\text{sing}(U_i,A) \longrightarrow H^\text{sing}(X,A)
+			H_0^\text{sing}(X) \isom \Z[\largepi_0(X)]
 		\end{equation*}
-		is an isomorphism.
+		where $\largepi_0(X)$ denotes the set of path components of $X$.
 	\end{lemma}
 	\begin{sketch}
-		Note that every compact subset $K \subseteq X$ is contained in some $U_i$, since $(K \intersection U_i)_i$ is an open cover of $K$. In particular, given $n \in \N_0$ for any $n$-cycle $c$ in $C_n^\text{sing}(X)$ the support is contained in some $U_i$.
-
-		The 
+		Use the identifications from remark \TODO{cite} and that $\Z[-]$ is a left adjoint to calculate
+		\begin{align*}
+			H_0^\text{sing}(X) &\isom \coker \left(
+				\begin{diagram}
+					\twobyone[ultrawide]
+						{\Z[\ncat{Top}([0,1],X)]}{\Z[\ncat{Top}(*,X)]}
+					\arrow{w}{e}{\gamma(1) - \gamma(0)}[gray,above]
+				\end{diagram}
+			 \right)\\
+			 &= \coeq \left(
+				\begin{diagram}
+					\twobyone[ultrawide]
+						{\Z[\ncat{Top}([0,1],X)]}{\Z[\ncat{Top}(*,X)]}
+					\arrow[higher]{w}{e}{\gamma(1)}[gray,above]
+					\arrow[lower]{w}{e}{\gamma(0)}[gray,below]
+				\end{diagram}
+			 \right)\\
+			 &\isom \Z\left [\coeq \left(
+ 				\begin{diagram}
+ 					\twobyone[verywide]
+ 						{\ncat{Top}([0,1],X)}{\ncat{Top}(*,X)}
+ 					\arrow[higher]{w}{e}{}
+ 					\arrow[lower]{w}{e}{}
+ 				\end{diagram}
+ 			 \right)\right]\\
+ 			 &\isom \Z[\largepi_0(X)].
+		\end{align*}
+		{\vspace{-2em}}
 	\end{sketch}
 
 	\begin{proposition}
-		Singular homology preserves filtered colimits, ie. the canonical morphism 
-		\begin{align*}
-			\fcolim \limits_{i \in I} H_\bullet^\text{sing}(X_i,A_i) --> H_\bullet^\text{sing}(\fcolim \limits_{i \in I} (X_i,A_i))
-		\end{align*}
+		Let $(X,A)$ be a pair of spaces and $A \subseteq X_0 \subseteq X_1 \subseteq ... \;X = \smash{\colim \limits_{i\in \N_0}U_i}$ a filtration of $X$. Then the canonical morphism
+		\begin{equation*}
+			\colim \limits_{i \in \N_0} H^\text{sing}(X_i,A) \xrightarrow{\pi} H^\text{sing}(X,A)
+		\end{equation*}
 		is an isomorphism.
-
-		In particular, given a filtration $A \subseteq U_0 \subseteq U_1 \subseteq ... \;X = \smash{\colim \limits_{i\in \N_0}U_i}$ of $X$ by open subsets $U_i$ we have $$\colim_i H_\bullet^\text{sing}(U_i) \isom H_\bullet^\text{sing}(X).$$
 	\end{proposition}
 	\begin{sketch}
-		Surjective:
-		\begin{tab}
-			Let $[[c]] \in H_n^\text{sing}(X,A)$, i.e. $[c] \in C_n^\text{sing}(X,A)$ and $c \in C_n^\text{sing}(X)$.
+		Note that every compact subset $K \subseteq X$ is contained in some $X_i$, since $(K \intersection \int X_i)_i$ is an open cover of $K$. In particular for any $n$-cycle $c \in C_n^\text{sing}(X)$ the support is contained in some $X_i$, hence all $n$-simplices contributing to $c$ have their image in $X_i$ and can be identified with $n$-simplices in $X_i$. Therefore $c$ can be seen as a chain $c' \in C_n^\text{sing}(X_i)$.
+
+		We first show that $\pi$ is surjective, so let $[[c]] \in H_n^\text{sing}(X,A)$. By the previous argument $c \in C_n^\text{sing}(X)$ can be identified with a cycle $c' \in C_n^\text{sing}(X_i)$, which gives $[[c']] \in H_n^\text{sing}(X_i,A)$ with $\pi([[c']]) = [[c]].$
+
+		\textbf{Warning}: 
+		\vspace{-1.8em}
+		\begin{tab}[2cm]
+			In the following the class $[c]$ will be considered as an element of $C_n^\text{sing}(X_i,A)$, $C_n^\text{sing}(X_j,A)$ and $C_n^\text{sing}(X,A)$ depending on the context. I did not find a way around this without notation getting out of hand.
 		\end{tab}
+
+		To show injectivity let $[[c]] \in H_n(X_i,A)$ be a representative of an homology class in $\colim \limits_{i \in \N_0} H_n^\text{sing}(U_i,A)$, which is mapped to $0 \in H_n^\text{sing}(X,A)$. This means that there is an ($n+1$)-chain $[d] \in C_{n+1}(X,A)$ such that $[c] - \partial_{n+1}([d]) = 0 \in C_n^\text{sing}(X,A)$. By the previous argument there is a $j \geq i$ such that $[d]$ can be identified with $[d'] \in C_{n+1}^\text{sing}(X_j,A)$. But then $[c]-\partial_{n+1}[d'] = 0 \in C_n^\text{sing}(X_j,A)$, so $[[c]] = 0 \in H_n^\text{sing}(X_j,A)$, which represents $0 \in \colim \limits_{i \in \N_0} H_n^\text{sing}(X,A)$.
 	\end{sketch}
 
-	\TODO{Künneth formula}
+	% \begin{proposition}
+	% 	Singular homology preserves filtered colimits, ie. the canonical morphism 
+	% 	\begin{align*}
+	% 		\fcolim \limits_{i \in I} H_\bullet^\text{sing}(X_i,A_i) --> H_\bullet^\text{sing}(\fcolim \limits_{i \in I} (X_i,A_i)) = H_\bullet^\text{sing}(X,A)
+	% 	\end{align*}
+	% 	is an isomorphism.
+
+	% 	In particular, given a filtration $A \subseteq U_0 \subseteq U_1 \subseteq ... \;X = \smash{\colim \limits_{i\in \N_0}U_i}$ of $X$ by open subsets $U_i$ we have $$\colim_i H_\bullet^\text{sing}(U_i) \isom H_\bullet^\text{sing}(X).$$
+	% \end{proposition}
+	% \begin{sketch}
+	% 	Surjective:
+	% 	\begin{tab}
+	% 		Let $[[c]] \in H_n^\text{sing}(X,A)$, i.e. $[c] \in C_n^\text{sing}(X,A)$ and $c \in C_n^\text{sing}(X)$.
+	% 	\end{tab}
+	% \end{sketch}
+
+	\begin{theorem}[Eilenberg Zilber]
+		Let $X,Y$ be topological spaces. Then there is a chain homotopy equivalence
+		\begin{equation*}
+			C_\bullet^\text{sing}(X \times Y) \xrightarrow{\simeq} C_\bullet^\text{sing}(X) \tensor C_\bullet^\text{sing}(Y),
+		\end{equation*}
+		which is natural in $X$ and $Y$.
+	\end{theorem}
+
+	\begin{corollary}[Künneth Formula]
+		Let $X,Y$ be topological spaces. For any $n$ there is a short exact sequence
+		\begin{align*}
+			0 --> \Oplus \limits_{p+q=n}H_p^\text{sing}(X) \tensor H_q^\text{sing}(Y) --> H_n^\text{sing}(X \times Y) --> \Oplus \limits_{p+q=n} \Tor(H_p^\text{sing}(X),H_q^\text{sing}(Y)) --> 0,
+		\end{align*}
+		which is natural in $X$ and $Y$ \TODO{and compatible with boundaries?}
+	\end{corollary}
 
 	\newpage
-	\subsection{Examples and Applications}
+	\subsection{Applications of Singular Homology}
+
+	\begin{proposition}
+		\vspace{-1.5em}
+		\begin{enumerate}[(i)]
+			\item{
+				For an embedding $f:\D^k \longrightincl \S^n$ we have $\widetilde{H}_\bullet^\text{sing}(\S^n \setminus f(\D^k),x_0) = 0$.
+			}
+			\item{
+				For $k<n$ and an embedding $g: \S^k \longrightincl \S^n$ it holds that $\widetilde{H}_\bullet^\text{sing}(\S^n \setminus \S^k) = \Z_{\bullet-n+k+1}$.
+			}
+		\end{enumerate}
+	\end{proposition}
+
+	\begin{corollary}[Properties of Embeddings of Spheres]
+		TODO
+	\end{corollary}
+
+	\begin{corollary}[Jordan Curve Theorem]
+		Any embedding $f:\S^{n-1} \longrightincl \S^n$ splits $\S^n$ into precisely two pathconnected components.
+	\end{corollary}
+	\begin{proof}
+		\begin{align*}
+			\# \largepi_0(\S^n \setminus f(\S^{n-1})) &= \rk \Z[\largepi_0(\S^n \setminus f(\S^{n-1}))]\\
+			&= \rk H_0(\S^n \setminus f(\S^{n-1}))\\
+			&= \rk \left (\widetilde{H}_0(\S^n \setminus f(\S^{n-1})) \oplus \Z\right) = 2
+		\end{align*}
+	\end{proof}
 
 	\TODO{Jordan Curve Theorem}
 
