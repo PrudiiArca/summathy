@@ -173,6 +173,7 @@
 \DeclareMathOperator{\jrad}{jrad}
 \DeclareMathOperator{\rk}{rk}
 
+\DeclareMathOperator{\supp}{supp}
 \DeclareMathOperator{\closure}{cl}
 \DeclareMathOperator{\interior}{int}
 \DeclareMathOperator{\boundary}{bd}
@@ -221,6 +222,25 @@
 \let\Re\relax
 \DeclareMathOperator{\Re}{Re}
 
+%https://tex.stackexchange.com/questions/284059/new-command-for-filtered-colimits-and-limits
+\makeatletter
+\newcommand{\fcolim@}[2]{%
+  \vtop{\m@th\ialign{##\cr
+    \hfil$#1\operator@font colim$\hfil\cr
+    \noalign{\nointerlineskip\kern1.5\ex@}#2\cr
+    \noalign{\nointerlineskip\kern-\ex@}\cr}}%
+}
+\newcommand{\fcolim}{%
+  \mathop{\mathpalette\fcolim@{\rightarrowfill@\scriptscriptstyle}}\nmlimits@
+}
+\renewcommand{\varprojlim}{%
+  \mathop{\mathpalette\varlim@{\leftarrowfill@\scriptscriptstyle}}\nmlimits@
+}
+\renewcommand{\varinjlim}{%
+  \mathop{\mathpalette\varlim@{\rightarrowfill@\scriptscriptstyle}}\nmlimits@
+}
+\newcommand{\flim}{\varprojlim}
+\makeatother
 
 
 % --- end package declaration

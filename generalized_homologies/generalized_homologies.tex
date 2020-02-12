@@ -1468,8 +1468,8 @@
 		\begin{equation*}
 			\begin{array}{rcl}
 				\Delta & \overset{\mathbb{\Delta}}{\longrightarrow} & \ncat{Top}\\
-				{[n]} & \longmapsto & \mathbb{\Delta}_n := \convex \{e_0,...,e_n\} \subseteq \R^{n+1}\\
-				{[\rho:[m]\rightarrow[n]]} & \longmapsto & {\left[\begin{array}{rcl}\mathbb{\Delta}_m &\rightarrow& \mathbb{\Delta}_n\\e_i &:\mapsto& e_{\rho(i)}\end{array}\right]}
+				{[n]} & \longmapsto & \mathbb{\Delta}^n := \convex \{e_0,...,e_n\} \subseteq \R^{n+1}\\
+				{[\rho:[m]\rightarrow[n]]} & \longmapsto & {\left[\begin{array}{rcl}\mathbb{\Delta}^m &\rightarrow& \mathbb{\Delta}^n\\e_i &:\mapsto& e_{\rho(i)}\end{array}\right]}
 			\end{array}
 		\end{equation*}
 		where $e_0,...,e_n$ denote the standard basis vectors and
@@ -1503,7 +1503,7 @@
 	\end{definition}
 
 	\begin{definition}
-		The \textbf{barycenter} of the standard $n$-simplex $\mathbb{\Delta}_n$ is the point $b_n = (\frac{1}{n+1},...,\frac{1}{n+1}) \in \R^{n+1}$.
+		The \textbf{barycenter} of the standard $n$-simplex $\mathbb{\Delta}n$ is the point $b_n = (\frac{1}{n+1},...,\frac{1}{n+1}) \in \R^{n+1}$.
 	\end{definition}
 
 	\newpage
@@ -1533,12 +1533,25 @@
 			{[X\overset{f}{\rightarrow} Y]} & \longmapsto & {[\ncat{Top}(\mathbb{\Delta}-,X) \overset{f_{*}}{\Rightarrow} \ncat{Top}(\mathbb{\Delta}-,Y)]}
 		\end{array}
 	\end{equation*}
-	Note that by construction we have the identifications
-	\begin{align*}
-		\ncat{sing}(X)([0]) &= \ncat{Top}(\mathbb{\Delta}_0,X) \isom \ncat{Top}(*,X) = \{\text{points in }X\}\\
-		\ncat{sing}(X)([1]) &= \ncat{Top}(\mathbb{\Delta}_1,X) \isom \ncat{Top}([0,1],X) = \{\text{paths in }X\}\\
-		\ncat{sing}(X)([2]) &= \ncat{Top}(\mathbb{\Delta}_2,X) \isom \ncat{Top}(\S^1,X) = \{\text{loops in }X\text{ (without basepoint)}\}.
-	\end{align*}
+
+	\begin{remark}
+		\vspace{-1.5em}
+		\begin{enumerate}[(i)]
+			\item{
+				By construction we have the identifications
+				\begin{align*}
+					\ncat{sing}(X)([0]) &= \ncat{Top}(\mathbb{\Delta}_0,X) \isom \ncat{Top}(*,X) = \{\text{points in }X\}\\
+					\ncat{sing}(X)([1]) &= \ncat{Top}(\mathbb{\Delta}_1,X) \isom \ncat{Top}([0,1],X) = \{\text{paths in }X\}\\
+					\ncat{sing}(X)([2]) &= \ncat{Top}(\mathbb{\Delta}_2,X) \isom \ncat{Top}(\S^1,X) = \{\text{loops in }X\text{ (without basepoint)}\}.
+				\end{align*}
+			}
+			\item{
+				An element $s$ in $\ncat{sing}(X)([n]) = \ncat{Top}(\mathbb{\Delta}^n,X)$ is called a \textbf{singular $n$-simplex in $X$}.
+
+				By definition, the image of an $n$-simplex $s$ in $X$ is a quasicompact subset of $X$, since $\mathbb{\Delta}^n$ is quasicompact. Moreover, given a map $f:[m] --> [n]$ the image of $f_{*}(s)=fs$ is a quasicompact subset of the image of $s$. \TODO{why?}
+			}
+		\end{enumerate}
+	\end{remark}
 
 	The \textit{free abelian group functor} $\Z[-]: \ncat{Set} --> \ncat{Ab}$ extends by postcomposition to a functor
 	\begin{equation*}
@@ -1558,15 +1571,15 @@
 			\fivebyone[wide]
 				{...\fun{A}([2])}{\fun{A}([1])}{\fun{A}([0])}{0}{0...}
 
-			\arrow{ww}{w}{\partial_2}[above]
-			\arrow{w}{c}{\partial_1}[above]
-			\arrow{c}{e}{\partial_0}[above]
+			\arrow{ww}{w}{\gamma_2}[above]
+			\arrow{w}{c}{\gamma_1}[above]
+			\arrow{c}{e}{\gamma_0}[above]
 			\arrow{e}{ee}{0}[above]
 		\end{diagram},
 	\end{equation*}
 	where
 	\begin{equation*}
-		\partial_n = \Sum \limits_{i=0}^n(-1)^i d_i^n
+		\gamma_n = \Sum \limits_{i=0}^n(-1)^i d_i^n
 	\end{equation*}
 	for $n \in \N$. By definition of a natural transformation $\beta:\fun{A} ==> \fun{B}$ the components $\beta_{[n]}$ make the diagram
 	\begin{equation*}
@@ -1587,8 +1600,8 @@
 				{\fun{A}([n])}{\fun{A}([n-1])}
 				{\fun{A}([n])}{\fun{A}([n-1])}
 
-			\arrow{nw}{ne}{\partial_n}[above]
-			\arrow{sw}{se}{\partial_n}[below]
+			\arrow{nw}{ne}{\gamma_n}[above]
+			\arrow{sw}{se}{\gamma_n}[below]
 
 			\arrow{nw}{sw}{\beta_{[n]}}[left]
 			\arrow{ne}{se}{\beta_{[n-1]}}[right]
@@ -1602,7 +1615,7 @@
 	\end{equation*}
 	holds for $i \leq j \leq n$. With this we compute
 	\begin{align*}
-		\partial_n\partial_{n+1} &= \Sum \limits_{i=0}^n(-1)^i d_i^n \left(\Sum \limits_{j=0}^{n+1}(-1)^j d_j^{n+1}\right)
+		\gamma_n\gamma_{n+1} &= \Sum \limits_{i=0}^n(-1)^i d_i^n \left(\Sum \limits_{j=0}^{n+1}(-1)^j d_j^{n+1}\right)
 		= \Sum \limits_{i=0}^n \Sum \limits_{j=0}^{n+1}(-1)^{i+j}d_i^nd_j^{n+1}\\
 		&=\sum\limits_{i=0}^n\Sum\limits_{j=0}^{i}(-1)^{j+i}d_i^nd_j^{n+1} + \Sum\limits_{i=0}^n\Sum\limits_{j=i+1}^{n+1}(-1)^{i+j}d_i^nd_j^{n+1}\\
 		&=\sum\limits_{i=0}^n\Sum\limits_{j=0}^{i}(-1)^{j+i}d_i^nd_j^{n+1} + \Sum\limits_{i=0}^n\Sum\limits_{j=i}^{n}(-1)^{i+j+1}d_i^nd_{j+1}^{n+1}\\
@@ -1637,6 +1650,17 @@
 		\begin{equation*}
 			H^\text{sing} := H_{*}\circ C^\text{sing}: \ncat{Top} \longrightarrow \ncat{Ab}^{\Z gr}.
 		\end{equation*}
+
+		For given $n \in \N_0$ an element $c$ of $C_n^\text{sing}(X)$ is called a \textbf{$n$-cycle} of $X$ and an \textbf{$(n+1)$-boundary}, if it lies in the image of $\gamma_{n+1}:C_{n+1}^\text{sing}(X)-->C_n^\text{sing}(X)$.
+
+		An $n$-cycle $c$, i.e. an element of $\Z^{\oplus\;\ncat{sing}(X)([n])}$, determines a subset of $X$, given by the union of the images of all singular $n$-simplices contributing to $c$. This set, which we will call the \textbf{support} $\supp c$ of $c$, is a finite union of quasicompact subsets and hence again quasicompact.
+		% By construction we can identify an $n$-cycle $c$, i.e. an element of $\Z^{\oplus\;\ncat{sing}(X)([n])}$, with a function $c: \ncat{sing}(X)([n]) --> \Z$ with finite support, such that
+		% \begin{equation*}
+		% 	c = \sum \limits_{s \in \ncat{sing}(X)([n])} c(s)e_s.
+		% \end{equation*}
+		% Moreover $c$ defines a subset of $X$ given by the union of the images of all $n$-simplices contributing to $c$. As a finite union of quasicompact subsets this set is again quasicompact.
+
+		%Moreover $c$ gives rise to a \TODO{unique} simplicial complex \TODO{$\mathbb{\Delta}(c)$}, which induces a map $\widetilde{c}:\mathbb{\Delta}(c) --> X$, whose image is given by the finite union $\Union \limits_{a\\b} s(\mathbb{\Delta}n)$ and is thus quasicompact.
 	\end{definition}
 
 	Now we extend this to a homology functor on pairs of spaces. Note that for any pair of spaces $(X,A)$ the sequence of chain complexes
@@ -1648,37 +1672,27 @@
 		C^\text{sing}(X,A) := C^\text{sing}(X)/C^\text{sing}(A).
 	\end{equation*}
 
-	Moreover, given a $\Z$-graded abelian group $M$, considered as a chain complex with zero differential, we obtain a short exact sequence of chain complexes
-	\begin{align*}
-		0 --> C^\text{sing}(A) \tensor M --> C^\text{sing}(X) \tensor M --> C^\text{sing}(X,A) \tensor M --> 0,
-	\end{align*}
-
-	since $C^\text{sing}(A)$ is free and hence flat, and $- \tensor M$ preserves quotients.
-
 	\begin{definition}
-		Let $M$ be a $\Z$-graded abelian group.
-
-		The \textbf{(relative) singular chain complex functor with coefficients in $M$} is the functor
+		The \textbf{(relative) singular chain complex functor} is the functor
 		\begin{equation*}
 			\begin{array}{rcl}
-				\ncat{Top}^2 & \xrightarrow{C^\text{sing}(-,- \,| M)} & \ncat{Ch}\\
-				(X,A) & \longmapsto & C^\text{sing}(X,A \,| M) = C^\text{sing}(X,A) \tensor M\\
-				{[f:(X,A)\rightarrow(Y,B)]} & \longmapsto & {[C^\text{sing}(f) \tensor M: C^\text{sing}(X,A) \tensor M \rightarrow C^\text{sing}(X,A) \tensor M]}
+				\ncat{Top}^2 & \xrightarrow{C^\text{sing}(-,-)} & \ncat{Ch}\\
+				(X,A) & \longmapsto & C^\text{sing}(X,A) = C^\text{sing}(X)/C^\text{sing}(A)\\
+				{[f:(X,A)\rightarrow(Y,B)]} & \longmapsto & {[\Z[f_{*}]:C^\text{sing}(X)/C^\text{sing}(A) \rightarrow C^\text{sing}(Y) / C^\text{sing}(Y)]}
 			\end{array}
 		\end{equation*}
 		Postcomposing with the homology functor $H_{*}$ yields the \textbf{(relative) singular homology functor with coefficients in $M$}
 		\begin{align*}
-			H(-,- | M): \ncat{Top}^2 --> \ncat{Ab}^{\Z gr}.
+			H_\bullet^\text{sing}(-,-): \ncat{Top}^2 --> \ncat{Ab}^{\Z gr}.
 		\end{align*}
 		The corresponding boundary operator is given by the boundary map induced by the short exact sequences of the form
 		\begin{align*}
-			0 --> C^\text{sing}(A) \tensor M --> C^\text{sing}(X) \tensor M --> C^\text{sing}(X,A) \tensor M --> 0.
+			0 --> C^\text{sing}(A) --> C^\text{sing}(X) --> C^\text{sing}(X,A) --> 0.
 		\end{align*}
 	\end{definition}
 
-	Before we start to verify that singular homology satisfies the axioms of a generalized homology theory, we want to compute its module of coefficients.
-
-	\TODO{todo}
+	%Before we start to verify that singular homology satisfies the axioms of a generalized homology theory, we want to compute its module of coefficients.
+	%\TODO{todo}
 
 	\begin{lemma}
 		Relative singular homology satisfies the exactness and the additivity axiom.
@@ -1693,18 +1707,75 @@
 	\end{theorem}
 
 	\newpage
-	\subsection{Filtration, Künneth Formula and the Universal Coefficient Theorem}
+	\subsection{Special Properties of Singular Homology}
 
 	\begin{lemma}[Filtration]
-		Let $(X,A)$ be a pair of spaces and $A \subseteq U_0 \subseteq U_1 \subseteq ... X = \smash{\colim \limits_{i\in \N_0}U_i}$ a filtration of $X$ by open subsets. Then the canonical morphism
+		Let $(X,A)$ be a pair of spaces and $A \subseteq U_0 \subseteq U_1 \subseteq ... \;X = \smash{\colim \limits_{i\in \N_0}U_i}$ a filtration of $X$ by open subsets. Then the canonical morphism
 		\begin{equation*}
-			\colim \limits_{i \in \N_0} H^\text{sing}(U_i,A \,| M) \longrightarrow H^\text{sing}(X,A \,| M)
+			\colim \limits_{i \in \N_0} H^\text{sing}(U_i,A) \longrightarrow H^\text{sing}(X,A)
 		\end{equation*}
 		is an isomorphism.
 	\end{lemma}
+	\begin{sketch}
+		Note that every compact subset $K \subseteq X$ is contained in some $U_i$, since $(K \intersection U_i)_i$ is an open cover of $K$. In particular, given $n \in \N_0$ for any $n$-cycle $c$ in $C_n^\text{sing}(X)$ the support is contained in some $U_i$.
 
-	\TODO{Künneth formular}
+		The 
+	\end{sketch}
 
+	\begin{proposition}
+		Singular homology preserves filtered colimits, ie. the canonical morphism 
+		\begin{align*}
+			\fcolim \limits_{i \in I} H_\bullet^\text{sing}(X_i,A_i) --> H_\bullet^\text{sing}(\fcolim \limits_{i \in I} (X_i,A_i))
+		\end{align*}
+		is an isomorphism.
+
+		In particular, given a filtration $A \subseteq U_0 \subseteq U_1 \subseteq ... \;X = \smash{\colim \limits_{i\in \N_0}U_i}$ of $X$ by open subsets $U_i$ we have $$\colim_i H_\bullet^\text{sing}(U_i) \isom H_\bullet^\text{sing}(X).$$
+	\end{proposition}
+	\begin{sketch}
+		Surjective:
+		\begin{tab}
+			Let $[[c]] \in H_n^\text{sing}(X,A)$, i.e. $[c] \in C_n^\text{sing}(X,A)$ and $c \in C_n^\text{sing}(X)$.
+		\end{tab}
+	\end{sketch}
+
+	\TODO{Künneth formula}
+
+	\newpage
+	\subsection{Examples and Applications}
+
+	\TODO{Jordan Curve Theorem}
+
+	\newpage
+	\subsection{The Universal Coefficient Theorem}
+
+	Given a $\Z$-graded abelian group $M$, considered as a chain complex with zero differential, we can extend the definition of singular homology to be concentrated in $M$. For this purpose we note that we obtain a short exact sequence of chain complexes
+	\begin{align*}
+		0 --> C^\text{sing}(A) \tensor M --> C^\text{sing}(X) \tensor M --> C^\text{sing}(X,A) \tensor M --> 0,
+	\end{align*}
+	since $C^\text{sing}(A)$ is free and hence flat, and $- \tensor M$ preserves quotients.
+
+	\begin{definition}
+		Let $M$ be a $\Z$-graded abelian group.
+
+		The \textbf{(relative) singular chain complex functor with coefficients in $M$} is the functor
+		\begin{equation*}
+			\begin{array}{rcl}
+				\ncat{Top}^2 & \xrightarrow{C^\text{sing}(-,- \,| M)} & \ncat{Ch}\\
+				(X,A) & \longmapsto & C^\text{sing}(X,A \,| M) = C^\text{sing}(X,A) \tensor M\\
+				{[(X,A)\rightarrow(Y,B)]} & \longmapsto & {[C^\text{sing}(X,A) \tensor M \rightarrow C^\text{sing}(X,A) \tensor M]}
+			\end{array}
+		\end{equation*}
+		Postcomposing with the homology functor $H_{*}$ yields the \textbf{(relative) singular homology functor with coefficients in $M$}
+		\begin{align*}
+			H(-,- | M): \ncat{Top}^2 --> \ncat{Ab}^{\Z gr}.
+		\end{align*}
+		The corresponding boundary operator is given by the boundary map induced by the short exact sequences of the form
+		\begin{align*}
+			0 --> C^\text{sing}(A) \tensor M --> C^\text{sing}(X) \tensor M --> C^\text{sing}(X,A) \tensor M --> 0.
+		\end{align*}
+	\end{definition}
+
+	\TODO{Eilenberg Zilber}
 	\TODO{Universal Coefficient theorem}
 
 
