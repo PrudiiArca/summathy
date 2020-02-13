@@ -1636,7 +1636,7 @@
 	\begin{definition}
 		The \textbf{(absolute) singular chain complex functor} is the functor given by the composition
 		\begin{equation*}
-			C^\text{sing}:=
+			C_\bullet^\text{sing}:=
 			\begin{diagram}
 				\fourbyone[wide]
 					{\ncat{Top}}{\ncat{sSet}}{\ncat{sAb}}{\ncat{Ch}}
@@ -1648,7 +1648,7 @@
 		\end{equation*}
 		and the \textbf{(absolute) singular homology functor} is the corresponding homology functor, obtained by postcomposing with the usual homology functor $H_{*}: \ncat{Ch} --> \ncat{Ab}^{\Z gr}$, i.e. explicitly
 		\begin{equation*}
-			H^\text{sing} := H_{*}\circ C^\text{sing}: \ncat{Top} \longrightarrow \ncat{Ab}^{\Z gr}.
+			H^\text{sing} := H_{*}\circ C_\bullet^\text{sing}: \ncat{Top} \longrightarrow \ncat{Ab}^{\Z gr}.
 		\end{equation*}
 
 		For given $n \in \N_0$ an element $c$ of $C_n^\text{sing}(X)$ is called a \textbf{$n$-cycle} of $X$ and an \textbf{$(n+1)$-boundary}, if it lies in the image of $\gamma_{n+1}:C_{n+1}^\text{sing}(X)-->C_n^\text{sing}(X)$.
@@ -1665,20 +1665,20 @@
 
 	Now we extend this to a homology functor on pairs of spaces. Note that for any pair of spaces $(X,A)$ the sequence of chain complexes
 	\begin{align*}
-		0 --> C^\text{sing}(A) --> C^\text{sing}(X) --> C^\text{sing}(X)/C^\text{sing}(A) --> 0
+		0 --> C_\bullet^\text{sing}(A) --> C_\bullet^\text{sing}(X) --> C_\bullet^\text{sing}(X)/C_\bullet^\text{sing}(A) --> 0
 	\end{align*}
 	is exact and functorial in $(X,A)$. Hence we set
 	\begin{equation*}
-		C^\text{sing}(X,A) := C^\text{sing}(X)/C^\text{sing}(A).
+		C_\bullet^\text{sing}(X,A) := C_\bullet^\text{sing}(X)/C_\bullet^\text{sing}(A).
 	\end{equation*}
 
 	\begin{definition}
 		The \textbf{(relative) singular chain complex functor} is the functor
 		\begin{equation*}
 			\begin{array}{rcl}
-				\ncat{Top}^2 & \xrightarrow{C^\text{sing}(-,-)} & \ncat{Ch}\\
-				(X,A) & \longmapsto & C^\text{sing}(X,A) = C^\text{sing}(X)/C^\text{sing}(A)\\
-				{[f:(X,A)\rightarrow(Y,B)]} & \longmapsto & {[\Z[f_{*}]:C^\text{sing}(X)/C^\text{sing}(A) \rightarrow C^\text{sing}(Y) / C^\text{sing}(Y)]}
+				\ncat{Top}^2 & \xrightarrow{C_\bullet^\text{sing}(-,-)} & \ncat{Ch}\\
+				(X,A) & \longmapsto & C_\bullet^\text{sing}(X,A) = C_\bullet^\text{sing}(X)/C_\bullet^\text{sing}(A)\\
+				{[f:(X,A)\rightarrow(Y,B)]} & \longmapsto & {[\Z[f_{*}]:C_\bullet^\text{sing}(X)/C_\bullet^\text{sing}(A) \rightarrow C_\bullet^\text{sing}(Y) / C_\bullet^\text{sing}(Y)]}
 			\end{array}
 		\end{equation*}
 		Postcomposing with the homology functor $H_{*}$ yields the \textbf{(relative) singular homology functor with coefficients in $M$}
@@ -1687,7 +1687,7 @@
 		\end{align*}
 		The corresponding boundary operator is given by the boundary map induced by the short exact sequences of the form
 		\begin{align*}
-			0 --> C^\text{sing}(A) --> C^\text{sing}(X) --> C^\text{sing}(X,A) --> 0.
+			0 --> C_\bullet^\text{sing}(A) --> C_\bullet^\text{sing}(X) --> C_\bullet^\text{sing}(X,A) --> 0.
 		\end{align*}
 	\end{definition}
 
@@ -1697,6 +1697,30 @@
 	\begin{lemma}
 		Relative singular homology satisfies the exactness and the additivity axiom.
 	\end{lemma}
+	\begin{sketch}
+		The exactness axiom is built in by construction.
+
+		Let $(X_i,Y_i)$ be a family of pairs of spaces and $(X,A) = \Coproduct \limits_{i \in I}(X_i,A_i)$. Then 
+		\begin{equation*}
+			\ncat{sing}(X) \isom \Coproduct \limits_{i \in I} \ncat{sing}(X_i),
+		\end{equation*}
+		\TODO{since the $\mathbb{\Delta}^n$ are connected}. As $\Z[-]_{*}$ is a left adjoint, we get 
+		\begin{equation*}
+			\Z[\ncat{sing}(X)] \isom \Z\left[\Coproduct \limits_{i \in I} \ncat{sing}(X_i)\right] \isom \Oplus \limits_{i \in I} \Z[\ncat{sing}(X_i)].
+		\end{equation*}
+		Moreover the Dold-Kan functor preserves colimits, so we have
+		\begin{equation*}
+			C_\bullet^\text{sing}(X) \isom \Oplus \limits_{i \in I} C_\bullet^\text{sing}(X_i) \hspace{1cm}\text{and likewise}\hspace{1cm} C_\bullet^\text{sing}(A) \isom \Oplus \limits_{i \in I} C^\text{sing}(A_i).
+		\end{equation*}
+		Since colimits commute we obtain
+		\begin{equation*}
+			C_\bullet^\text{sing}(X,A) \isom \Oplus \limits_{i \in I} C_\bullet^\text{sing}(X_i,A_i).
+		\end{equation*}
+		Finally, $H_{*}$ is additive, so we find
+		\begin{equation*}
+			H_\bullet^\text{sing}(X,A) \isom \Oplus \limits_{i \in I} H_\bullet^\text{sing}(X_i,A_i).\vspace{-3em}
+		\end{equation*}
+	\end{sketch}
 
 	\begin{proposition}
 		Relative singular homology is homotopy invariant.
@@ -1858,10 +1882,6 @@
 							\end{equation*}
 							A contradiction.
 						\end{tab}
-						\TODO{if we can replace $\D^k$ with homeomorphic things, why not with homotopy equivalent things like a point, in which case this would be trivial?}
-						% \begin{align*}
-						% 	\hspace{-3cm}...\widetilde{H}_{m+1}^\text{sing}(A_1 \union A_2) --> \widetilde{H}_m^\text{sing}(A_1) --> \widetilde{H}_m^\text{sing}(A_1 \union A_2) \oplus \widetilde{H}_m^\text{sing}(A_2) --> \widetilde{H}_m^\text{sing}(A_1 \union A_2)...
-						% \end{align*}
 					}
 				\end{enumerate}
 			}
