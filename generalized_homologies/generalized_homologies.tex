@@ -1814,23 +1814,146 @@
 			}
 		\end{enumerate}
 	\end{proposition}
+	\begin{sketch}
+		\begin{enumerate}[(i)]
+			\item{
+				By induction on $k$.
+				\begin{enumerate}
+					\item[(IB)]{
+						For $k=0$ we calculate $\widetilde{H}_\bullet^\text{sing}(\S^n \setminus f(\D^0),x_0) \isom \widetilde{H}_\bullet^\text{sing}(\R^n,y_0) = 0$.
+					}
+					\item[(IH)]{
+						\TODO{TODO}
+					}
+					\item[(IS)]{
+						For $k-1 \leadsto k$ note that $\D^k \isom [0,1]^k$.
 
-	\begin{corollary}[Properties of Embeddings of Spheres]
-		TODO
-	\end{corollary}
+						\textit{Assume} there is an $m \in \N$ and a nonzero element $[[x]] \in \widetilde{H}_m^\text{sing}(\S^n \setminus f([0,1]^k),x_0)$
+						\begin{tab}[1.3cm]
+							Let\vspace{-2.2em}
+							\begin{align*}
+								A_1 &= \S^n \setminus f([0,1]^{k-1}\times[0,\tfrac{1}{2}])\\
+								A_2 &= \S^n \setminus f([0,1]^{k-1}\times[\tfrac{1}{2},1])\\
+								A_1 \union A_2 &= \S^n \setminus f([0,1]^{k-1}\times\{\tfrac{1}{2}\})\\
+								A_1 \intersection A_2 &= \S^n \setminus f([0,1]^k).
+							\end{align*}
+							Mayer Vietories for the cover $A_1, A_2$ of $A_1 \union A_2$ yields by induction hypothesis (IH) an isomorphism 
+							\begin{equation*}
+								\widetilde{H}_m^\text{sing}(A_1 \intersection A_2,x_0) \isom \widetilde{H}_m^\text{sing}(A_1,x_0) \oplus \widetilde{H}_m^\text{sing}(A_2,x_0)
+							\end{equation*}
+							and $[[x]]$ maps to a nonzero element in at least one of the homology groups of $A_1$ or $A_2$.
+							Inductively we obtain a sequence of intervals 
+							\begin{equation*}
+								[0,1] = I \supseteq I_1 \supseteq I_2 \supseteq ... 
+							\end{equation*}
+							with the property that $\widetilde{H}_m^\text{sing}(\S^n \setminus f(I^{k-1}\times I_i),x_0)$ is nonzero.  Note that
+							\begin{align*}
+								\Union \limits_{i \in \N} \S^n\setminus f(I^{k-1} \times I_i) &= \S^n \setminus \Intersection \limits_{i \in \N} f(I^{k-1} \times I_i)\\ 
+								&= \S^n \setminus f(\Intersection \limits_{i \in \N} I^{k-1} \times I_i)\\
+								&= \S^n \setminus f(I^{k-1} \times \{t\})
+							\end{align*}
+							Since singular homology preserves filtrations and by induction hypothesis (IH) we get
+							\begin{equation*}
+								0 \neq \colim \limits_{i \in \N} \widetilde{H}_m^\text{sing}(\S^n \setminus f(I^{k-1}\times I_i),x_0) \isom \widetilde{H}_m^\text{sing}(\S^n \setminus f(I^{k-1}\times \{t\}),x_0) = 0.
+							\end{equation*}
+							A contradiction.
+						\end{tab}
+						\TODO{if we can replace $\D^k$ with homeomorphic things, why not with homotopy equivalent things like a point, in which case this would be trivial?}
+						% \begin{align*}
+						% 	\hspace{-3cm}...\widetilde{H}_{m+1}^\text{sing}(A_1 \union A_2) --> \widetilde{H}_m^\text{sing}(A_1) --> \widetilde{H}_m^\text{sing}(A_1 \union A_2) \oplus \widetilde{H}_m^\text{sing}(A_2) --> \widetilde{H}_m^\text{sing}(A_1 \union A_2)...
+						% \end{align*}
+					}
+				\end{enumerate}
+			}
+			\item{
+				By induction on $k$.
+				\begin{enumerate}
+					\item[(IB)]{
+						For $k=0$ note that $\S^n \setminus f(\S^0) \isom \R \times \S^{n-1} \simeq \S^{n-1}$, so $\widetilde{H}_\bullet^\text{sing}(\S^n \setminus \S^0) \isom \widetilde{H}_\bullet^\text{sing}(\S^{n-1}) = \Z_{\bullet-n+0+1}$.
+					}
+					\item[(IH)]{
+						\TODO{TODO}
+					}
+					\item[(IS)]{
+						For $k-1 \leadsto k$ consider $\S^k$ as the pushout of upper and lower hemispheres $\D^k_{+}$ and $\D^k_{-}$. Let
+						\begin{align*}
+							B_1 &= \S^n \setminus f(\D^k_{+})\\
+							B_1 &= \S^n \setminus f(\D^k_{+})\\
+							B_1 \union B_2 &= \S^n \setminus f(\S^{k-1})\\
+							B_1 \intersection B_2 &= \S^n \setminus f(\S^k).
+						\end{align*}
+						Mayer Vietories for the cover $B_1,B_2$ of $B_1 \union B_2$ in combination with (i) yield an isomorphism
+						\begin{equation*}
+							\widetilde{H}_\bullet^\text{sing}(\S^n \setminus f(\S^{k-1})) \isom \widetilde{H}_{\bullet-1}^\text{sing}(\S^n \setminus f(\S^{k})),
+						\end{equation*}
+						so by induction hypothesis we get
+						\begin{equation*}
+							\widetilde{H}_{\bullet}^\text{sing}(\S^n \setminus f(\S^{k})) \isom \widetilde{H}_{\bullet+1}^\text{sing}(\S^n \setminus f(\S^{k-1})) \isom \Z_{(\bullet-n+(k-1)+1)+1}.
+						\end{equation*}
+					}
+				\end{enumerate}
+			}\vspace{-2.5em}
+		\end{enumerate}
+	\end{sketch}
 
 	\begin{corollary}[Jordan Curve Theorem]
 		Any embedding $f:\S^{n-1} \longrightincl \S^n$ splits $\S^n$ into precisely two pathconnected components.
 	\end{corollary}
 	\begin{proof}
+		~\vspace{-2.55em}
 		\begin{align*}
 			\# \largepi_0(\S^n \setminus f(\S^{n-1})) &= \rk \Z[\largepi_0(\S^n \setminus f(\S^{n-1}))]\\
 			&= \rk H_0(\S^n \setminus f(\S^{n-1}))\\
-			&= \rk \left (\widetilde{H}_0(\S^n \setminus f(\S^{n-1})) \oplus \Z\right) = 2
+			&= \rk \left (\widetilde{H}_0(\S^n \setminus f(\S^{n-1})) \oplus \Z\right)\\
+			&= \rk \left (\Z_{0-n+(n-1)+1} \oplus \Z\right) = 2
 		\end{align*}
+		~\vspace{-2em}
 	\end{proof}
 
-	\TODO{Jordan Curve Theorem}
+	\begin{corollary}[Invariance of Domain]
+		If $U$ is an open subset of $\R^n$ and $f: U \longrightincl \R^n$ is any embedding, then $f(U)$ is open.
+	\end{corollary}
+	\begin{proof}
+		Let $x \in U$ and $D$ be a closed ball around $x$ contained in $U$. Show that $f(\interior D)$ is open in $\S^n$. By JCT $\S^n \setminus f(\boundary D)$ has exactly two path components, namely $f(\interior D)$ and $\S^n \setminus f(D)$. These path components are open, so in particular $f(\interior D)$ is an open neighborhood of $f(x)$ in $f(U)$.
+	\end{proof}
+
+	\begin{corollary}
+		If $M$ is a compact topological $n$-manifold and $N$ is a connected topological $n$-manifold, then every embedding $f: M \longrightincl N$ is a homeomorphism.
+
+		In particular every embedding $\S^n \longrightincl \S^n$ is a homeomorphism.
+	\end{corollary}
+	\begin{proof}
+		$f(M)$ is a closed subset of $N$ as a compact subset of a hausdorff space. Since $N$ is connected we find that $f$ is a homeomorphism, if $f(M)$ is open. Let $x \in M$ and $U$ be an euclidean neighborhood. Moreover $f(x)$ is contained in an euclidean neighborhood $V$, so we find an open neighborhood $W = U \intersection f^{-1}(V)$ of $x$, which by invariance of domain is mapped to an open set $f(W)$ containing $x$. Hence $f(M)$ is open.
+	\end{proof}
+
+	\begin{corollary}[Nonexistence of Embeddings]
+		\vspace{-1.5em}
+		\begin{enumerate}[(i)]
+			\item{
+				For $m > n$ there is no embedding $\S^m \longrightincl \S^n$.
+			}
+			\item{
+				For $m \geq n$ there is no embedding $\S^m \longrightincl \R^n$.
+			}
+			\item{
+				For $m > n$ there is no embedding $\R^m \longrightincl \R^n$.
+			}
+		\end{enumerate}
+	\end{corollary}
+	\begin{sketch}
+		\begin{enumerate}[(i)]
+			\item{
+				By the previous corollary $\S^m \isom \S^n$, so by invariance of dimension $m = n$.
+			}
+			\item{
+				The composite $\S^m \longrightincl \R^n \longrightincl \S^n$ gives an embedding of $\S^m$ into $\S^n$. Even in the case $m=n$ the second morphism is not surjective, so we don't get an homeomorphism.
+			}
+			\item{
+				The last morphism in the composite $\S^n \longrightincl \R^m \longrightincl \R^n \longrightincl \S^n$ is not surjective.
+			}
+			\vspace{-1.8em}
+		\end{enumerate}
+	\end{sketch}
 
 	\newpage
 	\subsection{The Universal Coefficient Theorem}
