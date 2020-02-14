@@ -75,17 +75,17 @@
 		\end{minipage}
 		\begin{minipage}[t]{\linewidth-5.5cm}
 			\vspace{1em}
-			Since $I = [0,1]$ is compact, $I \times -$ preserves colimits and from the diagram on the left we obtain a morphism $k: I \times Y --> Y$, which by construction satisfies $k(t,i'(b)) = b$. It remains to check that $k(0,y) = i'r'(y)$ and $k(1,y) = y$ for all $y$ in $Y$, which can be deduced from the universal property of the pushout $Y$.
+			Since $I = [0,1]$ is compact, $I \times -$ preserves colimits and from the diagram on the left we obtain a morphism $k: I \times Y --> Y$, which by construction satisfies $k(t,i'(b)) = i'(b)$. We have to check that $k(0,y) = i'r'(y)$ for all $y$ in $Y$. This can by deduced by using the homotopy property of $h$ to show that both $Y \xrightarrow{c_0 \times Y} I \times Y \xrightarrow{k} Y$ and $i'r': Y --> Y$ satisfy the universal property of the pushout $Y$. A similar argument shows $k(1,y) = y$ for all $y \in Y$.
 		\end{minipage}
 
 		\begin{minipage}[t]{\linewidth-4.5cm}
 			For $i:A --> X$ being a neighborhood deformation retract with $i(A) \subseteq U \subseteq X$, note that we can factor the pushout as depicted on the right and that $V$ is by definition an open subspace of $Y$, of which $B$ is a deformation retract.
 
 			\vspace{1em}
-			Finally \TODO{recall} that the pushout of a closed morphism is closed.
+			Finally $i'(B)$ is closed in $Y = (X \sqcup B)/\sim$, since the preimage ${f'}^{-1}(i'(B)) \sqcup B = A \sqcup B$ is closed in $X \sqcup B$.
 		\end{minipage}
 		\begin{minipage}[t]{4.5cm}
-			\vspace{-2.1cm}
+			\vspace{-1cm}
 			\begin{equation*}
 				\begin{diagram}
 					\twobythree
@@ -109,7 +109,6 @@
 					\node at ($(se)+(-.3,.3)$) {$\secorner$};
 				\end{diagram}
 			\end{equation*}
-		\vspace{-2cm}
 		\end{minipage}
 	\end{sketch}
 
@@ -152,7 +151,7 @@
 				\begin{diagram}
 					\twobytwo[verywide]
 						{\{-1,1\}\times X}{[-1,1]\times X}
-						{\{-1,1\}}{\Sigma X}
+						{\{-1,1\}}{\Susp X}
 
 					\arrow{nw}{ne}{}
 					\arrow{sw}{se}{}
@@ -176,7 +175,7 @@
 					\draw (0,0) ellipse (.5cm and .25cm);
 					\draw (-.5,0) -- (0,1) -- (.5,0) -- (0,-1) -- cycle;
 
-					\node at (1,0) {$\Sigma X$};
+					\node at (1.5,0) {$\Susp X$};
 				\end{tikzpicture}
 			\end{center}
 		\end{minipage}
@@ -186,7 +185,7 @@
 				\begin{diagram}
 					\twobytwo[hyperwide]
 						{(\{-1,1\}\times X)\sqcup([-1,1]\times \{x_0\})}{[-1,1]\times X}
-						{*}{\widetilde{\Sigma}(X,x_0)}
+						{*}{\Susp_{*}(X,x_0)}
 
 					\arrow{nw}{ne}{}
 					\arrow{sw}{se}{}
@@ -207,17 +206,131 @@
 
 					\fill (0,-.25) circle (.05cm);
 
-					\node at (1.5,0) {$\widetilde{\Sigma}(X,x_0)$};
+					\node at (1.75,0) {$\Susp_{*}(X,x_0)$};
 				\end{tikzpicture}
 			\end{center}
 		\end{minipage}
 
-		These constructions give functors $\Sigma: \ncat{Top} --> \ncat{Top}$ and $\widetilde{\Sigma}: \ncat{Top}_{*} --> \ncat{Top}_{*}$.
+		These constructions give functors $\Susp: \ncat{Top} --> \ncat{Top}$ and $\Susp_{*}: \ncat{Top}_{*} --> \ncat{Top}_{*}$.
 	\end{definition}
 
 	\begin{lemma}[Properties of Suspension]
-		There is a canonical isomorphism $\Sigma \S^n \isom \S^{n+1}$.
+		There is a canonical isomorphism $\Susp \S^n \isom \S^{n+1}$.
+
+		\TODO{suspension vs quotients vs deformation retracts?}
 	\end{lemma}
+	\begin{sketch}
+		The universal morphism induced by the continous maps
+		\begin{equation*}
+			\begin{array}{rcl}
+				\{-1,1\} & \longrightarrow & \S^{n+1} \subseteq \R^{n+2}\\
+				s & \longmapsto & (0,s)
+			\end{array}
+			\hspace{1cm}\text{and}\hspace{1cm}
+			\begin{array}{rcl}
+				{[-1,1]} \times \S^n & \longrightarrow & \S^{n+1} \subseteq \R^{n+2}\\
+				(t,x) & \longmapsto & (\sqrt{1-t^2}\cdot x,t)
+			\end{array}
+		\end{equation*}
+		is a continous bijection between the quasicompact space $\Susp X$ and the hausdorff space $\S^{n+1}$ and hence a homeomorphism.
+	\end{sketch}
+
+	\begin{definition}
+		\begin{minipage}{\linewidth-5cm}
+			Let $X_0 \xrightarrow{i_0} X_1 \xrightarrow{i_1} ... --> X = \colim \limits_{n \in \N} X_i$ be an linearly filtered diagram of topological spaces.
+
+			\vspace{.5em}
+			We inductively obtain a sequence $T_0 \subseteq T_1 \subseteq ...$ of topological spaces by letting $T_0 = [0,1] \times X_0$ and considering the pushouts
+			\begin{equation*}
+				\begin{diagram}
+					\twobytwo[verywide]
+						{X_n}{T_n}
+						{[n+1,n+2]\times X_{n+1}}{T_{n+1},}
+
+					\arrow{nw}{ne}{\scalarproduct{c_{n+1}}{1_{X_n}}}[above]
+					\arrow{sw}{se}{}
+					\arrow{nw}{sw}{\scalarproduct{c_{n+1}}{i_n}}[left]
+					\arrow{ne}{se}{}
+
+					\node at ($(se)+(-.4,.4)$) {\secorner};
+					\node[gray] at ($(ne)+(1.65,0)$) {$\subseteq [0,n+1] \times X_n$};
+				\end{diagram}
+			\end{equation*}
+			where $c_{n+1}$ denotes the obvious constant functions. 
+
+			\vspace{.5em}
+			The \textbf{mapping telescope} of the sequence $(X_n,i_n)_n$ is defined as
+			\begin{equation*}
+				\Tel X = \colim \limits_{n \in \N} T_n.
+			\end{equation*}
+
+			\vspace{.5em}
+			Note that the mapping telescope admits the canonical arrow
+			\begin{equation*}
+				\begin{array}{rcl}
+					\Tel X &\longrightarrow &X = \colim \limits_{n \in \N_0} X_n\\
+					{[(t,x_n)]} & \longmapsto & \iota_n(x_n)
+				\end{array}
+			\end{equation*}
+			%which is welldefined for all $t = n+1$, since $\iota_n(x_n) = \iota_{n+1}(i_n(x_n))$.
+			induced by the universal property of $\Tel X$. It is in general \underline{not} an isomorphism.
+		\end{minipage}
+		\begin{minipage}{5cm}
+			\begin{center}
+				% \begin{tikzpicture}
+				% 	\draw[gray] (0,-1.5) -- (0,1.5) -- (2.5,1.5) -- (2.5,-1.5) -- cycle;
+
+				% 	\draw (0,-.5) -- (0,.5) -- (.5,.5) -- (.5,-.5) -- cycle;
+				% 	\draw (1,-1) -- (1,1) -- (1.5,1) -- (1.5,-1) -- cycle;
+				% 	\draw (2,-1.5) -- (2,1.5) -- (2.5,1.5) -- (2.5,-1.5) -- cycle;
+
+				% 	\draw[very thick] (.5,.5) -- (.5,-.5);
+				% 	\draw[very thick] (1,.5) -- (1,-.5);
+				% 	\draw[very thick] (1.5,1) -- (1.5,-1);
+				% 	\draw[very thick] (2,1) -- (2,-1);
+				% 	%\draw[very thick] (2.5,1.5) -- (2.5,-1.5);
+
+				% 	\draw[->] (.5,0) -- node[above]{$i_0$} (1,0);
+				% 	\draw[->] (1.5,0) -- node[above]{$i_1$} (2,0);
+
+				% 	\node[gray] at (.8,1.8) {$[0,3] \times X_2$};
+				% \end{tikzpicture}
+				\begin{tikzpicture}
+					\draw[gray] (0,-1.5) -- (0,1.5) -- (3,1.5) -- (3,-1.5) -- cycle;
+
+					\draw (0,-.5) -- (0,.5) -- (1,.5) -- (1,-.5) -- cycle;
+					\draw (1,-1) -- (1,1) -- (2,1) -- (2,-1) -- cycle;
+					\draw (2,-1.5) -- (2,1.5) -- (3,1.5) -- (3,-1.5) -- cycle;
+
+					%\draw[very thick] (.5,.5) -- (.5,-.5);
+					\draw[very thick] (1,.5) -- (1,-.5);
+					%\draw[very thick] (1.5,1) -- (1.5,-1);
+					\draw[very thick] (2,1) -- (2,-1);
+					%\draw[very thick] (2.5,1.5) -- (2.5,-1.5);
+
+					% \draw[->] (.5,0) -- node[above]{$i_0$} (1,0);
+					% \draw[->] (1.5,0) -- node[above]{$i_1$} (2,0);
+
+					\node[gray] at (.8,1.8) {$[0,3] \times X_2$};
+					\node at (0,-1.8) {$0$};
+					\node at (1,-1.8) {$1$};
+					\node at (2,-1.8) {$2$};
+					\node at (3,-1.8) {$3$};
+					\node at (3.5,0) {$T_3$};
+					\node at (.5,0) {$X_0$};
+					\node at (1.5,0) {$X_1$};
+					\node at (2.5,0) {$X_2$};
+				\end{tikzpicture}
+			\end{center}
+		\end{minipage}
+	\end{definition}
+
+	\begin{lemma}[Properties of the Mapping Telescope]
+		If $X_0 \subseteq X_1 \subseteq ... \subseteq X = \colim \limits_{n \in \N_0} X_n$ is a sequence of CNDRs, then the canonical morphism $$\Tel X --> X$$ is a homotopy equivalence.
+	\end{lemma}
+	\begin{sketch}
+		Factor the morphism as $\Tel X \xrightarrow{i} [0,\infty) \times X \xrightarrow{\pi_X} X$ and note that, since $\pi_X$ is a homotopy equivalence, it suffices to show that $i$ is a homotopy equivalence.
+	\end{sketch}
 
 	\newpage
 	\section{Generalized Homology}
@@ -671,12 +784,6 @@
 					\end{equation*}
 				\end{minipage}
 			}
-			\item{
-				Let $A \subseteq X_0 \subseteq X_1 \subseteq ... \subseteq X$ be a chain of CNDRs. Then there is a \TODO{canonical?} isomorphism
-				\begin{equation*}
-					\colim \limits_{i \in I} H_\bullet(X,A) \isom H_\bullet(\Tel X, A).
-				\end{equation*}
-			}
 		\end{enumerate}
 	\end{proposition}
 	\begin{proof}
@@ -746,63 +853,74 @@
 					\end{diagram}
 				\end{equation*}
 			}
-			\item{
-				Use the following decomposition of the nonnegative real line
-				\begin{center}
-				\begin{tikzpicture}
-					% \node at (-4,.5) {$[0,1) \sqcup \Coproduct \limits_{n \in \N}(2(n-1)-\tfrac{1}{4},2(n-1)+\tfrac{1}{4})$};
-					% \node at (-.5,-.5) {$A_2$};
-					% \node at (-1,0) {$A_1 \intersection A_2$};
-
-					\node (x0) at (0,.5){};
-					\node (y0) at (0,0){};
-					\node (z0) at (0,-.5){};
-
-					\node at (6.2,.5){...};
-					\node at (6.2,0){...};
-					\node at (6.2,-.5){...};
-
-					\draw[|-] (x0) -- ($(x0)+(1,0)$);
-					\draw[|-] ($(x0)+(1,0)$) -- ($(x0)+(2,0)$);
-					\draw[|-] ($(x0)+(2,0)$) -- ($(x0)+(3,0)$);
-					\draw[|-] ($(x0)+(3,0)$) -- ($(x0)+(4,0)$);
-					\draw[|-] ($(x0)+(4,0)$) -- ($(x0)+(5,0)$);
-					\draw[|-] ($(x0)+(5,0)$) -- ($(x0)+(6,0)$);
-					\draw[|-] (y0) -- ($(y0)+(1,0)$);
-					\draw[|-] ($(y0)+(1,0)$) -- ($(y0)+(2,0)$);
-					\draw[|-] ($(y0)+(2,0)$) -- ($(y0)+(3,0)$);
-					\draw[|-] ($(y0)+(3,0)$) -- ($(y0)+(4,0)$);
-					\draw[|-] ($(y0)+(4,0)$) -- ($(y0)+(5,0)$);
-					\draw[|-] ($(y0)+(5,0)$) -- ($(y0)+(6,0)$);
-					\draw[|-] (z0) -- ($(z0)+(1,0)$);
-					\draw[|-] ($(z0)+(1,0)$) -- ($(z0)+(2,0)$);
-					\draw[|-] ($(z0)+(2,0)$) -- ($(z0)+(3,0)$);
-					\draw[|-] ($(z0)+(3,0)$) -- ($(z0)+(4,0)$);
-					\draw[|-] ($(z0)+(4,0)$) -- ($(z0)+(5,0)$);
-					\draw[|-] ($(z0)+(5,0)$) -- ($(z0)+(6,0)$);
-
-					
-					\draw[very thick,red] (x0) -- ($(x0)+(1.25,0)$);
-					\draw[very thick,red] ($(x0)+(1.75,0)$) -- ($(x0)+(3.25,0)$);
-					\draw[very thick,red] ($(x0)+(3.75,0)$) -- ($(x0)+(5.25,0)$);
-					\draw[very thick,red] ($(x0)+(5.75,0)$) -- ($(x0)+(6,0)$);
-
-					\draw[very thick,darkgreen] ($(y0)+(.75,0)$) -- ($(y0)+(1.25,0)$);
-					\draw[very thick,darkgreen] ($(y0)+(1.75,0)$) -- ($(y0)+(2.25,0)$);
-					\draw[very thick,darkgreen] ($(y0)+(2.75,0)$) -- ($(y0)+(3.25,0)$);
-					\draw[very thick,darkgreen] ($(y0)+(3.75,0)$) -- ($(y0)+(4.25,0)$);
-					\draw[very thick,darkgreen] ($(y0)+(4.75,0)$) -- ($(y0)+(5.25,0)$);
-					\draw[very thick,darkgreen] ($(y0)+(5.75,0)$) -- ($(y0)+(6,0)$);
-
-					\draw[very thick,blue] ($(z0)+(0.75,0)$) -- ($(z0)+(2.25,0)$);
-					\draw[very thick,blue] ($(z0)+(2.75,0)$) -- ($(z0)+(4.25,0)$);
-					\draw[very thick,blue] ($(z0)+(4.75,0)$) -- ($(z0)+(6,0)$);		
-				\end{tikzpicture}
-				\end{center}
-				to obtain an decomposition of $\Tel X$
-			}
 		\end{enumerate}
 	\end{proof}
+
+	\begin
+
+
+	% \item{
+	% 	Let $A \subseteq X_0 \subseteq X_1 \subseteq ... \subseteq X$ be a chain of CNDRs. Then there is a \TODO{canonical?} isomorphism
+	% 	\begin{equation*}
+	% 		\colim \limits_{i \in I} H_\bullet(X,A) \isom H_\bullet(\Tel X, A).
+	% 	\end{equation*}
+	% }
+
+	% \item{
+	% 	Use the following decomposition of the nonnegative real line
+	% 	\begin{center}
+	% 	\begin{tikzpicture}
+	% 		% \node at (-4,.5) {$[0,1) \sqcup \Coproduct \limits_{n \in \N}(2(n-1)-\tfrac{1}{4},2(n-1)+\tfrac{1}{4})$};
+	% 		% \node at (-.5,-.5) {$A_2$};
+	% 		% \node at (-1,0) {$A_1 \intersection A_2$};
+
+	% 		\node (x0) at (0,.5){};
+	% 		\node (y0) at (0,0){};
+	% 		\node (z0) at (0,-.5){};
+
+	% 		\node at (6.2,.5){...};
+	% 		\node at (6.2,0){...};
+	% 		\node at (6.2,-.5){...};
+
+	% 		\draw[|-] (x0) -- ($(x0)+(1,0)$);
+	% 		\draw[|-] ($(x0)+(1,0)$) -- ($(x0)+(2,0)$);
+	% 		\draw[|-] ($(x0)+(2,0)$) -- ($(x0)+(3,0)$);
+	% 		\draw[|-] ($(x0)+(3,0)$) -- ($(x0)+(4,0)$);
+	% 		\draw[|-] ($(x0)+(4,0)$) -- ($(x0)+(5,0)$);
+	% 		\draw[|-] ($(x0)+(5,0)$) -- ($(x0)+(6,0)$);
+	% 		\draw[|-] (y0) -- ($(y0)+(1,0)$);
+	% 		\draw[|-] ($(y0)+(1,0)$) -- ($(y0)+(2,0)$);
+	% 		\draw[|-] ($(y0)+(2,0)$) -- ($(y0)+(3,0)$);
+	% 		\draw[|-] ($(y0)+(3,0)$) -- ($(y0)+(4,0)$);
+	% 		\draw[|-] ($(y0)+(4,0)$) -- ($(y0)+(5,0)$);
+	% 		\draw[|-] ($(y0)+(5,0)$) -- ($(y0)+(6,0)$);
+	% 		\draw[|-] (z0) -- ($(z0)+(1,0)$);
+	% 		\draw[|-] ($(z0)+(1,0)$) -- ($(z0)+(2,0)$);
+	% 		\draw[|-] ($(z0)+(2,0)$) -- ($(z0)+(3,0)$);
+	% 		\draw[|-] ($(z0)+(3,0)$) -- ($(z0)+(4,0)$);
+	% 		\draw[|-] ($(z0)+(4,0)$) -- ($(z0)+(5,0)$);
+	% 		\draw[|-] ($(z0)+(5,0)$) -- ($(z0)+(6,0)$);
+
+			
+	% 		\draw[very thick,red] (x0) -- ($(x0)+(1.25,0)$);
+	% 		\draw[very thick,red] ($(x0)+(1.75,0)$) -- ($(x0)+(3.25,0)$);
+	% 		\draw[very thick,red] ($(x0)+(3.75,0)$) -- ($(x0)+(5.25,0)$);
+	% 		\draw[very thick,red] ($(x0)+(5.75,0)$) -- ($(x0)+(6,0)$);
+
+	% 		\draw[very thick,darkgreen] ($(y0)+(.75,0)$) -- ($(y0)+(1.25,0)$);
+	% 		\draw[very thick,darkgreen] ($(y0)+(1.75,0)$) -- ($(y0)+(2.25,0)$);
+	% 		\draw[very thick,darkgreen] ($(y0)+(2.75,0)$) -- ($(y0)+(3.25,0)$);
+	% 		\draw[very thick,darkgreen] ($(y0)+(3.75,0)$) -- ($(y0)+(4.25,0)$);
+	% 		\draw[very thick,darkgreen] ($(y0)+(4.75,0)$) -- ($(y0)+(5.25,0)$);
+	% 		\draw[very thick,darkgreen] ($(y0)+(5.75,0)$) -- ($(y0)+(6,0)$);
+
+	% 		\draw[very thick,blue] ($(z0)+(0.75,0)$) -- ($(z0)+(2.25,0)$);
+	% 		\draw[very thick,blue] ($(z0)+(2.75,0)$) -- ($(z0)+(4.25,0)$);
+	% 		\draw[very thick,blue] ($(z0)+(4.75,0)$) -- ($(z0)+(6,0)$);		
+	% 	\end{tikzpicture}
+	% 	\end{center}
+	% 	to obtain an decomposition of $\Tel X$
+	% }
 
 	\newpage
 	\subsection{Reduced Homology}
