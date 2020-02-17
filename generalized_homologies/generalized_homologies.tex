@@ -128,7 +128,34 @@
 				\arrow{c}{e}{I \times h}[above]
 			\end{diagram}
 		\end{equation*}
-		satisfies the required properties of a homotopy $k:(I \times ir) --> 1_{I \times U}$, where $\tau: X \times X --> X \times X$ denotes the transposition isomorphism. Finally \TODO{recall} that $I \times -$ preserves closed morphisms.
+		satisfies the required properties of a homotopy $k:(I \times ir) --> 1_{I \times U}$, where $\tau: X \times X --> X \times X$ denotes the transposition isomorphism. Finally $I \times i(I \times A)$ is closed in $I \times X$.
+	\end{sketch}
+
+	\begin{lemma}
+		If $i:A --> X$ is a CNDR, then the canonical morphism $I \times A \union \{1\} \times X --> I \times X$ is a deformation retract.
+	\end{lemma}
+	\begin{sketch}
+		Let $A \subseteq U \subseteq X$ and consider the diagram
+		\begin{equation*}
+			\begin{diagram}
+				\threebythree[verywide]
+					{\{1\}\times A}{\{1\}\times X}{I \times X}
+					{I \times A}{I \times A \union \{1\} \times X}{}
+					{I \times U}{}{I \times X}
+
+				\arrow{nw}{n}{}
+				\arrow{n}{ne}{}
+				\arrow{w}{c}{}
+				\arrow{nw}{w}{}
+				\arrow{w}{sw}{}
+				\arrow{n}{c}{}
+				\arrow[equals]{ne}{se}{}
+				\arrow{sw}{se}{}
+				\arrow[dashed]{c}{se}{}
+
+				\node at ($(c)+(-.5,.5)$) {$\secorner$};
+			\end{diagram}
+		\end{equation*}
 	\end{sketch}
 
 	\newpage
@@ -407,8 +434,11 @@
 				If $A \subseteq X$ is a homotopy equivalence, then $H_\bullet(X,A) \isom 0$, in particular $H_\bullet(X,X) \isom 0$.
 			}
 			\item{
-				If $H_\bullet$ is additive, it holds that $H_\bullet(X_\text{disc}) = \Directsum \limits_X H_\bullet(*)$.
+				If $A \subseteq X$ is a deformation retract of $U \subseteq X$, then the canonical morphism $H_\bullet(X,A) --> H_\bullet(X,U)$ is an isomorphism.
 			}
+			% \item{
+			% 	If $H_\bullet$ is additive, it holds that $H_\bullet(X_\text{disc}) = \Directsum \limits_X H_\bullet(*)$.
+			% }
 		\end{enumerate}
 	\end{lemma}
 	\begin{proof}
@@ -429,6 +459,32 @@
 					\end{diagram}
 				\end{equation*}
 				and note that as in (i) we have that $H_\bullet(A) --> H_\bullet(X)$ is an isomorphism. Hence by exactness we have $H_\bullet(X,A) \isom 0$.
+			}
+			\item{
+				Consider the following diagram and apply the 5-lemma.
+				\begin{equation*}
+					\begin{diagram}
+						\fivebytwo[verywide]
+							{H_\bullet(A)}{H_\bullet(X)}{H_\bullet(X,A)}{H_{\bullet-1}(A)}{H_{\bullet-1}(X)}
+							{H_\bullet(U)}{H_\bullet(X)}{H_\bullet(X,U)}{H_{\bullet-1}(U)}{H_{\bullet-1}(X)}
+
+						\arrow{nww}{nw}{}
+						\arrow{nw}{n}{}
+						\arrow{n}{ne}{\partial_\bullet}[above]
+						\arrow{ne}{nee}{}
+
+						\arrow{sww}{sw}{}
+						\arrow{sw}{s}{}
+						\arrow{s}{se}{\partial_\bullet}[below]
+						\arrow{se}{see}{}
+
+						\arrow{nww}{sww}{\isom}[left]
+						\arrow[equals]{nw}{sw}{}
+						\arrow{n}{s}{}
+						\arrow{ne}{se}{\isom}[left]
+						\arrow[equals]{nee}{see}{}
+					\end{diagram}
+				\end{equation*}
 			}
 		\end{enumerate}
 	\end{proof}
@@ -811,7 +867,7 @@
 			}
 			\item{
 				\begin{minipage}[t]{\linewidth-4cm}
-					Let $A \subseteq U \subseteq X$ and $B \subseteq V \subseteq Y$ be open neighborhoods of $A$ and $B$, which deformation retract to $A$ and $B$ respectively and fit into pushout squares as depicted on the right. By construction of pushouts in $\ncat{Top}$ we have that $X \setminus A \isom Y \setminus B$ and $U \setminus A \isom V \setminus B$. Thus we have obtain an isomorphism $H_\bullet(X\setminus A, U \setminus A) \isom H_\bullet(Y \setminus B, V \setminus B)$. Similar to (i) the commutativity of the following diagram gives the desired result.
+					Let $A \subseteq U \subseteq X$ and $B \subseteq V \subseteq Y$ be open neighborhoods of $A$ and $B$, which deformation retract to $A$ and $B$ respectively and fit into pushout squares as depicted on the right. \TODO{By construction of pushouts} in $\ncat{Top}$ we have that $X \setminus A \isom Y \setminus B$ and $U \setminus A \isom V \setminus B$. Thus we have obtain an isomorphism $H_\bullet(X\setminus A, U \setminus A) \isom H_\bullet(Y \setminus B, V \setminus B)$. Similar to (i) the commutativity of the following diagram gives the desired result.
 				\end{minipage}
 				\begin{minipage}[t]{4cm}
 					\vspace{-1.5em}
@@ -855,8 +911,6 @@
 			}
 		\end{enumerate}
 	\end{proof}
-
-	\begin
 
 
 	% \item{
@@ -974,55 +1028,66 @@
 	\end{definition}
 
 	\begin{remark}
-		\TODO{mapping cone and reduced suspension}
+		Let $(H_\bullet, \partial_\bullet)$ be an ordinary homology theory and $x$ be a point in a topological space $X$. For $n \neq 0$ there is by construction an isomorphism
+		\begin{equation*}
+			H_n(X) \isom \widetilde{H}_n(X,x).
+		\end{equation*}
 	\end{remark}
 
 	\begin{lemma}
 		Let $(H_\bullet,\partial_\bullet)$ be a generalized homology theory.
 		\begin{enumerate}[(i)]
 			\item{
+				There are natural isomorphisms (called \textbf{suspension morphisms})
+				\begin{equation*}
+					\sigma_\bullet: \widetilde{H}_{\bullet}(X,x_0) \isom \widetilde{H}_{\bullet+1}(\Susp X, x_0).
+				\end{equation*}
+			}
+			\item{
 				$\widetilde{H}_\bullet$ is homotopy invariant, i.e. factors via $\ncat{hTop}_{*}$.
 			}
 			\item{
-				Given $i_A:A \longrightincl X$ in $\ncat{Top}$ and $x_0 \in A$ it holds that $H_\bullet(X,A) \isom \widetilde{H}_\bullet(\Cone(i_A), x_0)$.
-			}
-			\item{
-				Given $x_0 \in A$, the long exact sequence of $(X,A)$ induces a long exact sequence.
+				Given $i_A:A \longrightincl X$ in $\ncat{Top}$ and $x_0 \in A$ it holds that $H_\bullet(X,A) \isom \widetilde{H}_\bullet(\Cone(i_A), x_0)$. Moreover the following sequence is exact.
 				\begin{equation*}
 					\begin{diagram}
-						\threebythree[ultrawide]
-							{}{}{...\widetilde{H}_{\bullet+1}(\Cone(i_A),x_0)}
-							{\widetilde{H}_\bullet(A,x_0)}{\widetilde{H}_\bullet(X,x_0)}{\widetilde{H}_\bullet(\Cone(i_A),x_0)}
-							{\widetilde{H}_{\bullet-1}(A,x_0)...}{}{}
+						% \threebythree[ultrawide]
+						% 	{}{}{...\widetilde{H}_{\bullet+1}(\Cone(i_A),x_0)}
+						% 	{\widetilde{H}_\bullet(A,x_0)}{\widetilde{H}_\bullet(X,x_0)}{\widetilde{H}_\bullet(\Cone(i_A),x_0)}
+						% 	{\widetilde{H}_{\bullet-1}(A,x_0)...}{}{}
+
+						\threebyone[verywide]
+							{\widetilde{H}_\bullet(A,x_0)}{\widetilde{H}_\bullet(X,x_0)}{\widetilde{H}_\bullet(\Cone(i_A),x_0).}
 
 						\arrow{w}{c}{}
 						\arrow{c}{e}{}
 
-						\draw[->,rounded corners] (ne.east) -| node[auto,pos=.7]{${\partial}_{\bullet+1}$}($(ne)+(2,-.75)$) -| ($(w)+(-1.5,0)$) |- (w.west);
-						\draw[->,rounded corners] (e.east) -| node[auto,pos=.7]{${\partial}_\bullet$}($(e)+(2,-.75)$) -| ($(sw)+(-1.5,0)$) |- (sw.west);
+						%\draw[->,rounded corners] (ne.east) -| node[auto,pos=.7]{${\partial}_{\bullet+1}$}($(ne)+(2,-.75)$) -| ($(w)+(-1.5,0)$) |- (w.west);
+						%\draw[->,rounded corners] (e.east) -| node[auto,pos=.7]{${\partial}_\bullet$}($(e)+(2,-.75)$) -| ($(sw)+(-1.5,0)$) |- (sw.west);
 					\end{diagram}
 				\end{equation*}
-			}
-			\item{
-				\TODO{suspension}
 			}
 		\end{enumerate}
 		If $H_\bullet$ is additive we further have
 		\begin{enumerate}
-			\item[(v)]{
+			\item[(iv)]{
 				Let $(X_i,x_i)_{i \in I}$ be a family \textit{wellpointed} spaces (i.e. each $x_i$ has a neighborhood, which deformation retracts to it). Then
 				\begin{equation*}
-					H_\bullet(\Join \limits_{i\in I}X_i, x_0) \isom \Directsum \limits_{i \in I}(X_i, x_i).
+					\widetilde{H}_\bullet(\Join \limits_{i\in I}X_i, x_0) \isom \Directsum \limits_{i \in I}\widetilde{H}_\bullet(X_i, x_i).
 				\end{equation*}
 			}
 		\end{enumerate}
 	\end{lemma}
 	\begin{proof}
 		\begin{enumerate}[(i)]
-			\item{}
-			\item{}
-			\item{}
-			\item{}
+			\item{
+				Denote the points $n = [\{1\},x_0] \in \Sigma(X)$ and $s = [\{-1\},x_0]$
+			}
+			\item{
+				By definition.
+			}
+			\item{
+
+			}
 			\item{
 				Let $U_i$ be a neighborhood of $x_i$, which deformation retracts to $x_i$. We calculate
 				\begin{equation*}
@@ -1050,8 +1115,8 @@
 				\arrow{w}{c}{H_\bullet(i_1)\directsum H_\bullet(i_2)}[above]
 				\arrow{c}{e}{H_\bullet(j_1) - H_\bullet(j_2)}[above]
 				
-				\draw[->,rounded corners] (ne.east) -| node[auto,pos=.7]{$\partial_{\bullet+1}$}($(ne)+(1.5,-.75)$) -| ($(w)+(-2,0)$) |- (w.west);
-				\draw[->,rounded corners] (e.east) -| node[auto,pos=.7]{$\partial_\bullet$}($(e)+(1.5,-.75)$) -| ($(sw)+(-2,0)$) |- (sw.west);
+				\draw[->,rounded corners] (ne.east) -| node[auto,pos=.7]{$\nu_{\bullet+1}$}($(ne)+(1.5,-.75)$) -| ($(w)+(-2,0)$) |- (w.west);
+				\draw[->,rounded corners] (e.east) -| node[auto,pos=.7]{$\nu_\bullet$}($(e)+(1.5,-.75)$) -| ($(sw)+(-2,0)$) |- (sw.west);
 			\end{diagram}
 		\end{equation*}
 	\end{lemma}
@@ -1145,7 +1210,7 @@
 	\begin{theorem}[Brouwers Fixed Point Theorem]
 		Let $(H_\bullet, \partial_\bullet)$ be a nontrivial ordinary additive homology theory.
 
-		For any $n\in \N$ $\D^n$ does not retract onto it's boundary $\S^{n-1}$. This is equivalent to the statement that every continuous map $f:\D^n --> \D^n$ has a fixed point.
+		For any $n\in \N$ $\D^n$ does not retract onto it's boundary $\S^{n-1}$. This is \TODO{equivalent} to the statement that every continuous map $f:\D^n --> \D^n$ has a fixed point.
 	\end{theorem}
 	\begin{sketch}
 		\textit{Assume} there is a retraction $r: \D^n --> \S^{n-1}$ of the embedding $i:\S^{n-1} --> \D^n$.
@@ -1184,9 +1249,9 @@
 	Recall that any morphism of $R$-modules $f:R --> R$ is given by multiplication with $r = f(1)$.
 
 	\begin{definition}
-		Let $(H_\bullet,\partial_\bullet)$ be an $R$-homology theory and fix an isomorphisms $\widetilde{H}_n(\S^n,x) \isom R$. The \textbf{$R$-degree} of a morphism $f:(\S^n,x_0) --> (\S^n,x_1)$ in $\ncat{Top}_{*}$ is the element $\deg_R(f) := \tilde{f}(1)$ in $R$ for the morphism $\tilde f$ defined by the composition
+		Let $(H_\bullet,\partial_\bullet)$ be an $R$-homology theory, let $n \in \N$ and fix an isomorphism $H_n(\S^n) \isom R$. The \textbf{$R$-degree} of a morphism $f:\S^n --> \S^n$ in $\ncat{Top}$ is the element $\deg_R(f) := \tilde{f}(1)$ in $R$ for the morphism $\tilde f$ defined by the composition
 		\begin{equation*}
-			R \isom \widetilde{H}_n(\S^n,x_0) \xrightarrow{\widetilde{H}_n(f)} \widetilde{H}_n(\S^n,x_1)\isom R
+			R \isom H_n(\S^n) \xrightarrow{H_n(f)} {H}_n(\S^n)\isom R
 		\end{equation*}
 
 		By construction $\deg_R(gf) = \deg_R(g)\deg_R(f)$ and $\deg_R(\id) = 1$ in $R$. Thus we have a morphism of monoids
@@ -1194,6 +1259,72 @@
 			\deg_R: \End_\ncat{Top}(\S^n) \longrightarrow (R,\cdot).
 		\end{equation*}
 	\end{definition}
+
+	% \begin{lemma}[Degree and Suspension]
+	% 	Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory, $n \in \N$ and $f:\S^n --> \S^n$ be a morphism in $\ncat{Top}$. Then
+	% 	\begin{equation*}
+	% 		\deg_R f = \deg_R (\kappa \Susp(f) \kappa^{-1}),
+	% 	\end{equation*}
+	% 	where 
+	% \end{lemma}
+	% \begin{sketch}
+	% 	Fix isomorphisms $H_n(\S^n) \isom R$ and $H_{n+1}(\S^{n+1})$ and consider the diagram.
+	% 	\begin{equation*}
+	% 		\begin{diagram}
+	% 			\threebytwo[ultrawide]
+	% 				{H_{n+1}(\S^{n+1})}{H_{n+1}(\Susp \S^n)}{H_n(\S^n)}
+	% 				{H_{n+1}(\S^{n+1})}{H_{n+1}(\Susp \S^n)}{H_n(\S^n)}
+
+	% 			\arrow{n}{nw}{\begin{array}{c}\isom\\\kappa\end{array}}
+	% 			\arrow{s}{sw}{\begin{array}{c}\isom\\\kappa\end{array}}
+
+	% 			\arrow{n}{ne}{\begin{array}{c}\isom\\\nu_{n+1}\end{array}}
+	% 			\arrow{s}{se}{\begin{array}{c}\isom\\\nu_{n+1}\end{array}}
+
+	% 			\arrow{nw}{sw}{H_{n+1}(\kappa \Susp(f) \kappa^{-1})}[ontop]
+	% 			\arrow{n}{s}{H_{n+1}(\Susp f)}[ontop]
+	% 			\arrow{ne}{se}{f}[right]
+	% 		\end{diagram}
+	% 	\end{equation*}
+	% \end{sketch}
+
+	\begin{lemma}
+		Let $(H,\partial_\bullet)$ be an $R$-homology theory. Fix an isomorphism $H_n(\S^n) \isom R$ for each $n \geq 1$.
+
+		For $n = 0$ all morphisms have $R$-degree $\pm 1$ or $0$ and for $n \geq 1$ \TODO{at least} all values in $\chi(\Z) \subseteq R$ can appear. 
+	\end{lemma}
+	\begin{sketch}
+		For $n \geq 1$ we use induction on $n$.
+		\begin{enumerate}
+			\item[(IB)]{
+				TODO
+			}
+			\item[(IH)]{
+				For $n$ and $z \in \chi(\Z) \subseteq R$ there is a map $f:\S^n --> \S^n$ with $\deg_R(f) = z$.
+			}
+			\item[(IS)]{
+				Consider the following diagram, where $\kappa: \Susp \S^n --> \S^{n+1}$ is the homeomorphism constructed in lemma \TODO{cite}.
+				\begin{equation*}
+					\begin{diagram}
+						\threebytwo[ultrawide]
+							{H_{n+1}(\S^{n+1})}{H_{n+1}(\Susp \S^n)}{H_n(\S^n)}
+							{H_{n+1}(\S^{n+1})}{H_{n+1}(\Susp \S^n)}{H_n(\S^n)}
+
+						\arrow{n}{nw}{\begin{array}{c}\isom\\\kappa\end{array}}
+						\arrow{s}{sw}{\begin{array}{c}\isom\\\kappa\end{array}}
+
+						\arrow{n}{ne}{\begin{array}{c}\isom\\\nu_{n+1}\end{array}}
+						\arrow{s}{se}{\begin{array}{c}\isom\\\nu_{n+1}\end{array}}
+
+						\arrow{nw}{sw}{H_{n+1}(\kappa \Susp(f) \kappa^{-1})}[ontop]
+						\arrow{n}{s}{H_{n+1}(\Susp f)}[ontop]
+						\arrow{ne}{se}{f}[right]
+					\end{diagram}
+				\end{equation*}
+				By commutativity of the diagram the degree of the left morphism is given by the image of $1 \in R \isom H_{n+1}(\S^{n+1})$ along the boundary. Note that the horizontal morphisms of $R$-modules $R \isom H_{n+1}(\S^{n+1}) --> H_n(\S^n) \isom R$ are given by multiplication with some invertible element $a \in R$. This gives $\deg_R(\kappa\Susp(f)\kappa^{-1}) = a^{-1}\deg_R(f)a = \deg_R(f)$.
+			}
+		\end{enumerate}
+	\end{sketch}
 
 	\begin{theorem}[Fundamental Theorem of Algebra]
 		Every nonconstant polynomial in $\C[X]$ has a zero.
