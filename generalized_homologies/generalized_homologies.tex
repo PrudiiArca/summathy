@@ -1289,13 +1289,14 @@
 		\TODO{Torus and higher genus}
 	\end{lemma}
 
+	\newpage
+	\subsection{Degree, Homological Orientation and Further Applications}
+
 	To abbreviate following statements, we make the following nonstandard definition.
 
 	\begin{definition}
 		Let $R$ be a (commutative unital) ring. An $R$-\textbf{homology theory} is an ordinary additive homology theory, whose module of coefficients is $M_0 = R$.
 	\end{definition}
-
-	\TODO{degree and hairy ball theorem, fundamental theorem of algebra}
 
 	Recall that any morphism of $R$-modules $f:R --> R$ is given by multiplication with $r = f(1)$.
 
@@ -1311,34 +1312,6 @@
 		\end{equation*}
 	\end{definition}
 
-	% \begin{lemma}[Degree and Suspension]
-	% 	Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory, $n \in \N$ and $f:\S^n --> \S^n$ be a morphism in $\ncat{Top}$. Then
-	% 	\begin{equation*}
-	% 		\deg_R f = \deg_R (\kappa \Susp(f) \kappa^{-1}),
-	% 	\end{equation*}
-	% 	where 
-	% \end{lemma}
-	% \begin{sketch}
-	% 	Fix isomorphisms $H_n(\S^n) \isom R$ and $H_{n+1}(\S^{n+1})$ and consider the diagram.
-	% 	\begin{equation*}
-	% 		\begin{diagram}
-	% 			\threebytwo[ultrawide]
-	% 				{H_{n+1}(\S^{n+1})}{H_{n+1}(\Susp \S^n)}{H_n(\S^n)}
-	% 				{H_{n+1}(\S^{n+1})}{H_{n+1}(\Susp \S^n)}{H_n(\S^n)}
-
-	% 			\arrow{n}{nw}{\begin{array}{c}\isom\\\kappa\end{array}}
-	% 			\arrow{s}{sw}{\begin{array}{c}\isom\\\kappa\end{array}}
-
-	% 			\arrow{n}{ne}{\begin{array}{c}\isom\\\nu_{n+1}\end{array}}
-	% 			\arrow{s}{se}{\begin{array}{c}\isom\\\nu_{n+1}\end{array}}
-
-	% 			\arrow{nw}{sw}{H_{n+1}(\kappa \Susp(f) \kappa^{-1})}[ontop]
-	% 			\arrow{n}{s}{H_{n+1}(\Susp f)}[ontop]
-	% 			\arrow{ne}{se}{f}[right]
-	% 		\end{diagram}
-	% 	\end{equation*}
-	% \end{sketch}
-
 	\begin{lemma}
 		Let $(H,\partial_\bullet)$ be an $R$-homology theory. Fix an isomorphism $H_n(\S^n) \isom R$ for each $n \geq 1$.
 
@@ -1348,20 +1321,22 @@
 		For $n \geq 1$ we use induction on $n$.
 		\begin{enumerate}
 			\item[(IB)]{
-				Consider $\S^1 \subseteq \C$ and define for $m \in \Z$ the map 
+				Consider $\S^1 \subseteq \C$.
+
+				For $m = 0$ denote $c_1: \S^1 --> \{1\} --> \S^1$ and note $H_1(c_1) = 0$.
+
+				For $m > 0$ define the map 
 				\begin{equation*}
 					\begin{array}{rccl}
 						f_m: &\S^1 &\longrightarrow& \S^1\\
 						&z &\longmapsto& z^m
-					\end{array}
+					\end{array},
 				\end{equation*}
-				For $m = 0$ we find $H_1(f_0) = 0$, as $f$ factors through $\{1\} \subseteq \S^1$.
-
-				For $m > 0$ note that the covering space 
+				note that the covering space 
 				\begin{equation*}
 					S_m = \{(\cos (\tfrac{t}{m}), \sin (\tfrac{t}{m}), \tfrac{t}{2\pi}) \mid t \in [0,2\pi m]\} / \sim
 				\end{equation*}
-				with $(1,0,0) \sim (1,0,m)$ is homeomorphic to $\S^1$ in such a way that postcomposing with the projection $p:S_m --> \S^1$ gives $f_m$. Consider the decomposition of $S_m$ into $A_1 = \S^1 \setminus \{1\} \simeq *$ and $A_2 = \S^1 \setminus \{-1\} \simeq *$. The preimages under $p$ give a decomposition of $S_m$ into sets $B_1$ and $B_2$ and we find $B_1,B_2 \simeq \Coproduct \limits_{i=1}^m *$. Mayer Vietories yields a diagram
+				with $(1,0,0) \sim (1,0,m)$ is $\S^1$ and that its projection $p:S_m --> \S^1$ is $f_m$. Consider the decomposition of $\S^1$ into $A_1 = \S^1 \setminus \{1\} \simeq *$ and $A_2 = \S^1 \setminus \{-1\} \simeq *$. The preimages under $p$ give a decomposition of $S_m$ into sets $B_1$ and $B_2$ and we find $B_1,B_2 \simeq \Coproduct \limits_{i=1}^m *$. Mayer Vietories yields a diagram
 				\begin{equation*}
 					\begin{diagram}
 						\fourbytwo[ultrawide]
@@ -1407,11 +1382,48 @@
 				\begin{align*}
 					a(y_1^1,y_1^2,...,y_m^1,y_m^2) &= (y_1^1+y_1^2,...,y_m^1+y_m^2,y_1^1+y_m^2,y_2^1+y_1^2,...,y_m^1+y_{m-1}^2)\\
 					b(w_1,w_2) &= (w_1+w_2,w_1+w_2)\\
-					t(y_1^1,y_1^2,...,y_m^1,y_m^2) &= (\sum \limits_{i=1}^m y_i^1,\sum \limits_{i=1}^m y_i^2)
+					t(y_1^1,y_1^2,...,y_m^1,y_m^2) &= y_1^1+...+y_m^1,y_1^2 + ... + y_m^2)
 				\end{align*}
+				From exactness of the rows, we get that
+				\begin{align*}
+					u(x) &= (\alpha x, -\alpha x, ..., \alpha x, -\alpha x)\\
+					v(z) &= (\beta z,-\beta z)
+				\end{align*}
+				for some values $\alpha,\beta \in R$ and, since $(1,-1,...,1,-1)$ resp. $(1,-1)$ are in the kernel, that $\alpha$ and $\beta$ are units in $R$. Moreover, because \TODO{why the hell}, we have $\alpha = \beta$. By definition $\deg_R(f_m) = s(1)$ and we get by commutativity of the diagram
+				\begin{equation*}
+					(\alpha \deg_R(f_m), -\alpha \deg_R(f_m)) = v(s(1)) = t(u(1)) = (\alpha m,-\alpha m),
+				\end{equation*}
+				from which we deduce $\deg_R(f_m) = m$.
+
+				For $m=-1$ consider the complex conjugate $f:\S^1 --> \S^1, z \mapsto \overline{z}$ and reuse the decomposition $A_1,A_2$. As for $m > 0$ we obtain a diagram
+				\begin{equation*}
+					\begin{diagram}
+						\fourbytwo[wide]
+							{0}{R}{R \oplus R}{R \oplus R}
+							{0}{R}{R \oplus R}{R \oplus R}
+
+						\arrow{nww}{nw}{}
+						\arrow{nw}{ne}{v}[above]
+						\arrow{ne}{nee}{b}[above]
+
+						\arrow{sww}{sw}{}
+						\arrow{sw}{se}{v}[below]
+						\arrow{se}{see}{b}[below]
+
+						\arrow[equals]{nww}{sww}{}
+						\arrow{nw}{sw}{s'}[left]
+						\arrow{ne}{se}{t'}[right]
+						\arrow{nee}{see}{}
+					\end{diagram}
+				\end{equation*}
+				where
+				\begin{equation*}
+					t'(y_1,y_2) = (y_2,y_1),
+				\end{equation*}
+				which then leads to $(\alpha \deg_R(f), -\alpha \deg_R(f)) = v(s'(1)) = t'(v(1)) = (-\alpha,\alpha)$. Hence $\deg_R(f) = -1$.
 			}
 			\item[(IH)]{
-				For $n$ and $z \in \chi(\Z) \subseteq R$ there is a map $f:\S^n --> \S^n$ with $\deg_R(f) = z$.
+				For $n$ and $m \in \chi(\Z) \subseteq R$ there is a map $f:\S^n --> \S^n$ with $\deg_R(f) = m$.
 			}
 			\item[(IS)]{
 				Consider the following diagram, where $\kappa: \Susp \S^n --> \S^{n+1}$ is the homeomorphism constructed in lemma \TODO{cite}.
@@ -1437,28 +1449,91 @@
 		\end{enumerate}
 	\end{sketch}
 
-	\begin{theorem}[Fundamental Theorem of Algebra]
-		Every nonconstant polynomial in $\C[X]$ has a zero.
+	\begin{theorem}[\TODO{Projective Fixed Point Theorem}]
+		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory with $\characteristic R \notin \{1,2\}$.
+
+		Then for $n \in \N$ it holds that for every function $f: \S^{2n} --> \S^{2n}$ there is an $x_0 \in \S^{2n}$ with $f(x_0) \in \{-x_0,x_0\}$. \TODO{In particular, every map $\widetilde{f}:\R\P^{2n} --> \R\P^{2n}$ has a fixed point.}
 	\end{theorem}
-	\begin{sketch}
-		\textit{Assume} there is $\smash{p(X) = \sum \limits_{k=0}^n a_kX^k}$ without a zero and consider it as $p:\C --> \C$.
-		\begin{tab}[1.3cm]
-			For any $t \in \R$ the map $f_t$ is nullhomotopic via $h_t$
+	\begin{proof}
+		\begin{assume}
+			there is no $x$ with $f(x) \in \{-x,x\}$.
+				
+			We find that
 			\begin{equation*}
-				\begin{array}{rcc}
-					f_t: \S^1 & \longrightarrow & \D^2\\
-					z & \longmapsto & \dfrac{p(tz)}{\Norm{p(tz)}}
+				\begin{array}{rccl}
+					h: &[0,1] \times \S^{2n} & \longrightarrow & \S^{2n}\\
+					&(t,x) & \longmapsto & \dfrac{(1-t)x + tf(x)}{\Norm{(1-t)x + tf(x)}}\vspace{.5em}\\
+					k: &[0,1] \times \S^{2n} & \longrightarrow & \S^{2n}\\
+					&(t,x) & \longmapsto & \dfrac{(1-t)f(x) + t(-x)}{\Norm{(1-t)f(x) + t(-x)}}
+				\end{array}
+			\end{equation*}
+			give homotopies $\id \sim_h f \sim_k -\id$. Hence
+			\begin{equation*}
+				1 = \deg_R(\id) = \deg_R(-\id) = (-1)^{2n+1} = -1.
+			\end{equation*}
+			A contradiction. \vspace{-2em}
+		\end{assume} 
+	\end{proof}
+
+	\begin{theorem}[Hairy Ball Theorem]
+		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory with $\characteristic R \notin \{1,2\}$.
+
+		Then every continuous vector field $v:\S^{2n} --> \R^{2n+1}$ (meaning $\scalarproduct{x}{v(x)} = 0$ for all $x \in \S^{2n}$) vanishes, i.e. there is a point $x_0 \in \S^{2n}$ with $v(x_0) = 0$.
+	\end{theorem}
+	\begin{proof}
+		\textit{Assume} otherwise and define the continuous function
+		\begin{tab}[1.3cm]
+		\begin{equation*}
+			\begin{array}{rccl}
+				f: & \S^{2n} & \longrightarrow & \S^{2n}\\
+				& x & \longmapsto & \dfrac{v(x)}{\Norm{v(x)}}
+			\end{array}.
+		\end{equation*}
+		By the Projective Fixed Point Theorem there is some $x_0 \in \S^{2n}$ with $f(x_0) = \pm x_0$. But then
+		\begin{equation*}
+			0 = \dfrac{\scalarproduct{v(x_0)}{x_0}}{\Norm{v(x_0)}} = \scalarproduct{f(x_0)}{x_0} = \scalarproduct{\pm x_0}{x_0} = \pm 1.
+		\end{equation*}
+		A contradiction.\vspace{-2em}
+		\end{tab}
+	\end{proof}
+
+	\begin{theorem}[Fundamental Theorem of Algebra]
+		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory with $\characteristic R = 0$. Then every nonconstant polynomial in $\C[X]$ has a zero.
+	\end{theorem}
+	\begin{proof}
+		\begin{assume}
+			there is a polynomial $p(X) = X^n + a_{n-1}X^{n-1} + ... + a_0$ without a zero and consider it as a function $p:\C --> \C$.
+			For any $t \in \R$ the map $f_t$ is nullhomotopic \TODO{via $h_t$}, where
+			\begin{equation*}
+				\begin{array}{rccc}
+					f_t: &\S^1 & \longrightarrow & \S^1\\
+					&z & \longmapsto & \dfrac{p(tz)}{\Norm{p(tz)}}
 				\end{array}
 				\hspace{1cm}
-				\begin{array}{rcl}
-					h_t: [0,1] \times \S^1 & \longrightarrow & \D^2\\
-					 (s,z) & \longmapsto & s\dfrac{p(tz)}{\Norm{p(tz)}}
-				\end{array}
+				\begin{array}{rccc}
+					h_t: &[0,1] \times \S^1 & \longrightarrow & \S^1\\
+					 &(s,z) & \longmapsto & \dfrac{p(stz)}{\Norm{p(stz)}}
+				\end{array},
 				\hspace{1.5cm}
 			\end{equation*}
-			and thus $\deg f_t = 0$.
-		\end{tab}
-	\end{sketch}
+			so $\deg f_t = 0$. Choose $r>0$ so large that $\norm{z}^n > \norm{a_{n-1}z^{n-1} + ... + a_0}$. Consider the maps
+			\begin{equation*}
+				p_t(z) = z^n + t(a_{n-1}z^{n-1} + ... + a_0),
+			\end{equation*}
+			which in turn give maps
+			\begin{equation*}
+				\begin{array}{rccc}
+					g_t: & \S^1 & \longrightarrow & \S^1\\
+					& z & \longmapsto & \dfrac{p_t(r z)}{\norm{p_t(rz)}}
+				\end{array}.
+			\end{equation*}
+			Now $f_r = g_1 \sim g_0 = (z \mapsto z^n)$. Hence
+			\begin{equation*}
+				0 = \deg_R(f_r) = \deg_R(z \mapsto z^n) = n.
+			\end{equation*}
+			A contradiction.\vspace{-2em}
+		\end{assume}
+	\end{proof}
 
 	\newpage
 	\subsection{CW-complexes and Cellular Homology}

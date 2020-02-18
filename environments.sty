@@ -86,6 +86,8 @@
 \NewDocumentEnvironment{example}{oo}
 {\begin{@theoremenvironment}{Example}{#1}{#2}}{\end{@theoremenvironment}}
 
+
+
 \newlist{@prooflist}{enumerate}{5}
 \setlist[@prooflist]{topsep=.5\baselineskip, align=left, labelwidth=1cm, leftmargin=1.15cm}
 
@@ -106,6 +108,19 @@
 
 \NewDocumentEnvironment{claim}{}
 {\begin{@proofenvironment}{Claim}{}}{\end{@proofenvironment}}
+
+
+
+\newlist{@assumelist}{enumerate}{5}
+\setlist[@assumelist]{topsep=0\baselineskip, align=left, labelwidth=1.25cm, leftmargin=1.4cm}
+
+\NewDocumentEnvironment{assume}{}
+{
+	\begin{@assumelist}[label={\textit{Assume}}]
+		\item
+}{
+	\end{@assumelist}
+}
 \makeatother
 
 
