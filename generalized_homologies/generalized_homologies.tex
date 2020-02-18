@@ -419,7 +419,7 @@
 
 	In the following we will abbreviate $H_\bullet(X,\emptyset)$ to $H_\bullet(X)$.
 
-	\begin{lemma}[First Calculations]
+	\begin{lemma}[Homology vs Homotopy]
 		Let $(H_\bullet, \partial_\bullet)$ be a generalized homology theory.
 		\begin{enumerate}[(i)]
 			\item{
@@ -487,6 +487,31 @@
 				\end{equation*}
 			}
 		\end{enumerate}
+	\end{proof}
+
+	\begin{lemma}[Homology of Discrete Spaces]
+		Let $(H_\bullet, \partial_\bullet)$ be a generalized additive homology theory. Then there is a canonical isomorphism
+		\begin{equation*}
+			H_\bullet(X_\text{disc}) \isom \Oplus_X H_\bullet(*).
+		\end{equation*}
+		Furthermore, given a map $f:X --> Y$ its homology can be calculated via the induced map
+		\begin{equation*}
+			\begin{array}{rcl}
+				\Oplus_X H_\bullet(*) & \longrightarrow & \Oplus_Y H_\bullet(*)\vspace{.5em}\\(m_x)_x & \longmapsto & \Big(\Sum \limits_{x \in f^{-1}(y)}m_x\Big)_y
+			\end{array}
+		\end{equation*}
+	\end{lemma}
+	\begin{proof}
+		Note that $X_\text{disc} \isom \Coproduct_X *$, hence $H_\bullet(X_\text{disc}) \isom H_\bullet(\Coproduct_X *) \isom \Oplus_X H_\bullet(*)$.
+
+		By construction the assignment $x \mapsto f(x)$ induces the identity $1_{H_\bullet(*)}$. Hence $f$ yields an induced map
+		\begin{equation*}
+			\begin{array}{rcl}
+				\Oplus_{f^{-1}(\{y\})} H_\bullet(*) &\longrightarrow& H_\bullet(*)\\
+				(m_x)_x & \longmapsto & \Sum \limits_{x \in f^{-1}(y)} m_x.
+			\end{array}
+		\end{equation*}
+		Using $\Oplus \limits_{y\in Y} \Oplus \limits_{f^{-1}(\{y\})} * \isom \Oplus_X *$ yields the desired result. 
 	\end{proof}
 
 	\begin{proposition}[Triple Sequence]
@@ -695,6 +720,7 @@
 				\arrow[mapsto]{c1}{b1}{}
 				\arrow[mapsto]{b1}{c2}{}
 			\end{diagram}
+			\vspace{-2em}
 		\end{equation*}
 	\end{sketch}
 
@@ -1034,6 +1060,27 @@
 		\end{equation*}
 	\end{remark}
 
+	\begin{lemma}[Reduced Mayer Vitoris]
+		Let $(H_\bullet,\partial_\bullet)$ be a generalized homology theory and $A_1,A_2 \subseteq X$ in $\ncat{Top}$, such that $X \subseteq \interior(A_1) \union \interior(A_2)$ and $x_0 \in A_1 \intersection A_2$. Then the following sequence is exact.
+		\begin{equation*}
+			\begin{diagram}
+				\threebythree[hyperwide]
+					{}{}{...\widetilde{H}_{\bullet+1}(X,x_0)}
+					{\widetilde{H}_\bullet(A_1 \intersection A_2,x_0)}{\widetilde{H}_\bullet(A_1,x_0)\directsum \widetilde{H}_\bullet(A_2,x_0)}{\widetilde{H}_\bullet(X,x_0)}
+					{\widetilde{H}_{\bullet-1}(A_1 \intersection A_2,x_0)...}{}{}
+
+				\arrow{w}{c}{H_\bullet(i_1)\directsum H_\bullet(i_2)}[above]
+				\arrow{c}{e}{H_\bullet(j_1) - H_\bullet(j_2)}[above]
+				
+				\draw[->,rounded corners] (ne.east) -| node[auto,pos=.7]{$\nu_{\bullet+1}$}($(ne)+(1.5,-.75)$) -| ($(w)+(-2,0)$) |- (w.west);
+				\draw[->,rounded corners] (e.east) -| node[auto,pos=.7]{$\nu_\bullet$}($(e)+(1.5,-.75)$) -| ($(sw)+(-2,0)$) |- (sw.west);
+			\end{diagram}
+		\end{equation*}
+	\end{lemma}
+	\begin{sketch}
+		Follows immediately from unreduced Mayer Vietories.
+	\end{sketch}
+
 	\begin{lemma}
 		Let $(H_\bullet,\partial_\bullet)$ be a generalized homology theory.
 		\begin{enumerate}[(i)]
@@ -1080,7 +1127,17 @@
 	\begin{proof}
 		\begin{enumerate}[(i)]
 			\item{
-				Denote the points $n = [\{1\},x_0] \in \Sigma(X)$ and $s = [\{-1\},x_0]$
+				Denote the points $x_1 = [\{1\},x_0]$ and $x_2 = [\{-1\},x_0]$ in $\Susp X$ and consider the decomposition of $\Susp X$ into $A_1 = \Susp(X) \setminus \{x_1\}$ and $A_2 = \Susp(X) \setminus \{x_2\}$. Note that by construction $A_1 \simeq * \simeq A_2$ and $A_1 \intersection A_2 \simeq X$. Hence Reduced Mayer Vietoris gives an isomorphism
+				\begin{equation*}
+					\begin{diagram}
+						\fourbyone[verywide]
+							{0 \oplus 0}{\widetilde{H}_{\bullet+1}(\Susp X, x_0)}{\widetilde{H}_\bullet(X)}{0 \oplus 0}
+
+						\arrow{ww}{w}{}
+						\arrow{w}{e}{\nu_{\bullet+1}}[above]
+						\arrow{e}{ee}{}
+					\end{diagram}
+				\end{equation*}
 			}
 			\item{
 				By definition.
@@ -1103,26 +1160,9 @@
 		\end{enumerate}
 	\end{proof}
 
-	\begin{lemma}[Reduced Mayer Vitoris]
-		Let $(H_\bullet,\partial_\bullet)$ be a generalized homology theory and $A_1,A_2 \subseteq X$ in $\ncat{Top}$, such that $X \subseteq \interior(A_1) \union \interior(A_2)$ and $x_0 \in A_1 \intersection A_2$. Then the following sequence is exact.
-		\begin{equation*}
-			\begin{diagram}
-				\threebythree[hyperwide]
-					{}{}{...\widetilde{H}_{\bullet+1}(X,x_0)}
-					{\widetilde{H}_\bullet(A_1 \intersection A_2,x_0)}{\widetilde{H}_\bullet(A_1,x_0)\directsum \widetilde{H}_\bullet(A_2,x_0)}{\widetilde{H}_\bullet(X,x_0)}
-					{\widetilde{H}_{\bullet-1}(A_1 \intersection A_2,x_0)...}{}{}
-
-				\arrow{w}{c}{H_\bullet(i_1)\directsum H_\bullet(i_2)}[above]
-				\arrow{c}{e}{H_\bullet(j_1) - H_\bullet(j_2)}[above]
-				
-				\draw[->,rounded corners] (ne.east) -| node[auto,pos=.7]{$\nu_{\bullet+1}$}($(ne)+(1.5,-.75)$) -| ($(w)+(-2,0)$) |- (w.west);
-				\draw[->,rounded corners] (e.east) -| node[auto,pos=.7]{$\nu_\bullet$}($(e)+(1.5,-.75)$) -| ($(sw)+(-2,0)$) |- (sw.west);
-			\end{diagram}
-		\end{equation*}
-	\end{lemma}
-	\begin{sketch}
-		Follows immediately from unreduced Mayer Vietories.
-	\end{sketch}
+	\begin{remark}
+		The properties of reduced homology stated in the previous lemma can be used as axioms for generalized reduced homology theories.
+	\end{remark}
 
 	\newpage
 	\subsection{Examples and Applications}
@@ -1210,7 +1250,7 @@
 	\begin{theorem}[Brouwers Fixed Point Theorem]
 		Let $(H_\bullet, \partial_\bullet)$ be a nontrivial ordinary additive homology theory.
 
-		For any $n\in \N$ $\D^n$ does not retract onto it's boundary $\S^{n-1}$. This is \TODO{equivalent} to the statement that every continuous map $f:\D^n --> \D^n$ has a fixed point.
+		For any $n\in \N$ $\D^n$ does not retract onto it's boundary $\S^{n-1}$. This is equivalent to the statement that every continuous map $f:\D^n --> \D^n$ has a fixed point.
 	\end{theorem}
 	\begin{sketch}
 		\textit{Assume} there is a retraction $r: \D^n --> \S^{n-1}$ of the embedding $i:\S^{n-1} --> \D^n$.
@@ -1227,7 +1267,18 @@
 		\end{equation*}
 		where $\sigma:\D^n --> [0,\infty)$ is the continous function calculating the intersection of the ray from $f(p)$ to $p$ with the boundary, ie. satisfying $\Vert f(p) + \sigma(p)(p - f(p))\Vert = 1$. Clearly this defines a retraction of $\S^n$.
 
-		\TODO{converse?}
+		Conversely, suppose there is a retraction $r:\D^n --> \S^{n-1}$ and consider 
+		\begin{equation*}
+			\begin{diagram}
+				\fourbyone
+					{\D^n}{\S^{n-1}}{\S^{n-1}}{\D^n,}
+
+				\arrow{ww}{w}{r}[above]
+				\arrow{w}{e}{a}[above]
+				\arrow{e}{ee}{i}[above]
+			\end{diagram}
+		\end{equation*}
+		where $a: \S^{n-1} --> \S^{n-1}$ is the antipodal map. This map has no fixed points.
 	\end{sketch}
 
 	\begin{lemma}[Homology of Wedge Sums of Circles]
@@ -1297,7 +1348,67 @@
 		For $n \geq 1$ we use induction on $n$.
 		\begin{enumerate}
 			\item[(IB)]{
-				TODO
+				Consider $\S^1 \subseteq \C$ and define for $m \in \Z$ the map 
+				\begin{equation*}
+					\begin{array}{rccl}
+						f_m: &\S^1 &\longrightarrow& \S^1\\
+						&z &\longmapsto& z^m
+					\end{array}
+				\end{equation*}
+				For $m = 0$ we find $H_1(f_0) = 0$, as $f$ factors through $\{1\} \subseteq \S^1$.
+
+				For $m > 0$ note that the covering space 
+				\begin{equation*}
+					S_m = \{(\cos (\tfrac{t}{m}), \sin (\tfrac{t}{m}), \tfrac{t}{2\pi}) \mid t \in [0,2\pi m]\} / \sim
+				\end{equation*}
+				with $(1,0,0) \sim (1,0,m)$ is homeomorphic to $\S^1$ in such a way that postcomposing with the projection $p:S_m --> \S^1$ gives $f_m$. Consider the decomposition of $S_m$ into $A_1 = \S^1 \setminus \{1\} \simeq *$ and $A_2 = \S^1 \setminus \{-1\} \simeq *$. The preimages under $p$ give a decomposition of $S_m$ into sets $B_1$ and $B_2$ and we find $B_1,B_2 \simeq \Coproduct \limits_{i=1}^m *$. Mayer Vietories yields a diagram
+				\begin{equation*}
+					\begin{diagram}
+						\fourbytwo[ultrawide]
+							{0}{H_1(S_m)}{H_0(B_1 \intersection B_2)}{H_0(B_1) \oplus H_0(B_2)}
+							{0}{H_1(\S^1)}{H_0(A_1 \intersection A_2)}{H_0(A_1) \oplus H_0(A_2)}
+
+						\arrow{nww}{nw}{}
+						\arrow{nw}{ne}{\nu_1}[above]
+						\arrow{ne}{nee}{}
+
+						\arrow{sww}{sw}{}
+						\arrow{sw}{se}{\nu_1}[below]
+						\arrow{se}{see}{}
+
+						\arrow[equals]{nww}{sww}{}
+						\arrow{nw}{sw}{H_1(p)}[ontop]
+						\arrow{ne}{se}{H_1(p|_{B_1 \intersection B_2})}[ontop]
+						\arrow{nee}{see}{H_1(p|B_1) \oplus H_1(p|B_2)}[ontop]
+					\end{diagram}
+				\end{equation*}
+				Using homotopy invariance we can translate this into a diagram, where the right square is given by homologies of discrete spaces.
+				\begin{equation*}
+					\begin{diagram}
+						\fourbytwo[ultrawide]
+							{0}{R}{\Oplus \limits_{k=1}^m(R \oplus R)}{\Oplus \limits_{i=1}^m R \oplus \Oplus \limits_{j=1}^m R}
+							{0}{R}{R \oplus R}{R \oplus R}
+
+						\arrow{nww}{nw}{}
+						\arrow{nw}{ne}{u}[above]
+						\arrow{ne}{nee}{a}[above]
+
+						\arrow{sww}{sw}{}
+						\arrow{sw}{se}{v}[below]
+						\arrow{se}{see}{b}[below]
+
+						\arrow[equals]{nww}{sww}{}
+						\arrow{nw}{sw}{s}[left]
+						\arrow{ne}{se}{t}[right]
+						\arrow{nee}{see}{}
+					\end{diagram}
+				\end{equation*}
+				By construction of Mayer Vietories and the homology of maps between discrete spaces we have
+				\begin{align*}
+					a(y_1^1,y_1^2,...,y_m^1,y_m^2) &= (y_1^1+y_1^2,...,y_m^1+y_m^2,y_1^1+y_m^2,y_2^1+y_1^2,...,y_m^1+y_{m-1}^2)\\
+					b(w_1,w_2) &= (w_1+w_2,w_1+w_2)\\
+					t(y_1^1,y_1^2,...,y_m^1,y_m^2) &= (\sum \limits_{i=1}^m y_i^1,\sum \limits_{i=1}^m y_i^2)
+				\end{align*}
 			}
 			\item[(IH)]{
 				For $n$ and $z \in \chi(\Z) \subseteq R$ there is a map $f:\S^n --> \S^n$ with $\deg_R(f) = z$.
