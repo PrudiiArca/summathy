@@ -10,7 +10,90 @@
 	\newpage
 	\setcounter{section}{-1}
 	\section{Prerequisites}
-	\subsection{Deformation Retracts and Mapping Telescope}
+	\subsection{Homotopy}
+
+	\begin{definition}
+		A \textbf{homotopy} between morphisms $f_0,f_1: (X, \mathcal{O}_X) --> (Y,\mathcal{O}_Y)$ in $\ncat{Top}$ is a continuous map 
+		\begin{align*}
+			h:[0,1]\times X --> Y,
+		\end{align*}
+		satisfying that $f_0 = h|_{\{0\}\times X}$ and $f_1 = h|_{\{1\}\times X}$. In this case $f_0$ and $f_1$ are called \textbf{homotopic}, which is denoted by $f_0 h_\sim f_1$ or simply $f_0 \sim f_1$.
+
+		For arbitrary objects $X,Y$ in $\ncat{Top}$, homotopy defines an equivalence relation on $\ncat{Top}(X,Y)$ as
+		\begin{equation*}
+			\begin{array}{rcl}
+				f_0 \sim f_0 & \text{via} & (t,x) \mapsto f(x)\vspace{.5em}\\
+				f_0 \underset{h}{\sim} f_1 \implies f_1 \sim f_0 & \text{via} &(t,x) \mapsto h(1-t,x)\vspace{-.25em}\\
+				f_0 \underset{h}{\sim} f_1 \underset{h'}{\sim} f_2 \implies f_0 \sim f_2 & \text{via} &(t,x) \mapsto \left\{\begin{array}{cl} 
+					h(2t,x) & t \in [0,\frac{1}{2}]\\
+					h'(2t-1,x) & t \in [\frac{1}{2},1]
+				\end{array}\right.
+			\end{array}
+		\end{equation*}
+		Moreover this equivalence relation is compatible with composition in the sense that, given maps $s:W-->X$, $f_0,f_1: X --> Y$ and $t:Y-->Z$, any homotopy $f_0 h_\sim f_1$ extends to a homotopy $tf_0s \sim tf_1s$, by taking the composite
+		\begin{equation*}
+			\begin{diagram}
+				\fourbyone[verywide]
+					{[0,1]\times W}{[0,1] \times X}{Y}{Z}
+				\arrow{ww}{w}{[0,1]\times s}[above]
+				\arrow{w}{e}{h}[above]
+				\arrow{e}{ee}{t}[above]
+			\end{diagram}.
+		\end{equation*}
+		Hence, by considering morphisms of topological spaces just up to homotopy, one obtains the \textbf{homotopy category} $\ncat{hTop}$, which comes with the canonical functor
+		\begin{equation*}
+			\begin{array}{rcl}
+				\ncat{Top} & \longrightarrow & \ncat{hTop}\\
+				(X,\mathcal{O}_X) & \mapsto & (X,\mathcal{O}_X)\\
+				f & \mapsto & [f]_\sim
+			\end{array}.
+		\end{equation*}
+	\end{definition}
+
+	\begin{definition}
+		A continuous map $f:X-->Y$ is a \textbf{homotopy equivalence}, if $[f]_\sim: X --> Y$ is an isomorphism in $\ncat{hTop}$. Explicitly this means that there exists a morphism $g:Y --> X$ in $\ncat{Top}$ such that $gf \sim 1_X$ and $fg \sim 1_Y$. Topological spaces $X$ and $Y$ are said to be \textbf{homotopy equivalent}, which will be denoted by $X \simeq Y$, if there is a homotopy equivalence between them.
+
+		A topological space $X$ is \textbf{contractible}, if it is homotopy equivalent to the singleton space $\{*\}$. In particular $X$ is a nonempty space.
+	\end{definition}
+
+	For example the canonical projection $[0,1] \times X \xrightarrow{\pi_X} X$ defines a homotopy equivalence with homotopy inverse given by the homotopy class of any of the following maps ($t \in [0,1]$).
+	\begin{equation*}
+		\begin{array}{rcc}
+			\iota_t:X &\longrightarrow &[0,1] \times X,\\
+			 x & \longmapsto &(t,x)
+		\end{array}
+	\end{equation*}
+
+	\begin{definition}
+		A functor $\fun{F}:\ncat{Top} --> \cat{C}$ into some category $\cat{C}$ is said to be \textbf{homotopy invariant}, if it satisfies one of the following equivalent conditions.
+		\begin{enumerate}[(i)]
+			\item{
+				$\fun{F}$ factors through $\ncat{hTop}$.
+			}
+			\item{
+				For any pair of continuous maps $f_0,f_1$ in $\ncat{Top}$ it holds that $f_0 \sim f_1$ implies $\fun{F}f_0 = \fun{F}f_1$.
+			}
+			\item{
+				For any topological space $X$ he projection $\pi_X:[0,1]\times X --> X$ induces an isomorphism $\fun{F}\pi_X: \fun{F}([0,1]\times X) \xrightarrow{\isom} \fun{F}X$.
+			}
+			\item{
+				For any topological space $X$ and $s,t \in [0,1]$ the inclusions $\iota_s, \iota_t: X --> [0,1]\times X$ satisfy $\fun{F}\iota_s = \fun{F}\iota_t$.
+			}
+		\end{enumerate}
+	\end{definition}
+	\begin{sketch}
+		(i) $\Leftrightarrow$ (ii): by definition.
+
+		(i) $\Rightarrow$ (iii):  $[\pi_X]_\sim$ is iso in $\ncat{hTop}$, so $\fun{F}\pi_X$ is an isomorphism.
+
+		(iii) $\Rightarrow$ (iv): by uniqueness of inverses.
+
+		(iv) $\Rightarrow$ (ii): Given $f_0 \sim_h f_1$ we have $f_i = h\iota_i$, which yields $\fun{F}f_0 = \fun{F}(h)\fun{F}\iota_0 = \fun{F}h\fun{F}\iota_1 = \fun{F}f_1$.
+
+	\end{sketch}
+
+	\newpage
+	\subsection{Deformation Retracts}
 	\TODO{Kammeyer section 2.4}
 
 	\begin{definition}
@@ -1332,68 +1415,69 @@
 						&z &\longmapsto& z^m
 					\end{array},
 				\end{equation*}
-				note that the covering space 
-				\begin{equation*}
-					S_m = \{(\cos (\tfrac{t}{m}), \sin (\tfrac{t}{m}), \tfrac{t}{2\pi}) \mid t \in [0,2\pi m]\} / \sim
-				\end{equation*}
-				with $(1,0,0) \sim (1,0,m)$ is $\S^1$ and that its projection $p:S_m --> \S^1$ is $f_m$. Consider the decomposition of $\S^1$ into $A_1 = \S^1 \setminus \{1\} \simeq *$ and $A_2 = \S^1 \setminus \{-1\} \simeq *$. The preimages under $p$ give a decomposition of $S_m$ into sets $B_1$ and $B_2$ and we find $B_1,B_2 \simeq \Coproduct \limits_{i=1}^m *$. Mayer Vietories yields a diagram
-				\begin{equation*}
-					\begin{diagram}
-						\fourbytwo[ultrawide]
-							{0}{H_1(S_m)}{H_0(B_1 \intersection B_2)}{H_0(B_1) \oplus H_0(B_2)}
-							{0}{H_1(\S^1)}{H_0(A_1 \intersection A_2)}{H_0(A_1) \oplus H_0(A_2)}
+				\TODO{finish with Hannes-Kammeyer}
+				% note that the covering space 
+				% \begin{equation*}
+				% 	S_m = \{(\cos (\tfrac{t}{m}), \sin (\tfrac{t}{m}), \tfrac{t}{2\pi}) \mid t \in [0,2\pi m]\} / \sim
+				% \end{equation*}
+				% with $(1,0,0) \sim (1,0,m)$ is $\S^1$ and that its projection $p:S_m --> \S^1$ is $f_m$. Consider the decomposition of $\S^1$ into $A_1 = \S^1 \setminus \{1\} \simeq *$ and $A_2 = \S^1 \setminus \{-1\} \simeq *$. The preimages under $p$ give a decomposition of $S_m$ into sets $B_1$ and $B_2$ and we find $B_1,B_2 \simeq \Coproduct \limits_{i=1}^m *$. Mayer Vietories yields a diagram
+				% \begin{equation*}
+				% 	\begin{diagram}
+				% 		\fourbytwo[ultrawide]
+				% 			{0}{H_1(S_m)}{H_0(B_1 \intersection B_2)}{H_0(B_1) \oplus H_0(B_2)}
+				% 			{0}{H_1(\S^1)}{H_0(A_1 \intersection A_2)}{H_0(A_1) \oplus H_0(A_2)}
 
-						\arrow{nww}{nw}{}
-						\arrow{nw}{ne}{\nu_1}[above]
-						\arrow{ne}{nee}{}
+				% 		\arrow{nww}{nw}{}
+				% 		\arrow{nw}{ne}{\nu_1}[above]
+				% 		\arrow{ne}{nee}{}
 
-						\arrow{sww}{sw}{}
-						\arrow{sw}{se}{\nu_1}[below]
-						\arrow{se}{see}{}
+				% 		\arrow{sww}{sw}{}
+				% 		\arrow{sw}{se}{\nu_1}[below]
+				% 		\arrow{se}{see}{}
 
-						\arrow[equals]{nww}{sww}{}
-						\arrow{nw}{sw}{H_1(p)}[ontop]
-						\arrow{ne}{se}{H_1(p|_{B_1 \intersection B_2})}[ontop]
-						\arrow{nee}{see}{H_1(p|B_1) \oplus H_1(p|B_2)}[ontop]
-					\end{diagram}
-				\end{equation*}
-				Using homotopy invariance we can translate this into a diagram, where the right square is given by homologies of discrete spaces.
-				\begin{equation*}
-					\begin{diagram}
-						\fourbytwo[ultrawide]
-							{0}{R}{\Oplus \limits_{k=1}^m(R \oplus R)}{\Oplus \limits_{i=1}^m R \oplus \Oplus \limits_{j=1}^m R}
-							{0}{R}{R \oplus R}{R \oplus R}
+				% 		\arrow[equals]{nww}{sww}{}
+				% 		\arrow{nw}{sw}{H_1(p)}[ontop]
+				% 		\arrow{ne}{se}{H_1(p|_{B_1 \intersection B_2})}[ontop]
+				% 		\arrow{nee}{see}{H_1(p|B_1) \oplus H_1(p|B_2)}[ontop]
+				% 	\end{diagram}
+				% \end{equation*}
+				% Using homotopy invariance we can translate this into a diagram, where the right square is given by homologies of discrete spaces.
+				% \begin{equation*}
+				% 	\begin{diagram}
+				% 		\fourbytwo[ultrawide]
+				% 			{0}{R}{\Oplus \limits_{k=1}^m(R \oplus R)}{\Oplus \limits_{i=1}^m R \oplus \Oplus \limits_{j=1}^m R}
+				% 			{0}{R}{R \oplus R}{R \oplus R}
 
-						\arrow{nww}{nw}{}
-						\arrow{nw}{ne}{u}[above]
-						\arrow{ne}{nee}{a}[above]
+				% 		\arrow{nww}{nw}{}
+				% 		\arrow{nw}{ne}{u}[above]
+				% 		\arrow{ne}{nee}{a}[above]
 
-						\arrow{sww}{sw}{}
-						\arrow{sw}{se}{v}[below]
-						\arrow{se}{see}{b}[below]
+				% 		\arrow{sww}{sw}{}
+				% 		\arrow{sw}{se}{v}[below]
+				% 		\arrow{se}{see}{b}[below]
 
-						\arrow[equals]{nww}{sww}{}
-						\arrow{nw}{sw}{s}[left]
-						\arrow{ne}{se}{t}[right]
-						\arrow{nee}{see}{}
-					\end{diagram}
-				\end{equation*}
-				By construction of Mayer Vietories and the homology of maps between discrete spaces we have
-				\begin{align*}
-					a(y_1^1,y_1^2,...,y_m^1,y_m^2) &= (y_1^1+y_1^2,...,y_m^1+y_m^2,y_1^1+y_m^2,y_2^1+y_1^2,...,y_m^1+y_{m-1}^2)\\
-					b(w_1,w_2) &= (w_1+w_2,w_1+w_2)\\
-					t(y_1^1,y_1^2,...,y_m^1,y_m^2) &= y_1^1+...+y_m^1,y_1^2 + ... + y_m^2)
-				\end{align*}
-				From exactness of the rows, we get that
-				\begin{align*}
-					u(x) &= (\alpha x, -\alpha x, ..., \alpha x, -\alpha x)\\
-					v(z) &= (\beta z,-\beta z)
-				\end{align*}
-				for some values $\alpha,\beta \in R$ and, since $(1,-1,...,1,-1)$ resp. $(1,-1)$ are in the kernel, that $\alpha$ and $\beta$ are units in $R$. Moreover, because \TODO{why the hell}, we have $\alpha = \beta$. By definition $\deg_R(f_m) = s(1)$ and we get by commutativity of the diagram
-				\begin{equation*}
-					(\alpha \deg_R(f_m), -\alpha \deg_R(f_m)) = v(s(1)) = t(u(1)) = (\alpha m,-\alpha m),
-				\end{equation*}
-				from which we deduce $\deg_R(f_m) = m$.
+				% 		\arrow[equals]{nww}{sww}{}
+				% 		\arrow{nw}{sw}{s}[left]
+				% 		\arrow{ne}{se}{t}[right]
+				% 		\arrow{nee}{see}{}
+				% 	\end{diagram}
+				% \end{equation*}
+				% By construction of Mayer Vietories and the homology of maps between discrete spaces we have
+				% \begin{align*}
+				% 	a(y_1^1,y_1^2,...,y_m^1,y_m^2) &= (y_1^1+y_1^2,...,y_m^1+y_m^2,y_1^1+y_m^2,y_2^1+y_1^2,...,y_m^1+y_{m-1}^2)\\
+				% 	b(w_1,w_2) &= (w_1+w_2,w_1+w_2)\\
+				% 	t(y_1^1,y_1^2,...,y_m^1,y_m^2) &= y_1^1+...+y_m^1,y_1^2 + ... + y_m^2)
+				% \end{align*}
+				% From exactness of the rows, we get that
+				% \begin{align*}
+				% 	u(x) &= (\alpha x, -\alpha x, ..., \alpha x, -\alpha x)\\
+				% 	v(z) &= (\beta z,-\beta z)
+				% \end{align*}
+				% for some values $\alpha,\beta \in R$ and, since $(1,-1,...,1,-1)$ resp. $(1,-1)$ are in the kernel, that $\alpha$ and $\beta$ are units in $R$. Moreover, because \TODO{why the hell}, we have $\alpha = \beta$. By definition $\deg_R(f_m) = s(1)$ and we get by commutativity of the diagram
+				% \begin{equation*}
+				% 	(\alpha \deg_R(f_m), -\alpha \deg_R(f_m)) = v(s(1)) = t(u(1)) = (\alpha m,-\alpha m),
+				% \end{equation*}
+				% from which we deduce $\deg_R(f_m) = m$.
 
 				For $m=-1$ consider the complex conjugate $f:\S^1 --> \S^1, z \mapsto \overline{z}$ and reuse the decomposition $A_1,A_2$. As for $m > 0$ we obtain a diagram
 				\begin{equation*}
@@ -2050,7 +2134,7 @@
 			\begin{array}{rcl}
 				\Delta & \overset{\mathbb{\Delta}}{\longrightarrow} & \ncat{Top}\\
 				{[n]} & \longmapsto & \mathbb{\Delta}^n := \convex \{e_0,...,e_n\} \subseteq \R^{n+1}\\
-				{[\rho:[m]\rightarrow[n]]} & \longmapsto & {\left[\begin{array}{rcl}\mathbb{\Delta}^m &\rightarrow& \mathbb{\Delta}^n\\e_i &:\mapsto& e_{\rho(i)}\end{array}\right]}
+				{[\rho:[m]\rightarrow[n]]} & \longmapsto & {\left[\begin{array}{ccc}\mathbb{\Delta}^m &\rightarrow& \mathbb{\Delta}^n\\e_i &:\mapsto& e_{\rho(i)}\end{array}\right]}
 			\end{array}
 		\end{equation*}
 		where $e_0,...,e_n$ denote the standard basis vectors and
@@ -2060,30 +2144,80 @@
 		The action on morphisms is defined by linear (and hence continuous) extension.
 	\end{definition}
 
-	\begin{remark}
-		The \textit{convex hull} $\{0,e_0,...,e_n\}$ in $\R^n$ lends itself to two different kinds of parameterizations, namely
-		\begin{equation*}
-			\smash{\convex \{e_0,...,e_n\} = \{(t_0,...,t_n) \mid 0 \leq t_i \text{ and } \Sum \limits_{i=0}^n t_i = 1\}}
-		\end{equation*}
-		and
-		\begin{equation*}
-			\convex \{e_0,...,e_n\} = \{(\varphi_1,...,\varphi_n) \mid 0 \leq \varphi_i \leq 1\}.
-		\end{equation*}
-		We can convert between both parametrizations by letting
-		\begin{equation*}
-			\begin{array}{rcl}
-				(t_0,\,...\,,t_n) & \longmapsto & (t_0,\,t_0+t_1,\,...\,,\,\Sum \limits_{i=0}^{n-1} t_i)\\
-				(\varphi_1,\, \varphi_2 - \varphi_1,\,...\,,\,\varphi_n-\varphi_{n-1},\,1-\varphi_n) & \reflectbox{$\longmapsto$} & (\varphi_1,\, ...\,,\, \varphi_n)
-			\end{array}
-		\end{equation*}
-		\TODO{coordinates and their $d_i^n, s_i^n$}
-	\end{remark}
+	%Note that the geometric $n$-simplex $\mathbb{\Delta}^n$ is inherently $n$-dimensional, as it lies completely in the hyperplane spanned by the unit vectors. Thus it is common to consider it as subset of $\R^n$.
 
 	\begin{definition}
-		\TODO{subdivision of the cylinder}
+		Let $X$ be a convex subset of a real vector space $V$. Given an ordered family of points $x_0,...,x_n$ there is a unique linear map $\R^{n+1} --> V$ induced by the assignment $e_i \mapsto x_i$. The \textbf{linear $n$-simplex} $[x_0,...,x_n]$ with \textbf{vertices} $x_0,...,x_n$ is defined to be the restriction of this map to $\mathbb{\Delta}^n \longrightarrow X$. It is common to denot the linear subsimplex, obtained by ommitting $x_i$ by $[x_0,...,\widehat{x_i},...,x_n]$.
+
+		It is important to stress that the order of the vertices plays a crucial role here, since
+		\begin{equation*}
+			\im [x_0,...,x_n] = \convex \{x_0,...,x_n\} = \im [x_n,...,x_0],
+		\end{equation*}
+		but $[x_0,...,x_n] \neq [x_n,...,x_0]$.
 	\end{definition}
 
-	\begin{definition}
+	\TODO{linear sing functor}
+
+	\TODO{remark on different parameterizations needed?}
+	% \begin{remark}
+	% 	The \textit{convex hull} $\{0,e_0,...,e_n\}$ in $\R^n$ lends itself to two different kinds of parameterizations, namely
+	% 	\begin{equation*}
+	% 		\smash{\convex \{e_0,...,e_n\} = \{(t_0,...,t_n) \mid 0 \leq t_i \text{ and } \Sum \limits_{i=0}^n t_i = 1\}}
+	% 	\end{equation*}
+	% 	and
+	% 	\begin{equation*}
+	% 		\convex \{e_0,...,e_n\} = \{(\varphi_1,...,\varphi_n) \mid 0 \leq \varphi_i \leq 1\}.
+	% 	\end{equation*}
+	% 	We can convert between both parametrizations by letting
+	% 	\begin{equation*}
+	% 		\begin{array}{rcl}
+	% 			(t_0,\,...\,,t_n) & \longmapsto & (t_0,\,t_0+t_1,\,...\,,\,\Sum \limits_{i=0}^{n-1} t_i)\\
+	% 			(\varphi_1,\, \varphi_2 - \varphi_1,\,...\,,\,\varphi_n-\varphi_{n-1},\,1-\varphi_n) & \reflectbox{$\longmapsto$} & (\varphi_1,\, ...\,,\, \varphi_n)
+	% 		\end{array}
+	% 	\end{equation*}
+	% 	\TODO{coordinates and their $d_i^n, s_i^n$}
+	% \end{remark}
+	\begin{lemma}[Subdivision of the Prism]
+		The \textbf{prism} $[0,1] \times \mathbb{\Delta}^n \subseteq \R^{n+1}$ admits a subdivision into $n+1$ linear $n+1$-simplices in such a way that pairwise their intersection is a $k$-simplex for some $k \leq n$.
+	\end{lemma}
+	\begin{sketch}
+		\begin{minipage}[t]{\linewidth-3cm}
+			The inclusions $\iota_0,\iota_1: \mathbb{\Delta}^n --> [0,1] \times \mathbb{\Delta}^n$ yield two linear $n$-simplices $[v_0,...,v_n]$ and $[w_0,...,w_n]$ in the prism. Consider the family of linear $(n+1)$-simplices of the form
+			\begin{equation*}
+				p_i = [v_0,...,v_i,w_i,...,w_n]
+			\end{equation*}
+			for $i \in \{0,...,n\}$. We find for $i < j$
+			\begin{equation*}
+				\im p_i \intersection \im p_j = \convex \{v_0,...,v_i,w_{j+1}...,w_n\}.
+			\end{equation*}
+			
+			\TODO{why is every point contained in the union?}
+		\end{minipage}
+		\begin{minipage}[t]{3cm}
+			\textcolor{white}{.}
+			\begin{center}
+			\begin{tikzpicture}
+				\draw[line cap=round] (-.5,-1) -- (-.5,1) -- (0,1.5) -- (0,-.5) -- (-.5,-1) -- (.5,-1) -- (.5,1) -- (0,1.5) -- (0,-.5) -- (.5,-1);
+				\draw[line cap=round,densely dotted] (-.5,1) -- (.5,1);
+
+				\draw[line cap=round,thick,densely dotted,darkgreen] (-.5,-1) -- (.5,1);
+				\draw[line cap=round,thick,darkgreen] (0,1.5) -- (-.5,-1) -- (.5,-1) -- (0,1.5);
+				\draw[line cap=round,thick,darkgreen] (0,1.5) -- (.5,1) -- (.5,-1);
+
+				\node at (-.5,-1.25) {$v_0$};
+				\node at (.5,-1.25) {$v_1$};
+				\node at (-.8,1) {$w_0$};
+				\node at (.8,1) {$w_1$};
+				\node at (0,1.75) {$w_2$};
+
+				% \draw[rounded corners=2mm,thick,densely dotted, darkgreen] (-.5,-1) -- (.5,1);
+				% \draw[rounded corners=.25mm,thick,darkgreen] (0,1.5) -- (-.5,-1) -- (.5,-1) -- (0,1.5) -- (.5,1) -- (.5,-1);
+			\end{tikzpicture}
+			\end{center}
+		\end{minipage}
+	\end{sketch}
+
+	\begin{definition}[Barycentric Subdivision]
 		The \textbf{barycenter} of the standard $n$-simplex $\mathbb{\Delta}n$ is the point $b_n = (\frac{1}{n+1},...,\frac{1}{n+1}) \in \R^{n+1}$.
 	\end{definition}
 
@@ -2272,8 +2406,9 @@
 		\end{align*}
 	\end{definition}
 
-	%Before we start to verify that singular homology satisfies the axioms of a generalized homology theory, we want to compute its module of coefficients.
-	%\TODO{todo}
+	\begin{lemma}
+		Relative singular homology satisfies the dimension axiom. To be specific, $H_\bullet^\text{sing}(*) = \Z[0]$.
+	\end{lemma}
 
 	\begin{lemma}
 		Relative singular homology satisfies the exactness and the additivity axiom.
@@ -2306,6 +2441,25 @@
 	\begin{proposition}
 		Relative singular homology is homotopy invariant.
 	\end{proposition}
+	\begin{proof}
+		It suffices to show \TODO{why? (see Kammeyer)} that $H_\bullet^\text{sing}(-)$ is homotopy invariant. This will be done by showing that a homotopy $f_0 \sim_h f_1$ between maps $f_0,f_1:X-->Y$ induces a homotopy of chains $k_\bullet: C_\bullet^\text{sing}(X) \leadsto C_{\bullet+1}^\text{sing}(Y)$.
+
+		Let $s: \mathbb{\Delta}^n --> X$ be a singular $n$-simplex. From the linear $(n+1)$-simplices $p_i: \mathbb{\Delta}^{n+1} --> I \times \mathbb{\Delta}^n$ used in subdividing the prism we obtain a family  of singular $(n+1)$-simplices $q_i:\mathbb{\Delta}^{n+1} --> Y$ by taking the composite
+		\begin{equation*}
+			\begin{diagram}
+				\fourbyone[wide]
+					{\mathbb{\Delta}^{n+1}}{I \times \mathbb{\Delta}^n}{I \times X}{Y.}
+
+				\arrow{ww}{w}{p_i}[above]
+				\arrow{w}{e}{I \times s}[above]
+				\arrow{e}{ee}{h}[above]
+			\end{diagram}
+		\end{equation*}
+		Define the map $k_n: C_n^\text{sing}(X) \rightarrow C_{n+1}^\text{sing}(Y)$ by linear extension of the assignment
+		\begin{equation*}
+			k_n(e_s) = \Sum \limits_{i=0}^n (-1)^i e_{q_i}.
+		\end{equation*}
+	\end{proof}
 
 	\begin{theorem}
 		Relative singular homology satisfies excission.
