@@ -1373,7 +1373,7 @@
 	\end{lemma}
 
 	\newpage
-	\subsection{Degree, Homological Orientation and Further Applications}
+	\subsection{Degree and Further Applications}
 
 	To abbreviate following statements, we make the following nonstandard definition.
 
@@ -1620,6 +1620,26 @@
 	\end{proof}
 
 	\newpage
+	\subsection{Local Degree and Homological Orientation}
+
+	\begin{lemma}
+		Let $(H_\bullet,\partial_\bullet)$ be an $R$-homology theory.
+
+		Let $X$ be an $n$-dimensional topological manifold and $x$ be a point in $X$. Then there is an isomorphism $H_n(X,X\setminus \{x\}) \isom R$.
+	\end{lemma}
+	\begin{proof}
+		By definition of a manifold there is a chart $\phi_x: U_x \isom \R^n$ with $\phi_x(x) = 0$. By excission (of the complement of $\phi_x^{-1}(\D^n)$) we get a chain of isomorphisms
+		\begin{equation*}
+			H_\bullet(X,X\setminus\{x\}) \isom H_\bullet(\phi_x^{-1}(\D^n),\phi_x^{-1}(\D^n\setminus \{0\})) \isom H_\bullet(\D^n,\D^n\setminus \{0\}) \isom H_\bullet(\D^n,\S^{n-1}) \isom M_{\bullet-n}.
+		\end{equation*}
+		In particular we have $H_n(X,X\setminus\{x\}) \isom R$. 
+	\end{proof}
+
+	\begin{definition}
+		Let $(H_\bullet, \partial_\bullet)$ be a 
+	\end{definition}
+
+	\newpage
 	\subsection{CW-complexes and Cellular Homology}
 
 	\begin{definition}
@@ -1674,10 +1694,7 @@
 		Let $(X,A)$ be a relative CW-complex with a given CW-structure. For any $n \in \N_0$ the following properties hold. 
 		\begin{enumerate}[(i)]
 			\item{
-				$X_n \setminus X_{n-1} \isom \Coproduct \limits_{i \in I_n} (\D^n \setminus \S^{n-1}) = \Coproduct \limits_{i \in I_n} \B^n$
-			}
-			\item{
-				$I_n \isom \pi_0(X_n \setminus X_{n-1})$
+				We have $X_n \setminus X_{n-1} \isom \Coproduct \limits_{i \in I_n} (\D^n \setminus \S^{n-1}) = \Coproduct \limits_{i \in I_n} \B^n$ and in particular $I_n \isom \pi_0(X_n \setminus X_{n-1})$.
 			}
 			\item{
 				$X_{n-1}$ is a CNDR of $X_n$ and $X_n / X_{n-1} \isom \Join \limits_{i \in I} \S^n$.
@@ -2184,11 +2201,11 @@
 		\begin{minipage}[t]{\linewidth-3cm}
 			The inclusions $\iota_0,\iota_1: \mathbb{\Delta}^n --> [0,1] \times \mathbb{\Delta}^n$ yield two linear $n$-simplices $[v_0,...,v_n]$ and $[w_0,...,w_n]$ in the prism. Consider the family of linear $(n+1)$-simplices of the form
 			\begin{equation*}
-				p_i = [v_0,...,v_i,w_i,...,w_n]
+				\rho_i = [v_0,...,v_i,w_i,...,w_n]
 			\end{equation*}
 			for $i \in \{0,...,n\}$. We find for $i < j$
 			\begin{equation*}
-				\im p_i \intersection \im p_j = \convex \{v_0,...,v_i,w_{j+1}...,w_n\}.
+				\im \rho_i \intersection \im \rho_j = \convex \{v_0,...,v_i,w_{j+1}...,w_n\}.
 			\end{equation*}
 			
 			\TODO{why is every point contained in the union?}
@@ -2232,7 +2249,7 @@
 			\fivebyone[wide]
 				{\ncat{Top}}{\ncat{sSet}}{\ncat{sAb}}{\ncat{Ch}}{\ncat{Ab}^{\Z\text{gr}}}
 
-			\arrow{ww}{w}{\ncat{sing}}[above]
+			\arrow{ww}{w}{\ncat{Top}(\mathbb{\Delta},-)}[above]
 			\arrow{w}{c}{\Z[-]_{*}}[above]
 			\arrow{c}{e}{D_\bullet}[above]
 			\arrow{e}{ee}{H_{*}}[above]
@@ -2243,7 +2260,7 @@
 	The first functor is the \TODO{somewhat} canonical way to turn a topological space into a simplicial set.
 	\begin{equation*}
 		\begin{array}{rcl}
-			\ncat{Top} & \xrightarrow{\ncat{sing}} & \ncat{sSet}\\
+			\ncat{Top} & \xrightarrow{\ncat{Top}(\mathbb{\Delta},-)} & \ncat{sSet}\\
 			X & \longmapsto & \ncat{Top}(\mathbb{\Delta}-,X)\\
 			{[X\overset{f}{\rightarrow} Y]} & \longmapsto & {[\ncat{Top}(\mathbb{\Delta}-,X) \overset{f_{*}}{\Rightarrow} \ncat{Top}(\mathbb{\Delta}-,Y)]}
 		\end{array}
@@ -2255,15 +2272,15 @@
 			\item{
 				By construction we have the identifications
 				\begin{align*}
-					\ncat{sing}(X)([0]) &= \ncat{Top}(\mathbb{\Delta}_0,X) \isom \ncat{Top}(*,X) = \{\text{points in }X\}\\
-					\ncat{sing}(X)([1]) &= \ncat{Top}(\mathbb{\Delta}_1,X) \isom \ncat{Top}([0,1],X) = \{\text{paths in }X\}\\
-					\ncat{sing}(X)([2]) &= \ncat{Top}(\mathbb{\Delta}_2,X) \isom \ncat{Top}(\S^1,X) = \{\text{loops in }X\text{ (without basepoint)}\}.
+					\ncat{Top}(\mathbb{\Delta}_0,X) &\isom \ncat{Top}(*,X) = \{\text{points in }X\}\\
+					\ncat{Top}(\mathbb{\Delta}_1,X) &\isom \ncat{Top}([0,1],X) = \{\text{paths in }X\}\\
+					\ncat{Top}(\mathbb{\Delta}_2,X) &\isom \ncat{Top}(\S^1,X) = \{\text{loops in }X\text{ (without basepoint)}\}.
 				\end{align*}
 			}
 			\item{
-				An element $s$ in $\ncat{sing}(X)([n]) = \ncat{Top}(\mathbb{\Delta}^n,X)$ is called a \textbf{singular $n$-simplex in $X$}.
+				An element $\sigma$ in $\ncat{Top}(\mathbb{\Delta}^n,X)$ is called a \textbf{singular $n$-simplex in $X$}.
 
-				By definition, the image of an $n$-simplex $s$ in $X$ is a quasicompact subset of $X$, since $\mathbb{\Delta}^n$ is quasicompact. Moreover, given a map $f:[m] --> [n]$ the image of $f_{*}(s)=fs$ is a quasicompact subset of the image of $s$. \TODO{why?}
+				By definition, the image of an $n$-simplex $\sigma$ in $X$ is a quasicompact subset of $X$, since $\mathbb{\Delta}^n$ is quasicompact. Moreover, given a map $f:[m] --> [n]$ the image of $f_{*}(\sigma)=f\sigma$ is a quasicompact subset of the image of $\sigma$. \TODO{why?}
 			}
 		\end{enumerate}
 	\end{remark}
@@ -2356,7 +2373,7 @@
 				\fourbyone[wide]
 					{\ncat{Top}}{\ncat{sSet}}{\ncat{sAb}}{\ncat{Ch}}
 
-				\arrow{ww}{w}{\ncat{sing}}[above]
+				\arrow{ww}{w}{\ncat{Top}(\mathbb{\Delta},X)}[above]
 				\arrow{w}{e}{\Z[-]_{*}}[above]
 				\arrow{e}{ee}{D_\bullet}[above]
 			\end{diagram}
@@ -2366,9 +2383,15 @@
 			H^\text{sing} := H_{*}\circ C_\bullet^\text{sing}: \ncat{Top} \longrightarrow \ncat{Ab}^{\Z gr}.
 		\end{equation*}
 
-		For given $n \in \N_0$ an element $c$ of $C_n^\text{sing}(X)$ is called a \textbf{$n$-cycle} of $X$ and an \textbf{$(n+1)$-boundary}, if it lies in the image of $\gamma_{n+1}:C_{n+1}^\text{sing}(X)-->C_n^\text{sing}(X)$.
+		For given $n \in \N_0$ an element $c$ of $C_n^\text{sing}(X)$ is called a \textbf{$n$-cycle} of $X$ and is explicitly given by a linear combination
+		\begin{equation*}
+			c = \Sum \limits_{\sigma \in \ncat{Top}(\mathbb{\Delta}^n,X)} c_\sigma \cdot \sigma,
+		\end{equation*}
+		where $c_\sigma$ are coefficients in $\Z$ and the basis vectors $e_\sigma$ are simply written as $\sigma$. 
 
-		An $n$-cycle $c$, i.e. an element of $\Z^{\oplus\;\ncat{sing}(X)([n])}$, determines a subset of $X$, given by the union of the images of all singular $n$-simplices contributing to $c$. This set, which we will call the \textbf{support} $\supp c$ of $c$, is a finite union of quasicompact subsets and hence again quasicompact.
+		An $n$-cycle is a \textbf{$(n+1)$-boundary}, if it lies in the image of $\gamma_{n+1}:C_{n+1}^\text{sing}(X)-->C_n^\text{sing}(X)$.
+
+		An $n$-cycle $c$, i.e. an element of $\Z^{\oplus\;\ncat{Top}(\mathbb{\Delta}^n,X)}$, determines a subset of $X$, given by the union of the images of all singular $n$-simplices contributing to $c$. This set, which we will call the \textbf{support} $\supp c$ of $c$, is a finite union of quasicompact subsets and hence again quasicompact.
 		% By construction we can identify an $n$-cycle $c$, i.e. an element of $\Z^{\oplus\;\ncat{sing}(X)([n])}$, with a function $c: \ncat{sing}(X)([n]) --> \Z$ with finite support, such that
 		% \begin{equation*}
 		% 	c = \sum \limits_{s \in \ncat{sing}(X)([n])} c(s)e_s.
@@ -2418,11 +2441,11 @@
 
 		Let $(X_i,Y_i)$ be a family of pairs of spaces and $(X,A) = \Coproduct \limits_{i \in I}(X_i,A_i)$. Then 
 		\begin{equation*}
-			\ncat{sing}(X) \isom \Coproduct \limits_{i \in I} \ncat{sing}(X_i),
+			\ncat{Top}(\mathbb{\Delta}-,X) \isom \Coproduct \limits_{i \in I} \ncat{Top}(\mathbb{\Delta}-,X_i),
 		\end{equation*}
 		\TODO{since the $\mathbb{\Delta}^n$ are connected}. As $\Z[-]_{*}$ is a left adjoint, we get 
 		\begin{equation*}
-			\Z[\ncat{sing}(X)] \isom \Z\left[\Coproduct \limits_{i \in I} \ncat{sing}(X_i)\right] \isom \Oplus \limits_{i \in I} \Z[\ncat{sing}(X_i)].
+			\Z[\ncat{Top}(\mathbb{\Delta}-,X)] \isom \Z\left[\Coproduct \limits_{i \in I} \ncat{Top}(\mathbb{\Delta}-,X_i)\right] \isom \Oplus \limits_{i \in I} \Z[\ncat{Top}(\mathbb{\Delta}-,X_i)].
 		\end{equation*}
 		Moreover the Dold-Kan functor preserves colimits, so we have
 		\begin{equation*}
@@ -2444,21 +2467,47 @@
 	\begin{proof}
 		It suffices to show \TODO{why? (see Kammeyer)} that $H_\bullet^\text{sing}(-)$ is homotopy invariant. This will be done by showing that a homotopy $f_0 \sim_h f_1$ between maps $f_0,f_1:X-->Y$ induces a homotopy of chains $k_\bullet: C_\bullet^\text{sing}(X) \leadsto C_{\bullet+1}^\text{sing}(Y)$.
 
-		Let $s: \mathbb{\Delta}^n --> X$ be a singular $n$-simplex. From the linear $(n+1)$-simplices $p_i: \mathbb{\Delta}^{n+1} --> I \times \mathbb{\Delta}^n$ used in subdividing the prism we obtain a family  of singular $(n+1)$-simplices $q_i:\mathbb{\Delta}^{n+1} --> Y$ by taking the composite
+		Let $\theta: \mathbb{\Delta}^n --> X$ be a singular $n$-simplex. Recall the the linear $(n+1)$-simplices $\rho_j = [v_0,...,v_j,w_j,...,w_n]: \mathbb{\Delta}^{n+1} --> \I \times \mathbb{\Delta}^n$ used in subdivision of the prism. From these we obtain a family  of singular $(n+1)$-simplices $\sigma_j:\mathbb{\Delta}^{n+1} --> Y$ by taking the composite
 		\begin{equation*}
 			\begin{diagram}
 				\fourbyone[wide]
-					{\mathbb{\Delta}^{n+1}}{I \times \mathbb{\Delta}^n}{I \times X}{Y.}
+					{\mathbb{\Delta}^{n+1}}{\I \times \mathbb{\Delta}^n}{\I \times X}{Y.}
 
-				\arrow{ww}{w}{p_i}[above]
-				\arrow{w}{e}{I \times s}[above]
+				\arrow{ww}{w}{\rho_i}[above]
+				\arrow{w}{e}{\I \times \theta}[above]
 				\arrow{e}{ee}{h}[above]
 			\end{diagram}
 		\end{equation*}
-		Define the map $k_n: C_n^\text{sing}(X) \rightarrow C_{n+1}^\text{sing}(Y)$ by linear extension of the assignment
+		We note that
 		\begin{equation*}
-			k_n(e_s) = \Sum \limits_{i=0}^n (-1)^i e_{q_i}.
+			d_i^{n+1}(\sigma_j) = \left\{
+			\begin{array}{ll}
+				\sigma_j\vert_{[v_0,...,\widehat{v_i},...,v_j,w_j,...,w_n]} & i \leq j\\
+				\sigma_j\vert_{[v_0,...,v_j,w_j,...,\widehat{w_{i-1}},...,w_n]} & i > j
+			\end{array}
+			\right.
 		\end{equation*}
+		and further
+		\begin{align*}
+			d_0^{n+1}(\sigma_n) &= \sigma_n \vert_{[\widehat{v_0},w_0,...,w_n]} = h \circ (\{1\} \times \theta) = f_1 \circ \theta\\
+			d_{n+1}^{n+1}(\sigma_0) &= \sigma_0 \vert_{[v_0,...,v_n,\widehat{w_n}]} = h \circ (\{0\} \times \theta) = f_0 \circ \theta\\
+		\end{align*}
+
+		Define the map $k_n: C_n^\text{sing}(X) --> C_{n+1}^\text{sing}(Y)$ by linear extension of the assignment
+		\begin{equation*}
+			k_n(\theta) = \Sum \limits_{j=0}^n (-1)^j \cdot \sigma_j.
+		\end{equation*}
+		For $n=0$ we calculate
+		\begin{equation*}
+			\gamma_1(k_0(\theta)) = \gamma_1(\sigma_0) = d_0^1(\sigma_0) - d_1^1(\sigma_0) = \sigma\vert_{[\widehat{v_0},w_0]} - \sigma\vert_{[v_0,\widehat{w_0}]} = f_1 \circ \theta - f_0 \circ \theta
+		\end{equation*}
+		and for $n>0$ we obtain
+		\begin{align*}
+			\gamma_{n+1}k_n(\theta) &= \Sum \limits_{i=0}^{n+1}\Sum \limits_{j=0}^n (-1)^{i+j} d_i^{n+1}(\sigma_j)\\
+			&= \Sum \limits_{0 \leq i \leq j \leq n}(-1)^{i+j}d_i^{n+1}(\sigma_j) + \Sum \limits_{0 \leq j < i \leq n+1} (-1)^{i+j}d_i^{n+1}(\sigma_j)\\
+			&= \Sum \limits_{0 \leq i \leq j \leq n}(-1)^{i+j}d_i^{n+1}(\sigma_j) + \Sum \limits_{1 \leq j < i \leq n+1} (-1)^{i+j}d_i^{n+1}(\sigma_j)\\
+			&= \Sum \limits_{i \leq j} (-1)^{i+j}\sigma_j\vert_{[v_0,...,\widehat{v_i},...,v_j,w_j,...,w_n]} + \Sum \limits_{i > j}(-1)^{i+j}\sigma_j\vert_{[v_0,...,v_j,w_j,...,\widehat{w_{i-1}},...,w_n]}
+		\end{align*}
 	\end{proof}
 
 	\begin{theorem}
