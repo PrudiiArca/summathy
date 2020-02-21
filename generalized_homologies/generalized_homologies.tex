@@ -1384,7 +1384,7 @@
 	Recall that any morphism of $R$-modules $f:R --> R$ is given by multiplication with $r = f(1)$.
 
 	\begin{definition}
-		Let $(H_\bullet,\partial_\bullet)$ be an $R$-homology theory, let $n \in \N$ and fix an isomorphism $H_n(\S^n) \isom R$. The \textbf{$R$-degree} of a morphism $f:\S^n --> \S^n$ in $\ncat{Top}$ is the element $\deg_R(f) := \tilde{f}(1)$ in $R$ for the morphism $\tilde f$ defined by the composition
+		Let $(H_\bullet,\partial_\bullet)$ be an $R$-homology theory, let $n \in \N$ and fix an isomorphism $H_n(\S^n) \isom R$. The \textbf{$R$-degree} of a morphism $f:\S^n --> \S^n$ in $\ncat{Top}$ is the element $\deg_R(f) := \tilde{f}(1)$ in $R$ for the morphism $\tilde f:R-->R$ defined by the composition
 		\begin{equation*}
 			R \isom H_n(\S^n) \xrightarrow{H_n(f)} {H}_n(\S^n)\isom R
 		\end{equation*}
@@ -1395,143 +1395,210 @@
 		\end{equation*}
 	\end{definition}
 
-	\begin{lemma}
-		Let $(H,\partial_\bullet)$ be an $R$-homology theory. Fix an isomorphism $H_n(\S^n) \isom R$ for each $n \geq 1$.
-
-		For $n = 0$ all morphisms have $R$-degree $\pm 1$ or $0$ and for $n \geq 1$ \TODO{at least} all values in $\chi(\Z) \subseteq R$ can appear. 
-	\end{lemma}
-	\begin{sketch}
-		For $n \geq 1$ we use induction on $n$.
-		\begin{enumerate}
-			\item[(IB)]{
-				Consider $\S^1 \subseteq \C$.
-
-				For $m = 0$ denote $c_1: \S^1 --> \{1\} --> \S^1$ and note $H_1(c_1) = 0$.
-
-				For $m > 0$ define the map 
-				\begin{equation*}
-					\begin{array}{rccl}
-						f_m: &\S^1 &\longrightarrow& \S^1\\
-						&z &\longmapsto& z^m
-					\end{array},
-				\end{equation*}
-				\TODO{finish with Hannes-Kammeyer}
-				% note that the covering space 
-				% \begin{equation*}
-				% 	S_m = \{(\cos (\tfrac{t}{m}), \sin (\tfrac{t}{m}), \tfrac{t}{2\pi}) \mid t \in [0,2\pi m]\} / \sim
-				% \end{equation*}
-				% with $(1,0,0) \sim (1,0,m)$ is $\S^1$ and that its projection $p:S_m --> \S^1$ is $f_m$. Consider the decomposition of $\S^1$ into $A_1 = \S^1 \setminus \{1\} \simeq *$ and $A_2 = \S^1 \setminus \{-1\} \simeq *$. The preimages under $p$ give a decomposition of $S_m$ into sets $B_1$ and $B_2$ and we find $B_1,B_2 \simeq \Coproduct \limits_{i=1}^m *$. Mayer Vietories yields a diagram
-				% \begin{equation*}
-				% 	\begin{diagram}
-				% 		\fourbytwo[ultrawide]
-				% 			{0}{H_1(S_m)}{H_0(B_1 \intersection B_2)}{H_0(B_1) \oplus H_0(B_2)}
-				% 			{0}{H_1(\S^1)}{H_0(A_1 \intersection A_2)}{H_0(A_1) \oplus H_0(A_2)}
-
-				% 		\arrow{nww}{nw}{}
-				% 		\arrow{nw}{ne}{\nu_1}[above]
-				% 		\arrow{ne}{nee}{}
-
-				% 		\arrow{sww}{sw}{}
-				% 		\arrow{sw}{se}{\nu_1}[below]
-				% 		\arrow{se}{see}{}
-
-				% 		\arrow[equals]{nww}{sww}{}
-				% 		\arrow{nw}{sw}{H_1(p)}[ontop]
-				% 		\arrow{ne}{se}{H_1(p|_{B_1 \intersection B_2})}[ontop]
-				% 		\arrow{nee}{see}{H_1(p|B_1) \oplus H_1(p|B_2)}[ontop]
-				% 	\end{diagram}
-				% \end{equation*}
-				% Using homotopy invariance we can translate this into a diagram, where the right square is given by homologies of discrete spaces.
-				% \begin{equation*}
-				% 	\begin{diagram}
-				% 		\fourbytwo[ultrawide]
-				% 			{0}{R}{\Oplus \limits_{k=1}^m(R \oplus R)}{\Oplus \limits_{i=1}^m R \oplus \Oplus \limits_{j=1}^m R}
-				% 			{0}{R}{R \oplus R}{R \oplus R}
-
-				% 		\arrow{nww}{nw}{}
-				% 		\arrow{nw}{ne}{u}[above]
-				% 		\arrow{ne}{nee}{a}[above]
-
-				% 		\arrow{sww}{sw}{}
-				% 		\arrow{sw}{se}{v}[below]
-				% 		\arrow{se}{see}{b}[below]
-
-				% 		\arrow[equals]{nww}{sww}{}
-				% 		\arrow{nw}{sw}{s}[left]
-				% 		\arrow{ne}{se}{t}[right]
-				% 		\arrow{nee}{see}{}
-				% 	\end{diagram}
-				% \end{equation*}
-				% By construction of Mayer Vietories and the homology of maps between discrete spaces we have
-				% \begin{align*}
-				% 	a(y_1^1,y_1^2,...,y_m^1,y_m^2) &= (y_1^1+y_1^2,...,y_m^1+y_m^2,y_1^1+y_m^2,y_2^1+y_1^2,...,y_m^1+y_{m-1}^2)\\
-				% 	b(w_1,w_2) &= (w_1+w_2,w_1+w_2)\\
-				% 	t(y_1^1,y_1^2,...,y_m^1,y_m^2) &= y_1^1+...+y_m^1,y_1^2 + ... + y_m^2)
-				% \end{align*}
-				% From exactness of the rows, we get that
-				% \begin{align*}
-				% 	u(x) &= (\alpha x, -\alpha x, ..., \alpha x, -\alpha x)\\
-				% 	v(z) &= (\beta z,-\beta z)
-				% \end{align*}
-				% for some values $\alpha,\beta \in R$ and, since $(1,-1,...,1,-1)$ resp. $(1,-1)$ are in the kernel, that $\alpha$ and $\beta$ are units in $R$. Moreover, because \TODO{why the hell}, we have $\alpha = \beta$. By definition $\deg_R(f_m) = s(1)$ and we get by commutativity of the diagram
-				% \begin{equation*}
-				% 	(\alpha \deg_R(f_m), -\alpha \deg_R(f_m)) = v(s(1)) = t(u(1)) = (\alpha m,-\alpha m),
-				% \end{equation*}
-				% from which we deduce $\deg_R(f_m) = m$.
-
-				For $m=-1$ consider the complex conjugate $f:\S^1 --> \S^1, z \mapsto \overline{z}$ and reuse the decomposition $A_1,A_2$. As for $m > 0$ we obtain a diagram
-				\begin{equation*}
-					\begin{diagram}
-						\fourbytwo[wide]
-							{0}{R}{R \oplus R}{R \oplus R}
-							{0}{R}{R \oplus R}{R \oplus R}
-
-						\arrow{nww}{nw}{}
-						\arrow{nw}{ne}{v}[above]
-						\arrow{ne}{nee}{b}[above]
-
-						\arrow{sww}{sw}{}
-						\arrow{sw}{se}{v}[below]
-						\arrow{se}{see}{b}[below]
-
-						\arrow[equals]{nww}{sww}{}
-						\arrow{nw}{sw}{s'}[left]
-						\arrow{ne}{se}{t'}[right]
-						\arrow{nee}{see}{}
-					\end{diagram}
-				\end{equation*}
-				where
-				\begin{equation*}
-					t'(y_1,y_2) = (y_2,y_1),
-				\end{equation*}
-				which then leads to $(\alpha \deg_R(f), -\alpha \deg_R(f)) = v(s'(1)) = t'(v(1)) = (-\alpha,\alpha)$. Hence $\deg_R(f) = -1$.
+	\begin{lemma}[Degree 0]
+		Let $R$ be a ring with $\characteristic R \neq 1$, $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory and $f:\S^n --> \S^n$ a morphism in $\ncat{Top}$.
+		\begin{enumerate}[(i)]
+			\item{
+				If $f$ homotopic to a constant map, then $\deg_R(f) = 0$. \TODO{converse doable by axioms?}
 			}
-			\item[(IH)]{
-				For $n$ and $m \in \chi(\Z) \subseteq R$ there is a map $f:\S^n --> \S^n$ with $\deg_R(f) = m$.
-			}
-			\item[(IS)]{
-				Consider the following diagram, where $\kappa: \Susp \S^n --> \S^{n+1}$ is the homeomorphism constructed in lemma \TODO{cite}.
-				\begin{equation*}
-					\begin{diagram}
-						\threebytwo[ultrawide]
-							{H_{n+1}(\S^{n+1})}{H_{n+1}(\Susp \S^n)}{H_n(\S^n)}
-							{H_{n+1}(\S^{n+1})}{H_{n+1}(\Susp \S^n)}{H_n(\S^n)}
-
-						\arrow{n}{nw}{\begin{array}{c}\isom\\\kappa\end{array}}
-						\arrow{s}{sw}{\begin{array}{c}\isom\\\kappa\end{array}}
-
-						\arrow{n}{ne}{\begin{array}{c}\isom\\\nu_{n+1}\end{array}}
-						\arrow{s}{se}{\begin{array}{c}\isom\\\nu_{n+1}\end{array}}
-
-						\arrow{nw}{sw}{H_{n+1}(\kappa \Susp(f) \kappa^{-1})}[ontop]
-						\arrow{n}{s}{H_{n+1}(\Susp f)}[ontop]
-						\arrow{ne}{se}{f}[right]
-					\end{diagram}
-				\end{equation*}
-				By commutativity of the diagram the degree of the left morphism is given by the image of $1 \in R \isom H_{n+1}(\S^{n+1})$ along the boundary. Note that the horizontal morphisms of $R$-modules $R \isom H_{n+1}(\S^{n+1}) --> H_n(\S^n) \isom R$ are given by multiplication with some invertible element $a \in R$. This gives $\deg_R(\kappa\Susp(f)\kappa^{-1}) = a^{-1}\deg_R(f)a = \deg_R(f)$.
+			\item{
+				If $\deg_R(f) \neq 0$ then $f$ is surjective.
 			}
 		\end{enumerate}
+	\end{lemma}
+	\begin{sketch}
+		\begin{enumerate}[(i)]
+			\item{
+				holds, because $f$ is homotopic to a map, which factors through $H_n(*) = 0$.
+			}
+			\item{
+				follows from (i) by contraposition, since if $f$ is not surjective, it factors through $H_n(\R^n) = 0$.
+			}\vspace{-1.5em}
+		\end{enumerate}
 	\end{sketch}
+
+	\begin{lemma}
+		Let $R$ be a ring with $\characteristic R \neq 1$ and $(H_\bullet, R_\bullet)$ be an $R$-homology. Fix an isomorphism $H_1(\S^1) \isom R$. Then for every $m \in \Z$ the map
+		\begin{equation*}
+			\begin{array}{rccl}
+				f_m: &\S^1 &\longrightarrow& \S^1\\
+				&z &\longmapsto& z^m
+			\end{array},
+		\end{equation*}
+		has degree $\deg_R(f) = m$ (in $R$).
+	\end{lemma}
+	\begin{sketch}
+		Consider $\S^1 \subseteq \C$.
+
+		For $m=-1$ note that $z^{-1} = \overline{z}$ for $z \in \S^1$. Consider the decomposition of $\S^1$ into $A_0 = \S^1 \setminus \{-1\}$ and $A_2 = \S^1 \setminus \{1\}$. With respect to the chosen isomorphism, Mayer Vietories yields a diagram
+		\begin{equation*}
+			\begin{diagram}
+				\fourbytwo[wide]
+					{0}{R}{R \oplus R}{R \oplus R}
+					{0}{R}{R \oplus R}{R \oplus R}
+
+				\arrow{nww}{nw}{}
+				\arrow{nw}{ne}{v}[above]
+				\arrow{ne}{nee}{d}[above]
+
+				\arrow{sww}{sw}{}
+				\arrow{sw}{se}{v}[below]
+				\arrow{se}{see}{d}[below]
+
+				\arrow[equals]{nww}{sww}{}
+				\arrow{nw}{sw}{\widetilde{f}_{-1}}[left]
+				\arrow{ne}{se}{t}[right]
+				\arrow{nee}{see}{}
+			\end{diagram}
+		\end{equation*}
+		where
+		\begin{align*}
+			\widetilde{f}_{-1}(x) &= \deg_R(f_{-1}) x,\\
+			v(x) &= (\alpha x,-\alpha x),\\
+			d(y_1,y_2) &= (y_2+y_1,y_2+y_1),\\
+			t(y_1,y_2) &= (y_2,y_1),
+		\end{align*}
+		and the coefficient $\alpha$ in $R$ is a unit, since $(1,-1) \in \ker d$. Commutativity of the middle square yields $(\alpha\deg_R(f_{-1}),-\alpha \deg_R(f_{-1})) = (-\alpha,\alpha)$. Hence $\deg_R(f_{-1}) = -1$.
+
+		For $m = 0$ we have $f_0 = c_1$ constant, so $\deg_R(f_0) = 0$.
+
+		\begin{minipage}[t]{\linewidth-5cm}
+			For $m \geq 1$ there is a factorization as depicted on the right, where
+			\begin{equation*}
+				g_m(e^{2\pi i (\frac{k}{m} + t\frac{1}{m})}) = e^{2\pi i t} \text{ in } \S^n_k.
+			\end{equation*}
+			Moreover the other diagram on the right commutes in $hTop$, hence the morphism $H_n(f_m)$ factorizes as
+			\begin{equation*}
+				H_n(\S^n) \xrightarrow{H_n(g_m)} \Oplus \limits_{k=1}^m H_n(\S^n) \xrightarrow{\Oplus_k H_n(\pi_k)} H_n(\S^n)
+			\end{equation*}
+			and we get
+			\begin{equation*}
+				\deg_R(f_m) = m \cdot \deg_R(1_{\S^n}) = m.
+			\end{equation*}
+			\vspace{-3em}
+		\end{minipage}
+		\begin{minipage}[t]{5cm}
+			\vspace{-1cm}
+			\begin{equation*}
+				\begin{diagram}
+					\threebytwo[small]
+						{}{\;\;\;\;\;\Join \limits_{k=1}^m \S^n_k}{}
+						{\S^n}{}{\S^n}
+
+					\arrow{sw}{n}{g_m}[above left]
+					\arrow{sw}{se}{f_m}[below]
+					\arrow{n}{se}{\Join \pi_k}[above right]
+
+					\node at (0,-.2) {\scriptsize in $\ncat{Top}$};
+				\end{diagram}
+			\end{equation*}
+			\begin{equation*}
+				\begin{diagram}
+					\threebytwo[small]
+						{}{\;\;\;\;\;\Join \limits_{k=1}^m \S^n_k}{}
+						{\S^n}{}{\S^n}
+
+					\arrow{sw}{n}{g_m}[above left]
+					\arrow[equals]{sw}{se}{}
+					\arrow{n}{se}{\pi_k}[above right]
+
+					\node at (0,-.2) {\scriptsize in $\ncat{hTop}$};
+				\end{diagram}
+			\end{equation*}
+		\end{minipage}
+	\end{sketch}
+
+	\begin{lemma}
+		Let $(H_\bullet,\partial_\bullet)$ be an $R$-homology theory. Fix an isomorphism $H_n(\S^n) \isom R$ for each $n \geq 1$.
+
+		For every $n \geq 1$ and every $m \in \Z$ there is a map $f:\S^n --> \S^n$ with $\deg_R(f) = m$ (in $R$).
+	\end{lemma}
+	\begin{sketch}
+		We have already shown the claim for $n = 1$. Given $n$ and $m$, suppose there is a map $f:\S^n --> \S^n$ with $\deg_R(f) = m$. 
+
+		Consider the following diagram, where $\kappa: \Susp \S^n --> \S^{n+1}$ is the homeomorphism constructed in lemma \TODO{cite}.
+		\begin{equation*}
+			\begin{diagram}
+				\threebytwo[ultrawide]
+					{H_{n+1}(\S^{n+1})}{H_{n+1}(\Susp \S^n)}{H_n(\S^n)}
+					{H_{n+1}(\S^{n+1})}{H_{n+1}(\Susp \S^n)}{H_n(\S^n)}
+
+				\arrow{n}{nw}{\begin{array}{c}\isom\\\kappa\end{array}}
+				\arrow{s}{sw}{\begin{array}{c}\isom\\\kappa\end{array}}
+
+				\arrow{n}{ne}{\begin{array}{c}\isom\\\nu_{n+1}\end{array}}
+				\arrow{s}{se}{\begin{array}{c}\isom\\\nu_{n+1}\end{array}}
+
+				\arrow{nw}{sw}{H_{n+1}(\kappa \Susp(f) \kappa^{-1})}[ontop]
+				\arrow{n}{s}{H_{n+1}(\Susp f)}[ontop]
+				\arrow{ne}{se}{f}[right]
+			\end{diagram}
+		\end{equation*}
+		By commutativity of the diagram the degree of the left morphism is given by the image of $1 \in R \isom H_{n+1}(\S^{n+1})$ along the boundary. Note that the horizontal morphisms of $R$-modules $R \isom H_{n+1}(\S^{n+1}) --> H_n(\S^n) \isom R$ are given by multiplication with some invertible element $\alpha \in R$. This gives $\deg_R(\kappa\Susp(f)\kappa^{-1}) = \alpha^{-1}\deg_R(f)\alpha = \deg_R(f)$.
+	\end{sketch}
+
+	% note that the covering space 
+	% \begin{equation*}
+	% 	S_m = \{(\cos (\tfrac{t}{m}), \sin (\tfrac{t}{m}), \tfrac{t}{2\pi}) \mid t \in [0,2\pi m]\} / \sim
+	% \end{equation*}
+	% with $(1,0,0) \sim (1,0,m)$ is $\S^1$ and that its projection $p:S_m --> \S^1$ is $f_m$. Consider the decomposition of $\S^1$ into $A_1 = \S^1 \setminus \{1\} \simeq *$ and $A_2 = \S^1 \setminus \{-1\} \simeq *$. The preimages under $p$ give a decomposition of $S_m$ into sets $B_1$ and $B_2$ and we find $B_1,B_2 \simeq \Coproduct \limits_{i=1}^m *$. Mayer Vietories yields a diagram
+	% \begin{equation*}
+	% 	\begin{diagram}
+	% 		\fourbytwo[ultrawide]
+	% 			{0}{H_1(S_m)}{H_0(B_1 \intersection B_2)}{H_0(B_1) \oplus H_0(B_2)}
+	% 			{0}{H_1(\S^1)}{H_0(A_1 \intersection A_2)}{H_0(A_1) \oplus H_0(A_2)}
+
+	% 		\arrow{nww}{nw}{}
+	% 		\arrow{nw}{ne}{\nu_1}[above]
+	% 		\arrow{ne}{nee}{}
+
+	% 		\arrow{sww}{sw}{}
+	% 		\arrow{sw}{se}{\nu_1}[below]
+	% 		\arrow{se}{see}{}
+
+	% 		\arrow[equals]{nww}{sww}{}
+	% 		\arrow{nw}{sw}{H_1(p)}[ontop]
+	% 		\arrow{ne}{se}{H_1(p|_{B_1 \intersection B_2})}[ontop]
+	% 		\arrow{nee}{see}{H_1(p|B_1) \oplus H_1(p|B_2)}[ontop]
+	% 	\end{diagram}
+	% \end{equation*}
+	% Using homotopy invariance we can translate this into a diagram, where the right square is given by homologies of discrete spaces.
+	% \begin{equation*}
+	% 	\begin{diagram}
+	% 		\fourbytwo[ultrawide]
+	% 			{0}{R}{\Oplus \limits_{k=1}^m(R \oplus R)}{\Oplus \limits_{i=1}^m R \oplus \Oplus \limits_{j=1}^m R}
+	% 			{0}{R}{R \oplus R}{R \oplus R}
+
+	% 		\arrow{nww}{nw}{}
+	% 		\arrow{nw}{ne}{u}[above]
+	% 		\arrow{ne}{nee}{a}[above]
+
+	% 		\arrow{sww}{sw}{}
+	% 		\arrow{sw}{se}{v}[below]
+	% 		\arrow{se}{see}{b}[below]
+
+	% 		\arrow[equals]{nww}{sww}{}
+	% 		\arrow{nw}{sw}{s}[left]
+	% 		\arrow{ne}{se}{t}[right]
+	% 		\arrow{nee}{see}{}
+	% 	\end{diagram}
+	% \end{equation*}
+	% By construction of Mayer Vietories and the homology of maps between discrete spaces we have
+	% \begin{align*}
+	% 	a(y_1^1,y_1^2,...,y_m^1,y_m^2) &= (y_1^1+y_1^2,...,y_m^1+y_m^2,y_1^1+y_m^2,y_2^1+y_1^2,...,y_m^1+y_{m-1}^2)\\
+	% 	b(w_1,w_2) &= (w_1+w_2,w_1+w_2)\\
+	% 	t(y_1^1,y_1^2,...,y_m^1,y_m^2) &= y_1^1+...+y_m^1,y_1^2 + ... + y_m^2)
+	% \end{align*}
+	% From exactness of the rows, we get that
+	% \begin{align*}
+	% 	u(x) &= (\alpha x, -\alpha x, ..., \alpha x, -\alpha x)\\
+	% 	v(z) &= (\beta z,-\beta z)
+	% \end{align*}
+	% for some values $\alpha,\beta \in R$ and, since $(1,-1,...,1,-1)$ resp. $(1,-1)$ are in the kernel, that $\alpha$ and $\beta$ are units in $R$. Moreover, because \TODO{why the hell}, we have $\alpha = \beta$. By definition $\deg_R(f_m) = s(1)$ and we get by commutativity of the diagram
+	% \begin{equation*}
+	% 	(\alpha \deg_R(f_m), -\alpha \deg_R(f_m)) = v(s(1)) = t(u(1)) = (\alpha m,-\alpha m),
+	% \end{equation*}
+	% from which we deduce $\deg_R(f_m) = m$.
 
 	\begin{theorem}[\TODO{Projective Fixed Point Theorem}]
 		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory with $\characteristic R \notin \{1,2\}$.
@@ -1636,7 +1703,13 @@
 	\end{proof}
 
 	\begin{definition}
-		Let $(H_\bullet, \partial_\bullet)$ be a 
+		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory and $f:X-->Y$ be a continuous map between topological $n$-manifolds $X$ and $Y$. Fix a point $x$ in $X$ and isomorphisms $R \isom H_n(X,X\setminus\{x\})$ and $R \isom H_n(Y,Y\setminus\{f(x)\})$.
+
+		Suppose there is a neighborhood $U_x$ of $x$ such that $U_x \intersection f^{-1}(\{f(x)\}) = \{x\}$. The \textbf{local $R$-degree in $x$} is defined to be the element $\deg_{R,x}(f) = \widetilde{f}(1)$ in $R$, where $\widetilde{f}:R-->R$ is the morphism given by the composite
+		\begin{equation*}
+			R \isom H_n(X,X\setminus \{x\}) \isom H_n(U_x,U_x \setminus \{x\}) \longrightarrow H_n(f(U_x),f(U_x)\setminus \{f(x)\}) \longrightarrow H_n(Y,Y \setminus \{f(x)\}) \isom R.
+		\end{equation*}
+		The construction is independent from the choice of $U_x$, as can be seen by considering the intersection of two such sets $U_x$ and $V_x$.
 	\end{definition}
 
 	\newpage
