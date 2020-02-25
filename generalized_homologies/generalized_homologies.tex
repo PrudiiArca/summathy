@@ -93,7 +93,7 @@
 	\end{sketch}
 
 	\newpage
-	\subsection{Deformation Retracts}
+	\subsection{Deformation Retracts and Cofibrations}
 	\TODO{Kammeyer section 2.4}
 
 	\begin{definition}
@@ -1724,7 +1724,7 @@
 		\begin{equation*}
 			H_\bullet(X,X\setminus U) \isom H_\bullet(X,X\setminus\{x\})
 		\end{equation*}
-		since $U$ is contractible to $\{x\}$. This isomorphism gives $H_n(X,X\setminus U) \isom R$, which turns $H_n(X,X\setminus U)$ into a nontrivial cyclic $R$-module. Furtheremore under its inverse a generator $g_x$ of $H_n(X,X\setminus\{s\})$ maps uniquely to a generator $g_U$ of $H_n(X,X\setminus U)$. Finally, since $U$ is contractible to any other point $y$ in $U$, we also have an induced isomorphism
+		since $U$ is contractible to $\{x\}$. This isomorphism gives $H_n(X,X\setminus U) \isom R$, which turns $H_n(X,X\setminus U)$ into a nontrivial cyclic $R$-module. Furtheremore under its inverse a generator $g_x$ of $H_n(X,X\setminus\{x\})$ maps uniquely to a generator $g_U$ of $H_n(X,X\setminus U)$. Finally, since $U$ is contractible to any other point $y$ in $U$, we also have an induced isomorphism
 		\begin{equation*}
 			H_\bullet(X,X\setminus U) \isom H_\bullet(X,X\setminus \{y\}),
 		\end{equation*}
@@ -1773,7 +1773,14 @@
 		Then $X$ admits a fundamental class if and only if it is $R$-orientable.
 	\end{proposition}
 	\begin{sketch}
-		Use exactness of "orientation sheaf" to obtain fundamental class.
+		$\Rightarrow$: Having a fundamental class implies orientability, since the map $H_n(X) --> H_n(X,X\setminus \{x\})$ factors via any open neighborhood $U$, ie. via $H_n(X,X\setminus U)$.
+
+		$\Leftarrow$: 
+		Given closed subspaces $A,B_1,B_2$ with $A = B_1 \union B_2$ Mayer Vietories for subspaces yields an exact sequence
+		\begin{equation*}
+			H_n(X,X\setminus A) \longrightarrow H_n(X,X\setminus B_1) \oplus H_n(X,X\setminus B_2) \longrightarrow H_n(X,X\setminus B_1 \intersection B_2)
+		\end{equation*}
+		Now if $H_n(X,X\setminus B_1)$ and $H_n(X,X\setminus B_2)$ are isomorphic to $R$, there are ge
 	\end{sketch}
 
 	\begin{lemma}
@@ -1793,11 +1800,11 @@
 		The construction is independent from the choice of $U_x$, as can be seen by considering the intersection of two such sets $U_x$ and $V_x$.
 	\end{definition}
 
-	\begin{corollary}[Intermediate Value Theorem]
+	\begin{lemma}[Intermediate Value Theorem]
 		Let $(H_\bullet, R_\bullet)$ be an $R$-homology theory.
 
 		Any continuous function $f:[0,1] --> [0,1]$ with $f(0) = 0$ and $f(1) = 1$ is surjective.
-	\end{corollary}
+	\end{lemma}
 	\begin{sketch}
 		Extend $f$ to a function $f':\R --> \R$ by setting $f'(x) = x$ outside $[0,1]$. Then extend it further to a function $f'': \S^1 --> \S^1$.
 	\end{sketch}
@@ -1862,13 +1869,28 @@
 			\item{
 				$X_{n-1}$ is a CNDR of $X_n$ and $X_n / X_{n-1} \isom \Join \limits_{i \in I} \S^n$.
 
-				\TODO{characteristic map induces homeom see Kammeyer eq (6.1)}
+				%\TODO{characteristic map induces homeom see Kammeyer eq (6.1)}
 			}
 			\item{
 				The composition $(\Tel(X),A) --> ([-1,\infty)\times X,[-1,\infty)\times A) --> (X,A)$ is a homotopy equivalence.
 			}
 		\end{enumerate}
 	\end{lemma}
+	\begin{sketch}
+		\begin{enumerate}[(i)]
+			\item{
+				By construction.
+			}
+			\item{
+				The inclusion $X_{n-1}-->X_n$ is the pushout of a coproduct of CNDRs.
+
+				The isomorphism follows from the fact that both are pushouts of the constant map and the inclusion of cells.
+			}
+			\item{
+
+			}
+		\end{enumerate}
+	\end{sketch}
 
 	\begin{corollary}[Homology of CW-complexes]
 		Let $(H_\bullet, \partial_\bullet)$ be an ordinary homology theory and $(X,A)$ be a relative CW-complex with given CW-structure.
@@ -1917,9 +1939,9 @@
 	\end{definition}
 
 	\begin{theorem}[Cellular Homology]
-		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory and $(X,A)$ be a relative CW-complex. Then there are isomorphisms
+		Let $(H_\bullet, \partial_\bullet)$ be an ordinary homology theory and $(X,A)$ be a relative CW-complex. Then for $n \geq 0$there are isomorphisms
 		\begin{equation*}
-			H_\bullet^\text{CW}(X,A) \isom H_\bullet(X,A),
+			H_n^\text{CW}(X,A) \isom H_n(X,A),
 		\end{equation*}
 		which are natural \TODO{with respect to \textit{cellular maps}} and \TODO{compatible with the boundary morphisms}. Moreover on $(*,\emptyset)$ this isomorphism is the identity on $H_\bullet(*)$.
 	\end{theorem}
@@ -1943,10 +1965,14 @@
 		\begin{equation*}
 			H_k(X_n,A) \isom H_k(X_{n+1},A) \isom ... \isom H_k(X_m,A).
 		\end{equation*}
-		This yields for any $k$ and arbitrary $m > k$ \TODO{correct?}
-		\begin{equation*}
-			H_k(X,A) \isom \colim \limits_{n \in \N_0} H_k(X_n,A) \isom \colim \limits_{n > k} H_k(X_n,A) \isom H_k(X_m,A).
-		\end{equation*}
+		This yields for any $k$ and arbitrary $m > k$
+		\begin{align*}
+			H_k(X,A) &\isom \colim \limits_{n \in \N_0} H_k(X_n,A) \isom \colim (H_k(X_k,A) \rightarrow H_k(X_{k+1},A))\\
+			&\isom H_k(X_{k+1},A) \isom H_k(X_m,A).
+		\end{align*}
+		% \begin{equation*}
+		% 	H_k(X,A) \isom \colim \limits_{n \in \N_0} H_k(X_n,A) \isom \colim \limits_{n > k} H_k(X_n,A) \isom H_k(X_m,A).
+		% \end{equation*}
 		
 		Now consider the following diagram. Note that the vertical composition is part of the triple exact sequence of $(X_n,X_{n-1},A)$, and that the lower diagonal is an excerpt of the triple exact sequence of $(X_{n-1},X_{n-2},A)$. Furthermore, note that the two triangles commute by definition. By exactness of the vertical and the diagonal sequence and the previous calculations we obtain that the two canonical morphisms are injective, as indicated.
 		\begin{equation*}
