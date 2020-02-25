@@ -99,7 +99,7 @@
 	\begin{definition}
 		A morphism $i:A --> X$ of topological spaces is a \textbf{deformation retract}, if there is a retraction $r:X --> A$ and a homotopy $h:ir \sim 1_X$, which satisfies $h(t,i(a)) = a$ for all $a$ in $A$. Note that $i$ being split mono (and thus regular mono) makes it an embedding of a subspace.
 
-		The morphism $i$ is a \textbf{neighborhood deformation retract}, if there exists a neighborhood $U$ of $i(A)$, such that the restricted map $i:A-->U$ is a deformation retract.
+		The morphism $i$ is a \textbf{neighborhood deformation retract}, if there exists an open neighborhood $U$ of $i(A)$, such that the restricted map $i:A-->U$ is a deformation retract.
 
 		In the case that $i$ is the canonical inclusion we also say that $A$ is a (neighborhood-) deformation retract.
 
@@ -214,32 +214,62 @@
 		satisfies the required properties of a homotopy $k:(I \times ir) --> 1_{I \times U}$, where $\tau: X \times X --> X \times X$ denotes the transposition isomorphism. Finally $I \times i(I \times A)$ is closed in $I \times X$.
 	\end{sketch}
 
+	\begin{definition}
+		The inclusion of a closed subspace $i:A --> X$ is a \textbf{cofibration}, if the canonical embedding $j:I \times A \union \{0\} \times X --> I \times X$ has a retraction. In fact, such a retraction $r: I \times X --> I \times A \union \{0\} \times X$ turns $j$ into a deformation retract via the  homotopy
+		\begin{equation*}
+			\begin{array}{rccl}
+				H: &I \times I \times X &\longrightarrow & I \times X\\
+				&(s,t,x)&\longmapsto& ((1-s)t + s\pi_I\circ r(t,x), \pi_Xr(st,x))
+			\end{array}
+		\end{equation*}
+		\TODO{homotopy extension property}
+	\end{definition}
+
+	For example $\S^{n-1} --> \D^n$ is a cofibration {by indenting the cylinder $[0,1] \times \D^n$}.
+
+	\begin{proposition}
+		Cofibrations are CNDRs.
+
+		Conversely, if $X$ is perfectly normal, then every CNDR $i:A-->X$ is a cofibration.
+
+		\TODO{see AGPS algebraic topology from a homotopical viewpoint thm 4.1.14}
+	\end{proposition}
+
 	\begin{lemma}
-		If $i:A --> X$ is a CNDR, then the canonical morphism $I \times A \union \{1\} \times X --> I \times X$ is a deformation retract.
+		Cofibrations are preserved under coproducts and pushouts.
 	\end{lemma}
 	\begin{sketch}
-		Let $A \subseteq U \subseteq X$ and consider the diagram
-		\begin{equation*}
-			\begin{diagram}
-				\threebythree[verywide]
-					{\{1\}\times A}{\{1\}\times X}{I \times X}
-					{I \times A}{I \times A \union \{1\} \times X}{}
-					{I \times U}{}{I \times X}
+		\TODO{Use compactness of $I$ and the fact that colimits commute.}
 
-				\arrow{nw}{n}{}
-				\arrow{n}{ne}{}
-				\arrow{w}{c}{}
-				\arrow{nw}{w}{}
-				\arrow{w}{sw}{}
-				\arrow{n}{c}{}
-				\arrow[equals]{ne}{se}{}
-				\arrow{sw}{se}{}
-				\arrow[dashed]{c}{se}{}
-
-				\node at ($(c)+(-.5,.5)$) {$\secorner$};
-			\end{diagram}
-		\end{equation*}
+		$I \times \Coproduct \limits_{k \in I} A_k \union \{0\} \times \Coproduct \limits_{k \in I} X_k \isom \Coproduct \limits_{k \in I} (I \times A_k \union \{0\} \times X_k)$.
 	\end{sketch}
+
+	% \begin{lemma}
+	% 	If $i:A --> X$ is a CNDR, then the canonical morphism $I \times A \union \{1\} \times X --> I \times X$ is a deformation retract.
+	% \end{lemma}
+	% \begin{sketch}
+	% 	Let $A \subseteq U \subseteq X$ and consider the diagram
+	% 	\begin{equation*}
+	% 		\begin{diagram}
+	% 			\threebythree[verywide]
+	% 				{\{1\}\times A}{\{1\}\times X}{I \times X}
+	% 				{I \times A}{I \times A \union \{1\} \times X}{}
+	% 				{I \times U}{}{I \times X}
+
+	% 			\arrow{nw}{n}{}
+	% 			\arrow{n}{ne}{}
+	% 			\arrow{w}{c}{}
+	% 			\arrow{nw}{w}{}
+	% 			\arrow{w}{sw}{}
+	% 			\arrow{n}{c}{}
+	% 			\arrow[equals]{ne}{se}{}
+	% 			\arrow{sw}{se}{}
+	% 			\arrow[dashed]{c}{se}{}
+
+	% 			\node at ($(c)+(-.5,.5)$) {$\secorner$};
+	% 		\end{diagram}
+	% 	\end{equation*}
+	% \end{sketch}
 
 	\newpage
 	\subsection{Mapping Cone, Suspension, Mapping Telescope}
@@ -436,10 +466,30 @@
 	\end{definition}
 
 	\begin{lemma}[Properties of the Mapping Telescope]
-		If $X_0 \subseteq X_1 \subseteq ... \subseteq X = \colim \limits_{n \in \N_0} X_n$ is a sequence of CNDRs, then the canonical morphism $$\Tel X --> X$$ is a homotopy equivalence.
+		Given a sequence of cofibrations
+		\begin{align*}
+			X_0 --> X_1 --> ... --> X = \colim \limits_{n \in \N_0} X_n
+		\end{align*}
+		the canonical morphism $\Tel X --> X$ is a homotopy equivalence.
 	\end{lemma}
 	\begin{sketch}
-		Factor the morphism as $\Tel X \xrightarrow{i} [0,\infty) \times X \xrightarrow{\pi_X} X$ and note that, since $\pi_X$ is a homotopy equivalence, it suffices to show that $i$ is a homotopy equivalence.
+		Factor the morphism as $\Tel X \xrightarrow{s} [0,\infty) \times X \xrightarrow{\pi_X} X$ and note that, since $\pi_X$ is a homotopy equivalence, it suffices to show that $s$ is a homotopy equivalence.
+
+		By assumption we have that $[n,n+1] \times X_n \union \{n+1\} \times X_{n+1}$ is a deformation retract of $[n,n+1] \times X_{n+1}$. Hence the inclusion $s_n:T_n-->[0,n+1]\times X_n$ has a retraction $r_n:[0,n+1] \times X_n --> T_n$ and homotopy $s_nr_n \sim_{h_n} \id$, making $s_n$ a deformation retract.
+
+		\TODO{Note that $\colim \limits_{n \in \N_0} \;[0,n+1]\times X_n \isom [0,\infty) \times X$.}
+
+		By functoriality of $\colim$ we obtain morphisms
+		\begin{equation*}
+			\begin{array}{rcl}
+			s:\Tel X &\longrightarrow& [0,\infty) \times X\\
+			r:[0,\infty) \times X &\longrightarrow& \Tel X\\
+			h:I \times [0,\infty) \times X &\longrightarrow& [0,\infty) \times X
+			\end{array}
+		\end{equation*}
+		turning $s$ into a deformation retract.
+		% By assumption $[i,i+1]\times X_i \union \{i+1\}\times X$ is a deformation retract of $[i,i+1]\times X$ with given homotopy $H_i$. Extending this by the identity makes $([0,i+1] \times X \intersection \Tel X) \union ([i+1,\infty) \times X)$ a deformation retract of $[0,\infty) \times X$ via retractions $r_i$ and homotopies $K_i$.
+		% Now let $r:[0,\infty) \times X --> \Tel X$ be the \underline{infinite} composite of the retractions.
 	\end{sketch}
 
 	\newpage
@@ -1018,8 +1068,76 @@
 					\end{diagram}
 				\end{equation*}
 			}
+		\vspace{-3em}
 		\end{enumerate}
 	\end{proof}
+
+	\begin{lemma}[Homology of Mapping Telescope]
+		Let $(H_\bullet, \partial_\bullet)$ be a generalized homology theory and let $X_0 --> X_1 --> ... --> X = \colim \limits_{n \in \N_0} X_n$ be a linearly filtered diagram of topological spaces. Then we have a canonical isomorphism
+		\begin{equation*}
+			H_\bullet(\Tel X) \isom \colim \limits_{n \in \N_0} H_\bullet(X_n)
+		\end{equation*}
+	\end{lemma}
+	\begin{sketch}
+		Use the following decomposition of the nonnegative real line
+		\begin{center}
+		\begin{tikzpicture}
+			% \node at (-4,.5) {$[0,1) \sqcup \Coproduct \limits_{n \in \N}(2(n-1)-\tfrac{1}{4},2(n-1)+\tfrac{1}{4})$};
+			% \node at (-.5,-.5) {$A_2$};
+			% \node at (-1,0) {$A_1 \intersection A_2$};
+
+			\node (x0) at (0,.5){};
+			\node (y0) at (0,0){};
+			\node (z0) at (0,-.5){};
+
+			\node at (6.2,.5){...};
+			\node at (6.2,0){...};
+			\node at (6.2,-.5){...};
+
+			\draw[|-] (x0) -- ($(x0)+(1,0)$);
+			\draw[|-] ($(x0)+(1,0)$) -- ($(x0)+(2,0)$);
+			\draw[|-] ($(x0)+(2,0)$) -- ($(x0)+(3,0)$);
+			\draw[|-] ($(x0)+(3,0)$) -- ($(x0)+(4,0)$);
+			\draw[|-] ($(x0)+(4,0)$) -- ($(x0)+(5,0)$);
+			\draw[|-] ($(x0)+(5,0)$) -- ($(x0)+(6,0)$);
+			\draw[|-] (y0) -- ($(y0)+(1,0)$);
+			\draw[|-] ($(y0)+(1,0)$) -- ($(y0)+(2,0)$);
+			\draw[|-] ($(y0)+(2,0)$) -- ($(y0)+(3,0)$);
+			\draw[|-] ($(y0)+(3,0)$) -- ($(y0)+(4,0)$);
+			\draw[|-] ($(y0)+(4,0)$) -- ($(y0)+(5,0)$);
+			\draw[|-] ($(y0)+(5,0)$) -- ($(y0)+(6,0)$);
+			\draw[|-] (z0) -- ($(z0)+(1,0)$);
+			\draw[|-] ($(z0)+(1,0)$) -- ($(z0)+(2,0)$);
+			\draw[|-] ($(z0)+(2,0)$) -- ($(z0)+(3,0)$);
+			\draw[|-] ($(z0)+(3,0)$) -- ($(z0)+(4,0)$);
+			\draw[|-] ($(z0)+(4,0)$) -- ($(z0)+(5,0)$);
+			\draw[|-] ($(z0)+(5,0)$) -- ($(z0)+(6,0)$);
+
+			
+			\draw[very thick,red] (x0) -- ($(x0)+(1.25,0)$);
+			\draw[very thick,red] ($(x0)+(1.75,0)$) -- ($(x0)+(3.25,0)$);
+			\draw[very thick,red] ($(x0)+(3.75,0)$) -- ($(x0)+(5.25,0)$);
+			\draw[very thick,red] ($(x0)+(5.75,0)$) -- ($(x0)+(6,0)$);
+
+			\draw[very thick,darkgreen] ($(y0)+(.75,0)$) -- ($(y0)+(1.25,0)$);
+			\draw[very thick,darkgreen] ($(y0)+(1.75,0)$) -- ($(y0)+(2.25,0)$);
+			\draw[very thick,darkgreen] ($(y0)+(2.75,0)$) -- ($(y0)+(3.25,0)$);
+			\draw[very thick,darkgreen] ($(y0)+(3.75,0)$) -- ($(y0)+(4.25,0)$);
+			\draw[very thick,darkgreen] ($(y0)+(4.75,0)$) -- ($(y0)+(5.25,0)$);
+			\draw[very thick,darkgreen] ($(y0)+(5.75,0)$) -- ($(y0)+(6,0)$);
+
+			\draw[very thick,blue] ($(z0)+(0.75,0)$) -- ($(z0)+(2.25,0)$);
+			\draw[very thick,blue] ($(z0)+(2.75,0)$) -- ($(z0)+(4.25,0)$);
+			\draw[very thick,blue] ($(z0)+(4.75,0)$) -- ($(z0)+(6,0)$);		
+		\end{tikzpicture}
+		\end{center}
+		to obtain an decomposition of $\Tel X$ into
+		\begin{align*}
+			A_1 &= [0,1) \times X_0 \sqcup \Coproduct \limits_{k \in \N} (2k-\frac{1}{4},2k) \times X_{2k-1} \sqcup [2k,2k+1) \times X_{2n} \simeq X_0 \sqcup \Coproduct \limits_{k \in \N} X_{2k}\\
+			A_2 &= \Coproduct \limits_{k \in \N_0} (2k+1-\frac{1}{4},2k+1) \times X_{2k} \sqcup [2k+1,2k+2) \times X_{2k+1} \simeq \Coproduct \limits_{k \in \N_0} X_{2k+1}\\
+			A_1 \intersection A_2 &= \Coproduct \limits_{n \in \N_0} (n+1-\frac{1}{4},n+1)\times X_n \simeq \Coproduct \limits_{n \in \N_0} X_n 
+ 		\end{align*}
+	\end{sketch}
 
 
 	% \item{
@@ -1867,9 +1985,7 @@
 				We have $X_n \setminus X_{n-1} \isom \Coproduct \limits_{i \in I_n} (\D^n \setminus \S^{n-1}) = \Coproduct \limits_{i \in I_n} \B^n$ and in particular $I_n \isom \pi_0(X_n \setminus X_{n-1})$.
 			}
 			\item{
-				$X_{n-1}$ is a CNDR of $X_n$ and $X_n / X_{n-1} \isom \Join \limits_{i \in I} \S^n$.
-
-				%\TODO{characteristic map induces homeom see Kammeyer eq (6.1)}
+				The inclusion $X_{n-1}-->X_n$ is a cofibration and $X_n / X_{n-1} \isom \Join \limits_{i \in I} \S^n$.
 			}
 			\item{
 				The composition $(\Tel(X),A) --> ([-1,\infty)\times X,[-1,\infty)\times A) --> (X,A)$ is a homotopy equivalence.
@@ -1882,7 +1998,7 @@
 				By construction.
 			}
 			\item{
-				The inclusion $X_{n-1}-->X_n$ is the pushout of a coproduct of CNDRs.
+				The inclusion $X_{n-1}-->X_n$ is the pushout of a coproduct of cofibrations.
 
 				The isomorphism follows from the fact that both are pushouts of the constant map and the inclusion of cells.
 			}
