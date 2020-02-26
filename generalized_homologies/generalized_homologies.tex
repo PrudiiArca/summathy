@@ -2074,6 +2074,7 @@
 
 				The isomorphism follows from the fact that both are pushouts of the constant map and the inclusion of cells.
 			}
+			\vspace{-1.75em}
 		\end{enumerate}
 	\end{sketch}
 
@@ -2222,7 +2223,7 @@
 		For (ii) note that in this case $C_k(X,A) = 0$ for $k > \dim(X,A)$.
 	\end{sketch}
 
-	\begin{theorem}
+	\begin{theorem}[Uniqueness of Cellular Homology]
 		Let $(H_\bullet, \partial_\bullet)$ and $(H_\bullet',\partial_\bullet')$ be two ordinary additive homology theories and assume $\phi: H_\bullet ==> H_\bullet'$ is a natural transformation compatible with boundaries.
 
 		If $\phi_{*}: H_\bullet(*) --> H_\bullet'(*)$ is an isomorphism, then $H_\bullet^\text{CW}(X,A) \isom {H_\bullet'}^\text{CW}(X,A)$ for all relative CW-complexes.
@@ -2317,14 +2318,40 @@
 		\end{equation*}
 	\end{definition}
 
+	\begin{remark}
+		For any CW-complex $(X,A)$ with given CW-structure, we have \TODO{$R$ noetherian / PID sufficient?} 
+		\begin{equation*}
+			b_n(X,A) = \rk H_n(X,A) \leq \rk C_n(X_n,A) = \#I_n.
+		\end{equation*}
+		In particular, if $(X,A)$ is locally finite, then $b_n(X,A)$ is finite for all $n \in \N_0$.
+	\end{remark}
+
 	\begin{proposition}[Euler Characteristic of Finite CW-complexes]
 		Let $R$ be a integral domain and $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory.
 
 		If $(X,A)$ is a finite relative CW-complex, then
 		\begin{equation*}
-			\chi_R(X,A) = \sum \limits_{n \in \N_0}(-1)^n \#I_n = \sum \limits_{n \in \N_0} (-1)^n \rk C_n(X,A).
+			\chi_R(X,A) = \sum \limits_{n \in \N_0}(-1)^n \#I_n.
 		\end{equation*}
 	\end{proposition}
+	\begin{sketch}
+		Denote $Q := \Quot(R)$ and use the fact that $Q$ is a flat $R$-module to obtain for a chain complex $C_\bullet$ of $R$-modules the isomorphism $Q \tensor_R H(C_\bullet) \isom H(Q \tensor_R C_\bullet)$. We calculate
+		\begin{equation*}
+			b_n^R(X,A) = \rk H_n(X,A) = \dim_Q Q \tensor_R H_n(X,A) = \dim_Q H_n(Q \tensor_R C_\bullet^\text{CW}(X,A)).
+		\end{equation*}
+
+		Moreover, given a chain complex $...--> C_{n+1} \xrightarrow{c_{n+1}} C_n \xrightarrow{c_n} C_{n-1}-->...$ of $Q$-vector spaces we find that $H_n(C_\bullet) \isom \ker c_n / \im c_{n+1}$ implies $\ker c_n \isom H_n(C_\bullet) \oplus \im c_{n+1}$ and we get $C_n \isom \ker c_n \oplus \im c_n \isom H_n(C_\bullet) \oplus \im c_{n+1} \oplus \im c_n$. This yields
+		\begin{align*}
+			\Sum \limits_{n \in \Z} (-1)^n \dim_Q C_n &= \Sum \limits_{n \in \Z} (-1)^n (\dim_Q H_n(C_\bullet) + \dim_Q \im c_{n+1} + \dim_Q \im c_n)\\
+			&= \Sum \limits_{n \in \Z} (-1)^n \dim_Q H_n(C_\bullet).
+		\end{align*}
+		Finally we calculate
+		\begin{align*}
+			\chi_R(X,A) &= \Sum \limits_{n \in \Z}(-1)^n b_n^R(X,A) = \Sum \limits_{n \in \Z} (-1)^n \dim_Q H_n(Q \tensor_R C_\bullet^\text{CW}(X,A))\\
+			&= \Sum \limits_{n \in \Z} (-1)^n \dim_Q Q \tensor_R C_\bullet^\text{CW}(X,A) = \Sum \limits_{n \in \Z} (-1)^n \rk C_\bullet^\text{CW}(X,A)\\
+			&= \Sum \limits_{n \in \Z} (-1)^n \# I_n.
+		\end{align*}
+	\end{sketch}
 
 
 	\newpage
