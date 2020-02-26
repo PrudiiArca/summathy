@@ -1079,7 +1079,7 @@
 		\end{equation*}
 	\end{lemma}
 	\begin{sketch}
-		Applying Mayer Vietories to the decomposition
+		Applying Mayer Vietories to \TODO{an $\varepsilon$-enlargement of} the decomposition
 		\begin{align*}
 			A_1 &= \Coproduct \limits_{n \in \N_0} [2n,2n+1] \times X_{2n} \simeq \Coproduct \limits_{n \in \N_0} X_{2n}\\
 			A_2 &= \Coproduct \limits_{n \in \N_0} [2n+1,2n+2] \times X_{2n-1} \simeq \Coproduct \limits_{n \in \N_0} X_{2n+1}\\
@@ -1126,7 +1126,7 @@
 			%\beta(y_n) &= \iota_n(y_n)\\
 			\gamma(x_n) &= (-1)^n x_n
 		\end{align*}
-		From algebra we know that the sequence
+		From algebra (\TODO{see May p 115}) we know that the sequence
 		\begin{equation*}
 			0 \longrightarrow \Oplus \limits_{n \in \N_0} H_\bullet(X_n) \xrightarrow{\alpha} \Oplus \limits_{n \in \N_0} H_\bullet(X_n) \xrightarrow{\beta} \colim \limits_{n \in \N_0} H_\bullet(X_n) \longrightarrow 0
 		\end{equation*}
@@ -2060,10 +2060,7 @@
 				We have $X_n \setminus X_{n-1} \isom \Coproduct \limits_{i \in I_n} (\D^n \setminus \S^{n-1}) = \Coproduct \limits_{i \in I_n} \B^n$ and in particular $I_n \isom \pi_0(X_n \setminus X_{n-1})$.
 			}
 			\item{
-				The inclusion $X_{n-1}-->X_n$ is a cofibration and $X_n / X_{n-1} \isom \Join \limits_{i \in I} \S^n$.
-			}
-			\item{
-				The composition $(\Tel(X),A) --> ([-1,\infty)\times X,[-1,\infty)\times A) --> (X,A)$ is a homotopy equivalence.
+				The inclusion $X_{n-1}-->X_n$ is a cofibration and $\smash{X_n / X_{n-1} \isom \Join \limits_{i \in I} \S^n}$. In particular $\Tel X$ is homotopy equivalent to $X$.
 			}
 		\end{enumerate}
 	\end{lemma}
@@ -2077,14 +2074,11 @@
 
 				The isomorphism follows from the fact that both are pushouts of the constant map and the inclusion of cells.
 			}
-			\item{
-
-			}
 		\end{enumerate}
 	\end{sketch}
 
 	\begin{corollary}[Homology of CW-complexes]
-		Let $(H_\bullet, \partial_\bullet)$ be an ordinary homology theory and $(X,A)$ be a relative CW-complex with given CW-structure.
+		Let $(H_\bullet, \partial_\bullet)$ be an ordinary homology theory satisfying additivity and $(X,A)$ be a relative CW-complex with given CW-structure.
 		\begin{enumerate}[(i)]
 			\item{
 				We have $H_\bullet(X_n,X_{n-1}) \isom \Directsum \limits_{i \in I_n}M_{\bullet-n}$.% and in particular
@@ -2099,8 +2093,6 @@
 			}
 		\end{enumerate}
 	\end{corollary}
-
-	\TODO{cellular homology see kammeyer}
 
 	\begin{definition}
 		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory and $(X,A)$ be a relative CW-complex with filtration $(X_n)_n$. 
@@ -2130,7 +2122,7 @@
 	\end{definition}
 
 	\begin{theorem}[Cellular Homology]
-		Let $(H_\bullet, \partial_\bullet)$ be an ordinary homology theory and $(X,A)$ be a relative CW-complex. Then for $n \geq 0$there are isomorphisms
+		Let $(H_\bullet, \partial_\bullet)$ be an ordinary homology theory satisfying additivity and $(X,A)$ be a relative CW-complex. Then for $n \geq 0$ there are isomorphisms
 		\begin{equation*}
 			H_n^\text{CW}(X,A) \isom H_n(X,A),
 		\end{equation*}
@@ -2230,7 +2222,77 @@
 		For (ii) note that in this case $C_k(X,A) = 0$ for $k > \dim(X,A)$.
 	\end{sketch}
 
-	\TODO{uniqueness}
+	\begin{theorem}
+		Let $(H_\bullet, \partial_\bullet)$ and $(H_\bullet',\partial_\bullet')$ be two ordinary additive homology theories and assume $\phi: H_\bullet ==> H_\bullet'$ is a natural transformation compatible with boundaries.
+
+		If $\phi_{*}: H_\bullet(*) --> H_\bullet'(*)$ is an isomorphism, then $H_\bullet^\text{CW}(X,A) \isom {H_\bullet'}^\text{CW}(X,A)$ for all relative CW-complexes.
+	\end{theorem}
+	\begin{sketch}
+		Note that $\phi$ is compatible with the axioms of homology theories, ie. with the long exact sequence, excission and additivity. As such, results obtained from these axioms (like the homology of the sphere) are compatible with $\phi$.
+
+		For a CW-complex $(X,A)$ with given filtration $(X_n)_n$ it suffices to show that $H_\bullet(X_n,A) \xrightarrow{\phi} H_\bullet'(X_n,A)$ is an isomorphism for all $n \in \N_0$, since $H_\bullet(X,A) \isom \colim \limits_{n \in \N} H_\bullet(X_n,A)$. Do this by induction on $n$.
+
+		\begin{enumerate}
+			\item[(IB)]{
+				$n = 0$: We calculate 
+				\begin{equation*}
+					H_\bullet(X_0,A) \isom H_\bullet(X_0/A,A/A) \isom H_\bullet(\Join \limits_{\#I_0}(* \sqcup a),a) \isom \Oplus \limits_{\# I_0}H_\bullet(* \sqcup a,a)
+				\end{equation*}
+				and obtain
+				\begin{equation*}
+					\begin{diagram}
+						\fivebytwo[verywide]
+							{H_\bullet(a)}{H_\bullet(* \sqcup a)}{H_\bullet(* \sqcup a,a)}{H_{\bullet-1}(a)}{H_{\bullet-1}(* \sqcup a)}
+							{H_\bullet'(a)}{H_\bullet'(* \sqcup a)}{H_\bullet'(* \sqcup a,a)}{H_{\bullet-1}'(a)}{H_{\bullet-1}'(* \sqcup a)}
+
+						\arrow{nww}{nw}{}
+						\arrow{nw}{n}{}
+						\arrow{n}{ne}{}
+						\arrow{ne}{nee}{}
+
+						\arrow{sww}{sw}{}
+						\arrow{sw}{s}{}
+						\arrow{s}{se}{}
+						\arrow{se}{see}{}
+
+						\arrow{nww}{sww}{\isom\;\;\phi\;}
+						\arrow{nw}{sw}{\isom\;\;\phi\;}
+						\arrow{n}{s}{\isom\;\;\phi\;}
+						\arrow{ne}{se}{\isom\;\;\phi\;}
+						\arrow{nee}{see}{\isom\;\;\phi\;}
+					\end{diagram}
+				\end{equation*}
+				where the middle vertical morphism is an isomorphism by the five lemma, while the others are isomorphisms by assumption.
+			}
+			\item[(IS)]{
+				$n \leadsto n+1$: Recall that $H_\bullet(X_{n+1},X_n) \isom \Oplus \limits_{\# I_{n+1}}H_{\bullet-(n+1)}$. In particular $H_\bullet(X_{n+1},X_n) \xrightarrow{\phi} H_\bullet'(X_{n+1},X_n)$ is an isomorphism. The triple exact sequence yields
+				\begin{equation*}
+					\begin{diagram}
+						\fivebytwo[verywide]
+							{H_\bullet(X_n,A)}{H_\bullet(X_{n+1},X_n)}{H_\bullet(X_{n+1},A)}{H_{\bullet-1}(X_n,A)}{H_{\bullet-1}(X_{n+1},X_n)}
+							{H_\bullet'(X_n,A)}{H_\bullet'(X_{n+1},X_n)}{H_\bullet'(X_{n+1},A)}{H_{\bullet-1}'(X_n,A)}{H_{\bullet-1}'(X_{n+1},X_n)}
+
+						\arrow{nww}{nw}{}
+						\arrow{nw}{n}{}
+						\arrow{n}{ne}{}
+						\arrow{ne}{nee}{}
+
+						\arrow{sww}{sw}{}
+						\arrow{sw}{s}{}
+						\arrow{s}{se}{}
+						\arrow{se}{see}{}
+
+						\arrow{nww}{sww}{\isom\;\;\phi\;}
+						\arrow{nw}{sw}{\isom\;\;\phi\;}
+						\arrow{n}{s}{\isom\;\;\phi\;}
+						\arrow{ne}{se}{\isom\;\;\phi\;}
+						\arrow{nee}{see}{\isom\;\;\phi\;}
+					\end{diagram}
+				\end{equation*}
+				where the middle vertical morphism is an isomorphism by the five lemma, while the others are isomorphisms by assumption.
+			}
+		\end{enumerate}
+	\end{sketch}
 
 	\begin{remark}
 		Let $R$ be a integral domain and $M$ be an $R$-module. The \textbf{rank} of $M$ is defined as 
@@ -2823,7 +2885,7 @@
 		\begin{equation*}
 			\ncat{Top}(\mathbb{\Delta}-,X) \isom \Coproduct \limits_{i \in I} \ncat{Top}(\mathbb{\Delta}-,X_i),
 		\end{equation*}
-		\TODO{since the $\mathbb{\Delta}^n$ are connected}. As $\Z[-]_{*}$ is a left adjoint, we get 
+		since the $\mathbb{\Delta}^n$ are connected. As $\Z[-]_{*}$ is a left adjoint, we get 
 		\begin{equation*}
 			\Z[\ncat{Top}(\mathbb{\Delta}-,X)] \isom \Z\left[\Coproduct \limits_{i \in I} \ncat{Top}(\mathbb{\Delta}-,X_i)\right] \isom \Oplus \limits_{i \in I} \Z[\ncat{Top}(\mathbb{\Delta}-,X_i)].
 		\end{equation*}
