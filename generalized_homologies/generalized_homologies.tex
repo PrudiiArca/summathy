@@ -2082,7 +2082,7 @@
 		Let $(H_\bullet, \partial_\bullet)$ be an ordinary homology theory satisfying additivity and $(X,A)$ be a relative CW-complex with given CW-structure.
 		\begin{enumerate}[(i)]
 			\item{
-				We have $H_\bullet(X_n,X_{n-1}) \isom \Directsum \limits_{i \in I_n}M_{\bullet-n}$.% and in particular
+				We have $H_\bullet(X_n,X_{n-1}) \isom H_\bullet(X_n/X_{n-1},*) \isom H_\bullet(\Join \limits_{i \in I_n} \S^n) \isom \Oplus \limits_{i \in I_n}H_\bullet(\S^n) \isom \Directsum \limits_{i \in I_n}M_{\bullet-n}$.% and in particular
 				% \begin{equation*}
 				% 	H_\bullet(X_n,X_{n-1}) = \left \{ \begin{array}{ll}
 				% 		\Directsum \limits_{i \in I} M_0 & k = n\\ 0 & k \neq n
@@ -2352,6 +2352,168 @@
 			&= \Sum \limits_{n \in \Z} (-1)^n \# I_n.
 		\end{align*}
 	\end{sketch}
+
+	\newpage
+	\subsection{Examples}
+
+	In the following we fix an $R$-homology theory $(H_\bullet,\partial_\bullet)$.
+
+	\begin{example}[Homology of the Sphere revisited]
+		For every $n \in \N$ the sphere $\S^n$ has a finite CW-structure given by the pushouts
+		\begin{equation*}
+			\begin{diagram}
+				\twobytwo[small]
+					{\emptyset}{\emptyset}
+					{*}{*}
+
+				\arrow{nw}{ne}{}
+				\arrow{sw}{se}{}
+				\arrow{nw}{sw}{}
+				\arrow{ne}{se}{}
+
+				\node at ($(se)+(-.3,.3)$) {$\secorner$};
+			\end{diagram}
+			\hspace{1cm}\text{and}\hspace{1cm}
+			\begin{diagram}
+				\twobytwo[small]
+					{\S^{n-1}}{*}
+					{\D^n}{\S^n}
+
+				\arrow{nw}{ne}{}
+				\arrow{sw}{se}{}
+				\arrow{nw}{sw}{}
+				\arrow{ne}{se}{}
+
+				\node at ($(se)+(-.3,.3)$) {$\secorner$};
+			\end{diagram}.
+		\end{equation*}
+		Hence its cellular complex and homology are given by
+		\begin{equation*}
+			C_\bullet^\text{CW}(\S^n) = \left\{\begin{array}{ll}
+				R & \bullet \in \{0,n\}\\
+				0 & \text{otherwise}
+			\end{array}\right.
+			\hspace{1cm}\text{and}\hspace{1cm}
+			H_\bullet^\text{CW}(\S^n) = \left\{\begin{array}{ll}
+				R & \bullet \in \{0,n\}\\
+				0 & \text{otherwise}
+			\end{array}\right..
+		\end{equation*}
+		Moreover the $R$-Euler characteristic is
+		\begin{equation*}
+			\chi_R(X,A) = 1 + (-1)^n = \left \{\begin{array}{ll}
+				0 & n \text{ odd}\\
+				2 & n \text{ even}
+			\end{array}\right.
+		\end{equation*}
+	\end{example}
+
+	\begin{example}[Homology of Surfaces of Genus $g$]
+		For every $g \in \N$ the surface $\Sigma_g$ has a finite CW-structure given by the pushouts
+		\begin{equation*}
+			\begin{diagram}
+				\twobytwo
+					{\emptyset}{\emptyset}
+					{*}{*}
+
+				\arrow{nw}{ne}{}
+				\arrow{sw}{se}{}
+				\arrow{nw}{sw}{}
+				\arrow{ne}{se}{}
+
+				\node at ($(se)+(-.3,.3)$) {$\secorner$};
+			\end{diagram}
+			\hspace{1cm}\text{and}\hspace{1cm}
+			\begin{diagram}
+				\twobytwo
+					{\Coproduct \limits_{k=1}^{2g}\S^0\;\;}{*}
+					{\Coproduct \limits_{k=1}^{2g}\D^1}{\Join \limits_{k=1}^{2g} \S^1}
+
+				\arrow{nw}{ne}{}
+				\arrow{sw}{se}{}
+				\arrow{nw}{sw}{}
+				\arrow{ne}{se}{}
+
+				\node at ($(se)+(-.5,.5)$) {$\secorner$};
+			\end{diagram}
+			\hspace{1cm}\text{and}\hspace{1cm}
+			\begin{diagram}
+				\twobytwo
+					{\S^1}{\Join \limits_{k=1}^{2g} \S^1\;\;}
+					{\D^2}{\Sigma_g}
+
+				\arrow{nw}{ne}{\chi}[above]
+				\arrow{sw}{se}{}
+				\arrow{nw}{sw}{}
+				\arrow{ne}{se}{}
+
+				\node at ($(se)+(-.3,.3)$) {$\secorner$};
+			\end{diagram},
+		\end{equation*}
+		where the attaching map $\chi$ is given by the gluing scheme \TODO{todo}. Hence the cellular complex is given by
+		\begin{equation*}
+			C_\bullet^\text{CW}(\Sigma_g) = \left \{\begin{array}{ll}
+				R & \bullet \in \{0,2\}\\
+				R^{2g} & \bullet = 1\\
+				0 & \text{otherwise}
+			\end{array}\right.
+		\end{equation*}
+		To calculate the cellular Homology, we have to determine the maps
+		\begin{align*}
+			H_2(\Sigma_g,\Join \limits_{k=1}^{2g}\S^1) \xrightarrow{\Delta_2} H_1(\Join \limits_{k=1}^{2g} \S^1,*) \xrightarrow{\Delta_1} H_0(*)
+		\end{align*}
+		For $\Delta_1 = \partial_1$ consider the diagram
+		\begin{equation*}
+			\begin{diagram}
+				\threebytwo[verywide]
+					{H_1(\S^1,*)}{H_1(\D^1,\S^0)}{H_0(\S^0)}
+					{\Oplus \limits_{k=1}^{2g}H_1(\S^1,*)}{H_1(\Join \limits_{k=1}^{2g}\S^1,*)\;\;}{H_0(*)}
+
+				\arrow{nw}{n}{\isom}[above]
+				\arrow{n}{ne}{\partial_1}[above]
+
+				\arrow{sw}{s}{\isom}[above]
+				\arrow{s}{se}{\Delta_1}[above]
+
+				\arrow{nw}{sw}{\iota_l}[left]
+				\arrow{n}{s}{}
+				\arrow{ne}{se}{a}[right]
+			\end{diagram}
+		\end{equation*}
+		We know from previous calculations that we can chose isomorphisms $H_1(\D^1,\S^0) \isom R$ and $H_0(\S^0) \isom R \oplus R$ such that $\partial_1(x) = (x,-x)$ and $a(y_1,y_2) = y_1 + y_2$. Hence $a\partial_1 = 0$ and consequently $\Delta_1 = 0$, since it is on every component.
+		% \begin{equation*}
+		% 	\begin{diagram}
+		% 		\matrix[objects,wide]{
+		% 			\node (nwww) {$H_1(\S^1,*)$};\&
+		% 			\node (nww) {$H_1(\D^1/\S^0,*)$};\&
+		% 			\node (nw) {$H_1(\D^1,\S^0)$};\&
+		% 			\node (n) {$H_0(\S^0)$};\&
+		% 			\node (ne) {};\&
+		% 			\node (nee) {};\&
+		% 			\node (neee) {$H_0(\Coproduct \limits_{k=1}^{2g}*)$};\\
+		% 			\node (swww) {$H_1(\Join \limits_{k=1}^{2g}\S^1,*)$};\&
+		% 			\node (sww) {};\&
+		% 			\node (sw) {$H_1(\Join \limits_{k=1}^{2g}\S^1,*)$};\&
+		% 			\node (s) {$H_0(*)$};\&
+		% 			\node (se) {$H_0(*)$};\&
+		% 			\node (see) {};\&
+		% 			\node (seee) {$H_0(\Coproduct \limits_{k=1}^{2g}*)$};\\
+		% 		};
+		% 	\end{diagram}
+		% \end{equation*}
+	\end{example}
+
+	\begin{lemma}[Homology of Real Projective Spaces]
+		TODO
+	\end{lemma}
+
+	\begin{lemma}[Homology of Complex Projective Spaces]
+		TODO
+	\end{lemma}
+
+	\begin{lemma}[Homology of Moore Spaces]
+		TODO
+	\end{lemma}
 
 
 	\newpage
@@ -2628,6 +2790,14 @@
 			\smash{\convex \{e_0,...,e_n\} = \{(t_0,...,t_n) \mid 0 \leq t_i \text{ and } \Sum \limits_{i=0}^n t_i = 1\}}.
 		\end{equation*}
 		The action on morphisms is defined by linear (and hence continuous) extension.
+
+		We have
+		\begin{equation*}
+			\begin{array}{rcl}
+				\mathbb{\Delta}(\delta_i^{n+1}): \mathbb{\Delta}^{n} & \longrightarrow & \mathbb{\Delta}^{n+1}\\
+				(t_0,...,t_n) & \longmapsto & (t_0...,t_{i-1},0,t_i,...,t_n)
+			\end{array}.
+		\end{equation*}
 	\end{definition}
 
 	%Note that the geometric $n$-simplex $\mathbb{\Delta}^n$ is inherently $n$-dimensional, as it lies completely in the hyperplane spanned by the unit vectors. Thus it is common to consider it as subset of $\R^n$.
@@ -2856,8 +3026,10 @@
 		\begin{equation*}
 			c = \Sum \limits_{\sigma \in \ncat{Top}(\mathbb{\Delta}^n,X)} c_\sigma \cdot \sigma,
 		\end{equation*}
-		where $c_\sigma$ are coefficients in $\Z$ and the basis vectors $e_\sigma$ are simply written as $\sigma$. 
-
+		where $c_\sigma$ are coefficients in $\Z$ and the basis vectors $e_\sigma$ are simply written as $\sigma$. Using this notation, the boundary morphisms of the singular chain complex are induced by assignments of the form
+		\begin{equation*}
+			\gamma_n(\sigma) = \Sum \limits_{i=0}^n (-1)^i \cdot \sigma \circ \mathbb{\Delta}(\delta_i^n).
+		\end{equation*}
 		An $n$-cycle is a \textbf{$(n+1)$-boundary}, if it lies in the image of $\gamma_{n+1}:C_{n+1}^\text{sing}(X)-->C_n^\text{sing}(X)$.
 
 		An $n$-cycle $c$, i.e. an element of $\Z^{\oplus\;\ncat{Top}(\mathbb{\Delta}^n,X)}$, determines a subset of $X$, given by the union of the images of all singular $n$-simplices contributing to $c$. This set, which we will call the \textbf{support} $\supp c$ of $c$, is a finite union of quasicompact subsets and hence again quasicompact.
@@ -2933,51 +3105,54 @@
 	\begin{proposition}
 		Relative singular homology is homotopy invariant.
 	\end{proposition}
-	\begin{proof}
-		It suffices to show \TODO{why? (see Kammeyer)} that $H_\bullet^\text{sing}(-)$ is homotopy invariant. This will be done by showing that a homotopy $f_0 \sim_h f_1$ between maps $f_0,f_1:X-->Y$ induces a homotopy of chains $k_\bullet: C_\bullet^\text{sing}(X) \leadsto C_{\bullet+1}^\text{sing}(Y)$.
-
-		Let $\theta: \mathbb{\Delta}^n --> X$ be a singular $n$-simplex. Recall the the linear $(n+1)$-simplices $\rho_j = [v_0,...,v_j,w_j,...,w_n]: \mathbb{\Delta}^{n+1} --> \I \times \mathbb{\Delta}^n$ used in subdivision of the prism. From these we obtain a family  of singular $(n+1)$-simplices $\sigma_j:\mathbb{\Delta}^{n+1} --> Y$ by taking the composite
+	\begin{sketch}
+		Let $X$ be a topological space and $i_0,i_1: X --> X \times \I$ be the two canonical inclusions. By homotopy invariance of $H_{*}:\ncat{Ch} --> \ncat{Ab}^{\Z gr}$ it suffices to show that the assignments
 		\begin{equation*}
-			\begin{diagram}
-				\fourbyone[wide]
-					{\mathbb{\Delta}^{n+1}}{\I \times \mathbb{\Delta}^n}{\I \times X}{Y.}
-
-				\arrow{ww}{w}{\rho_i}[above]
-				\arrow{w}{e}{\I \times \theta}[above]
-				\arrow{e}{ee}{h}[above]
-			\end{diagram}
-		\end{equation*}
-		We note that
-		\begin{equation*}
-			d_i^{n+1}(\sigma_j) = \left\{
-			\begin{array}{ll}
-				\sigma_j\vert_{[v_0,...,\widehat{v_i},...,v_j,w_j,...,w_n]} & i \leq j\\
-				\sigma_j\vert_{[v_0,...,v_j,w_j,...,\widehat{w_{i-1}},...,w_n]} & i > j
+			\begin{array}{rrcl}
+			h_n: & C_n^\text{sing} & \longrightarrow & C_{n+1}^\text{sing}\\
+			&\sigma & \longmapsto & \Sum \limits_{j=1}^n (-1)^j \cdot (\sigma \times \I) \circ \tau_j^n
 			\end{array}
-			\right.
+		\end{equation*} 
+		assemble into a chain homotopy $C_\bullet^\text{sing}(i_0) \sim_{h_\bullet} C_\bullet^\text{sing}(i_1)$, where
+		\begin{equation*}
+			\begin{array}{rrcl}
+				\tau_j^n: & \mathbb{\Delta}^n & \longrightarrow & \mathbb{\Delta}^n \times \I\\
+				& (t_0,...,t_n) & \longmapsto & (t_0,...,t_j-1,t_j+t_j+1,...,t_n,t_j+...+t_n).
+			\end{array}
 		\end{equation*}
-		and further
+
+		Indeed we calculate
 		\begin{align*}
-			d_0^{n+1}(\sigma_n) &= \sigma_n \vert_{[\widehat{v_0},w_0,...,w_n]} = h \circ (\{1\} \times \theta) = f_1 \circ \theta\\
-			d_{n+1}^{n+1}(\sigma_0) &= \sigma_0 \vert_{[v_0,...,v_n,\widehat{w_n}]} = h \circ (\{0\} \times \theta) = f_0 \circ \theta\\
+			\gamma_1(h_0(\sigma)) = TODO
+		\end{align*}
+		and
+		\begin{align*}
+			\gamma_{n+1}(h_n(\sigma)) &= \Sum \limits_{i=0}^{n+1} \Sum \limits_{j=0}^n (-1)^{i+j} \cdot (\sigma \times \I) \circ \tau_j^n \circ d_i^{n+1}\\
+			&= \text{upper face } + \Sum \text{inner faces } + \Sum \text{outer faces } + (-1)^{2n+1}\text{ lower face}\\
+			&= C_n^\text{sing}(i_1)(\sigma) + 0 - h_{n-1}(\gamma_n(\sigma)) - C_n^\text{sing}(i_0)(\sigma),
+		\end{align*}
+		where
+		\begin{align*}
+			\text{upper face } &= (\sigma \times \I) \circ \tau_0^n \circ d_0^{n+1} = C_n^\text{sing}(i_1)(\sigma)\\
+			\text{lower face } &= (\sigma \times \I) \circ \tau_n^n \circ d_{n+1}^{n+1} = C_n^\text{sing}(i_0)(\sigma)
+		\end{align*}
+		and the remaining terms are calculated as follows.
+
+		For $\Sum \text{inner faces}$ note that by construction $\tau_j^n \circ d_{j+1}^{n+1} = \tau_{j+1}^n \circ d_{j+1}^{n+1}$, so we have
+		\begin{align*}
+			\Sum \text{inner faces } = \Sum \limits_{j=0}^{n-1}(-1)^{2j+1} \cdot (\sigma \times \I) \circ \tau_j^n \circ d_{j+1}^{n+1} + \Sum \limits_{j=0}^{n-1}(-1)^{2j+2} \cdot (\sigma \times \I) \circ \tau_{j+1}^n \circ d_{j+1}^{n+1} = 0
 		\end{align*}
 
-		Define the map $k_n: C_n^\text{sing}(X) --> C_{n+1}^\text{sing}(Y)$ by linear extension of the assignment
-		\begin{equation*}
-			k_n(\theta) = \Sum \limits_{j=0}^n (-1)^j \cdot \sigma_j.
-		\end{equation*}
-		For $n=0$ we calculate
-		\begin{equation*}
-			\gamma_1(k_0(\theta)) = \gamma_1(\sigma_0) = d_0^1(\sigma_0) - d_1^1(\sigma_0) = \sigma\vert_{[\widehat{v_0},w_0]} - \sigma\vert_{[v_0,\widehat{w_0}]} = f_1 \circ \theta - f_0 \circ \theta
-		\end{equation*}
-		and for $n>0$ we obtain
+		Similarly, we have by construction for $j \leq i-2$  the identity $\tau_j^n \circ d_i^{n+1} = (d_{i-1}^n \times \I) \circ \tau_j^{n-1}$ and for $j \geq i+1$ the identity $\tau_j^n \circ d_i^{n+1} = (d_i^n \times \I) \circ \tau_{j-1}^{n-1}$. With this we calculate
 		\begin{align*}
-			\gamma_{n+1}k_n(\theta) &= \Sum \limits_{i=0}^{n+1}\Sum \limits_{j=0}^n (-1)^{i+j} d_i^{n+1}(\sigma_j)\\
-			&= \Sum \limits_{0 \leq i \leq j \leq n}(-1)^{i+j}d_i^{n+1}(\sigma_j) + \Sum \limits_{0 \leq j < i \leq n+1} (-1)^{i+j}d_i^{n+1}(\sigma_j)\\
-			&= \Sum \limits_{0 \leq i \leq j \leq n}(-1)^{i+j}d_i^{n+1}(\sigma_j) + \Sum \limits_{1 \leq j < i \leq n+1} (-1)^{i+j}d_i^{n+1}(\sigma_j)\\
-			&= \Sum \limits_{i \leq j} (-1)^{i+j}\sigma_j\vert_{[v_0,...,\widehat{v_i},...,v_j,w_j,...,w_n]} + \Sum \limits_{i > j}(-1)^{i+j}\sigma_j\vert_{[v_0,...,v_j,w_j,...,\widehat{w_{i-1}},...,w_n]}
+			\Sum \text{outer faces } &= \Sum \limits_{i=2}^{n+1}\Sum \limits_{j=0}^{i-2}(-1)^{i+j}(\sigma \times \I) \circ \tau_j^n \circ d_i^{n+1} + \Sum \limits_{i=0}^{n-1}\Sum \limits_{j=i+1}^n (-1)^{i+j}(\sigma \times \I) \circ \tau_j^n \circ d_i^{n+1}\\
+			&= \Sum \limits_{i=2}^{n+1}\Sum \limits_{j=0}^{i-2}(-1)^{i+j}(\sigma \circ d_{i-1}^n \times \I) \circ \tau_j^{n-1} + \Sum \limits_{i=0}^{n-1}\Sum \limits_{j=i+1}^n (-1)^{i+j}(\sigma \circ d_i^n \times \I) \circ \tau_{j-1}^{n-1}\\
+			&= \Sum \limits_{i=1}^{n+1}\Sum \limits_{j=0}^{i-1}(-1)^{i+j+1}(\sigma \circ d_{i}^n \times \I) \circ \tau_j^{n-1} + \Sum \limits_{i=0}^{n-1}\Sum \limits_{j=i}^n (-1)^{i+j+1}(\sigma \circ d_i^n \times \I) \circ \tau_{j}^{n-1}\\
+			&= \Sum \limits_{i=0}^{n}\Sum \limits_{j=0}^{n-1}(-1)^{i+j+1}(\sigma \circ d_i^n \times \I) \circ \tau_j^{n-1}\\
+			&= -h_{n-1}(\gamma_n(\sigma))
 		\end{align*}
-	\end{proof}
+		\TODO{index graphics}
+	\end{sketch}
 
 	\begin{theorem}
 		Relative singular homology satisfies excission.
