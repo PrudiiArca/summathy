@@ -2408,7 +2408,7 @@
 		\end{equation*}
 	\end{example}
 
-	\begin{example}[Homology of Surfaces of Genus $g$]
+	\begin{example}[Homology of Surfaces of Genus $g$][nobreak=false]
 		For every $g \in \N$ the surface $\Sigma_g$ has a finite CW-structure given by the pushouts
 		\begin{equation*}
 			\begin{diagram}
@@ -2462,7 +2462,7 @@
 		\begin{align*}
 			H_2(\Sigma_g,\Join \limits_{k=1}^{2g}\S^1) \xrightarrow{\Delta_2} H_1(\Join \limits_{k=1}^{2g} \S^1,*) \xrightarrow{\Delta_1} H_0(*)
 		\end{align*}
-		For $\Delta_1 = \partial_1$ consider the diagram
+		For $\Delta_1 = \partial_1$ and $1 \leq l \leq 2g$ consider the diagram
 		\begin{equation*}
 			\begin{diagram}
 				\threebytwo[verywide]
@@ -2476,31 +2476,44 @@
 				\arrow{s}{se}{\Delta_1}[above]
 
 				\arrow{nw}{sw}{\iota_l}[left]
-				\arrow{n}{s}{}
+				\arrow{n}{s}{H_1(\widetilde{\chi}_l,\chi_l)}[ontop]
 				\arrow{ne}{se}{a}[right]
 			\end{diagram}
 		\end{equation*}
-		We know from previous calculations that we can chose isomorphisms $H_1(\D^1,\S^0) \isom R$ and $H_0(\S^0) \isom R \oplus R$ such that $\partial_1(x) = (x,-x)$ and $a(y_1,y_2) = y_1 + y_2$. Hence $a\partial_1 = 0$ and consequently $\Delta_1 = 0$, since it is on every component.
-		% \begin{equation*}
-		% 	\begin{diagram}
-		% 		\matrix[objects,wide]{
-		% 			\node (nwww) {$H_1(\S^1,*)$};\&
-		% 			\node (nww) {$H_1(\D^1/\S^0,*)$};\&
-		% 			\node (nw) {$H_1(\D^1,\S^0)$};\&
-		% 			\node (n) {$H_0(\S^0)$};\&
-		% 			\node (ne) {};\&
-		% 			\node (nee) {};\&
-		% 			\node (neee) {$H_0(\Coproduct \limits_{k=1}^{2g}*)$};\\
-		% 			\node (swww) {$H_1(\Join \limits_{k=1}^{2g}\S^1,*)$};\&
-		% 			\node (sww) {};\&
-		% 			\node (sw) {$H_1(\Join \limits_{k=1}^{2g}\S^1,*)$};\&
-		% 			\node (s) {$H_0(*)$};\&
-		% 			\node (se) {$H_0(*)$};\&
-		% 			\node (see) {};\&
-		% 			\node (seee) {$H_0(\Coproduct \limits_{k=1}^{2g}*)$};\\
-		% 		};
-		% 	\end{diagram}
-		% \end{equation*}
+		We know from previous calculations that we can chose isomorphisms $H_1(\D^1,\S^0) \isom R$ and $H_0(\S^0) \isom R \oplus R$ such that $\partial_1(x) = (x,-x)$ and $a(y_1,y_2) = y_1 + y_2$. Hence $a\partial_1 = 0$ and consequently $\Delta_1 = 0$, since this holds for every component.
+
+		For $\Delta_2$ and $1 \leq l \leq 2g$ consider the diagram
+		\begin{equation*}
+			\begin{diagram}
+				\fourbytwo[verywide]
+					{H_2(\S^2,*)}{H_2(\D^2,\S^1)}{H_1(\S^1)}{H_1(\S^1,*)}
+					{H_2(\S^2,*)}{H_2(\Sigma_g,\Join \limits_{k=1}^{2g})}{H_1(\Join \limits_{k=1}^{2g})}{H_1(\Join \limits_{k=1}^{2g}\S^1,*)}
+
+				\arrow{nww}{nw}{\isom}[above]
+				\arrow{nw}{ne}{\begin{array}{c}\isom\\\partial_2\end{array}}
+				\arrow[dashed]{ne}{nee}{f_l}[above]
+
+				\arrow{sww}{sw}{\isom}[above]
+				\arrow{sw}{se}{\partial_2}[above]
+				\arrow{se}{see}{}
+				\arrow[bend right]{$(sw)+(1,-.5)$}{see}{\Delta_2}[below]
+
+				\arrow[equals]{nww}{sww}{}
+				\arrow{nw}{sw}{H_2(\widetilde{\chi},\chi)}[ontop]
+				\arrow{ne}{se}{H_1(\chi)}[ontop]
+				\arrow{see}{nee}{H_1(\pi_l)}[ontop]
+			\end{diagram}
+		\end{equation*}
+		To understand $\Delta_2$ it suffices to determine all the $f_l$. By construction they have degree $0$, so $\Delta_2 = 0$.
+
+		Hence, the cellular homology of $\Sigma_g$ is
+		\begin{equation*}
+			H_\bullet^\text{CW}(\Sigma_g) = \left \{\begin{array}{ll}
+				R & \bullet \in \{0,2\}\\
+				R^{2g} & \bullet = 1\\
+				0 & \text{otherwise}
+			\end{array}\right.
+		\end{equation*}
 	\end{example}
 
 	\begin{lemma}[Homology of Real Projective Spaces]
@@ -3157,6 +3170,110 @@
 	\begin{theorem}
 		Relative singular homology satisfies excission.
 	\end{theorem}
+	\begin{sketch}
+		Let $(X,A)$ be a pair of spaces and $U \subseteq \closure U \subseteq \interior A \subseteq A$. Obviously $X = A \union X \setminus U$.
+
+		We want to show that for all $n \in \N_0$ the map
+		\begin{equation*}
+			C_n^\text{sing}(X\setminus U, A \setminus U) \longrightarrow C_n^\text{sing}(X,A)
+		\end{equation*}
+		induces an isomorphism in homology.
+
+		Let us call an $n$-simplex $\sigma \in \ncat{Top}(\mathbb{\Delta}^n,X)$ \textbf{small}, if $\sigma(\mathbb{\Delta}^n) \subseteq A$ or $\sigma(\mathbb{\Delta}^n) \subseteq X \setminus U$. Similarly, an $n$-cycle $c = \Sum \limits_{\sigma \in \ncat{Top}(\mathbb{\Delta}^n,X)} c_\sigma \cdot \sigma$ is \textbf{small}, if $c_\sigma \neq 0$ implies that $\sigma$ is small, i.e. $c = c_A + c_{X \setminus U}$.
+
+		\begin{claim}
+			For $c \in C_n^\text{sing}(X)$ with $\gamma_n(c)$ small there is a $c' \in C_{n+1}^\text{sing}(X)$ such that $c+\gamma_{n+1}(c')$ is small.
+		\end{claim}
+
+		With this we can show surjectivity (and in a similar way injectivity) of the induced map
+		\begin{equation*}
+			H_n^\text{sing}(X\setminus U,A\setminus U) \longrightarrow H_n^\text{sing}(X,A).
+		\end{equation*}
+		Indeed, given $[[c]] \in H_n^\text{sing}(X,A) = \ker \overline{\gamma_n}/\im \overline{\gamma_{n+1}}$ we have $0=\overline{\gamma_n}([c]) = [\gamma_n(c)] \in C_{n-1}^\text{sing}(X,A) = C_{n-1}^\text{sing}(X)/C_{n-1}^\text{sing}(A)$, so $\gamma_n(c) \in C_{n-1}^\text{sing}(A)$ is small. By the claim there is a $c' \in C_{n+1}^\text{sing}(X)$ with $d := c + \gamma_{n+1}(c') \in C_n^\text{sing}$ small, ie. $d = d_A + d_{X \setminus U}$. We find
+		\begin{equation*}
+			C_{n-1}^\text{sing}(X\setminus U) \ni \gamma_n(d_{X \setminus U}) = \gamma_n(d)-\gamma_n(d_A) = \gamma_n(c)-\gamma_n(d_A) \in C_{n-1}^\text{sing}(A),
+		\end{equation*}
+		so $\gamma_n(d_{X \setminus U}) \in C_{n-1}^\text{sing}(A \setminus U)$, which implies $[d_{X\setminus U}] \in \ker \overline{\gamma_n}$. Finally
+		\begin{equation*}
+			[[c]] = [[c]+\overline{\gamma_{n+1}}([c'])] = [[d]] = [[d_{X \setminus U}]].
+		\end{equation*}
+
+		The hard part is the following
+
+		\textit{Roadmap of Claim:}\\
+		Consider $\R^{\infty} = \colim \limits_{n \in \N} \R^n$ and recall that for a linear simplex $\sigma = [v_0,...,v_n]$ we have the \textbf{barycenter} $b_\sigma = \dfrac{1}{n+1}\Sum \limits_{i=0}^n v_i$. Moreover there is for any $b \in \R^\infty$ and any $n \in \N_0$ a linear map
+		\begin{equation*}
+			\begin{array}{rcl}
+				b_n: C_n^\text{Lsing}(\R^\infty) & \longrightarrow & C_{n+1}^\text{Lsing}(\R^\infty)\\
+				{[v_0,...,v_n]} & \longmapsto & {[b,v_0,...,v_n]}
+			\end{array}
+		\end{equation*}
+		On a side note, this maps satisfy $\gamma_{n+1}b_n = \id - b_{n-1}\gamma_n$ and assemble into a homotopy of maps of chain complexes $\id \sim 0$.
+
+		We inductively define the barycentric subdivision of linear simplices via
+		\begin{equation*}
+			\begin{array}{rcll}
+				\widetilde{S_n}:C_n^\text{Lsing}(\R^\infty) & \longrightarrow & C_n^\text{Lsing}(\R^\infty)\\
+				0 & :\longmapsto & 0 & n<0\\
+				\sigma & :\longmapsto & \sigma & n=0\\
+				\sigma & :\longmapsto & b_\sigma(S_{n-1}(\gamma_n(\sigma))) & n>0
+			\end{array}
+		\end{equation*}
+		and note that by construction $\gamma_{n+1}(S_{n+1}(\sigma)) = S_n(\gamma_{n+1}(\sigma))$, so we have defined a map of chain complexes. Moreover, this map is a homotopy equivalence of chain complexes, as we can inductively define a homotopy $\widetilde{S_\bullet} \sim_{\widetilde{h_\bullet}} \id$ by setting
+		\begin{equation*}
+			\begin{array}{rcll}
+				\widetilde{h_n}: C_n^\text{Lsing}(\R^\infty) & \longrightarrow & C_{n+1}^\text{Lsing}(\R^\infty)\\
+				0 & :\longmapsto & 0 & n < 0\\
+				\sigma & :\longmapsto & b_\sigma(\sigma - h_{n-1}(\gamma_{n-1}(\sigma))) & n \geq 0
+			\end{array}
+		\end{equation*}
+		and checking that it satisfies $\gamma_{n+1}(h_n(\sigma)) = \sigma - h_{n-1}(\gamma_n(\sigma)) - S_n(\sigma)$.
+
+		This construction can be extended to nonlinear simplices in a general topological space $X$. We note that $[e_0,...,e_n]: \Delta^n --> \Delta^n \subseteq \R^\infty$ and hence $\widetilde{S_n}([e_0,...,e_n]) \in C_n^\text{Lsing}(\mathbb{\Delta}^n)$. Given an $n$-simplex $\sigma: \mathbb{\Delta}^n --> X$ we denote
+		\begin{equation*}
+			\begin{array}{rcl}
+				\sigma_{*}: C_n^\text{Lsing}(\mathbb{\Delta}^n) & \longrightarrow & C_n^\text{sing}(X)\\
+				\theta & :\longmapsto & \sigma \circ \theta
+			\end{array}
+		\end{equation*}
+		so we can define
+		\begin{equation*}
+			\begin{array}{rcl}
+				S_n: C_n^\text{sing}(X) & \longrightarrow & C_n^\text{sing}(X)\\
+				\sigma & :\longmapsto & \sigma_{*}(\widetilde{S_n}([e_0,...,e_n]))
+			\end{array}
+		\end{equation*}
+		and
+		\begin{equation*}
+			\begin{array}{rcl}
+				h_n: C_n^\text{sing}(X) & \longrightarrow & C_{n+1}^\text{sing}(X)\\
+				\sigma & :\longmapsto & \sigma_{*}(\widetilde{h_n}([e_0,...,e_n]))
+			\end{array}
+		\end{equation*}
+		By construction we find that $S_\bullet: C_\bullet^\text{sing}(X) --> C_\bullet^\text{sing}(X)$ is a homotopy equivalence of chain complexes, with given homotopy $S_\bullet \sim_{h_\bullet} \id$.
+
+		Let $D \subseteq \R^\infty$ and recall that $\diam D = \sup \limits_{x,y\in D} \Norm{x-y}$. For $[v_0,...,v_n]: \mathbb{\Delta}^n --> \R^\infty$ we have $\diam \im [v_0,...,v_n] = \max \limits_{i,j} \Norm{v_i - v_j}$, so in particular $\diam \mathbb{\Delta}^n = \sqrt{2}$.
+
+		Any linear $n$-simplex $\sigma: \mathbb{\Delta}^n --> \R^\infty$ is Lipschitz with Lipschitz-constant
+		\begin{equation*}
+			\operatorname{Lip}(\sigma) \leq \dfrac{\diam \im \sigma}{\diam \mathbb{\Delta}^n} = \dfrac{\diam \im \sigma}{\sqrt{2}}.
+		\end{equation*}
+		For an $n$-cycle $c = \Sum \limits_{\sigma \in \ncat{Top}(\mathbb{\Delta}^n,D)} c_\sigma \cdot \sigma$ we set $\diam c = \max \limits_{c_\sigma \neq 0} \diam \im \sigma$. By induction one can show that 
+		\begin{equation*}
+			\diam S_n(c) \leq \dfrac{n}{n+1}\diam c.
+		\end{equation*}
+
+		Suppose we have a general $n$-simplex $\sigma:\mathbb{\Delta}^n --> X$. We note that $\sigma^{-1}(\closure U)$ and $\sigma^{-1}(X \setminus \interior A)$ are disjoint closed subsets of $\mathbb{\Delta}^n$ and as such compact. We set
+		\begin{equation*}
+			\operatorname{sep}(\sigma) = \operatorname{dist}(\sigma^{-1}(\closure U),\sigma^{-1}(X \setminus \interior A)) > 0
+		\end{equation*}
+		and
+		\begin{equation*}
+			asd
+		\end{equation*}
+
+		Now assume that we have an $n$-cycle $c \in C_n^\text{sing}(X)$ such that $\gamma_n(c) \in C_{n-1}^\text{sing}(X)$ is small with respect to $A$ and $X\setminus U$.
+	\end{sketch}
 
 	\newpage
 	\subsection{Special Properties of Singular Homology}
