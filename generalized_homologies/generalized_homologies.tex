@@ -3086,6 +3086,21 @@
 	\begin{lemma}
 		Relative singular homology satisfies the dimension axiom. To be specific, $H_\bullet^\text{sing}(*) = \Z[0]$.
 	\end{lemma}
+	\begin{sketch}
+		$\#\ncat{Top}(\mathbb{\Delta}^n,*) = 1$, so $\Z[\ncat{Top}(\mathbb{\Delta}^n,*)] = \Z$ and by construction
+		\begin{equation*}
+			D_\bullet(\Z) =
+			\begin{diagram}
+				\fivebyone{...\Z}{\Z}{\Z}{\Z}{0...}
+
+				\arrow{ww}{w}{\gamma_2=0}[above]
+				\arrow{w}{c}{\gamma_1=\id}[above]
+				\arrow{c}{e}{\gamma_0=0}[above]
+				\arrow{e}{ee}{0}[above]
+			\end{diagram}
+		\end{equation*}
+		Hence $H_0^\text{sing}(*) = \Z$ and $H_n^\text{sing}(*) = 0$ otherwise.
+	\end{sketch}
 
 	\begin{lemma}
 		Relative singular homology satisfies the exactness and the additivity axiom.
@@ -3267,12 +3282,24 @@
 		\begin{equation*}
 			\operatorname{sep}(\sigma) = \operatorname{dist}(\sigma^{-1}(\closure U),\sigma^{-1}(X \setminus \interior A)) > 0
 		\end{equation*}
-		and
+		and for an $n$-cycle $c = \Sum \limits_{\sigma \in \ncat{Top}(\mathbb{\Delta}^n,X)}c_\sigma \cdot \sigma \in C_n^\text{sing}(X)$
 		\begin{equation*}
-			asd
+			\operatorname{sep}(c) = \inf \limits_{c_\sigma \neq 0} \operatorname{sep}(\sigma).
 		\end{equation*}
 
-		Now assume that we have an $n$-cycle $c \in C_n^\text{sing}(X)$ such that $\gamma_n(c) \in C_{n-1}^\text{sing}(X)$ is small with respect to $A$ and $X\setminus U$.
+		Note that if $\operatorname{sep}(\sigma) > \sqrt{2} = \diam \mathbb{\Delta}^n$ either $\sigma^{-1}(\closure U)$ or $\sigma^{-1}(X \setminus \interior A)$ is empty, so $\im \sigma$ is either contained in $\closure U \subseteq A$ or $X \setminus \interior A \subseteq X \setminus U$, i.e. $\sigma$ is small.
+
+		One somehow finds
+		\begin{align*}
+			\operatorname{sep}(S_n(\sigma)) &\geq \dfrac{n+1}{n}\operatorname{sep}(\sigma)\\
+			\operatorname{sep}(S_n(c)) &\geq \dfrac{n+1}{n}\operatorname{sep}(c)
+		\end{align*}
+
+		Now given an $n$-cycle $c$ with $\gamma_n(c)$ small we have by construction the formula
+		\begin{equation*}
+			c - \Sum \limits_{i=0}^{k-1} \gamma_{n+1}h_n(S_n^i(c)) = \Sum \limits_{i=0}^{k-1} h_{n-1}(S_{n-1}^i(\gamma_n(c))) + S_n^k(c).
+		\end{equation*}
+		Setting $k$ so large that $\frac{n+1}{n}^k \operatorname{sep}(c) > \sqrt{2}$ and setting $c' = -\Sum \limits_{i=0}^{k-1}h_n(S_n^i(c))$ we have found $c' \in C_{n+1}^\text{sing}(X)$ such that $c+\gamma_{n+1}(c')$ is small.
 	\end{sketch}
 
 	\newpage
