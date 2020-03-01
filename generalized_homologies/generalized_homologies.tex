@@ -3297,10 +3297,12 @@
 
 		Now given an $n$-cycle $c$ with $\gamma_n(c)$ small we have by construction the formula
 		\begin{equation*}
-			c - \Sum \limits_{i=0}^{k-1} \gamma_{n+1}h_n(S_n^i(c)) = \Sum \limits_{i=0}^{k-1} h_{n-1}(S_{n-1}^i(\gamma_n(c))) + S_n^k(c).
+			c - \Sum \limits_{i=0}^{k-1} \gamma_{n+1}(h_n(S_n^i(c))) = \Sum \limits_{i=0}^{k-1} h_{n-1}(S_{n-1}^i(\gamma_n(c))) + S_n^k(c).
 		\end{equation*}
 		Setting $k$ so large that $\frac{n+1}{n}^k \operatorname{sep}(c) > \sqrt{2}$ and setting $c' = -\Sum \limits_{i=0}^{k-1}h_n(S_n^i(c))$ we have found $c' \in C_{n+1}^\text{sing}(X)$ such that $c+\gamma_{n+1}(c')$ is small.
 	\end{sketch}
+
+
 
 	\newpage
 	\subsection{Special Properties of Singular Homology}
@@ -3380,27 +3382,38 @@
 	% 	\end{tab}
 	% \end{sketch}
 
-	\begin{theorem}[Eilenberg Zilber]
+	\begin{theorem}[Eilenberg-Zilber]
 		Let $X,Y$ be topological spaces. Then there is a chain homotopy equivalence
 		\begin{equation*}
 			C_\bullet^\text{sing}(X \times Y) \xrightarrow{\simeq} C_\bullet^\text{sing}(X) \tensor C_\bullet^\text{sing}(Y),
 		\end{equation*}
 		which is natural in $X$ and $Y$.
 	\end{theorem}
+	\begin{sketch}
+
+	\end{sketch}
 
 	\begin{corollary}[Künneth Formula]
 		Let $X,Y$ be topological spaces. For any $n$ there is a short exact sequence
 		\begin{align*}
 			0 --> \Oplus \limits_{p+q=n}H_p^\text{sing}(X) \tensor H_q^\text{sing}(Y) --> H_n^\text{sing}(X \times Y) --> \Oplus \limits_{p+q=n} \Tor(H_p^\text{sing}(X),H_q^\text{sing}(Y)) --> 0,
 		\end{align*}
-		which is natural in $X$ and $Y$ \TODO{and compatible with boundaries?}
+		which is natural in $X$ and $Y$ and splits (in a not natural way) \TODO{and compatible with boundaries?}
 	\end{corollary}
+	\begin{proof}
+		By the Künneth Formula of homological algebra there is a natural exact sequence
+		\begin{align*}
+			\hspace{-1.5cm}
+			0 --> \Oplus \limits_{p+q=n}H_p^\text{sing}(X) \tensor H_q^\text{sing}(Y) --> H_n(C_\bullet^\text{sing}(X) \tensor C_\bullet^\text{sing}(Y)) --> \Oplus \limits_{p+q=n} \Tor(H_p^\text{sing}(X),H_q^\text{sing}(Y)) --> 0
+		\end{align*}
+		so by Eilenberg-Zilber the claim follows immediately.
+	\end{proof}
 
 	\newpage
 	\subsection{Applications of Singular Homology}
 
 	\begin{proposition}
-		\vspace{-1.5em}
+		\vspace{-1.75em}
 		\begin{enumerate}[(i)]
 			\item{
 				For an embedding $f:\D^k \longrightincl \S^n$ we have $\widetilde{H}_\bullet^\text{sing}(\S^n \setminus f(\D^k),x_0) = 0$.
@@ -3550,33 +3563,45 @@
 	\newpage
 	\subsection{The Universal Coefficient Theorem}
 
-	Given a $\Z$-graded abelian group $M$, considered as a chain complex with zero differential, we can extend the definition of singular homology to be concentrated in $M$. For this purpose we note that we obtain a short exact sequence of chain complexes
+	Given a chain complex $M_\bullet$ we can extend the definition of singular homology to take coefficients in $M_\bullet$. For this purpose we note that we obtain a short exact sequence of chain complexes
 	\begin{align*}
-		0 --> C^\text{sing}(A) \tensor M --> C^\text{sing}(X) \tensor M --> C^\text{sing}(X,A) \tensor M --> 0,
+		0 --> C_\bullet^\text{sing}(A) \tensor M_\bullet --> C_\bullet^\text{sing}(X) \tensor M_\bullet --> C_\bullet^\text{sing}(X,A) \tensor M_\bullet --> 0,
 	\end{align*}
-	since $C^\text{sing}(A)$ is free and hence flat, and $- \tensor M$ preserves quotients.
+	since $C_\bullet^\text{sing}(A)$ is free and hence flat, and $- \tensor M$ preserves quotients.
 
 	\begin{definition}
-		Let $M$ be a $\Z$-graded abelian group.
+		Let $M_\bullet$ be a chain complex.
 
-		The \textbf{(relative) singular chain complex functor with coefficients in $M$} is the functor
+		The \textbf{(relative) singular chain complex functor with coefficients in $M_\bullet$} is the functor
 		\begin{equation*}
 			\begin{array}{rcl}
-				\ncat{Top}^2 & \xrightarrow{C^\text{sing}(-,- \,| M)} & \ncat{Ch}\\
-				(X,A) & \longmapsto & C^\text{sing}(X,A \,| M) = C^\text{sing}(X,A) \tensor M\\
-				{[(X,A)\rightarrow(Y,B)]} & \longmapsto & {[C^\text{sing}(X,A) \tensor M \rightarrow C^\text{sing}(X,A) \tensor M]}
+				\ncat{Top}^2 & \xrightarrow{C_\bullet^\text{sing}(-,- \mid M_\bullet)} & \ncat{Ch}\\
+				(X,A) & \longmapsto & C_\bullet^\text{sing}(X,A \mid M_\bullet) = C_\bullet^\text{sing}(X,A) \tensor M_\bullet\\
+				{[(X,A)\rightarrow(Y,B)]} & \longmapsto & {[C_\bullet^\text{sing}(X,A) \tensor M_\bullet \rightarrow C_\bullet^\text{sing}(X,A) \tensor M_\bullet]}
 			\end{array}
 		\end{equation*}
-		Postcomposing with the homology functor $H_{*}$ yields the \textbf{(relative) singular homology functor with coefficients in $M$}
+		Postcomposing with the homology functor $H_{*}$ yields the \textbf{(relative) singular homology functor with coefficients in $M_\bullet$}
 		\begin{align*}
-			H(-,- | M): \ncat{Top}^2 --> \ncat{Ab}^{\Z gr}.
+			H_\bullet(-,- \mid M_\bullet): \ncat{Top}^2 --> \ncat{Ab}^{\Z gr}.
 		\end{align*}
 		The corresponding boundary operator is given by the boundary map induced by the short exact sequences of the form
 		\begin{align*}
-			0 --> C^\text{sing}(A) \tensor M --> C^\text{sing}(X) \tensor M --> C^\text{sing}(X,A) \tensor M --> 0.
+			0 --> C_\bullet^\text{sing}(A) \tensor M_\bullet --> C_\bullet^\text{sing}(X) \tensor M_\bullet --> C_\bullet^\text{sing}(X,A) \tensor M_\bullet --> 0.
 		\end{align*}
 	\end{definition}
 
-	\TODO{Eilenberg Zilber}
-	\TODO{Universal Coefficient theorem}
+	One can show that singular homology with coefficients in $M_\bullet$ is again a (generalized, if $M_\bullet$ is not concentrated in degree zero) additive homology theory, satisfying the filtration lemma, either by adapting the proofs \TODO{or by applying the Künneth-formula of homological algebra???}.
+
+	In the special case of a single abelian group $G$, considered as a chain complex of the form $-->0-->G-->0-->$, there is the following quick way to compute homology with coefficients in $G$.
+
+	\begin{theorem}[Universal Coefficient Theorem]
+		Let $G$ be an abelian group and $(X,A)$ be a pair of spaces. Then there is for any $n$ a short exact sequence
+		\begin{align*}
+			0 --> H_n^\text{sing}(X,A \mid G) --> H_n^\text{sing}(X,A) \tensor G --> \Tor(H_{n-1}^\text{sing}(X,A),G)-->0,
+		\end{align*}
+		which is natural in $(X,A)$ and splits (in a not natural way).
+	\end{theorem}
+	\begin{sketch}
+		Follows immediately from the Künneth-formula of homological algebra.
+	\end{sketch}
 \end{document}
