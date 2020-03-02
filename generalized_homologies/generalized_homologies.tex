@@ -965,6 +965,52 @@
 		\TODO{diagram chase as diagrams}
 	\end{sketch}
 
+	\begin{corollary}[Relative Mayer Vietories]
+		Let $(H_\bullet,\partial_\bullet)$ be a generalized homology theory, $(X,B)$ a pair of spaces and $A_1,A_2 \subseteq X$ with $X \subseteq \interior(A_1) \union \interior(A_2)$. Then there is a long exact sequence
+		\begin{equation*}
+			\begin{diagram}
+				\threebythree[hyperwide]
+					{}{}{...H_{\bullet+1}(X,B)}
+					{H_\bullet(A_1 \intersection A_2,A_1 \intersection A_2 \intersection B)}{H_\bullet(A_1,A_1 \intersection B)\directsum H_\bullet(A_2,A_2 \intersection B)}{H_\bullet(X,B)}
+					{H_{\bullet-1}(A_1 \intersection A_2, A_1 \intersection A_2 \intersection B)...}{}{}
+
+				\arrow{w}{c}{}
+				\arrow{c}{e}{}
+				%\arrow{w}{c}{H_\bullet(i_1)\directsum H_\bullet(i_2)}[above]
+				%\arrow{c}{e}{H_\bullet(j_1) - H_\bullet(j_2)}[above]
+				
+				\draw[->,rounded corners] (ne.east) -| node[auto,pos=.7]{$\nu_{\bullet+1}$}($(ne)+(1.5,-.75)$) -| ($(w)+(-3,0)$) |- (w.west);
+				\draw[->,rounded corners] (e.east) -| node[auto,pos=.7]{$\nu_\bullet$}($(e)+(1.5,-.75)$) -| ($(sw)+(-3,0)$) |- (sw.west);
+			\end{diagram}
+		\end{equation*}
+	\end{corollary}
+	\begin{sketch}
+		\TODO{corollary of MV or does it require reduced homology?}
+	\end{sketch}
+
+	\begin{corollary}[Subspace Mayer Vietories]
+		Let $(H_\bullet,\partial_\bullet)$ be a generalized homology theory, $(X,A)$ a pair of spaces and $A_1,A_2 \subseteq A$ with $A \subseteq \interior(A_1) \union \interior(A_2)$. Then there is a long exact sequence
+		\begin{equation*}
+			\begin{diagram}
+				\threebythree[hyperwide]
+					{}{}{...H_{\bullet+1}(X,A)}
+					{H_\bullet(X,A_1 \intersection A_2)}{H_\bullet(X,A_1)\directsum H_\bullet(X,A_2)}{H_\bullet(X,A)}
+					{H_{\bullet-1}(X, A_1 \intersection A_2)...}{}{}
+
+				\arrow{w}{c}{}
+				\arrow{c}{e}{}
+				%\arrow{w}{c}{H_\bullet(i_1)\directsum H_\bullet(i_2)}[above]
+				%\arrow{c}{e}{H_\bullet(j_1) - H_\bullet(j_2)}[above]
+				
+				\draw[->,rounded corners] (ne.east) -| node[auto,pos=.7]{$\nu_{\bullet+1}$}($(ne)+(1.5,-.75)$) -| ($(w)+(-2,0)$) |- (w.west);
+				\draw[->,rounded corners] (e.east) -| node[auto,pos=.7]{$\nu_\bullet$}($(e)+(1.5,-.75)$) -| ($(sw)+(-2,0)$) |- (sw.west);
+			\end{diagram}
+		\end{equation*}
+	\end{corollary}
+	\begin{sketch}
+		\TODO{true? and how to prove?}
+	\end{sketch}
+
 	\begin{proposition}[Homology of CNDRs]
 		Let $(H_\bullet, \partial_\bullet)$ be a generalized homology theory and $(X,A)$ a pair of spaces such that $A$ is a CNDR of $X$.
 
@@ -1441,7 +1487,7 @@
 	\end{remark}
 
 	\newpage
-	\subsection{Examples and Applications}
+	\subsection{Homology of the Sphere and Applications}
 
 	\begin{lemma}[Homology of the Sphere]
 		Let $(H_\bullet, \partial_\bullet)$ be a generalized homology theory satisfying additivity and $n \in \N$. There are isomorphisms
@@ -1556,14 +1602,6 @@
 		\end{equation*}
 		where $a: \S^{n-1} --> \S^{n-1}$ is the antipodal map. This map has no fixed points.
 	\end{sketch}
-
-	\begin{lemma}[Homology of Wedge Sums of Circles]
-		\TODO{Wedge sums of circles}
-	\end{lemma}
-
-	\begin{lemma}[Homology of the Oriented Surfaces]
-		\TODO{Torus and higher genus}
-	\end{lemma}
 
 	\newpage
 	\subsection{Degree and Further Applications}
@@ -1958,7 +1996,7 @@
 		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory and $X$ be a topological $n$-manifold. $X$ admits a \textbf{fundamental class} $[X]$, if there exists an element $[X]$ in $H_n(X)$ with the property that it maps under all maps $H_n(X) --> H_n(X,X\setminus \{x\})$ to a generator $g_x$ of $H_n(X,X\setminus\{x\})$.
 	\end{definition}
 
-	Note that a manifold with fundamental class must satisfy $H_n(X) \neq 0$ by definition.
+	Note that a manifold with fundamental class must satisfy $H_n(X) \neq 0$ by definition. Furthermore a manifold with fundamental class is by construction $R$-orientable. Indeed in the following special case both notions are equivalent.
 
 	\begin{proposition}[Existence of Fundamental Classes for Closed Manifolds]
 		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory and $X$ be a closed topological $n$-manifold. 
@@ -1973,15 +2011,35 @@
 		\begin{equation*}
 			H_n(X,X\setminus A) \longrightarrow H_n(X,X\setminus B_1) \oplus H_n(X,X\setminus B_2) \longrightarrow H_n(X,X\setminus B_1 \intersection B_2)
 		\end{equation*}
-		Now if $H_n(X,X\setminus B_1)$ and $H_n(X,X\setminus B_2)$ are isomorphic to $R$, there are ge
+		Now if $H_n(X,X\setminus B_1)$ and $H_n(X,X\setminus B_2)$ are isomorphic to $R$, there are \TODO{is this doable?}
 	\end{sketch}
 
 	\begin{lemma}
-		TODO uniqueness of fundamental class for pathconnected...
+		\TODO{TODO uniqueness of fundamental class for pathconnected...}
 	\end{lemma}
+	\begin{sketch}
+		\TODO{show that there is a homotopy equivalence $X\setminus \{x\} \simeq X \setminus \{x'\}$ in such a way that for each $t$ we have $h(t,-):X\setminus\{x_t\} \longrightincl X$ (isotopy) by twisting points within unit spheres iteratively along a $x$-$x'$-path}
+	\end{sketch}
+
+	\begin{lemma}
+		Let $(H_\bullet,\partial_\bullet)$ be an $R$-homology theory and $X$ be a hausdorff space.
+
+		Given a discrete closed subset $S$ of $X$, the canonical morphism $\smash{H_n(X,X\setminus S) --> \Product \limits_{s \in S} H_n(X,X\setminus\{s\})}$ factors via $\Oplus \limits_{s \in S}H_n(X,X\setminus\{s\})$. 
+
+		In particular, if $X$ is a topological $n$-manifold, which admits a fundamental class, then $S$ is finite.
+	\end{lemma}
+	\begin{sketch}
+		As $X$ is hausdorff we find pairwise disjoint open neighborhoods $(U_s)_s$ of the elements $s$ in $S$ and we define $U = \Union_s U_s$. By excission, additivity and again excission we obtain a composite isomorphism
+		\begin{align*}
+			H_n(X,X\setminus S) \isom H_n(U,U\setminus S) \isom \Oplus \limits_{s \in S} H_n(U_s,U_s \setminus \{s\}) \isom \Oplus \limits_{s \in S} H_n(X,X\setminus \{s\}).
+		\end{align*}
+		Postcomposing with the inclusion $\Oplus \rightincl \Product$ \TODO{yields the canonical morphism}.
+
+		For a manifold with fundamental class $[X]$ we find that the fundamental class maps to $(1)_s \in \Oplus_s H_n(X,X\setminus \{s\})$, so $S$ has to be finite.
+	\end{sketch}
 
 	\newpage
-	\subsection{Local Degree and Applications}
+	\subsection{Local Degree, Degree and Applications}
 
 	\begin{definition}
 		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory and $f:X-->Y$ be a continuous map between topological $n$-manifolds $X$ and $Y$. Fix a point $x$ in $X$ and isomorphisms $R \isom H_n(X,X\setminus\{x\})$ and $R \isom H_n(Y,Y\setminus\{f(x)\})$.
@@ -1993,14 +2051,90 @@
 		The construction is independent from the choice of $U_x$, as can be seen by considering the intersection of two such sets $U_x$ and $V_x$.
 	\end{definition}
 
-	\begin{lemma}[Intermediate Value Theorem]
+	While the local $R$-degree can be defined for maps between arbitrary $n$-manifolds, in the presence of fundamental classes a global notion of degree can be obtained, which generalizes the degree of maps of spheres.
+
+	\begin{definition}
+		Let $(H_\bullet,\partial_\bullet)$ be an $R$-homology theory and $f:X-->Y$ be a continuous function of topological $n$-manifolds, which admit fundamental classes $[X]$ and $[Y]$ respectively. For each $y \in Y$ fix an isomorphism $H_n(Y,Y\setminus\{y\})\isom R$ in such a way that $[Y]$ maps to $1$ under the map $H_n(Y) --> H_n(Y,Y\setminus\{y\}) \isom R$.
+
+		Suppose that $Y$ is connected and that $y$ is any point in $Y$. The \textbf{$R$-degree} of $f$ is defined to be the element $\deg_R(f)$ in $R$ to which $[X]$ is mapped under the morphism
+		\begin{equation*}
+			H_n(X) \longrightarrow H_n(Y) \longrightarrow H_n(Y,Y\setminus \{y\}) \isom R.
+		\end{equation*}
+		This is independent from the choice of $y$, since by the continuation lemma for points $y,y'$ in the same continuation neighborhood $V \subseteq Y$ there is a commuting diagram
+		\begin{equation*}
+			\begin{diagram}
+				\fivebythree[verywide]
+					{}{}{}{H_n(Y,Y\setminus \{y\})}{R}
+					{H_n(X)}{H_n(Y)}{H_n(Y,Y\setminus V)}{}{}
+					{}{}{}{H_n(Y,Y\setminus \{y'\})}{R}
+
+				\arrow{ww}{w}{H_n(f)}[above]
+				\arrow{w}{c}{}
+
+				\arrow[bend left]{w}{ne}{}
+				\arrow[bend right]{w}{se}{}
+
+				\arrow{c}{ne}{}
+				\arrow{c}{se}{}
+
+				\arrow{ne}{nee}{\isom}[above]
+				\arrow{se}{see}{\isom}[below]
+
+				\arrow[equals]{nee}{see}{}
+			\end{diagram}
+		\end{equation*}
+		and this argument can be applied inductively along a path connecting arbitrary points $y,y'$ in $Y$.
+	\end{definition}
+
+	The following proposition connects the global and the local notion of degree.
+
+	\begin{proposition}
+		Let $(H_\bullet,\partial_\bullet)$ be an $R$-homology theory and $f:X --> Y$ be a continuous map between topological $n$-manifolds $X$ and $Y$ with fundamental classes $[X]$ and $[Y]$ respectively. Let $y$ be in $Y$ and suppose that $Y$ is connected and that $f^{-1}(\{y\})$ is a nonempty discrete subset of $X$.
+
+		For $x \in f^{-1}(\{y\})$ fix isomorphisms $H_n(X,X\setminus\{x\}) \isom R$ such that $[X]$ maps to $1$. Further fix an isomorphism $H_n(Y,Y\setminus y) \isom R$ with $[Y]$ mapping to $1$. Then
+		\begin{equation*}
+			\deg_R(f) = \Sum \limits_{x \in f^{-1}(\{y\})} \deg_{R,x}(f).
+		\end{equation*}
+	\end{proposition}
+	\begin{sketch}
+		Follows by chasing $[X]$ through the commuting diagram
+		\begin{equation*}
+			\begin{diagram}
+				\threebythree[ultrawide]
+					{H_n(X)}{}{\Oplus \limits_{x \in f^{-1}(\{y\})} H_n(X,X\setminus \{x\})}
+					{}{H_n(X,X\setminus f^{-1}(\{y\}))}{}
+					{H_n(Y)}{}{H_n(Y,Y\setminus\{y\})}
+
+				\arrow{nw}{ne}{\Oplus \iota_x}[above]
+				\arrow{sw}{se}{}
+
+				\arrow{nw}{sw}{H_n(f)}[left]
+				\arrow{ne}{se}{\Oplus H_n(f)}[right]
+
+				\arrow{nw}{c}{}
+				\arrow{c}{se}{H_n(f)}[ontop]
+				\arrow{c}{$(ne)+(-1,-.75)$}{\isom}[ontop]
+			\end{diagram}
+		\end{equation*}
+	\end{sketch}
+
+	\begin{corollary}[Intermediate Value Theorem]
 		Let $(H_\bullet, R_\bullet)$ be an $R$-homology theory.
 
 		Any continuous function $f:[0,1] --> [0,1]$ with $f(0) = 0$ and $f(1) = 1$ is surjective.
-	\end{lemma}
+	\end{corollary}
 	\begin{sketch}
-		Extend $f$ to a function $f':\R --> \R$ by setting $f'(x) = x$ outside $[0,1]$. Then extend it further to a function $f'': \S^1 --> \S^1$.
+		Extend $f$ to a function $f':\R --> \R$ by setting $f'(x) = x$ outside $[0,1]$. Then extend it further to a function $f'': \S^1 --> \S^1$. Now $\deg_R(f'') = \deg_{R,\infty}(f'') = 1$, so $f''$ is surjective. By construction this implies that $f$ is surjective.
 	\end{sketch}
+
+	% For the next application note that given any smooth function $f:\R^n --> \R^n$ with $f(0)=0$ is homotopic to its derivative $f':\R^n --> \R^n$ via the homotopy
+	% \begin{equation*}
+
+	% \end{equation*}
+
+	\begin{proposition}
+		Let $(H_\bullet, \partial_\bullet)$ be a $\Z$-homology theory and $f:\R^n --> \R^n$ a smooth function with $f(0)=0$. Then $H_n(f)$ acts on $H_n(\R^n,\R^n \setminus \{0\})$ by multiplication with $\sign \det df(0)$.
+	\end{proposition}
 
 	\newpage
 	\subsection{CW-complexes and Cellular Homology}
@@ -3548,7 +3682,7 @@
 	\begin{sketch}
 		\begin{enumerate}[(i)]
 			\item{
-				By the previous corollary $\S^m \isom \S^n$, so by invariance of dimension $m = n$.
+				The composite $\S^n \longrightincl \S^m \longrightincl \S^n$ is by the previous corollary an homeomorphism. Hence $\S^m \longrightincl \S^n$ is by the compact hausdorff trick a homeomorphism and by invariance of dimension $m = n$.
 			}
 			\item{
 				The composite $\S^m \longrightincl \R^n \longrightincl \S^n$ gives an embedding of $\S^m$ into $\S^n$. Even in the case $m=n$ the second morphism is not surjective, so we don't get an homeomorphism.
@@ -3597,11 +3731,15 @@
 	\begin{theorem}[Universal Coefficient Theorem]
 		Let $G$ be an abelian group and $(X,A)$ be a pair of spaces. Then there is for any $n$ a short exact sequence
 		\begin{align*}
-			0 --> H_n^\text{sing}(X,A \mid G) --> H_n^\text{sing}(X,A) \tensor G --> \Tor(H_{n-1}^\text{sing}(X,A),G)-->0,
+			0 --> H_n^\text{sing}(X,A) \tensor G --> H_n^\text{sing}(X,A \mid G) --> \Tor(H_{n-1}^\text{sing}(X,A),G)-->0,
 		\end{align*}
 		which is natural in $(X,A)$ and splits (in a not natural way).
 	\end{theorem}
 	\begin{sketch}
 		Follows immediately from the Künneth-formula of homological algebra.
 	\end{sketch}
+
+	\begin{corollary}
+
+	\end{corollary}
 \end{document}
