@@ -1768,6 +1768,25 @@
 		By commutativity of the diagram the degree of the left morphism is given by the image of $1 \in R \isom H_{n+1}(\S^{n+1})$ along the boundary. Note that the horizontal morphisms of $R$-modules $R \isom H_{n+1}(\S^{n+1}) --> H_n(\S^n) \isom R$ are given by multiplication with some invertible element $\alpha \in R$. This gives $\deg_R(\kappa\Susp(f)\kappa^{-1}) = \alpha^{-1}\deg_R(f)\alpha = \deg_R(f)$.
 	\end{sketch}
 
+	\begin{lemma}
+		Let $(H_\bullet,\partial_\bullet)$ be an $R$-homology theory.
+
+		Then $GL_n(\R)$ acts on $H_n(\R^n,\R^n\setminus \{0\})$ via $A \bullet x = \chi_R(\sign \det A) \cdot x$, where $\chi_R:\Z --> R$.
+
+		In particular, if $f:\R^n --> \R^n$ is differentiable with $f(0)=0$ and $df(0) \in GL_n(\R)$, then $H_n(f)$ acts on $H_n(\R^n,\R^n\setminus \{0\})$ by multiplication with $\sign \det df(0)$.
+	\end{lemma}
+	\begin{sketch}
+		$GL_n(\R) \subseteq \R^{n\times n}$ has two components distinguished by $\sign \det: GL_n(\R) --> \{\pm 1\}$, i.e. there is either a path from $A$ to $\diag(1,...,1)$ or from $A$ to $\diag(-1,1,...,1)$. These translate into homotopies from $A:\R^n --> \R^n$ to the identity or to a reflection (which restrict to maps $\S^{n-1} --> \S^{n-1}$), so $H_n(a)(x) = \chi_R(\sign \det A) \cdot x$.
+
+		Note that $f \sim df(0)$ via the homotopy
+		\begin{equation*}
+			\begin{array}{rcl}
+				h: \I \times \R^n & \longrightarrow & \R^n\\
+				(t,x)\; & \longmapsto & (1-t)\left(\dfrac{f(te_1)}{t} \;\bigg|\; ... \;\bigg|\; \dfrac{f(te_n)}{t}\right)x + tf(x)
+			\end{array}
+		\end{equation*}
+	\end{sketch}
+
 	% note that the covering space 
 	% \begin{equation*}
 	% 	S_m = \{(\cos (\tfrac{t}{m}), \sin (\tfrac{t}{m}), \tfrac{t}{2\pi}) \mid t \in [0,2\pi m]\} / \sim
@@ -2050,6 +2069,43 @@
 		\end{equation*}
 		The construction is independent from the choice of $U_x$, as can be seen by considering the intersection of two such sets $U_x$ and $V_x$.
 	\end{definition}
+
+	\begin{remark}[Local Degree of Locally Differentiable Maps]
+		Let $(H_\bullet, \partial_\bullet)$ be an $R$-homology theory and $f:X-->Y$ be a continuous map between topological $n$-manifolds. Fix a point $x$ in $X$ and isomorphisms $R \isom H_n(X,X\setminus\{x\})$ and $R \isom H_n(Y,Y\setminus \{f(x)\})$.
+
+		Suppose that $f$ is locally differentiable in $x$, meaning that there is an euclidean neighborhood $V \isom \R^n$ of $f(x)$ in $Y$ with $f(x) \corres 0$ and an euclidean neighborhood $U \isom \R^n$ of $x$ with $x \corres 0$ and $f(U) \subseteq V$ such that the restricted map $g=f\vert_U^V:\R^n --> \R^n$ is differentiable in $0$. Suppose further that $U \intersection f^{-1}(\{f(x)\}) = \{x\}$.
+
+		We can choose an isomorphism $\phi:H_n(\R^n,\R^n\setminus \{0\}) \isom R$ such that the following diagram commutes.
+		\begin{equation*}
+			\begin{diagram}
+				\fourbythree[hyperwide]
+					{R\isom H_n(X,X\setminus\{x\})}{H_n(U,U\setminus\{x\})}{H_n(V,V\setminus\{x\})}{H_n(Y,Y\setminus\{f(x)\})\isom R}
+					{}{H_n(\R^n,\R^n\setminus\{0\})}{H_n(\R^n,\R^n\setminus\{0\})}{}
+					{}{R}{R}{}
+
+				\arrow[out=10,in=170]{nww}{nee}{H_n(f)}[above]
+				\arrow{nw}{nww}{\isom}[above]
+				\arrow{nw}{ne}{}
+				\arrow{ne}{nee}{\isom}[above]
+				\arrow{w}{e}{H_n(g)}[above]
+				\arrow{sw}{se}{}
+
+				\arrow{nw}{w}{\isom}[left]
+				\arrow{w}{sw}{\isom \;\; \phi}
+
+				\arrow{ne}{e}{\isom}[right]
+				\arrow{e}{se}{\phi\;\;\isom}
+
+				\arrow[equals]{$(nww)+(-1.25,-.3)$}{sw}{}
+				\arrow{se}{$(nee)+(1.25,-.3)$}{\isom}[below right]
+			\end{diagram}
+		\end{equation*}
+		The right diagonal isomorphism maps $1$ to some unit $\alpha$. By a previous lemma the lowest horizontal morphism maps $1$ to $\sign \det dg(0)$. Hence we get
+		\begin{equation*}
+			\deg_{R,x}(f) = \alpha \cdot \sign \det dg(0).
+		\end{equation*}
+		Note that we may get for different choices of $U$ and $V$ the identity $\deg_{R,x}(f) = \alpha' \cdot \sign \det dg'(0)$, however, since $\deg_{R,x}(f)$ is independent from the choice of $U$ and $V$, we will find that $\alpha \cdot \sign \det dg(0) = \alpha' \cdot \sign \det dg'(0)$.
+	\end{remark}
 
 	While the local $R$-degree can be defined for maps between arbitrary $n$-manifolds, in the presence of fundamental classes a global notion of degree can be obtained, which generalizes the degree of maps of spheres.
 
