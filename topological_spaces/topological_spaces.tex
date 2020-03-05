@@ -10,7 +10,7 @@
 
 \newpage
 \section{Topological Spaces}
-\subsection{Topological Spaces}
+\subsection{Basic Definitions}
 
 \begin{definition}
 	A \textbf{topological space} $(X,\mathcal{O})$ is a set $X$ together with a family of sets $\mathcal{O} \subseteq \mathcal{P}(X)$ called \textbf{topology}, which satisfies the following axioms. Sets contained in $\mathcal{O}$ are called \textbf{open} in $X$.
@@ -619,7 +619,7 @@ In the following we will commonly refer to \textit{continuous functions} synonym
 	% if it is Frechét (T1) and normal / hereditarily normal / perfectly normal.
 
 \newpage
-\subsection{Connectivity}
+\subsection{Connectivity and Path-Connectivity}
 
 \begin{definition}
 	A topological space $(X, \mathcal{O})$ is \textbf{connected}, if it satisfies one of the following equivalent conditions.
@@ -662,7 +662,7 @@ In the following we will commonly refer to \textit{continuous functions} synonym
 \end{definition}
 
 \newpage
-\subsection{Compactness}
+\subsection{Notions of Compactness and Compactifications}
 
 \begin{definition}
 	Let $(X,\mathcal{O})$ be a topological space and $Y$ be a subset. A family $(U_i)_i$ of open subsets of $X$ is an \textbf{open cover} of $Y$, if $Y \subseteq \smash{\Union \limits_{i \in I} U_i}$. A \textbf{subcover} of $(U_i)_i$ is a subfamily $(V_j)_j$ of $(U_i)_i$, which itself is a cover.
@@ -709,7 +709,7 @@ In the following we will commonly refer to \textit{continuous functions} synonym
 \TODO{one point compactification, ends}
 
 \newpage
-\subsection{Size}
+\subsection{Countability, Separability and Dimension}
 \TODO{first countable, second countable, separable, combinatorial dimension}
 
 \subsection{Local Properties}
@@ -740,91 +740,264 @@ In the following we will commonly refer to \textit{continuous functions} synonym
 
 \subsection{Locally Quasicompact Hausdorff Spaces and Mapping Spaces}
 
-\newpage
-\subsection{Homotopy}
-\begin{definition}
-	A \textbf{homotopy} between continuous maps $f_0,f_1: (X, \mathcal{O}_X) --> (Y,\mathcal{O}_Y)$ is a continuous map $h:[0,1]\times X --> Y$, satisfying that $f_0 = h|_{\{0\}\times X}$ and $f_1 = h|_{\{1\}\times X}$. In this case $f_0$ and $f_1$ are called \textbf{homotopic}, which is denoted by $f_0 \underset{h}{\sim} f_1$ or simply $f_0 \sim f_1$.
+% \newpage
+% \subsection{Homotopy}
+% \begin{definition}
+% 	A \textbf{homotopy} between continuous maps $f_0,f_1: (X, \mathcal{O}_X) --> (Y,\mathcal{O}_Y)$ is a continuous map $h:[0,1]\times X --> Y$, satisfying that $f_0 = h|_{\{0\}\times X}$ and $f_1 = h|_{\{1\}\times X}$. In this case $f_0$ and $f_1$ are called \textbf{homotopic}, which is denoted by $f_0 \underset{h}{\sim} f_1$ or simply $f_0 \sim f_1$.
 
-	For arbitrary objects $X,Y$ in $\ncat{Top}$, homotopy defines an equivalence relation on $\ncat{Top}(X,Y)$ as
+% 	For arbitrary objects $X,Y$ in $\ncat{Top}$, homotopy defines an equivalence relation on $\ncat{Top}(X,Y)$ as
+% 	\begin{equation*}
+% 		\begin{array}{rcl}
+% 			f_0 \sim f_0 & \text{via} & (t,x) \mapsto f(x)\vspace{.5em}\\
+% 			f_0 \underset{h}{\sim} f_1 \implies f_1 \sim f_0 & \text{via} &(t,x) \mapsto h(1-t,x)\vspace{-.25em}\\
+% 			f_0 \underset{h}{\sim} f_1 \underset{h'}{\sim} f_2 \implies f_0 \sim f_2 & \text{via} &(t,x) \mapsto \left\{\begin{array}{cl} 
+% 				h(2t,x) & t \in [0,\frac{1}{2}]\\
+% 				h'(2t-1,x) & t \in [\frac{1}{2},1]
+% 			\end{array}\right.
+% 		\end{array}
+% 	\end{equation*}
+% 	Moreover this equivalence relation is compatible with composition in the sense that, given maps $s:W-->X$, $f_0,f_1: X --> Y$ and $t:Y-->Z$, any homotopy $f_0 \underset{h}{\sim} f_1$ extends to a homotopy $tf_0s \sim tf_1s$, by taking the composite
+% 	\begin{equation*}
+% 		\begin{diagram}
+% 			\fourbyone[verywide]
+% 				{[0,1]\times W}{[0,1] \times X}{Y}{Z}
+% 			\arrow{ww}{w}{[0,1]\times s}[above]
+% 			\arrow{w}{e}{h}[above]
+% 			\arrow{e}{ee}{t}[above]
+% 		\end{diagram}.
+% 	\end{equation*}
+% 	Hence, by considering morphisms of topological spaces just up to homotopy, one obtains the \textbf{homotopy category} $\ncat{hTop}$, which comes with the canonical functor
+% 	\begin{equation*}
+% 		\begin{array}{rcl}
+% 			\ncat{Top} & \longrightarrow & \ncat{hTop}\\
+% 			(X,\mathcal{O}_X) & \mapsto & (X,\mathcal{O}_X)\\
+% 			f & \mapsto & [f]_\sim
+% 		\end{array}.
+% 	\end{equation*}
+% \end{definition}
+
+% \begin{definition}
+% 	A continuous map $f:X-->Y$ is a \textbf{homotopy equivalence}, if $[f]_\sim: X --> Y$ is an isomorphism in $\ncat{hTop}$. Explicitly this means that there exists a morphism $g:Y --> X$ in $\ncat{Top}$ such that $gf \sim 1_X$ and $fg \sim 1_Y$. Topological spaces $X$ and $Y$ are said to be \textbf{homotopy equivalent}, which will be denoted by $X \simeq Y$, if there is a homotopy equivalence between them.
+
+% 	A topological space $X$ is \textbf{contractible}, if it is homotopy equivalent to the singleton space $\{*\}$. In particular $X$ is a nonempty space.
+
+% 	A subspace $M \subseteq X$ of a topological space $X$ is a \textbf{weak}/\textbf{strong deformation retract} of $X$, if the inclusion $m:M \longrightincl X$ has a retract $r:X --> M$ (i.e. satisfying $rm = 1_M$) such that $mr \smash{\underset{h}{\sim}} 1_X$ with $h(t,m) \in M$ / $h(t,m) = m$ for all $m$ in $M$.
+% \end{definition}
+
+% \begin{example}\vspace{-2em}
+% 	\begin{enumerate}
+% 		\item{
+% 			$\R^n$, $\D^n$, $\B^n$, $[0,1]^n$ are contractible spaces
+% 		}
+% 		\item{
+% 			$\S^n$ is \underline{not} contractible.
+% 		}
+% 	\end{enumerate}
+% \end{example}
+
+% \begin{definition}
+% 	A functor $\fun{F}:\ncat{Top} --> \cat{C}$ into some category $\cat{C}$ is said to be \textbf{homotopy invariant}, if it satisfies one of the following equivalent conditions.
+% 	\begin{enumerate}[(i)]
+% 		\item{
+% 			$F$ factors through $\ncat{hTop}$.
+% 		}
+% 		\item{
+% 			For any pair of continuous maps $f_0,f_1$ in $\ncat{Top}$ it holds that $f_0 \sim f_1$ implies $Ff_0 = Ff_1$.
+% 		}
+% 		\item{
+% 			For any topological space $X$ he projection $\pi_X:[0,1]\times X --> X$ induces an isomorphism $\fun{F}\pi_X: \fun{F}([0,1]\times X) \xrightarrow{\isom} \fun{F}X$
+% 		}
+% 	\end{enumerate}
+% \end{definition}
+
+
+\newpage
+\subsection{$G$-spaces and Topological Groups}
+
+\begin{definition}
+	Let $G$ be a group. Let $\cat{B}G$ be the one object category, whose (auto-)morphisms are precisely the elements of $G$ and whose composition is defined by multiplication of group elements.
+
+	A \textbf{$G$-space} is a functor $X:\cat{B}G --> \ncat{Top}$, or (phrased differently) a topological space $X$ together with a group homomorphism $G --> \Aut(X)$. Write $g \bullet x := X(g)(x)$ for $g \in G$ and $x \in X = X(*)$.
+
+	A natural transformation $\phi:X ==> Y:\cat{B}G --> \ncat{Top}$ amounts to giving a morphism $f:X-->Y$ in $\ncat{Top}$, which satisfies $f(g \bullet x) = g \bullet f(x)$ for all $g \in G$ and $x \in X$. Such a morphism is called \textbf{$G$-equivariant map}. There is the category of $G$-spaces $G\,\text{-}\ncat{Top} = |[\fun{B}G,\ncat{Top}|]$.
+
+	The subspace of \textbf{$G$-fixed points} can be computed as 
 	\begin{equation*}
-		\begin{array}{rcl}
-			f_0 \sim f_0 & \text{via} & (t,x) \mapsto f(x)\vspace{.5em}\\
-			f_0 \underset{h}{\sim} f_1 \implies f_1 \sim f_0 & \text{via} &(t,x) \mapsto h(1-t,x)\vspace{-.25em}\\
-			f_0 \underset{h}{\sim} f_1 \underset{h'}{\sim} f_2 \implies f_0 \sim f_2 & \text{via} &(t,x) \mapsto \left\{\begin{array}{cl} 
-				h(2t,x) & t \in [0,\frac{1}{2}]\\
-				h'(2t-1,x) & t \in [\frac{1}{2},1]
-			\end{array}\right.
-		\end{array}
+		X^G = \{x \in X \mid \forall g \in G: g \bullet x = x\} = \lim \fun{P}.
 	\end{equation*}
-	Moreover this equivalence relation is compatible with composition in the sense that, given maps $s:W-->X$, $f_0,f_1: X --> Y$ and $t:Y-->Z$, any homotopy $f_0 \underset{h}{\sim} f_1$ extends to a homotopy $tf_0s \sim tf_1s$, by taking the composite
+	The set of \textbf{$G$-orbits} is the quotient space 
+	\begin{equation*}
+		X/G = \colim \fun{P}
+	\end{equation*}
+\end{definition}
+
+\begin{lemma}[Properties of $G$-spaces]
+	The constant diagram functor $\Delta:\ncat{Top} --> |[\cat{B}G,\ncat{Top}|]$ amounts to a trivial action (of the form $g \bullet x = x$) for each object $X$ in $\ncat{Top}$. By definition there are adjunctions
 	\begin{equation*}
 		\begin{diagram}
-			\fourbyone[verywide]
-				{[0,1]\times W}{[0,1] \times X}{Y}{Z}
-			\arrow{ww}{w}{[0,1]\times s}[above]
-			\arrow{w}{e}{h}[above]
-			\arrow{e}{ee}{t}[above]
-		\end{diagram}.
+			\twobyone[verywide]{\ncat{Top}}{G\,\text{-}\ncat{Top}}
+
+			\arrow[in=45,out=135]{e}{w}{(-)/G}[above]
+			\arrow{w}{e}{\Delta}[ontop]
+			\arrow[in=-45,out=-135]{e}{w}{(-)^G}[below]
+
+			\node at (-.15,.4) {$\bot$};
+			\node at (-.15,-.4) {$\bot$};
+		\end{diagram}
 	\end{equation*}
-	Hence, by considering morphisms of topological spaces just up to homotopy, one obtains the \textbf{homotopy category} $\ncat{hTop}$, which comes with the canonical functor
+	In particular $G\,\text{-}\ncat{Top}$ is complete and cocomplete and limits/colimits are computed as in $\ncat{Top}$.
+\end{lemma}
+
+\begin{definition}
+	A \textbf{topological group} $G$ is a group object in $\ncat{Top}$. This means $G$ is a topological space, together with a multiplication morphism $m:G \times G --> G$, a neutral element morphism $e:* --> G$ and an inversion automorphism $i:G --> G$, which make the following diagrams commute.
 	\begin{equation*}
-		\begin{array}{rcl}
-			\ncat{Top} & \longrightarrow & \ncat{hTop}\\
-			(X,\mathcal{O}_X) & \mapsto & (X,\mathcal{O}_X)\\
-			f & \mapsto & [f]_\sim
-		\end{array}.
+		\begin{diagram}
+			\twobytwo[wide]
+				{G\times G\times G\;}{\;G \times G}
+				{G \times G}{G}
+
+			\arrow{nw}{ne}{G \times m}[above]
+			\arrow{nw}{sw}{m \times G}[left]
+			\arrow{ne}{se}{m}[right]
+			\arrow{sw}{se}{m}[below]
+		\end{diagram}
+		\begin{diagram}
+			\threebytwo
+				{* \times G}{G \times G}{G \times *}
+				{}{G}{}
+
+			\arrow{nw}{n}{e \times G}[above]
+			\arrow{ne}{n}{G \times e}[above]
+			\arrow{n}{s}{m}[ontop]
+			\arrow{nw}{s}{\isom}[below left]
+			\arrow{ne}{s}{\isom}[below right]
+		\end{diagram}
+		\begin{diagram}
+			\threebythree[small]
+				{}{G}{}
+				{G \times G}{*}{G \times G}
+				{}{G}{}
+
+			\arrow{n}{w}{(i , G)}[above left]
+			\arrow{n}{e}{(G , i)}[above right]
+			\arrow{n}{c}{}
+			\arrow{c}{s}{e}[right]
+			\arrow{w}{s}{m}[below left]
+			\arrow{e}{s}{m}[below right]
+		\end{diagram}
+	\end{equation*}
+	We will sometimes denote the composite $G --> * \xrightarrow{e} G$ by $e$ aswell.
+	% Concretely it is a group $G$, equipped with a topology $\mathcal{O}_G$, which satisfies one of the following equivalent conditions:
+	% \begin{enumerate}[(i)]
+	% 	\item{
+	% 		The multiplication map $m:G \times G --> G, (g,h) \mapsto gh$ and inverting map $i: G --> G, g \mapsto g^{-1}$ are continuous.
+	% 	}
+	% 	\item{
+	% 		The shear map $s: G \times G --> G \times G, (g,h) \mapsto (gh, h)$ is continuous.
+	% 	}
+	% \end{enumerate}
+
+	A \textbf{(continuous) $G$-action} on a topological space $X$ is a morphism $a:G \times X --> X$ in $\ncat{Top}$, which makes the following diagrams commute.
+	\begin{equation*}
+		\begin{diagram}
+			\twobytwo[wide]
+				{G \times G \times X}{G \times X}
+				{G \times X}{X}
+
+			\arrow{nw}{ne}{G \times a}[above]
+			\arrow{nw}{sw}{m \times X}[left]
+			\arrow{ne}{se}{a}[right]
+			\arrow{sw}{se}{a}[below]
+		\end{diagram}
+		\begin{diagram}
+			\twobytwo
+				{* \times X}{G \times X}
+				{}{X}
+
+			\arrow{nw}{ne}{e \times G}[above]
+			\arrow{ne}{se}{m}[right]
+			\arrow{nw}{se}{\isom}[below left]
+		\end{diagram}
+	\end{equation*}
+	\begin{minipage}{\linewidth-4cm}
+		\vspace{-.5cm}
+		A \textbf{morphism of $G$-actions} (on topological spaces $X,X'$ respectively) is a morphism $X-->X'$ in $\ncat{Top}$, which makes the diagram on the right commute.
+
+		\vspace{.5em}
+		The resulting category of $G$-actions will be denoted by $G\,\text{-}\Act$.
+	\end{minipage}
+	\begin{minipage}{4cm}
+		\vspace{-1cm}
+		\begin{equation*}
+			\begin{diagram}
+				\twobytwo[wide]
+					{G \times X}{G \times X'}
+					{X}{X'}
+
+				\arrow{nw}{ne}{G \times f}[above]
+				\arrow{sw}{se}{f}[below]
+				\arrow{nw}{sw}{a}[left]
+				\arrow{ne}{se}{a'}[right]
+			\end{diagram}
+		\end{equation*}
+	\end{minipage}
+
+	The subspace of \textbf{$G$-fixed points} can be computed as
+	\begin{equation*}
+		X^G = \eq \left(
+		\begin{diagram}
+			\twobyone[verywide]{X}{\Map(G,X)}
+
+			\arrow[higher]{w}{e}{x \mapsto a_x}[above]
+			\arrow[lower]{w}{e}{x \mapsto t_x}[below]
+		\end{diagram}
+		\right),
+	\end{equation*}
+	where $c_x:*-->X$ is the constant map onto $\{x\} \subseteq X$ and
+	\begin{align*}
+		a_x: &G \xrightarrow{(G,c_x)} G \times * \xrightarrow{a} X\\
+		t_x: &G \xrightarrow{(e,c_x)} G \times * \xrightarrow{a} X
+	\end{align*}
+	\TODO{correct? definition without points?}
+
+	The \textbf{stabilizer} of $x \in X$ is the topological subgroup
+	\begin{equation*}
+		G_x = \eq \left(
+		\begin{diagram}
+			\twobyone[wide]{G}{X}
+
+			\arrow[higher]{w}{e}{a_x}[above]
+			\arrow[lower]{w}{e}{t_x}[below]
+		\end{diagram}
+		\right).
+	\end{equation*}
+
+	The space of \textbf{$G$-orbits} in $X$ can be computed as
+	\begin{equation*}
+		X/G = \coeq \left(
+		\begin{diagram}
+			\twobyone[wide]{G\times X}{X}
+
+			\arrow[higher]{w}{e}{a}[above]
+			\arrow[lower]{w}{e}{\pi_X}[below]
+		\end{diagram}
+		\right)
 	\end{equation*}
 \end{definition}
 
-\begin{definition}
-	A continuous map $f:X-->Y$ is a \textbf{homotopy equivalence}, if $[f]_\sim: X --> Y$ is an isomorphism in $\ncat{hTop}$. Explicitly this means that there exists a morphism $g:Y --> X$ in $\ncat{Top}$ such that $gf \sim 1_X$ and $fg \sim 1_Y$. Topological spaces $X$ and $Y$ are said to be \textbf{homotopy equivalent}, which will be denoted by $X \simeq Y$, if there is a homotopy equivalence between them.
+\begin{lemma}[Properties of $G$-actions]
+	\TODO{discrete top makes any group a top group in part $G\,\text{-}\ncat{Top}$ subcat of $G\,\text{-}\Act$}	
+\end{lemma}
 
-	A topological space $X$ is \textbf{contractible}, if it is homotopy equivalent to the singleton space $\{*\}$. In particular $X$ is a nonempty space.
+% \newpage
+% \section{Bundles}
+% \newsection{Fiber Bundles}
+% \newsection{Vector Bundles and Module Bundles}
+% \newsection{Microbundles}
 
-	A subspace $M \subseteq X$ of a topological space $X$ is a \textbf{weak}/\textbf{strong deformation retract} of $X$, if the inclusion $m:M \longrightincl X$ has a retract $r:X --> M$ (i.e. satisfying $rm = 1_M$) such that $mr \smash{\underset{h}{\sim}} 1_X$ with $h(t,m) \in M$ / $h(t,m) = m$ for all $m$ in $M$.
-\end{definition}
-
-\begin{example}\vspace{-2em}
-	\begin{enumerate}
-		\item{
-			$\R^n$, $\D^n$, $\B^n$, $[0,1]^n$ are contractible spaces
-		}
-		\item{
-			$\S^n$ is \underline{not} contractible.
-		}
-	\end{enumerate}
-\end{example}
-
-\begin{definition}
-	A functor $\fun{F}:\ncat{Top} --> \cat{C}$ into some category $\cat{C}$ is said to be \textbf{homotopy invariant}, if it satisfies one of the following equivalent conditions.
-	\begin{enumerate}[(i)]
-		\item{
-			$F$ factors through $\ncat{hTop}$.
-		}
-		\item{
-			For any pair of continuous maps $f_0,f_1$ in $\ncat{Top}$ it holds that $f_0 \sim f_1$ implies $Ff_0 = Ff_1$.
-		}
-		\item{
-			For any topological space $X$ he projection $\pi_X:[0,1]\times X --> X$ induces an isomorphism $\fun{F}\pi_X: \fun{F}([0,1]\times X) \xrightarrow{\isom} \fun{F}X$
-		}
-	\end{enumerate}
-\end{definition}
-
-
-\subsection{Topological Groups}
-
-\begin{definition}
-	A \textbf{topological group} is a group object in $\ncat{Top}$. Concretely it is a group $G$, equipped with a topology $\mathcal{O}_G$, which satisfies one of the following equivalent conditions:
-	\begin{enumerate}[(i)]
-		\item{
-			The multiplication map $m:G \times G --> G, (g,h) \mapsto gh$ and inverting map $i: G --> G, g \mapsto g^{-1}$ are continuous.
-		}
-		\item{
-			The shear map $s: G \times G --> G \times G, (g,h) \mapsto (gh, h)$ are continuous.
-		}
-	\end{enumerate}
-\end{definition}
-\subsection{Topological Fields and Topological Vector Spaces}
+% \newpage
+% \section{Topological Manifolds}
+% \subsection{Locally Euclidean Spaces}
 
 % \newpage
 % \section{Homology}
