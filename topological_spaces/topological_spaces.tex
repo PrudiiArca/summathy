@@ -848,7 +848,7 @@ In the following we will commonly refer to \textit{continuous functions} synonym
 	In particular $G\,\text{-}\ncat{Top}$ is complete and cocomplete and limits/colimits are computed as in $\ncat{Top}$.
 \end{lemma}
 
-\begin{definition}
+\begin{definition}[][nobreak=false]
 	A \textbf{topological group} $G$ is a group object in $\ncat{Top}$. This means $G$ is a topological space, together with a multiplication morphism $m:G \times G --> G$, a neutral element morphism $e:* --> G$ and an inversion automorphism $i:G --> G$, which make the following diagrams commute.
 	\begin{equation*}
 		\begin{diagram}
@@ -986,7 +986,29 @@ In the following we will commonly refer to \textit{continuous functions} synonym
 \end{definition}
 
 \begin{lemma}[Properties of $G$-actions]
-	\TODO{discrete top makes any group a top group in part $G\,\text{-}\ncat{Top}$ subcat of $G\,\text{-}\Act$}	
+	\TODO{discrete top makes any group a top group in part $G\,\text{-}\ncat{Top}$ subcat of $G\,\text{-}\Act$}
+
+	\TODO{$G/G_x --> G \bullet x$ is continuous bijection}
+
+	\TODO{$X$ hausdorff implies $X^G$ closed subspace as $X^G = \Intersection \limits_{g \in G} \{x \mid gx = x\}$ and $\{x \mid gx = x\} = ((a_{g} \times X)\circ\Delta_X)^{-1}(\{(x,x)\})$}
+
+	\TODO{$\pi: X --> X/G$ is open (false for general quotients) since $\pi_G^{-1}(\pi_G(U)) = G \bullet U = \Union \limits_{g^{-1} \in G}g^{-1}\bullet U$ and $g^{-1} \bullet U = a_{g}^{-1}(U)$ open in $X$}
+
+	\TODO{$\largepi_0(G)$ is topological group and there is SES $1 --> G^0 --> G --> \largepi_0(G) --> 1$, where $G^0$ is connected}
+\end{lemma}
+
+\begin{definition}
+	\TODO{proper $G$-action = shear map is proper morphism}
+
+	\TODO{if $X$ hausdorff equiv to $\{g \mid gK \intersection K \neq \emptyset\}$ relatively compact}
+\end{definition}
+
+\begin{lemma}
+	\TODO{$X$ hausdorff locally qcp, $G$ acts properly, then $R_G \subseteq X \times X$ is closed subspace and in particulat $X/G = X/R_G$ hausdorff and locally qcp}
+
+	\TODO{$G$ discrete acts on $X$ (quasi?)compact properly, then $G$ finite}
+
+	\TODO{$G$ discrete acts on $X$ properly, then $\forall x: G_x$ finite}
 \end{lemma}
 
 % \newpage

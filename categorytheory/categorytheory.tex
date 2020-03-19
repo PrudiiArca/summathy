@@ -1,0 +1,170 @@
+\input{../header.tex}
+
+\title{$\Sum\text{math}(y)$\\Category Theory}
+\author{Jonas Linssen}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+
+	\newpage
+	\section{Categories}
+	\subsection{Categories}
+	\subsection{Functors and Natural Transformations}
+	\subsection{Representables and the Yoneda Lemma}
+	\subsection{Equivalences and Adjoint Functors}
+
+	\begin{definition}
+		A functor $\fun{R}:\cat{D} --> \cat{C}$ \textbf{admits a left adjoint} and \textbf{is a right adjoint}, if it satisfies one of the following equivalent conditions:
+		\begin{enumerate}[(i)]
+			\item{
+				There is a functor $L:\cat{C} --> \cat{D}$ together with natural transformations $\eta: 1_\cat{C} ==> RL$ and $\varepsilon: LR ==> 1_\cat{D}$, called \textbf{unit} and \textbf{counit}, which satisfy the \textit{triangle identities} \TODO{trigident}
+			}
+			\item{
+				For every $C$ in $\cat{C}$ the comma category $C \downarrow R$ has an initial object. This is to say there is the following universal property \TODO{up}
+			}
+			\item{
+				There is a functor $L:\cat{C} --> \cat{D}$ and a binatural isomorphism $\cat{D}(\fun{L}C,D) \isom \cat{C}(C,\fun{R}D)$
+			}
+			\item{
+				For every $D$ in $\cat{D}$ the functor $\cat{C}(-,\fun{R}D):\cat{C}^\op --> \ncat{Set}$ is representable.
+			}
+		\end{enumerate} 
+	\end{definition}
+
+	\begin{lemma}[Properties of Adjoint Functors]
+		Left/Right adjoints to a given functor are unique up to \TODO{unique} iso.
+
+		Adjoint functors compose.
+	\end{lemma}
+
+	\begin{lemma}[Adjoint Equivalences]
+		Any equivalence of categories can be turned into an adjoint equivalence.
+
+		Conversely, let $\fun{L}: \cat{C} <-> \cat{D}: \fun{R}$ be a pair of adjoint functors. Then
+		\begin{enumerate}[(i)]
+			\item{
+				$\fun{R}$ is faithful / $\fun{L}$ is faithful, if and only if $\varepsilon$ is epi / $\eta$ is mono.
+			}
+			\item{
+				$\fun{R}$ is full / $\fun{L}$ is full, if and only if $\varepsilon$ is split mono / $\eta$ is split epi.
+			}
+		\end{enumerate}
+		In particular, $\fun{L} \dashv \fun{R}$ is an adjoint equivalence, if and only if both $\fun{L}$ and $\fun{R}$ are full and faithful.
+	\end{lemma}
+
+	% \section{2-Categories}
+	% \subsection{2-Categories, 2-Functors, 2-Natural Transformations}
+	% \subsection{Adjoints and Kan Extensions}
+	\section{Limits and Colimits}
+	\subsection{Limits and Colimits}
+	\subsection{Examples}
+
+	\begin{proposition}
+		\TODO{Limits/Colimits in functor categories are computed pointwise}
+	\end{proposition}
+
+	\begin{theorem}[Density Theorem]
+		Every presheaf $P$ is colimit of representables
+	\end{theorem}
+
+	\begin{proposition}
+		Suppose that $\cat{C}$ has limits of shape $\cat{I}$ and $\fun{F}:\cat{C} --> \cat{D}$ preserves them.
+
+		Then $\cat{D} \downarrow \fun{F}$ has limits of shape $\cat{I}$ and $\fun{U}: \cat{D} \downarrow \fun{F} --> \cat{D}$ creates them.
+	\end{proposition}
+
+	\subsection{Limits vs. Colimits}
+	\subsection{Adjoint Functor vs. Limits and Colimits}
+
+	\begin{proposition}[RAPL + LAPC]
+		\TODO{todo}
+	\end{proposition}
+
+	\begin{theorem}[General Adjoint Functor Theorem]
+		Let $\cat{D}$ be a complete category. Then $\fun{R}: \cat{D} --> \cat{C}$ has a left adjoint, if and only if $\fun{R}$ is continuous and for every $C$ in $\cat{C}$ the comma category $C \downarrow \fun{R}$ has a weakly initial set.
+
+		Dually, if $\cat{C}$ is a cocomplete category, then $\fun{L}: \cat{C} --> \cat{D}$ has a right adjoint, if and only if $\fun{L}$ is cocontinuous and for every $D$ in $\cat{D}$ the comma category $\fun{L} \downarrow D$ has a weakly terminal set.
+	\end{theorem}
+
+	\begin{theorem}[Special Adjoint Functor Theorem]
+		Let $\cat{D}$ be a complete category. \TODO{todo}
+	\end{theorem}
+
+	\section{Density}
+	\subsection{Kan Extensions and Pointwise Kan Extensions}
+
+	\begin{definition}
+		The functor $\fun{F}:\cat{A} --> \cat{C}$ admits a \textbf{left Kan extension along} the functor $\fun{K}:\cat{A} --> \cat{B}$, if it satisfies one of the following equivalent conditions.
+		\begin{enumerate}[(i)]
+			\item{
+				There is a functor $\fun{L}:\cat{B}--> \cat{C}$ and a natural transformation $\lambda: \fun{F} ==> \fun{LK}$ such that the composite
+				\begin{align*}
+					|[\cat{B},\cat{C}|](\fun{L},\fun{G}) \xrightarrow{-\circ \fun{K}} |[\cat{A},\cat{C}|](\fun{LK},\fun{GK}) \xrightarrow{\pre\lambda}|[\cat{A},\cat{C}|](\fun{F},\fun{GK})
+				\end{align*}
+				is a natural isomorphism (in $\fun{G} \in |[\cat{B},\cat{C}|]$).
+
+				\TODO{universal property}
+			}
+			\item{
+				The functor $|[\cat{A},\cat{C}|](F,\pre\cat{K}-):|[\cat{B},\cat{C}|] --> \ncat{Set}$ is represented by a functor $\fun{L} \in |[\cat{B},\cat{C}|]$.
+			}
+		\end{enumerate}
+		The functor $\fun{L}$ is commonly denoted by $\Lan_\fun{K}\fun{F}$.
+	\end{definition}
+
+	\begin{lemma}[Properties of Kan Extensions]
+		\TODO{left/right Kan extensions are unique up to unique iso}
+
+		\TODO{left/right adjoints preserve left/right Kan extensions}
+
+		\TODO{left/right Kan extensions compose}
+	\end{lemma}
+
+	\begin{lemma}
+		\begin{minipage}{\linewidth-5cm}
+			Let $\cat{A},\cat{B}$ be small categories, $\fun{K}:\cat{A} --> \cat{B}$ be a functor and $\cat{C}$ be another category.\\
+
+			Then every functor $\fun{F}:\cat{A} --> \cat{C}$ admits a left/right Kan extension along $\fun{K}$, if and only if the functor $\pre\fun{K}:|[\cat{B},\cat{C}|] --> |[\cat{A},\cat{C}|]$ has a left/right adjoint.
+		\end{minipage}
+		\begin{minipage}{5cm}
+			\begin{equation*}
+				\begin{diagram}
+					\node (w) at (-1.5,0) {$[\![\cat{B},\cat{C}]\!]$};
+					\node (e) at (1.5,0) {$[\![\cat{A},\cat{C}]\!]$};
+
+					\arrow[bend right]{e}{w}{\Lan_\fun{K}}[above]
+					\arrow{w}{e}{\pre\fun{K}}[ontop]
+					\arrow[bend left]{e}{w}{\Ran_\fun{K}}[below]
+
+					\node at (0,.35) {$\bot$};
+					\node at (0,-.3) {$\bot$};
+				\end{diagram}
+			\end{equation*}
+		\end{minipage}
+	\end{lemma}
+
+	\begin{definition}
+		Suppose the functor $\fun{F}:\cat{A} --> \cat{C}$ admits a right Kan extension along $\fun{K}:\cat{A} --> \cat{B}$. $\Ran_\fun{K}\fun{F}$ is said to be a \textbf{pointwise right Kan extension}, if it satisfies one of the following equivalent conditions.
+		\begin{enumerate}[(i)]
+			\item{
+				For every $C$ in $\cat{C}$ the hom-functor $\cat{C}(C,-): \cat{C} --> \ncat{Set}$ preserves $\Ran_\fun{K}\fun{F}$.
+			}
+			\item{
+				$\Ran_\fun{K}\fun{F}$ can be computed pointwise via
+				\begin{align*}
+					\Ran_\fun{K}\fun{F}(B) = \lim_{B \downarrow \fun{K}} FU_{B \downarrow \fun{K}}
+				\end{align*}
+			}
+			\item{
+				For every $B$ in $\cat{B}$ the functor \TODO{???} is represented by \TODO{???}
+			}
+		\end{enumerate}
+	\end{definition}
+
+	\begin{lemma}
+		Let $\cat{A},\cat{B}$ be small categories and $\cat{C}$ be complete/cocomplete. Then for all $\fun{K}:\cat{A} --> \cat{B}$ and $\fun{F}:\cat{A}-->\cat{C}$ the right Kan extension $\Ran_\fun{K}\fun{F}$/left Kan extension $\Lan_\fun{K}\fun{F}$ exists and is pointwise.
+	\end{lemma}
+
+	\section{Monads}
+\end{document}

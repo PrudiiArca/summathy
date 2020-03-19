@@ -18,7 +18,6 @@
 
 % --- basics
 \NewDocumentCommand{\TODO}{m}{{\color{red}#1}}
-\NewDocumentCommand{\TOBI}{m}{{\color{blue}#1}}
 
 
 % --- arrows
@@ -169,6 +168,10 @@
 
 
 % --- operators
+
+\NewDocumentCommand{\op}{}{\text{op}}
+\NewDocumentCommand{\co}{}{\text{co}}
+\NewDocumentCommand{\pre}{}{{}_{*}}
 
 \DeclareMathOperator{\characteristic}{char}
 \DeclareMathOperator{\Quot}{Quot}
