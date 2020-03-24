@@ -20,31 +20,309 @@
 		\TODO{$\fun{K}$ is esssurj iff $\pre\fun{K}$ is conservative}
 	\end{lemma}
 
+	\newpage
+	\subsection{Examples}
+
+	\partitle{Concrete Categories}[concretecat]
+	\partitle{Functor Categories}[funcat]
+	\partitle{Comma Categories and Slice Categories}[commacat]
+
+	\begin{definition}
+		Let $\fun{F}:\cat{A} --> \cat{C}$ and $\fun{G}:\cat{B}-->\cat{C}$ be two functors. The \textbf{comma category} $\fun{F} \downarrow \fun{G}$ consists of\\
+
+		\begin{tabular}{rl}
+			Objects: & triples $(A,f,B)$, where $A \in \Ob \cat{A}$, $B \in \Ob \cat{B}$ and $f:\fun{F}A --> \fun{F}B$\\
+			Morphisms: & pairs $(a,b)$, where $a:A --> A'$ in $\cat{A}$, $b:B-->B'$ in $\cat{B}$ satisfying
+			%\begin{equation*}
+				\begin{diagram}
+					\twobytwo
+						{\fun{F}A}{\fun{F}A'}
+						{\fun{G}B}{\fun{G}B'}
+					\arrow{nw}{ne}{\fun{F}a}[above]
+					\arrow{sw}{se}{\fun{G}b}[below]
+					\arrow{nw}{sw}{f}[left]
+					\arrow{ne}{se}{f'}[right]
+				\end{diagram}
+			%\end{equation*}
+		\end{tabular}
+
+		This construction yields canonical functors
+		\begin{equation*}
+			\begin{array}{rcl}
+				\fun{F}\downarrow\fun{G} & \xrightarrow{\fun{U}_\cat{A}} & \cat{A}\\
+				(A,f,B) & \longmapsto & A\\
+				(a,b) & \longmapsto & a
+			\end{array}
+			\hspace{1cm}\text{and}\hspace{1cm}
+			\begin{array}{rcl}
+				\fun{F}\downarrow\fun{G} & \xrightarrow{\fun{U}_\cat{B}} & \cat{B}\\
+				(A,f,B) & \longmapsto & B\\
+				(a,b) & \longmapsto & b 
+			\end{array}
+		\end{equation*}
+		as well as
+		\begin{equation*}
+			\begin{array}{rcl}
+				\fun{F}\downarrow\fun{G} & \xrightarrow{\dom} & \cat{C}\\
+				(A,f,B) & \longmapsto & \fun{F}A\\
+				(a,b) & \longmapsto & \fun{F}a
+			\end{array}
+			\hspace{1cm}\text{and}\hspace{1cm}
+			\begin{array}{rcl}
+				\fun{F}\downarrow\fun{G} & \xrightarrow{\cod} & \cat{C}\\
+				(A,f,B) & \longmapsto & \fun{G}B\\
+				(a,b) & \longmapsto & \fun{G}b
+			\end{array}
+		\end{equation*}
+		and by construction $\dom = \fun{FU}_\cat{A}$ and $\cod = \fun{GU}_\cat{B}$.
+	\end{definition}
+
+	\newpage
 	\subsection{Representables and the Yoneda Lemma}
-	\subsection{Equivalences and Adjoint Functors}
+
+	\begin{definition}
+		Let $\cat{C}$ be a category. 
+
+		A contravariant functor $\fun{F}:\cat{C}^\op --> \ncat{Set}$, which is isomorphic to a hom-functor $\cat{C}(-,C):\cat{C}-->\ncat{Set}$, is said to be \textbf{representable}. The object $C$ is called a \textbf{representing object} of $\fun{F}$.
+
+		Similarly, a covariant functor $\fun{F}:\cat{C} --> \ncat{Set}$, which is isomorphic to a hom-functor $\cat{C}(C,-):\cat{C}-->\ncat{Set}$ is called \textbf{representable} and $C$ is a \textbf{representing object} of $\fun{F}$.
+	\end{definition}
+
+	\begin{theorem}[Yoneda Lemma]
+		Let $\cat{C}$ be a category. The mutually inverse assignments
+		\begin{align*}
+			\begin{array}{ccl}
+				|[\cat{C^\op,\ncat{Set}}|](\cat{C}(-,C),\fun{F}) &\isom& \fun{F}C
+				\vspace{.5em}\\
+				\alpha=(\alpha_{C'})_{C'} & \mapsto & \alpha_C(1_C)
+				\vspace{.5em}\\
+				\left(\begin{array}{rcl}
+					\cat{C}(C',C) &\rightarrow& \fun{F}C'\\
+				 	f & \mapsto & \fun{F}f(x)
+				\end{array}\right)_{C'} & \mapsfrom & x
+			\end{array}
+		\end{align*}
+		exhibit isomorphisms natural in $C$ and $F$. Similarly, the mutually inverse assignments
+		\begin{align*}
+			\begin{array}{ccl}
+				|[\cat{C,\ncat{Set}}|](\cat{C}(C,-),\fun{F}) &\isom& \fun{F}C
+				\vspace{.5em}\\
+				\alpha=(\alpha_{C'})_{C'} & \mapsto & \alpha_C(1_C)
+				\vspace{.5em}\\
+				\left(\begin{array}{rcl}
+				 	\cat{C}(C,C') &\rightarrow& \fun{F}C'\\
+				 	f & \mapsto & \fun{F}f(x)
+				\end{array}\right)_{C'} & \mapsfrom & x
+			\end{array}
+		\end{align*}
+		exhibit isomorphisms natural in $C$ and $F$.
+	\end{theorem}
+
+	\begin{corollary}
+		The (covariant) \textbf{Yoneda embedding}
+		\begin{align*}
+			\begin{array}{rcl}
+				\cat{C} & \xrightarrow{\fun{Y}} & |[\cat{C}^\op,\ncat{Set}|]\\
+				C & \longmapsto & \cat{C}(-,C)\\
+				{[f:C\rightarrow C']} & \longmapsto & {[f\post:\cat{C}(-,C)\Rightarrow\cat{C}(-,C')]}
+			\end{array}
+		\end{align*}
+		is full and faithful. In particular $\fun{Y}$ is conservative, which implies that any two representing objects of a functor are isomorphic.
+	\end{corollary}
+
+	\newpage
+	\subsection{Adjoint Functors and Kan Extensions}
 
 	\begin{definition}
 		A functor $\fun{R}:\cat{D} --> \cat{C}$ \textbf{admits a left adjoint} and \textbf{is a right adjoint}, if it satisfies one of the following equivalent conditions:
 		\begin{enumerate}[(i)]
 			\item{
-				There is a functor $L:\cat{C} --> \cat{D}$ together with natural transformations $\eta: 1_\cat{C} ==> RL$ and $\varepsilon: LR ==> 1_\cat{D}$, called \textbf{unit} and \textbf{counit}, which satisfy the \textit{triangle identities} \TODO{trigident}
+				There is a functor $\fun{L}:\cat{C} --> \cat{D}$ together with natural transformations $\eta: 1_\cat{C} ==> \fun{RL}$ and $\epsilon: \fun{LR} ==> 1_\cat{D}$, called \textbf{unit} and \textbf{counit}, which satisfy the \textit{triangle identities}
+				% \begin{equation*}
+				% 	\begin{diagram}
+				% 		\twobytwo
+				% 			{\fun{L}}{\fun{LRL}}
+				% 			{}{\fun{L}}
+				% 		\arrow[equals]{nw}{se}{}
+				% 		\arrow[implies]{nw}{ne}{\fun{L}\eta}[above]
+				% 		\arrow[implies]{ne}{se}{\epsilon\fun{L}}[right]
+				% 	\end{diagram}
+				% 	\hspace{1cm}\text{and}\hspace{1cm}
+				% 	\begin{diagram}
+				% 		\twobytwo
+				% 			{\fun{R}}{\fun{RLR}}
+				% 			{}{\fun{R}}
+				% 		\arrow[equals]{nw}{se}{}
+				% 		\arrow[implies]{nw}{ne}{\eta\fun{R}}[above]
+				% 		\arrow[implies]{ne}{se}{\fun{R}\epsilon}[right]
+				% 	\end{diagram}\hspace{.25cm}.
+				% \end{equation*}
+				\begin{equation*}
+					\begin{diagram}
+						\fourbyone{\cat{C}}{\cat{D}}{\cat{C}}{\cat{D}}
+						\arrow{ww}{w}{\fun{L}}[ontop]
+						\arrow{w}{e}{\fun{R}}[ontop]
+						\arrow{e}{ee}{\fun{L}}[ontop]
+						\arrow[out=45,in=135,equals]{ww}{e}{1_\cat{C}}[above]
+						\arrow[out=-45,in=-135,equals]{w}{ee}{1_\cat{D}}[below]
+						\node at (-1,.5) {$\Downarrow \eta$};
+						\node at (1,-.5) {$\Downarrow \epsilon$};
+					\end{diagram}
+					=
+					\begin{diagram}
+						\twobyone{\cat{C}}{\cat{D}}
+						\arrow[bend left]{w}{e}{\fun{L}}[above]
+						\arrow[bend right]{w}{e}{\fun{L}}[below]
+						\node at (0,0) {$||$};
+					\end{diagram}
+					=
+					\begin{diagram}
+						\twobyone{\cat{C}}{\cat{D}}
+						\arrow{w}{e}{\fun{L}}[above]
+					\end{diagram}
+				\end{equation*}
+				and
+				\begin{equation*}
+					\begin{diagram}
+						\fourbyone{\cat{D}}{\cat{C}}{\cat{D}}{\cat{C}}
+						\arrow{ww}{w}{\fun{R}}[ontop]
+						\arrow{w}{e}{\fun{L}}[ontop]
+						\arrow{e}{ee}{\fun{R}}[ontop]
+						\arrow[out=45,in=135,equals]{w}{ee}{}
+						\arrow[out=-45,in=-135,equals]{ww}{e}{}
+						\node at (1,.5) {$\Downarrow \eta$};
+						\node at (-.8,-.5) {$\Downarrow \epsilon$};
+					\end{diagram}
+					=
+					\begin{diagram}
+						\twobyone{\cat{D}}{\cat{C}}
+						\arrow[bend left]{w}{e}{\fun{R}}[above]
+						\arrow[bend right]{w}{e}{\fun{R}}[below]
+						\node at (0,0) {$||$};
+					\end{diagram}
+					=
+					\begin{diagram}
+						\twobyone{\cat{D}}{\cat{C}}
+						\arrow{w}{e}{\fun{R}}[above]
+					\end{diagram}
+				\end{equation*}
 			}
 			\item{
-				For every $C$ in $\cat{C}$ the comma category $C \downarrow R$ has an initial object. This is to say there is the following universal property \TODO{up}
+				\begin{minipage}[t]{\linewidth-4cm}
+					For every $C$ in $\cat{C}$ the comma category $C \downarrow \fun{R}$ has an initial object $(C,\eta_C,\fun{L}C)$.\vspace{.5em}
+
+					This is to say there is the following universal property: for every $C$ in $\cat{C}$ there is an object $\fun{L}C$ in $\cat{D}$ and a morphism $\eta_C:C-->\fun{RL}C$ such that for any $D$ in $\cat{D}$ and morphism $f:C-->\fun{R}D$ there exists a unique extension $\widehat{f}:\fun{L}C-->D$ in $\cat{D}$ such that the diagram on the right commutes in $\cat{C}$.
+				\end{minipage}
+				\begin{minipage}[t]{4cm}
+					\vspace{-.5cm}
+					\begin{equation*}
+						\begin{diagram}
+							\twobytwo
+								{\fun{RL}C}{\fun{R}D}
+								{C}{}
+							\arrow{sw}{nw}{\eta_C}[left]
+							\arrow{sw}{ne}{f}[below right]
+							\arrow[dashed]{nw}{ne}{\exists!\;\fun{R}(\widehat{f})}[above]
+						\end{diagram}
+					\end{equation*}
+				\end{minipage}
 			}
 			\item{
-				There is a functor $L:\cat{C} --> \cat{D}$ and a binatural isomorphism $\cat{D}(\fun{L}C,D) \isom \cat{C}(C,\fun{R}D)$
+				There is a functor $\fun{L}:\cat{C} --> \cat{D}$ and isomorphisms $\varphi_{CD}:\cat{D}(\fun{L}C,D) \isom \cat{C}(C,\fun{R}D)$ natural in $C$ and $D$.
 			}
 			\item{
-				For every $D$ in $\cat{D}$ the functor $\cat{C}(-,\fun{R}D):\cat{C}^\op --> \ncat{Set}$ is representable.
+				For every $C$ in $\cat{C}$ the functor $\cat{C}(C,\fun{R}-):\cat{D} --> \ncat{Set}$ is representable by an object $\fun{L}C$ in $\cat{D}$.
 			}
-		\end{enumerate} 
+		\end{enumerate}
+
+		~\\
+		Dually a functor $\fun{L}:\cat{C} --> \cat{D}$ \textbf{admits a right adjoint} and \textbf{is a left adjoint}, if it satisfies one of the following equivalent conditions:
+		\begin{enumerate}[(i)]
+			\item{
+				There is a functor $\fun{R}:\cat{D} --> \cat{C}$ together with natural transformations $\eta: 1_\cat{C} ==> \fun{RL}$ and $\epsilon: \fun{LR} ==> 1_\cat{D}$, called \textbf{unit} and \textbf{counit}, which satisfy the \textit{triangle identities}.
+				% \begin{equation*}
+				% 	\begin{diagram}
+				% 		\fourbyone{\cat{C}}{\cat{D}}{\cat{C}}{\cat{D}}
+				% 		\arrow{ww}{w}{\fun{L}}[ontop]
+				% 		\arrow{w}{e}{\fun{R}}[ontop]
+				% 		\arrow{e}{ee}{\fun{L}}[ontop]
+				% 		\arrow[out=45,in=135,equals]{ww}{e}{1_\cat{C}}[above]
+				% 		\arrow[out=-45,in=-135,equals]{w}{ee}{1_\cat{D}}[below]
+				% 		\node at (-1,.5) {$\Downarrow \eta$};
+				% 		\node at (1,-.5) {$\Downarrow \epsilon$};
+				% 	\end{diagram}
+				% 	=
+				% 	\begin{diagram}
+				% 		\twobyone{\cat{C}}{\cat{D}}
+				% 		\arrow[bend left]{w}{e}{\fun{L}}[above]
+				% 		\arrow[bend right]{w}{e}{\fun{L}}[below]
+				% 		\node at (0,0) {$||$};
+				% 	\end{diagram}
+				% 	=
+				% 	\begin{diagram}
+				% 		\twobyone{\cat{C}}{\cat{D}}
+				% 		\arrow{w}{e}{\fun{L}}[above]
+				% 	\end{diagram}
+				% \end{equation*}
+				% and
+				% \begin{equation*}
+				% 	\begin{diagram}
+				% 		\fourbyone{\cat{D}}{\cat{C}}{\cat{D}}{\cat{C}}
+				% 		\arrow{ww}{w}{\fun{R}}[ontop]
+				% 		\arrow{w}{e}{\fun{L}}[ontop]
+				% 		\arrow{e}{ee}{\fun{R}}[ontop]
+				% 		\arrow[out=45,in=135,equals]{w}{ee}{}
+				% 		\arrow[out=-45,in=-135,equals]{ww}{e}{}
+				% 		\node at (1,.5) {$\Downarrow \eta$};
+				% 		\node at (-.8,-.5) {$\Downarrow \epsilon$};
+				% 	\end{diagram}
+				% 	=
+				% 	\begin{diagram}
+				% 		\twobyone{\cat{D}}{\cat{C}}
+				% 		\arrow[bend left]{w}{e}{\fun{R}}[above]
+				% 		\arrow[bend right]{w}{e}{\fun{R}}[below]
+				% 		\node at (0,0) {$||$};
+				% 	\end{diagram}
+				% 	=
+				% 	\begin{diagram}
+				% 		\twobyone{\cat{D}}{\cat{C}}
+				% 		\arrow{w}{e}{\fun{R}}[above]
+				% 	\end{diagram}
+				% \end{equation*}
+			}
+			\item{
+				\begin{minipage}[t]{\linewidth-4cm}
+					For every $D$ in $\cat{D}$ the comma category $\fun{L} \downarrow D$ has a terminal object $(\fun{R}D,\epsilon_D,D)$.\vspace{.5em}
+
+					This is to say there is the following universal property: for every $D$ in $\cat{D}$ there is an object $\fun{R}D$ in $\cat{C}$ and a morphism $\epsilon_D:\fun{LR}D-->D$ such that for any $C$ in $\cat{C}$ and morphism $f:\fun{L}C-->D$ there exists a unique lift $\widehat{f}:C --> \fun{R}D$ in $\cat{C}$ such that the diagram on the right commutes in $\cat{D}$.
+				\end{minipage}
+				\begin{minipage}[t]{4cm}
+					\vspace{-.5cm}
+					\begin{equation*}
+						\begin{diagram}
+							\twobytwo
+								{\fun{L}C}{\fun{LR}D}
+								{}{D}
+							\arrow{ne}{se}{\eta_C}[right]
+							\arrow{nw}{se}{f}[below left]
+							\arrow[dashed]{nw}{ne}{\exists!\;\fun{L}(\widehat{f})}[above]
+						\end{diagram}
+					\end{equation*}
+				\end{minipage}
+			}
+			\item{
+				There is a functor $\fun{R}:\cat{D} --> \cat{L}$ and isomorphisms $\varphi_{CD}:\cat{D}(\fun{L}C,D) \isom \cat{C}(C,\fun{R}D)$ natural in $C$ and $D$.
+			}
+			\item{
+				For every $D$ in $\cat{D}$ the functor $\cat{D}(\fun{L}-,D):\cat{C}^\op --> \ncat{Set}$ is corepresentable by an object $\fun{R}D$ in $\cat{C}$.
+			}
+		\end{enumerate}
 	\end{definition}
 
 	\begin{lemma}[Properties of Adjoint Functors]
-		Left/Right adjoints to a given functor are unique up to \TODO{unique} iso.
+		\TODO{Left/Right adjoints to a given functor are unique up to \TODO{unique} iso.}
 
-		Adjoint functors compose.
+		\TODO{Adjoint functors compose.}
 	\end{lemma}
 
 	\begin{lemma}[Adjoint Equivalences]
@@ -62,52 +340,6 @@
 		In particular, $\fun{L} \dashv \fun{R}$ is an adjoint equivalence, if and only if both $\fun{L}$ and $\fun{R}$ are full and faithful.
 	\end{lemma}
 
-	% \section{2-Categories}
-	% \subsection{2-Categories, 2-Functors, 2-Natural Transformations}
-	% \subsection{Adjoints and Kan Extensions}
-	\section{Limits and Colimits}
-	\subsection{Limits and Colimits}
-
-	\begin{lemma}
-		\TODO{conservative functors reflect all limits/colimits they preserve}
-	\end{lemma}
-
-	\subsection{Examples}
-
-	\begin{proposition}
-		\TODO{Limits/Colimits in functor categories are computed pointwise}
-	\end{proposition}
-
-	\begin{theorem}[Density Theorem]
-		Every presheaf $P$ is colimit of representables
-	\end{theorem}
-
-	\begin{proposition}
-		Suppose that $\cat{C}$ has limits of shape $\cat{I}$ and $\fun{F}:\cat{C} --> \cat{D}$ preserves them.
-
-		Then $\cat{D} \downarrow \fun{F}$ has limits of shape $\cat{I}$ and $\fun{U}: \cat{D} \downarrow \fun{F} --> \cat{D}$ creates them.
-	\end{proposition}
-
-	\subsection{Limits vs. Colimits}
-	\subsection{Adjoint Functor vs. Limits and Colimits}
-
-	\begin{proposition}[RAPL + LAPC]
-		\TODO{todo}
-	\end{proposition}
-
-	\begin{theorem}[General Adjoint Functor Theorem]
-		Let $\cat{D}$ be a complete category. Then $\fun{R}: \cat{D} --> \cat{C}$ has a left adjoint, if and only if $\fun{R}$ is continuous and for every $C$ in $\cat{C}$ the comma category $C \downarrow \fun{R}$ has a weakly initial set.
-
-		Dually, if $\cat{C}$ is a cocomplete category, then $\fun{L}: \cat{C} --> \cat{D}$ has a right adjoint, if and only if $\fun{L}$ is cocontinuous and for every $D$ in $\cat{D}$ the comma category $\fun{L} \downarrow D$ has a weakly terminal set.
-	\end{theorem}
-
-	\begin{theorem}[Special Adjoint Functor Theorem]
-		Let $\cat{D}$ be a complete category. \TODO{todo}
-	\end{theorem}
-
-	\section{Density}
-	\subsection{Kan Extensions and Pointwise Kan Extensions}
-
 	\begin{definition}
 		The functor $\fun{F}:\cat{A} --> \cat{C}$ admits a \textbf{left Kan extension along} the functor $\fun{K}:\cat{A} --> \cat{B}$, if it satisfies one of the following equivalent conditions.
 		\begin{enumerate}[(i)]
@@ -116,12 +348,12 @@
 				\begin{align*}
 					|[\cat{B},\cat{C}|](\fun{L},\fun{G}) \xrightarrow{-\circ \fun{K}} |[\cat{A},\cat{C}|](\fun{LK},\fun{GK}) \xrightarrow{\pre\lambda}|[\cat{A},\cat{C}|](\fun{F},\fun{GK})
 				\end{align*}
-				is a natural isomorphism (in $\fun{G} \in |[\cat{B},\cat{C}|]$).
+				is an isomorphism natural in $\fun{G} \in |[\cat{B},\cat{C}|]$.
 
 				\TODO{universal property}
 			}
 			\item{
-				The functor $|[\cat{A},\cat{C}|](F,\pre\cat{K}-):|[\cat{B},\cat{C}|] --> \ncat{Set}$ is represented by a functor $\fun{L} \in |[\cat{B},\cat{C}|]$.
+				The functor $|[\cat{A},\cat{C}|](F,\pre\fun{K}-):|[\cat{B},\cat{C}|] --> \ncat{Set}$ is represented by a functor $\fun{L} \in |[\cat{B},\cat{C}|]$.
 			}
 		\end{enumerate}
 		The functor $\fun{L}$ is commonly denoted by $\Lan_\fun{K}\fun{F}$.
@@ -158,11 +390,64 @@
 		\end{minipage}
 	\end{lemma}
 
+	% \section{2-Categories}
+	% \subsection{2-Categories, 2-Functors, 2-Natural Transformations}
+	% \subsection{Adjoints and Kan Extensions}
+	\newpage
+	\section{Limits and Colimits}
+	\subsection{Limits and Colimits}
+
+	\begin{definition}
+		\TODO{limits as Ranext}
+	\end{definition}
+
+	\begin{lemma}
+		\TODO{conservative functors reflect all limits/colimits they preserve}
+	\end{lemma}
+
+	\subsection{Examples}
+
+	\begin{proposition}
+		\TODO{Limits/Colimits in functor categories are computed pointwise}
+	\end{proposition}
+
+	\begin{theorem}[Density Theorem]
+		Every presheaf $P$ is colimit of representables
+	\end{theorem}
+
+	\begin{proposition}
+		Suppose that $\cat{C}$ has limits of shape $\cat{I}$ and $\fun{F}:\cat{C} --> \cat{D}$ preserves them.
+
+		Then $\cat{D} \downarrow \fun{F}$ has limits of shape $\cat{I}$ and $\fun{U}: \cat{D} \downarrow \fun{F} --> \cat{D}$ creates them.
+	\end{proposition}
+
+	\subsection{Limits vs. Colimits}
+	\subsection{Adjoint Functor vs. Limits and Colimits}
+
+	\begin{proposition}[RAPL + LAPC]
+		\TODO{todo via RAPRan + LAPLan and via Yoneda}
+	\end{proposition}
+
+	\begin{theorem}[General Adjoint Functor Theorem]
+		Let $\cat{D}$ be a complete category. Then $\fun{R}: \cat{D} --> \cat{C}$ has a left adjoint, if and only if $\fun{R}$ is continuous and for every $C$ in $\cat{C}$ the comma category $C \downarrow \fun{R}$ has a weakly initial set.
+
+		Dually, if $\cat{C}$ is a cocomplete category, then $\fun{L}: \cat{C} --> \cat{D}$ has a right adjoint, if and only if $\fun{L}$ is cocontinuous and for every $D$ in $\cat{D}$ the comma category $\fun{L} \downarrow D$ has a weakly terminal set.
+	\end{theorem}
+
+	\begin{theorem}[Special Adjoint Functor Theorem]
+		Let $\cat{D}$ be a complete category. \TODO{todo}
+	\end{theorem}
+
+	\newpage
+	\section{Density and Locally Finitely Presentable Categories}
+	\subsection{Pointwise Kan Extensions}
+
 	\begin{definition}
 		Suppose the functor $\fun{F}:\cat{A} --> \cat{C}$ admits a right Kan extension along $\fun{K}:\cat{A} --> \cat{B}$. $\Ran_\fun{K}\fun{F}$ is said to be a \textbf{pointwise right Kan extension}, if it satisfies one of the following equivalent conditions.
 		\begin{enumerate}[(i)]
 			\item{
-				For every $C$ in $\cat{C}$ the hom-functor $\cat{C}(C,-): \cat{C} --> \ncat{Set}$ preserves $\Ran_\fun{K}\fun{F}$.
+				$\Ran_\fun{K}\fun{F}$ is preserved by representables.
+				%For every $C$ in $\cat{C}$ the hom-functor $\cat{C}(C,-): \cat{C} --> \ncat{Set}$ preserves $\Ran_\fun{K}\fun{F}$.
 			}
 			\item{
 				$\Ran_\fun{K}\fun{F}$ can be computed pointwise via
@@ -180,5 +465,10 @@
 		Let $\cat{A},\cat{B}$ be small categories and $\cat{C}$ be complete/cocomplete. Then for all $\fun{K}:\cat{A} --> \cat{B}$ and $\fun{F}:\cat{A}-->\cat{C}$ the right Kan extension $\Ran_\fun{K}\fun{F}$/left Kan extension $\Lan_\fun{K}\fun{F}$ exists and is pointwise.
 	\end{lemma}
 
+	\subsection{Density}
+
+	\subsection{Locally Finitely Presentable Categories}
+
+	\newpage
 	\section{Monads}
 \end{document}
