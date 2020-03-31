@@ -159,6 +159,18 @@
 				% \end{equation*}
 				\begin{equation*}
 					\begin{diagram}
+						\twobytwo
+							{\fun{L}}{\fun{LRL}}
+							{}{\fun{L}}
+
+						\arrow[implies]{nw}{ne}{\fun{L}\eta}[above]
+						\arrow[implies]{ne}{se}{\epsilon\fun{L}}[right]
+						\arrow[equals]{nw}{se}{}
+					\end{diagram}
+					\hspace{1cm}
+					\text{resp.}
+					\hspace{1cm}
+					\begin{diagram}
 						\fourbyone{\cat{C}}{\cat{D}}{\cat{C}}{\cat{D}}
 						\arrow{ww}{w}{\fun{L}}[ontop]
 						\arrow{w}{e}{\fun{R}}[ontop]
@@ -168,13 +180,13 @@
 						\node at (-1,.5) {$\Downarrow \eta$};
 						\node at (1,-.5) {$\Downarrow \epsilon$};
 					\end{diagram}
-					=
-					\begin{diagram}
-						\twobyone{\cat{C}}{\cat{D}}
-						\arrow[bend left]{w}{e}{\fun{L}}[above]
-						\arrow[bend right]{w}{e}{\fun{L}}[below]
-						\node at (0,0) {$||$};
-					\end{diagram}
+					% =
+					% \begin{diagram}
+					% 	\twobyone{\cat{C}}{\cat{D}}
+					% 	\arrow[bend left]{w}{e}{\fun{L}}[above]
+					% 	\arrow[bend right]{w}{e}{\fun{L}}[below]
+					% 	\node at (0,0) {$||$};
+					% \end{diagram}
 					=
 					\begin{diagram}
 						\twobyone{\cat{C}}{\cat{D}}
@@ -183,6 +195,18 @@
 				\end{equation*}
 				and
 				\begin{equation*}
+					\begin{diagram}
+						\twobytwo
+							{\fun{R}}{\fun{RLR}}
+							{}{\fun{R}}
+
+						\arrow[implies]{nw}{ne}{\eta\fun{R}}[above]
+						\arrow[implies]{ne}{se}{\fun{R}\epsilon}[right]
+						\arrow[equals]{nw}{se}{}
+					\end{diagram}
+					\hspace{1cm}
+					\text{resp.}
+					\hspace{1cm}
 					\begin{diagram}
 						\fourbyone{\cat{D}}{\cat{C}}{\cat{D}}{\cat{C}}
 						\arrow{ww}{w}{\fun{R}}[ontop]
@@ -193,13 +217,13 @@
 						\node at (1,.5) {$\Downarrow \eta$};
 						\node at (-.8,-.5) {$\Downarrow \epsilon$};
 					\end{diagram}
-					=
-					\begin{diagram}
-						\twobyone{\cat{D}}{\cat{C}}
-						\arrow[bend left]{w}{e}{\fun{R}}[above]
-						\arrow[bend right]{w}{e}{\fun{R}}[below]
-						\node at (0,0) {$||$};
-					\end{diagram}
+					% =
+					% \begin{diagram}
+					% 	\twobyone{\cat{D}}{\cat{C}}
+					% 	\arrow[bend left]{w}{e}{\fun{R}}[above]
+					% 	\arrow[bend right]{w}{e}{\fun{R}}[below]
+					% 	\node at (0,0) {$||$};
+					% \end{diagram}
 					=
 					\begin{diagram}
 						\twobyone{\cat{D}}{\cat{C}}
@@ -228,67 +252,130 @@
 				\end{minipage}
 			}
 			\item{
-				There is a functor $\fun{L}:\cat{C} --> \cat{D}$ and isomorphisms $\varphi_{CD}:\cat{D}(\fun{L}C,D) \isom \cat{C}(C,\fun{R}D)$ natural in $C$ and $D$.
+				There is a functor $\fun{L}:\cat{C} --> \cat{D}$ and isomorphisms $\phi_{CD}:\cat{D}(\fun{L}C,D) \isom \cat{C}(C,\fun{R}D):\psi_{CD}$ natural in $C$ and $D$. Writing $\eta_C:C-->\fun{RL}C$ for the morphism corresponding to $1_{\fun{L}C}$ and $\epsilon_D:\fun{LR}D --> D$ for the morphism corresponding to $1_{\fun{R}D}$ this isomorphism is given by
+				\begin{equation*}
+					\begin{array}{rcl}
+						\cat{D}(\fun{L}C,D) &\isom& \cat{C}(C,\fun{R}D)\\
+						g & \mapsto & \fun{R}g \circ \eta_C\\
+						\epsilon_D \circ \fun{L}f & \mapsfrom & f
+					\end{array}
+				\end{equation*}
 			}
 			\item{
 				For every $C$ in $\cat{C}$ the functor $\cat{C}(C,\fun{R}-):\cat{D} --> \ncat{Set}$ is representable by an object $\fun{L}C$ in $\cat{D}$.
 			}
 		\end{enumerate}
+	\end{definition}
+	\begin{sketch}
+		\begin{enumerate}[leftmargin=1.5cm]
+			\item[(i)$\Rightarrow$(ii)]{
+				The following commuting diagrams demonstrate existence and uniqueness of $\widehat{f}$.
+				\begin{equation*}
+					\begin{diagram}
+						\threebytwo[wide]
+							{\fun{RL}C}{\fun{RLR}D}{\fun{RD}}
+							{C}{\fun{R}D}{}
 
-		~\\
+						\arrow{sw}{nw}{\eta_C}[left]
+						\arrow{sw}{s}{f}[below]
+						\arrow{s}{n}{\eta_{\fun{R}D}}[ontop]
+						\arrow[equals]{s}{ne}{}
+						\arrow{nw}{n}{\fun{RL}f}[above]
+						\arrow{n}{ne}{\fun{R}\epsilon_D}[above]
+					\end{diagram}
+					\hspace{1cm}
+					\begin{diagram}
+						\twobythree[wide]
+							{\fun{LC}}{D}
+							{\fun{LRL}C}{\fun{LR}D}
+							{\fun{L}C}{}
+
+						\arrow{sw}{w}{\fun{L}\eta_C}[left]
+						\arrow{w}{nw}{\epsilon_{\fun{L}C}}[left]
+						\arrow{w}{e}{\fun{LR}\widehat{f}}[above]
+						\arrow{sw}{e}{\fun{L}f}[below right]
+						\arrow{e}{ne}{\epsilon_D}[right]
+						\arrow{nw}{ne}{\widehat{f}}[above]
+					\end{diagram}
+				\end{equation*}
+			}
+			\item[(ii)$\Rightarrow$(iii)]{
+				\begin{minipage}[t]{\linewidth-4cm}
+					Given $c:C'-->C$ the initial objects $(C,\eta_C,\fun{L}C)$ and $(C',\eta_{C'},\fun{L}C')$ yield a unique morphism $\fun{L}c:\fun{L}C' --> \fun{L}C$ making the diagram on the right commute. By uniqueness this assignment is functorial.
+				\end{minipage}
+				\begin{minipage}[t]{4cm}
+					\vspace{-1.25cm}
+					\begin{equation*}
+						\begin{diagram}
+							\twobytwo[wide]
+								{\fun{RL}C'}{\fun{RL}C}
+								{C'}{C}
+							\arrow[dashed]{nw}{ne}{\exists!\fun{R}(\fun{L}c)}[above]
+							\arrow{sw}{se}{c}[below]
+							\arrow{sw}{nw}{\eta_{C'}}[left]
+							\arrow{se}{ne}{\eta_C}[right]
+						\end{diagram}
+					\end{equation*}
+				\end{minipage}
+
+				Moreover the initial object $(C,\eta_C,\fun{L}C)$ provides a bijective function 
+				\begin{equation*}
+					\begin{array}{rcl}
+						\psi_{CD}:\cat{C}(C,\fun{R}D) &\rightarrow& \cat{D}(\fun{L}C,D)\\
+						f&\mapsto&\widehat{f}
+					\end{array}
+				\end{equation*}
+				with $\eta_C$ corresponding to $\widehat{\eta_C} = 1_{\fun{L}C}$ and inverse given by
+				\begin{equation*}
+					\begin{array}{rcl}
+						\phi_{CD}:\cat{D}(\fun{L}C,D) &\rightarrow& \cat{C}(C,\fun{R}D) \\
+						g&\mapsto&\fun{R}g\circ\eta_C
+					\end{array}
+				\end{equation*}
+				which is by construction natural in $D$.
+
+				Writing $\epsilon_D = \widehat{1_{\fun{R}D}}$ we note that by definition $\fun{R}\epsilon_D \circ \eta_{\fun{R}D} = 1_{\fun{R}D}$ and so the commutativity of the diagram
+				\begin{equation*}
+					\begin{diagram}
+						\threebytwo[verywide]
+							{\fun{RL}C}{\fun{RLRL}C}{\fun{RL}C}
+							{C}{\fun{RL}C}{}
+						\arrow{nw}{n}{\fun{RL}\eta_C}[above]
+						\arrow{n}{ne}{\fun{R}\epsilon_{\fun{L}C}}[above]
+						\arrow{sw}{s}{\eta_C}[below]
+						\arrow[equals]{s}{ne}{\fun{R}1_{\fun{L}C}}[below right]
+						\arrow{sw}{nw}{\eta_C}[left]
+						\arrow{s}{n}{\eta_{\fun{RL}C}}[left]
+					\end{diagram}
+				\end{equation*}
+
+				For naturality in $C$ note that given $c:C'-->C$ the initial element in $C'\downarrow\fun{R}$ gives rise to
+				\begin{equation*}
+					\begin{diagram}
+						\threebytwo[verywide]
+							{\fun{RL}C'}{\fun{RL}C}{\fun{R}D}
+							{C'}{C}{}
+
+						\arrow[bend left]{nw}{ne}{\fun{R}\widehat{\widehat{fc}}}[above]
+						%\arrow{nw}{n}{\fun{R}\widehat{\widehat{t}\,}}[above]
+						\arrow{nw}{n}{\fun{RL}c}[above]
+						\arrow{n}{ne}{\fun{R}\widehat{f}}[above]
+						\arrow{sw}{s}{c}[below]
+						\arrow{s}{ne}{f}[below right]
+						\arrow{sw}{nw}{\eta_{C'}}[left]
+						\arrow{s}{n}{\eta_C}[left]
+						%\arrow{sw}{n}{t}[ontop]
+					\end{diagram}
+				\end{equation*}
+			}
+		\end{enumerate}
+	\end{sketch}
+
+	\begin{definition}
 		Dually a functor $\fun{L}:\cat{C} --> \cat{D}$ \textbf{admits a right adjoint} and \textbf{is a left adjoint}, if it satisfies one of the following equivalent conditions:
 		\begin{enumerate}[(i)]
 			\item{
 				There is a functor $\fun{R}:\cat{D} --> \cat{C}$ together with natural transformations $\eta: 1_\cat{C} ==> \fun{RL}$ and $\epsilon: \fun{LR} ==> 1_\cat{D}$, called \textbf{unit} and \textbf{counit}, which satisfy the \textit{triangle identities}.
-				% \begin{equation*}
-				% 	\begin{diagram}
-				% 		\fourbyone{\cat{C}}{\cat{D}}{\cat{C}}{\cat{D}}
-				% 		\arrow{ww}{w}{\fun{L}}[ontop]
-				% 		\arrow{w}{e}{\fun{R}}[ontop]
-				% 		\arrow{e}{ee}{\fun{L}}[ontop]
-				% 		\arrow[out=45,in=135,equals]{ww}{e}{1_\cat{C}}[above]
-				% 		\arrow[out=-45,in=-135,equals]{w}{ee}{1_\cat{D}}[below]
-				% 		\node at (-1,.5) {$\Downarrow \eta$};
-				% 		\node at (1,-.5) {$\Downarrow \epsilon$};
-				% 	\end{diagram}
-				% 	=
-				% 	\begin{diagram}
-				% 		\twobyone{\cat{C}}{\cat{D}}
-				% 		\arrow[bend left]{w}{e}{\fun{L}}[above]
-				% 		\arrow[bend right]{w}{e}{\fun{L}}[below]
-				% 		\node at (0,0) {$||$};
-				% 	\end{diagram}
-				% 	=
-				% 	\begin{diagram}
-				% 		\twobyone{\cat{C}}{\cat{D}}
-				% 		\arrow{w}{e}{\fun{L}}[above]
-				% 	\end{diagram}
-				% \end{equation*}
-				% and
-				% \begin{equation*}
-				% 	\begin{diagram}
-				% 		\fourbyone{\cat{D}}{\cat{C}}{\cat{D}}{\cat{C}}
-				% 		\arrow{ww}{w}{\fun{R}}[ontop]
-				% 		\arrow{w}{e}{\fun{L}}[ontop]
-				% 		\arrow{e}{ee}{\fun{R}}[ontop]
-				% 		\arrow[out=45,in=135,equals]{w}{ee}{}
-				% 		\arrow[out=-45,in=-135,equals]{ww}{e}{}
-				% 		\node at (1,.5) {$\Downarrow \eta$};
-				% 		\node at (-.8,-.5) {$\Downarrow \epsilon$};
-				% 	\end{diagram}
-				% 	=
-				% 	\begin{diagram}
-				% 		\twobyone{\cat{D}}{\cat{C}}
-				% 		\arrow[bend left]{w}{e}{\fun{R}}[above]
-				% 		\arrow[bend right]{w}{e}{\fun{R}}[below]
-				% 		\node at (0,0) {$||$};
-				% 	\end{diagram}
-				% 	=
-				% 	\begin{diagram}
-				% 		\twobyone{\cat{D}}{\cat{C}}
-				% 		\arrow{w}{e}{\fun{R}}[above]
-				% 	\end{diagram}
-				% \end{equation*}
 			}
 			\item{
 				\begin{minipage}[t]{\linewidth-4cm}
