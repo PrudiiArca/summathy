@@ -1,0 +1,159 @@
+\input{../header.tex}
+
+\title{
+	$\Sum\text{math}(y)$\\
+	Monoidal- and Enriched Categories
+}
+\author{Jonas Linssen}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+
+	\newpage
+	\section{Monoidal Categories}
+	\subsection{Monoidal Categories}
+
+	\begin{definition}
+		A \textbf{monoidal category} consists of a category $\cat{V}$, a functor $-\tensor-:\cat{V}\times \cat{V} --> \cat{V}$, called \textbf{tensor product} and an \textbf{identity object} $I$ in $\cat{V}$ together with natural isomorphisms
+		\begin{align*}
+			\alpha:&\tensor(\tensor\times 1_\cat{V}) \overset{\sim}{==>}\tensor(1_\cat{V}\times \tensor):\cat{V}\times\cat{V}\times\cat{V} --> \cat{V}\\
+			\lambda:&I\tensor- \overset{\sim}{==>} 1_\cat{V}: \cat{V} --> \cat{V}\\
+			\rho:&-\tensor I \overset{\sim}{==>} 1_\cat{V}: \cat{V} --> \cat{V}
+		\end{align*}
+		making the following diagrams commute.
+		\begin{equation*}
+			\begin{diagram}
+				\node (a1) at (0,2.5) {$(W\tensor X)\tensor(Y\tensor Z)$};
+				\node (a2) at (3,1) {$W\tensor(X\tensor (Y\tensor Z))$};
+				\node (a3) at (2,-1) {$W\tensor ((X\tensor Y)\tensor Z)$};
+				\node (a4) at (-2,-1) {$(W\tensor (X\tensor Y))\tensor Z$};
+				\node (a5) at (-3,1) {$((W\tensor X)\tensor Y)\tensor Z$};
+
+				\arrow{a1}{a2}{\alpha}[above right]
+				\arrow{a3}{a2}{W\tensor \alpha}[below right]
+				\arrow{a4}{a3}{\alpha}[below]
+				\arrow{a5}{a4}{\alpha\tensor Z}[below left]
+				\arrow{a5}{a1}{\alpha}[above left]
+			\end{diagram}
+			\hspace{1cm}
+			%\hspace{.5cm}\text{and}\hspace{.5cm}
+			\begin{diagram}
+				\node (nw) at (-1.5,1) {$(X\tensor I)\tensor Y$};
+				\node (ne) at (1.5,1) {$X\tensor (I\tensor Y)$};
+				\node (s) at (0,-.5) {$X\tensor Y$};
+
+				\arrow{nw}{ne}{\alpha}[above]
+				\arrow{nw}{s}{\rho\tensor Y}[below left]
+				\arrow{ne}{s}{X \tensor\lambda}[below right]
+			\end{diagram}
+		\end{equation*}
+
+		$\cat{V}$ is said to be \textbf{strict monoidal}, if $\alpha,\lambda,\rho$ are identities.
+	\end{definition}
+
+	\begin{theorem}[MacLane's Coherence Theorem]
+		Any finite formal diagram built using $\tensor,I,\alpha,\lambda,\rho,\alpha^{-1},\lambda^{-1},\rho^{-1}$ commutes.
+	\end{theorem}
+
+	\TODO{string calculus}
+
+	\begin{definition}
+		A \textbf{lax monoidal functor} between monoidal categories $\cat{V}$ and $\cat{W}$ is a functor $\fun{F}:\cat{V} --> \cat{W}$ together with a \textbf{coercion morphism} $\phi_0: I_\cat{W} --> F(I_\cat{V})$ in $\cat{W}$ and a \textbf{coercion transformation} $\phi: \tensor_\cat{W}(\fun{F}\times\fun{F}) ==> F(-\tensor_\cat{V}-): \cat{V}\times\cat{V} --> \cat{W}$ such that the following diagrams commute.
+		\begin{equation*}
+			\begin{diagram}
+				\node (w) at (-4,0) {$(\fun{F}X \tensor_\cat{W} \fun{F}Y)\tensor_\cat{W} \fun{F}Z$};
+				\node (nw) at (-2.5,1.5) {$\fun{F}X \tensor_\cat{W} (\fun{F}Y\tensor_\cat{W} \fun{F}Z)$};
+				\node (ne) at (2.5,1.5) {$\fun{F}X \tensor_\cat{W} \fun{F}(Y\tensor_\cat{V} Z)$};
+				\node (e) at (4,0) {$\fun{F}(X \tensor_\cat{V} (Y\tensor_\cat{V} Z))$};
+				\node (sw) at (-2.5,-1.5) {$\fun{F}(X \tensor_\cat{V}Y)\tensor_\cat{W} \fun{F}Z$};
+				\node (se) at (2.5,-1.5) {$\fun{F}((X \tensor_\cat{V} Y)\tensor_\cat{V}Z)$};
+			\arrow{w}{nw}{\alpha^\cat{W}}[above left]
+			\arrow{nw}{ne}{\fun{F}X\tensor \phi}[above]
+			\arrow{ne}{e}{\phi}[above right]
+			\arrow{w}{sw}{\phi \tensor \fun{F}Z}[below left]
+			\arrow{sw}{se}{\phi}[below]
+			\arrow{se}{e}{\fun{F}\alpha^\cat{V}}[below right]
+			\end{diagram}
+		\end{equation*}
+		\begin{equation*}
+			\begin{diagram}
+				\node (w) at (-2.5,0) {$I_\cat{W} \tensor_\cat{W} \fun{F}X$};
+				\node (nw) at (-1.5,1.5) {$\fun{F}I_\cat{V} \tensor_\cat{W}\fun{F}X$};
+				\node (ne) at (1.5,1.5) {$\fun{F}(I_\cat{V}\tensor_\cat{V}W)$};
+				\node (e) at (2.5,0) {$\fun{F}X$};
+
+				\arrow{w}{nw}{\phi_0 \tensor \fun{F}X}[ontop]
+				\arrow{nw}{ne}{\phi}[above]
+				\arrow{ne}{e}{\fun{F}\lambda^\cat{V}}[ontop]
+				\arrow{w}{e}{\lambda^\cat{W}}[below]
+			\end{diagram}
+			\hspace{1cm}
+			\begin{diagram}
+				\node (w) at (-2.5,0) {$\fun{F}X \tensor_\cat{W} I_\cat{W}$};
+				\node (nw) at (-1.5,1.5) {$\fun{F}X \tensor_\cat{W} \fun{F}I_\cat{V}$};
+				\node (ne) at (1.5,1.5) {$\fun{F}(X \tensor_\cat{V} I_\cat{V})$};
+				\node (e) at (2.5,0) {$\fun{F}X$};
+
+				\arrow{w}{nw}{\fun{F}X \tensor \phi_0}[ontop]
+				\arrow{nw}{ne}{\phi}[above]
+				\arrow{ne}{e}{\fun{F}\rho^\cat{V}}[ontop]
+				\arrow{w}{e}{\rho^\cat{W}}[below]
+			\end{diagram}
+		\end{equation*}
+
+		A \textbf{strong/strict monoidal functor} is a lax monoidal functor, where $\phi_0$ and $\phi$ are isomorphisms/identities.
+	\end{definition}
+
+	\begin{definition}
+		Let $\cat{V},\cat{W}$ be monoidal categories. A \textbf{monoidal (natural) transformation} between lax/strong/strict monoidal functors $(F,\phi_0,\phi):\cat{V}-->\cat{W}$ and $(G,\psi_0,\psi):\cat{V}-->\cat{W}$ is a natural transformation $\gamma:\fun{F} ==> \fun{G}$ making the following diagrams commute.
+		\begin{equation*}
+			\begin{diagram}
+				\twobytwo[ultrawide]
+					{\fun{F}X \tensor_\cat{W} \fun{F}Y}{\fun{G}X \tensor_\cat{W} \fun{G}Y}
+					{\fun{F}(X \tensor_\cat{V} Y)}{\fun{G}(X \tensor_\cat{V} Y)}
+
+				\arrow{nw}{ne}{\gamma\tensor\gamma}[above]
+				\arrow{sw}{se}{\gamma}[below]
+				\arrow{nw}{sw}{\phi}[left]
+				\arrow{ne}{se}{\psi}[right]
+			\end{diagram}
+			\hspace{1.5cm}
+			\begin{diagram}
+				\node (n) at (0,.75) {$I_\cat{W}$};
+				\node (sw) at (-1,-.75) {$\fun{F}I_\cat{V}$};
+				\node (se) at (1,-.75) {$\fun{G}I_\cat{V}$};
+
+				\arrow{n}{sw}{\phi_0}[ontop]
+				\arrow{n}{se}{\psi_0}[ontop]
+				\arrow{sw}{se}{\gamma}[below]
+			\end{diagram}
+		\end{equation*}
+	\end{definition}
+
+	\begin{proposition}
+		\TODO{lax monoidal functors compose}
+
+		\TODO{monoidal transformations compose vertically}
+
+		\TODO{whiskering}
+	\end{proposition}
+
+	\begin{definition}
+		We constructed the 2-category $\ncat{MonCat}$ of monoidal categories, lax monoidal functors and monoidal transformations.
+	\end{definition}
+
+	\begin{theorem}[MacLane's Coherence Theorem]
+		Every monoidal category is monoidally equivalent to a strict monoidal category.
+	\end{theorem}
+
+	\subsection{Braided- and Symmetric Monoidal Categories}
+	\subsection{Closed Monoidal Categories}
+	\subsection{Monoids}
+	\newpage
+	\section{Enriched Categories}
+	\subsection{$\cat{V}$-Categories}
+	\subsection{Examples}
+	\subsection{Underlying- and Product categories}
+	\subsection{Self-Enrichment, Hom-Functors and Weak Yoneda}
+\end{document}

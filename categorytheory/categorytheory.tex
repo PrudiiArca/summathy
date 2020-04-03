@@ -290,21 +290,26 @@
 							{\fun{LRL}C}{\fun{LR}D}
 							{\fun{L}C}{}
 
-						\arrow{sw}{w}{\fun{L}\eta_C}[left]
-						\arrow{w}{nw}{\epsilon_{\fun{L}C}}[left]
+						\arrow{sw}{w}{\fun{L}\eta_C}[right]
+						\arrow{w}{nw}{\epsilon_{\fun{L}C}}[right]
 						\arrow{w}{e}{\fun{LR}\widehat{f}}[above]
 						\arrow{sw}{e}{\fun{L}f}[below right]
 						\arrow{e}{ne}{\epsilon_D}[right]
 						\arrow{nw}{ne}{\widehat{f}}[above]
+						\arrow[equals,out=135,in=-135]{sw}{nw}{}
 					\end{diagram}
 				\end{equation*}
 			}
 			\item[(ii)$\Rightarrow$(iii)]{
 				\begin{minipage}[t]{\linewidth-4cm}
-					Given $c:C'-->C$ the initial objects $(C,\eta_C,\fun{L}C)$ and $(C',\eta_{C'},\fun{L}C')$ yield a unique morphism $\fun{L}c:\fun{L}C' --> \fun{L}C$ making the diagram on the right commute. By uniqueness this assignment is functorial.
+					Given $c:C'-->C$ the initial objects $(C,\eta_C,\fun{L}C)$ and $(C',\eta_{C'},\fun{L}C')$ yield a unique morphism
+					\begin{equation*}
+						\fun{L}c:\fun{L}C' \xrightarrow{\widehat{\eta_Cc}} \fun{L}C
+					\end{equation*}
+					making the diagram on the right commute. By uniqueness this assignment is functorial.
 				\end{minipage}
 				\begin{minipage}[t]{4cm}
-					\vspace{-1.25cm}
+					\vspace{-.5cm}
 					\begin{equation*}
 						\begin{diagram}
 							\twobytwo[wide]
@@ -318,7 +323,7 @@
 					\end{equation*}
 				\end{minipage}
 
-				Moreover the initial object $(C,\eta_C,\fun{L}C)$ provides a bijective function 
+				Moreover every initial object $(C,\eta_C,\fun{L}C)$ provides a bijective function 
 				\begin{equation*}
 					\begin{array}{rcl}
 						\psi_{CD}:\cat{C}(C,\fun{R}D) &\rightarrow& \cat{D}(\fun{L}C,D)\\
@@ -334,20 +339,23 @@
 				\end{equation*}
 				which is by construction natural in $D$.
 
-				Writing $\epsilon_D = \widehat{1_{\fun{R}D}}$ we note that by definition $\fun{R}\epsilon_D \circ \eta_{\fun{R}D} = 1_{\fun{R}D}$ and so the commutativity of the diagram
-				\begin{equation*}
-					\begin{diagram}
-						\threebytwo[verywide]
-							{\fun{RL}C}{\fun{RLRL}C}{\fun{RL}C}
-							{C}{\fun{RL}C}{}
-						\arrow{nw}{n}{\fun{RL}\eta_C}[above]
-						\arrow{n}{ne}{\fun{R}\epsilon_{\fun{L}C}}[above]
-						\arrow{sw}{s}{\eta_C}[below]
-						\arrow[equals]{s}{ne}{\fun{R}1_{\fun{L}C}}[below right]
-						\arrow{sw}{nw}{\eta_C}[left]
-						\arrow{s}{n}{\eta_{\fun{RL}C}}[left]
-					\end{diagram}
-				\end{equation*}
+				Writing $\epsilon_D = \widehat{1_{\fun{R}D}}$ we note that by definition $\fun{R}\epsilon_D \circ \eta_{\fun{R}D} = 1_{\fun{R}D}$ and so by uniqueness of inverses
+
+				% the commutativity of the diagram
+				% \begin{equation*}
+				% 	\begin{diagram}
+				% 		\threebytwo[verywide]
+				% 			{\fun{RL}C}{\fun{RLRL}C}{\fun{RL}C}
+				% 			{C}{\fun{RL}C}{}
+				% 		\arrow{nw}{n}{\fun{RL}\eta_C}[above]
+				% 		\arrow{n}{ne}{\fun{R}\epsilon_{\fun{L}C}}[above]
+				% 		\arrow{sw}{s}{\eta_C}[below]
+				% 		\arrow[equals]{s}{ne}{\fun{R}1_{\fun{L}C}}[below right]
+				% 		\arrow{sw}{nw}{\eta_C}[left]
+				% 		\arrow{s}{n}{\eta_{\fun{RL}C}}[left]
+				% 	\end{diagram}
+				% \end{equation*}
+				% and the injectivity of $\phi_{CD}$ imply $\epsilon_{\fun{L}C}\circ \fun{L}\eta_C = 1_{\fun{L}C}$.
 
 				For naturality in $C$ note that given $c:C'-->C$ the initial element in $C'\downarrow\fun{R}$ gives rise to
 				\begin{equation*}
@@ -526,7 +534,7 @@
 	\end{theorem}
 
 	\newpage
-	\section{Density and Locally Finitely Presentable Categories}
+	\section{Density and Locally Presentable Categories}
 	\subsection{Pointwise Kan Extensions}
 
 	\begin{definition}
@@ -554,7 +562,7 @@
 
 	\subsection{Density}
 
-	\subsection{Locally Finitely Presentable Categories}
+	\subsection{Locally Presentable Categories}
 
 	\newpage
 	\section{Monads}
