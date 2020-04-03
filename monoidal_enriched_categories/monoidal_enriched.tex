@@ -6,6 +6,8 @@
 }
 \author{Jonas Linssen}
 
+\usetikzlibrary{fit}
+
 \begin{document}
 	\maketitle
 	\tableofcontents
@@ -80,7 +82,7 @@
 			\begin{diagram}
 				\node (w) at (-2.5,0) {$I_\cat{W} \tensor_\cat{W} \fun{F}X$};
 				\node (nw) at (-1.5,1.5) {$\fun{F}I_\cat{V} \tensor_\cat{W}\fun{F}X$};
-				\node (ne) at (1.5,1.5) {$\fun{F}(I_\cat{V}\tensor_\cat{V}W)$};
+				\node (ne) at (1.5,1.5) {$\fun{F}(I_\cat{V}\tensor_\cat{V}X)$};
 				\node (e) at (2.5,0) {$\fun{F}X$};
 
 				\arrow{w}{nw}{\phi_0 \tensor \fun{F}X}[ontop]
@@ -104,6 +106,103 @@
 
 		A \textbf{strong/strict monoidal functor} is a lax monoidal functor, where $\phi_0$ and $\phi$ are isomorphisms/identities.
 	\end{definition}
+
+	The corresponding string diagrams are
+	\begin{equation*}
+		\begin{diagram}
+			\node (a1) at (0,0) {$\fun{F}X$};
+			\node (a2) at (1,0) {$\fun{F}Y$};
+			\node (a3) at (2,0) {$\fun{F}Z$};
+
+			\node (b1) at (.5,-1.5) {$\fun{F}XY$};
+			\node (b2) at (2,-1.5) {$\fun{F}Z$};
+
+			\node (c1) at (1.25,-3) {$\fun{F}XYZ$};
+
+			\knot{a1}{a2}{b1}{\phi}
+			\edge[equals]{a3}{b2}{}
+			\knot{b1}{b2}{c1}{\phi}
+
+			%\node[draw,fit=(a1)(a2)(b1)] {};
+		\end{diagram}
+		=
+		\begin{diagram}
+			\node (a1) at (0,0) {$\fun{F}X$};
+			\node (a2) at (1,0) {$\fun{F}Y$};
+			\node (a3) at (2,0) {$\fun{F}Z$};
+
+			\node (b1) at (0,-1.5) {$\fun{F}X$};
+			\node (b2) at (1.5,-1.5) {$\fun{F}YZ$};
+
+			\node (c1) at (.75,-3) {$\fun{F}XYZ$};
+
+			\knot{a2}{a3}{b2}{\phi}
+			\edge[equals]{a1}{b1}{}
+			\knot{b1}{b2}{c1}{\phi}
+		\end{diagram}
+		\hspace{.75cm}
+		\begin{diagram}
+			\node (a1) at (0,0) {$I$};
+			\node (a2) at (1,0) {$\fun{F}X$};
+
+			\node (b1) at (0,-1.5) {$\fun{F}I$};
+			\node (b2) at (1,-1.5) {$\fun{F}X$};
+
+			\node (c1) at (.5,-3) {$\fun{F}IX$};
+			\node (c1f) at (0,-3.5) {$I$};
+			\node (c2f) at (1,-3.5) {$X$};
+
+			\node (d1f) at (.5,-5) {$X$};
+			\node (d1) at (.5,-5.5) {$\fun{F}X$};
+
+			\edge{a1}{b1}{\phi_0}[ontop]
+			\edge[equals]{a2}{b2}{}
+			\knot{b1}{b2}{c1}{\phi}
+			\knot{c1f}{c2f}{d1f}{\lambda}
+
+			\bbox{(c1f)(c2f)(d1f)}
+		\end{diagram}
+		=
+		\begin{diagram}
+			\node (a1) at (0,0) {$I$};
+			\node (a2) at (1,0) {$\fun{F}X$};
+
+			\node (b1) at (.5,-1.5) {$\fun{F}X$};
+
+			\knot{a1}{a2}{b1}{\lambda}
+		\end{diagram}
+		\hspace{.75cm}
+		\begin{diagram}
+			\node (a1) at (0,0) {$\fun{F}X$};
+			\node (a2) at (1,0) {$I$};
+
+			\node (b1) at (0,-1.5) {$\fun{F}X$};
+			\node (b2) at (1,-1.5) {$\fun{F}I$};
+
+			\node (c1) at (.5,-3) {$\fun{F}XI$};
+			\node (c1f) at (0,-3.5) {$X$};
+			\node (c2f) at (1,-3.5) {$I$};
+
+			\node (d1f) at (.5,-5) {$X$};
+			\node (d1) at (.5,-5.5) {$\fun{F}X$};
+
+			\edge[equals]{a1}{b1}{}
+			\edge{a2}{b2}{\phi_0}[ontop]
+			\knot{b1}{b2}{c1}{\phi}
+			\knot{c1f}{c2f}{d1f}{\rho}
+
+			\bbox{(c1f)(c2f)(d1f)}
+		\end{diagram}
+		=
+		\begin{diagram}
+			\node (a1) at (0,0) {$\fun{F}X$};
+			\node (a2) at (1,0) {$I$};
+
+			\node (b1) at (.5,-1.5) {$\fun{F}X$};
+
+			\knot{a1}{a2}{b1}{\rho}
+		\end{diagram}
+	\end{equation*}
 
 	\begin{definition}
 		Let $\cat{V},\cat{W}$ be monoidal categories. A \textbf{monoidal (natural) transformation} between lax/strong/strict monoidal functors $(F,\phi_0,\phi):\cat{V}-->\cat{W}$ and $(G,\psi_0,\psi):\cat{V}-->\cat{W}$ is a natural transformation $\gamma:\fun{F} ==> \fun{G}$ making the following diagrams commute.
