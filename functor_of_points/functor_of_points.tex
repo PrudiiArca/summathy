@@ -6,6 +6,7 @@
 \author{Jonas Linßen}
 
 \NewDocumentCommand{\ft}{}{\text{ft}}
+\NewDocumentCommand{\fp}{}{\text{fp}}
 
 \begin{document}
 	\maketitle
@@ -15,7 +16,8 @@
 
 
 	\newpage
-	\section{Affine Schemes}
+	\section{Schemes}
+	\subsection{Affine Schemes}
 
 	Let $F=\{f_1,...,f_r\} \subseteq R[X_1,...,X_n]$ be a finite system of polynomial equations in some (commutative unital) ring $R$. Given an $R$-algebra $A$ we want to study the set of simultaneous solutions of $F$ in $A$, denoted $V(F,A)=\{(a_1,...,a_n) \in A^n \mid \forall i=1 ... r: f_i(a_1,...,a_n) = 0 \}$, which describes an abstract geometric hypersurface in $A^n$.
 	Since $R$-algebra homomorphisms respect polynomial equations with coefficients in $R$, we find that this assignment is indeed functorial
@@ -30,23 +32,80 @@
 	\begin{equation*}
 		V(F,-) \isom \ncat{Alg}_R(R[X_1,...,X_n]/\Gen{f_1,...,f_r},-),
 	\end{equation*}
-	which shows that the functor $V(F,-)$ is in fact representable.
+	which shows that the functor $V(F,-)$ is in fact representable by an $R$-algebra of finite presentation (a quotient of a polynomial ring in finitely many variables by a finitely generated ideal).
 
 	\begin{definition}
-		A functor, which is isomorphic to one of the form $V(F,-)$, is called an \textbf{affine scheme over $R$}. In other words, an affine scheme over $R$ is a functor $\ncat{Alg}_R \rightarrow \ncat{Set}$, which is representable by an $R$-algebra of finite type. A \textbf{morphism of affine schemes over $R$} is a mere natural transformation. We write $\ncat{Aff}_R$ for the subcategory of affine schemes over $R$ in the functor category $|[\ncat{Alg}_R,\ncat{Set}|]$.
+		A functor, which is isomorphic to one of the form $V(F,-)$, is called an \textbf{affine scheme over $R$}. More precisely an affine scheme over $R$ is a functor $\ncat{Alg}_R \rightarrow \ncat{Set}$, which is representable by an $R$-algebra of finite presentation. A \textbf{morphism of affine schemes over $R$} is a mere natural transformation. We write $\ncat{Aff}_R$ for the corresponding full subcategory of the functor category $|[\ncat{Alg}_R,\ncat{Set}|]$.
 	\end{definition}
 
-	Since the category of $R$-algebras of finite type $\ncat{Alg}_R^\ft$ is a full subcategory of $\ncat{Alg}_R$ the restricted Yoneda embedding
+	We give some examples of affine schemes.
+	\begin{example}
+		\vspace{-2em}
+		\begin{enumerate}[$(i)$]
+			\item{
+				The functor 
+				$\begin{array}{rcl}
+					\ncat{Alg}_R & \longrightarrow & \ncat{Set}\\
+					A & \longmapsto & \emptyset
+				\end{array}$ is represented by the zero ring.
+			}
+			\item{
+				The functor $\begin{array}{rcl}
+					\ncat{Alg}_R & \longrightarrow & \ncat{Set}\\
+					A & \longmapsto & \{*\}
+				\end{array}$ is represented by $R$.
+			}
+			\item{
+				The functor $\begin{array}{rcl}
+					\ncat{Alg}_R & \xlongrightarrow{U} & \ncat{Set}\\
+					A & \longmapsto & A\\
+					(\phi:A\rightarrow B) & \longmapsto & (\phi:A\rightarrow B)
+				\end{array}$ is represented by $R[X]$.
+			}
+			\item{
+				The functor $\begin{array}{rcl}
+					\ncat{Alg}_R & \xlongrightarrow{\A_R^n} & \ncat{Set}\\
+					A & \longmapsto & A^n\\
+					(\phi:A\rightarrow B) & \longmapsto & (\phi^n:A^n\rightarrow B^n)
+				\end{array}$ is represented by $R[X_1,...,X_n]$.
+			}
+			\item{
+				The functor $\begin{array}{rcl}
+					\ncat{Alg}_R & \longrightarrow & \ncat{Set}\\
+					A & \longmapsto & A^\times\\
+					(\phi:A\rightarrow B) & \longmapsto & (\phi=\phi^\times:A^\times\rightarrow B^\times)
+				\end{array}$ is represented by $R[X,Y]/(XY-1)$.
+			}
+			\item{
+				The functor $\begin{array}{rcl}
+					\ncat{Alg}_R & \xlongrightarrow{\SL_2} & \ncat{Set}\\
+					A & \longmapsto & \SL_2(A)\\
+					(\phi:A\rightarrow B) & \longmapsto & (\phi^{n\times n}:\SL_2(A)\rightarrow \SL_2(B))
+				\end{array}$\vspace{.5em}\\
+				is represented by $R[X_1,...,X_4]/(X_1X_4-X_2X_3-1)$.
+			}
+		\end{enumerate}
+	\end{example}
+	Examples (v) and (vi) possess more structure \TODO{as they factor via $\ncat{Grp}$}. We will study these so called \textit{affine group schemes} in a later chapter. Example (iv) is important enough to deserve its own
+	\begin{definition}
+		The affine scheme represented by $R[X_1,...,X_n]$ is called the \textbf{$n$-dimensional affine space} over $R$ and is denoted $\A_R^n:\ncat{Alg}_R \longrightarrow \ncat{Set}$.
+	\end{definition}
+
+	Since the category of $R$-algebras of finite presentation $\ncat{Alg}_R^\fp$ is a full subcategory of $\ncat{Alg}_R$ the restricted Yoneda embedding
 	\begin{equation*}
 		\begin{array}{rcl}
-			(\ncat{Alg}_R^\ft)^\op & \xlongrightarrow{\fun{Y}} & [\![\ncat{Alg}_R,\ncat{Set}]\!]\\
+			(\ncat{Alg}_R^\fp)^\op & \xlongrightarrow{\fun{Y}} & [\![\ncat{Alg}_R,\ncat{Set}]\!]\\
 			A & \longmapsto & \ncat{Alg}_R(A,-)\\
 			(\phi:A\rightarrow B) & \longmapsto & \pre\phi
 		\end{array}
 	\end{equation*}
 	is full and faithful and we immediately get that $\fun{Y}$ restricts to an equivalence of categories
 	\begin{equation*}
-		(\ncat{Alg}_R^\ft)^\op \simeq \ncat{Aff}_R.
+		(\ncat{Alg}_R^\fp)^\op \simeq \ncat{Aff}_R.
 	\end{equation*}
-	As such $\ncat{Aff}_R$ exhibits the same categorical structure as $(\ncat{Alg}_R^\ft)^\op$, in particular it is \TODO{finitely complete and finitely cocomplete}.
+	As such $\ncat{Aff}_R$ exhibits the same categorical structure as $(\ncat{Alg}_R^\fp)^\op$, in particular it is \TODO{finitely complete and finitely cocomplete}.
+
+	\subsection{Projective Schemes}
+
+	\subsection{Abstract Schemes}
 \end{document}
