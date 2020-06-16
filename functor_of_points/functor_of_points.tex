@@ -1,0 +1,52 @@
+\input{../header.tex}
+
+\usepackage{extarrows}
+
+\title{$\Sum \text{math}(y)$\\The Functor of Points}
+\author{Jonas Linßen}
+
+\NewDocumentCommand{\ft}{}{\text{ft}}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+
+	We follow [Kapil] \url{https://www.imsc.res.in/~kapil/crypto/notes/node38.html} as well as 
+
+
+	\newpage
+	\section{Affine Schemes}
+
+	Let $F=\{f_1,...,f_r\} \subseteq R[X_1,...,X_n]$ be a finite system of polynomial equations in some (commutative unital) ring $R$. Given an $R$-algebra $A$ we want to study the set of simultaneous solutions of $F$ in $A$, denoted $V(F,A)=\{(a_1,...,a_n) \in A^n \mid \forall i=1 ... r: f_i(a_1,...,a_n) = 0 \}$, which describes an abstract geometric hypersurface in $A^n$.
+	Since $R$-algebra homomorphisms respect polynomial equations with coefficients in $R$, we find that this assignment is indeed functorial
+	\begin{equation*}
+		\begin{array}{rcl}
+			\ncat{Alg}_R&\xlongrightarrow{V(F,-)}&\ncat{Set}\\
+			A&\longmapsto&V(F,A)\\
+			(\phi:A\rightarrow B)&\longmapsto&(\phi:V(F,A)\rightarrow V(F,B)).
+		\end{array}
+	\end{equation*}
+	By the universal property of the polynomial ring $R[X_1,...,X_n]$ a morphism of $R$-algebras of the form $\phi:R[X_1,...,X_n]/\Gen{f_1,...,f_r} \rightarrow A$ is uniquely determined by a point $(a_1,...,a_n)\in A^n$ with the property that $f_i(a_1,...,a_n)=0$ for each $i=1...r$. Hence we find that there is a natural isomorphism 
+	\begin{equation*}
+		V(F,-) \isom \ncat{Alg}_R(R[X_1,...,X_n]/\Gen{f_1,...,f_r},-),
+	\end{equation*}
+	which shows that the functor $V(F,-)$ is in fact representable.
+
+	\begin{definition}
+		A functor, which is isomorphic to one of the form $V(F,-)$, is called an \textbf{affine scheme over $R$}. In other words, an affine scheme over $R$ is a functor $\ncat{Alg}_R \rightarrow \ncat{Set}$, which is representable by an $R$-algebra of finite type. A \textbf{morphism of affine schemes over $R$} is a mere natural transformation. We write $\ncat{Aff}_R$ for the subcategory of affine schemes over $R$ in the functor category $|[\ncat{Alg}_R,\ncat{Set}|]$.
+	\end{definition}
+
+	Since the category of $R$-algebras of finite type $\ncat{Alg}_R^\ft$ is a full subcategory of $\ncat{Alg}_R$ the restricted Yoneda embedding
+	\begin{equation*}
+		\begin{array}{rcl}
+			(\ncat{Alg}_R^\ft)^\op & \xlongrightarrow{\fun{Y}} & [\![\ncat{Alg}_R,\ncat{Set}]\!]\\
+			A & \longmapsto & \ncat{Alg}_R(A,-)\\
+			(\phi:A\rightarrow B) & \longmapsto & \pre\phi
+		\end{array}
+	\end{equation*}
+	is full and faithful and we immediately get that $\fun{Y}$ restricts to an equivalence of categories
+	\begin{equation*}
+		(\ncat{Alg}_R^\ft)^\op \simeq \ncat{Aff}_R.
+	\end{equation*}
+	As such $\ncat{Aff}_R$ exhibits the same categorical structure as $(\ncat{Alg}_R^\ft)^\op$, in particular it is \TODO{finitely complete and finitely cocomplete}.
+\end{document}
