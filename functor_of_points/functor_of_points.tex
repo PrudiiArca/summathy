@@ -32,11 +32,13 @@
 	\begin{equation*}
 		V(F,-) \isom \ncat{Alg}_R(R[X_1,...,X_n]/\Gen{f_1,...,f_r},-),
 	\end{equation*}
-	which shows that the functor $V(F,-)$ is in fact representable by an $R$-algebra of finite presentation (a quotient of a polynomial ring in finitely many variables by a finitely generated ideal).
+	which shows that the functor $V(F,-)$ is in fact representable by an $R$-algebra of finite presentation (a quotient of a polynomial ring in finitely many variables by a finitely generated ideal). We use this as the reason for the following
 
 	\begin{definition}
-		A functor, which is isomorphic to one of the form $V(F,-)$, is called an \textbf{affine scheme over $R$}. More precisely an affine scheme over $R$ is a functor $\ncat{Alg}_R \rightarrow \ncat{Set}$, which is representable by an $R$-algebra of finite presentation. A \textbf{morphism of affine schemes over $R$} is a mere natural transformation. We write $\ncat{Aff}_R$ for the corresponding full subcategory of the functor category $|[\ncat{Alg}_R,\ncat{Set}|]$.
+		%A functor, which is isomorphic to one of the form $V(F,-)$, is called an \textbf{affine $R$-scheme}. More precisely a
+		An affine scheme over $R$ is a functor $X:\ncat{Alg}_R \rightarrow \ncat{Set}$, which is representable by an $R$-algebra $\mathcal{O}(X)$ called the \textbf{coordinate ring} of $X$. A \textbf{morphism of affine schemes over $R$} is a mere natural transformation. We write $\ncat{Aff}_R$ for the corresponding full subcategory of the functor category $|[\ncat{Alg}_R,\ncat{Set}|]$.
 	\end{definition}
+	%\footnotetext{The definition of an affine scheme can be made for arbitrary $R$-Algebras. However one runs into issues of size, since the functor category $|[\ncat{Alg}_R,\ncat{Set}|]$ is not locally small. Moreover we feel like the restriction to algebras of finite presentation is more in spirit of finite systems of equations in finitely many variables, which is our motivation to study schemes.}
 
 	We give some examples of affine schemes.
 	\begin{example}
@@ -74,7 +76,8 @@
 					\ncat{Alg}_R & \longrightarrow & \ncat{Set}\\
 					A & \longmapsto & A^\times\\
 					(\phi:A\rightarrow B) & \longmapsto & (\phi=\phi^\times:A^\times\rightarrow B^\times)
-				\end{array}$ is represented by $R[X,Y]/(XY-1)$.
+				\end{array}$\vspace{.5em}\\
+				is represented by $R[X,Y]/(XY-1)=R[X,X^{-1}]$.
 			}
 			\item{
 				The functor $\begin{array}{rcl}
@@ -86,7 +89,7 @@
 			}
 		\end{enumerate}
 	\end{example}
-	Examples (v) and (vi) possess more structure \TODO{as they factor via $\ncat{Grp}$}. We will study these so called \textit{affine group schemes} in a later chapter. Example (iv) is important enough to deserve its own
+	Examples (v) and (vi) possess more structure as they factor via $\ncat{Grp}$. We will study these so called \textit{affine group schemes} in a later chapter. Example (iv) is important enough to deserve its own
 	\begin{definition}
 		The affine scheme represented by $R[X_1,...,X_n]$ is called the \textbf{$n$-dimensional affine space} over $R$ and is denoted $\A_R^n:\ncat{Alg}_R \longrightarrow \ncat{Set}$.
 	\end{definition}
@@ -99,11 +102,29 @@
 			(\phi:A\rightarrow B) & \longmapsto & \pre\phi
 		\end{array}
 	\end{equation*}
-	is full and faithful and we immediately get that $\fun{Y}$ restricts to an equivalence of categories
+	is full and faithful and we immediately get that $\fun{Y}$ restricts to an equivalence of categories \TODO{write down assignment}
 	\begin{equation*}
 		(\ncat{Alg}_R^\fp)^\op \simeq \ncat{Aff}_R.
 	\end{equation*}
-	As such $\ncat{Aff}_R$ exhibits the same categorical structure as $(\ncat{Alg}_R^\fp)^\op$, in particular it is \TODO{finitely complete and finitely cocomplete}.
+	As such $\ncat{Aff}_R$ is essentially small and exhibits the same categorical structure as $(\ncat{Alg}_R^\fp)^\op$. Under this equivalence we obtain
+
+	\begin{lemma}
+		The category $\ncat{Aff}_R$ is finitely complete. In particular we have
+		\begin{enumerate}[(i)]
+			\item{
+				The \textbf{terminal object} in $\ncat{Aff}_R$ is the functor represented by $R$.
+			}
+			\item{
+				The \textbf{product} $X \times Y$ of affine schemes $X$ and $Y$ is the functor represented by $\mathcal{O}(X)\tensor_R\mathcal{O}(Y)$.
+			}
+			\item{
+				The \textbf{pullback} of a diagram of affine schemes $X \rightarrow Y \leftarrow Z$ is the functor represented by $\mathcal{O}(X) \tensor_{\mathcal{O}(Y)} \mathcal{O}(Z)$.
+			}
+			\item{
+				The \TODO{equalizer} of morphisms of affine schemes $f,g:X \rightarrow Y$ is the functor represented by $\mathcal{O}(Y)/\Gen{f-g}$
+			}
+		\end{enumerate}
+	\end{lemma}
 
 	\subsection{Projective Schemes}
 
