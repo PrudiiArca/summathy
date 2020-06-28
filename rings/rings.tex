@@ -103,27 +103,26 @@
 
 	\begin{definition}
 		A \textbf{zero divisor} in a ring $R$ is an element $a$, such that there exists a nonzero element $b$ such that $ab = 0$. A \textbf{nilpotent element} $a$ satisfies that $a^n = 0$ for some $n \in \N$. In particular nilpotent elements are zero divisors.
-		An element, which is not a zero divisor, is sometimes called \textbf{regular}. 
+		An element, which is not a zero divisor, is sometimes called \textbf{regular}. A \textbf{unit} in a ring $R$ is an element $a$, for which there exists a multiplicative inverse, i.e. an element $a^{-1}$ satisfying $aa^{-1} = 1 \;{\color{gray}(= a^{-1}a)}$.
+		The subset of all units in $R$ will be denoted by $R^\times$. 
+
+		A ring, in which every element except $0$ is a unit, is a \textbf{field}.
 
 		A ring, in which $0$ it the only zero divisor, is called an \textbf{integral domain}.
 	\end{definition}
 
 	Note that $0$ is a zero divisor unless the ring is the trivial ring. In particular, the trivial ring is considered \underline{not} to be an integral domain.
 
-	\begin{definition}
-		A \textbf{unit} in a ring $R$ is an element $a$, for which there exists a \textbf{multiplicative inverse}, i.e. an element $a^{-1}$ satisfying $aa^{-1} = 1 \;{\color{gray}(= a^{-1}a)}$.
-		The subset of all units in $R$ will be denoted by $R^\times$. 
-
-		A ring, in which every element except $0$ is a unit, is a \textbf{field}.
-	\end{definition}
-
 	\begin{lemma}[Properties of Units and Zero Divisors]
 		\vspace{-1.5em}\begin{enumerate}[(i)]
 			\item{
-				No zero divisor is a unit and vice versa.
+				Let $a$ be a regular element. Then $ab=ab'$ implies $b=b'$. In particular this cancellation rule holds in any integral domain.
 			}
 			\item{
-				Let $f:R --> S$ be a morphism of rings. If $a$ is a zero divisor / unit in $R$, then $f(a)$ is a zero divisor / unit in $S$.
+				No zero divisor is a unit and vice versa. In particular every field is an integral domain.
+			}
+			\item{
+				Let $f:R --> S$ be a morphism of rings. If $a$ is a zero divisor / nilpotent / unit in $R$, then $f(a)$ is a zero divisor / nilpotent / unit in $S$.
 			}
 			\item{
 				Let $f: K --> R$ be a morphism of rings, where $K$ is a field. Then $f$ is mono.
@@ -135,6 +134,9 @@
 	\end{lemma}
 	\begin{sketch}
 		\begin{enumerate}[(i)]
+			\item{
+				By assumption.
+			}
 			\item{
 				Holds for the trivial ring by definition. In a nontrivial ring use contradiction.
 			}
@@ -396,7 +398,8 @@
 		By definition any maximal ideal is prime. The set of all maximal ideals is denoted by $\mSpec R$.
 	\end{definition}
 	\begin{sketch}
-		(i)$<==>$(ii) by definition\\
+		(i)$<==>$(ii) by definition
+
 		(ii)$<==>$(iii) note that $\{R\}$ is an Ako family.
 	\end{sketch}
 
@@ -465,6 +468,8 @@
 	\begin{sketch}
 		The correspondence for ideals can be checked by composing the mutually inverse maps. That for maximality follows from the former preserving inclusion. The correspondences for prime ideals may be checked by considering elements. The one for radical ideals the follows from the fact that for surjective functions preimages and images respect intersections. 
 	\end{sketch}
+
+	\TODO{$R/\nrad(R)$ is free reduced ring}
 
 	\newpage
 	\subsection{Localization and Local Rings}
@@ -570,7 +575,7 @@
 	\subsection{Factorial Rings and Principal Ideal Domains}
 
 	\begin{definition}
-		Let $R$ be a ring. An element $a$ \textbf{divides} another element $r$ (or is a \textbf{divisor} of $r$), if there is an element $b$ such that $ab = r$. In this case we write $a \mid r$.
+		Let $R$ be a ring. An element $a$ \textbf{divides} another element $r$ (or is a \textbf{divisor} of $r$), if there is an element $b$ such that $ab = r$. In this case we write $a \divides r$.
 
 		Two elements $a$ and $b$ are \textbf{associate}, if there is a unit $u$ such that $au = b$. Being associate defines an equivalence relation on $R$ and we denote the equivalence class corresponding to $a$ by $aR^\times$. 
 	\end{definition}
@@ -579,8 +584,8 @@
 		Given a ring $R$ the following statements hold.
 		\begin{enumerate}[(i)]
 			\item{
-				If $a \mid r$ and $a$ is a zero divisor, then $r$ is a zero divisor.\\
-				If $a \mid r$ and $a$ is not a zero divisor, then the corresponding factor $b$ with $ab = r$ is unique.
+				If $a \divides r$ and $a$ is a zero divisor, then $r$ is a zero divisor.\\
+				If $a \divides r$ and $a$ is not a zero divisor, then the corresponding factor $b$ with $ab = r$ is unique.
 			}
 			\item{
 				\TODO{all zero divisors are associate? one zero divisor then all associate zero divisors?}
@@ -596,7 +601,7 @@
 
 		An element $r$ is \textbf{irreducible}, if it is not a unit and $ab = r$ implies that either $a$ or $b$ are a unit. Note that the first condition makes this an exclusive or and the second condition can be reformulated as any divisor is associate to $r$.
 
-		An element $p$ is \textbf{prime}, if it is nonzero, not a unit and for any two elements $a,b$ the statement $p \mid ab$ implies $p \mid a$ or $p \mid b$.
+		An element $p$ is \textbf{prime}, if it is nonzero, not a unit and for any two elements $a,b$ the statement $p \divides ab$ implies $p \divides a$ or $p \divides b$.
 	\end{definition}
 
 	\begin{lemma}[Properties of Primes and Irreducibles]
@@ -608,18 +613,24 @@
 			\item{
 				In an integral domain any prime element is irreducible
 			}
+			\item{
+				In an integral domain prime elements $p,q$ with $p \divides q$ are associate.
+			}
 		\end{enumerate}
 	\end{lemma}
-	\begin{proof}
+	\begin{sketch}
 		\begin{enumerate}[(i)]
 			\item{
 				If $R$ is trivial $0$ is a unit.
 			}
 			\item{
-
+				Use the cancellation rule of integral domains.
+			}
+			\item{
+				$ap=q$ implies $qb=a$ or $qc=p$. Applying the cancellation rule on $q=ap=qbp$ yields a contradiction to $p$ not being a unit. Hence the cancellation rule on $q=ap=qac$ shows that $p$ and $q$ are associate via the unit $a$.
 			}
 		\end{enumerate}
-	\end{proof}
+	\end{sketch}
 
 	\begin{definition}
 		An integral domain $R$ is a \textbf{unique factorization domain} (or simply \textbf{factorial}), if it satisfies one of the following equivalent conditions
@@ -661,6 +672,12 @@
 		(i)$\implies$(ii) Use existence and uniqueness of factorizations to deduce prime element property
 
 		(ii)$\implies$(iii) $\checkmark$
+
+		(iii)$\implies$(i) Since in an integral domain every prime element is irreducible, it suffices to show uniqueness of the factorization. So given two factorizations with $m \leq n$
+		\begin{equation*}
+			u\cdot p_1\cdot ...\cdot p_m = v \cdot q_1 \cdot ... \cdot q_n
+		\end{equation*}
+		we find that $p_i \divides q_{j_i}$
 	\end{sketch}
 
 	\begin{lemma}[Properties of Factorial Rings]
