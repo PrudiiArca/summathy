@@ -56,7 +56,7 @@
 				\end{equation*}
 			}
 			\item{
-				A morphism of rings $f:R --> S$ is epi if and only if it is surjective.
+				\TODO{A morphism of rings $f:R --> S$ is epi if and only if it is surjective. WRONG see localization}
 			}
 			\item{
 				A morphism of rings $f:R --> S$ is mono if and only if it is injective. Using (i) this is equivalent to the equation $\ker f := \{r \in R \mid f(r) = 0\} = \{0\}$.
@@ -75,7 +75,7 @@
 					\end{diagram}
 					)
 				\end{equation*}
-				given by the subring $\{r \in R \mid f_1(r) = f_2(r)\}$ and its inclusion. Thus $\ncat{CRing}$ is \textit{complete}.
+				\TODO{given by the subring $\{r \in R \mid f_1(r) = f_2(r)\}$ wrong?} and its inclusion. Thus $\ncat{CRing}$ is \textit{complete}.
 			}
 		\end{enumerate}
 	\end{lemma}
@@ -694,10 +694,8 @@
 		Let $R$ be a principal ideal domain. Then $R$ is a factorial ring, i.e. every element has a (in some sense) unique decomposition into irreducible elements.
 	\end{theorem}
 
-	\subsection{Dedekind Domains?}
-
 	\newpage
-	\subsection{Noetherian and Artinian Rings, Krull Dimension}
+	\subsection{Noetherian Rings}
 
 	\begin{definition}
 		A ring $R$ is \textbf{noetherian}, if it satisfies one of the following equivalent conditions.
@@ -777,6 +775,9 @@
 		\end{enumerate}
 	\end{sketch}
 
+	\newpage
+	\subsection{Artinian Rings}
+
 	\begin{definition}
 		A ring $R$ is \textbf{artinian}, if it satisfies one of the following equivalent conditions.
 		\begin{enumerate}[(i)]
@@ -821,9 +822,11 @@
 
 	\TODO{artinian vs noetherian}
 
+	\subsection{Dedekind Domains?}
+
+
 	\newpage
 	\section{Algebras}
-	\subsection{Polynomial Rings}
 	\subsection{Algebras}
 
 	\begin{definition}
@@ -860,6 +863,37 @@
 		By construction the category of $R$-algebras, denoted $\ncat{Alg}_R$, is the comma category $R \downarrow \ncat{CRing}$.
 	\end{definition}
 
-	\section{Topological Rings?}
-	\subsection{Adic Topology}
+	\subsection{Polynomial Rings}
+
+	\begin{lemma}
+		A polynomial ring $R[X]$ is a principal ideal domain, \TODO{if and only if} $R$ is a field.
+	\end{lemma}
+
+	\begin{theorem}[Stability]
+		Let $R$ be a commutative ring.
+		\begin{enumerate}[(i)]
+			\item{
+				If $R$ is an integral domain, so is $R[X]$.
+			}
+			\item{
+				If $R$ is a factorial domain, so is $R[X]$.
+			}
+			\item{
+				If $R$ is noetherian, so is $R[X]$ (Hilbert's Basis Theorem)
+			}
+			\item{
+				\TODO{If $R$ is artinian, so is $R[X]$. (wrong?)}
+			}
+		\end{enumerate}
+	\end{theorem}
+
+	\subsection{$K$-algebras and Krull-Dimension}
+
+	\begin{theorem}
+		Let $K$ be a field. Then the Krull-dimension of $K[X_1,...,X_n]$ is $n$.
+	\end{theorem}
+
+	\subsection{Matrix Rings}
+
+	\TODO{TODO matrix rings as algebras over $R$}
 \end{document}
