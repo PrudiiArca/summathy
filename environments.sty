@@ -9,6 +9,7 @@
 \RequirePackage{mdframed} 		% background colors of environments
 \RequirePackage{hyperref} 		% referencing
 \RequirePackage{enumitem} 		% defining list environments
+\RequirePackage{listings}		% required for macros as parameters
 %\RequirePackage{etoolbox} % parskip bugfix
 
 % --- parskip bugfix
@@ -49,42 +50,44 @@
 \newcounter{theoremcounter}[subsection]
 \renewcommand{\thetheoremcounter}{\thesubsection.\arabic{theoremcounter}}
 
+% TODO https://tex.stackexchange.com/questions/227154/how-to-define-macros-in-order-to-reuse-key-value-parameters
+
 \NewDocumentEnvironment{@theoremenvironment}{mmm}
 {
 	\vspace{6pt}
-	\begin{mdframed}[backgroundcolor=verylightgray,leftline=true,rightline=false,topline=false,bottomline=false,linecolor=black,linewidth=1pt,leftmargin=-6pt,innerleftmargin=5pt,rightmargin=-6pt,innerrightmargin=5pt,innertopmargin=6pt,nobreak=true\IfNoValueTF{#3}{}{,#3}]\refstepcounter{theoremcounter}\textbf{#1 \thetheoremcounter}\IfNoValueTF{#2}{}{ (#2)}
+	\begin{mdframed}[backgroundcolor=verylightgray,leftline=true,rightline=false,topline=false,bottomline=false,linecolor=black,linewidth=1pt,leftmargin=-6pt,innerleftmargin=5pt,rightmargin=-6pt,innerrightmargin=5pt,innertopmargin=6pt]\refstepcounter{theoremcounter}\textbf{#1 \thetheoremcounter}\IfNoValueTF{#2}{}{ (#2)}
 	\vspace{3pt}\newline%\itshape
 }{
 	%\end{tab}
 	\end{mdframed}
 }
 
-\NewDocumentEnvironment{convention}{oo}
-{\begin{@theoremenvironment}{Convention}{#1}{#2}}{\end{@theoremenvironment}}
+\NewDocumentEnvironment{convention}{o}
+{\begin{@theoremenvironment}{Convention}{#1}{}}{\end{@theoremenvironment}}
 
-\NewDocumentEnvironment{definition}{oo}
-{\begin{@theoremenvironment}{Definition}{#1}{#2}}{\end{@theoremenvironment}}
+\NewDocumentEnvironment{definition}{o}
+{\begin{@theoremenvironment}{Definition}{#1}{}}{\end{@theoremenvironment}}
 
-\NewDocumentEnvironment{construction}{oo}
-{\begin{@theoremenvironment}{Construction}{#1}{#2}}{\end{@theoremenvironment}}
+\NewDocumentEnvironment{construction}{o}
+{\begin{@theoremenvironment}{Construction}{#1}{}}{\end{@theoremenvironment}}
 
-\NewDocumentEnvironment{lemma}{oo}
-{\begin{@theoremenvironment}{Lemma}{#1}{#2}}{\end{@theoremenvironment}}
+\NewDocumentEnvironment{lemma}{o}
+{\begin{@theoremenvironment}{Lemma}{#1}{}}{\end{@theoremenvironment}}
 
-\NewDocumentEnvironment{proposition}{oo}
-{\begin{@theoremenvironment}{Proposition}{#1}{#2}}{\end{@theoremenvironment}}
+\NewDocumentEnvironment{proposition}{o}
+{\begin{@theoremenvironment}{Proposition}{#1}{}}{\end{@theoremenvironment}}
 
-\NewDocumentEnvironment{theorem}{oo}
-{\begin{@theoremenvironment}{Theorem}{#1}{#2}}{\end{@theoremenvironment}}
+\NewDocumentEnvironment{theorem}{o}
+{\begin{@theoremenvironment}{Theorem}{#1}{}}{\end{@theoremenvironment}}
 
-\NewDocumentEnvironment{corollary}{oo}
-{\begin{@theoremenvironment}{Corollary}{#1}{#2}}{\end{@theoremenvironment}}
+\NewDocumentEnvironment{corollary}{o}
+{\begin{@theoremenvironment}{Corollary}{#1}{}}{\end{@theoremenvironment}}
 
-\NewDocumentEnvironment{remark}{oo}
-{\begin{@theoremenvironment}{Remark}{#1}{#2}}{\end{@theoremenvironment}}
+\NewDocumentEnvironment{remark}{o}
+{\begin{@theoremenvironment}{Remark}{#1}{}}{\end{@theoremenvironment}}
 
-\NewDocumentEnvironment{example}{oo}
-{\begin{@theoremenvironment}{Example}{#1}{#2}}{\end{@theoremenvironment}}
+\NewDocumentEnvironment{example}{o}
+{\begin{@theoremenvironment}{Example}{#1}{}}{\end{@theoremenvironment}}
 
 
 

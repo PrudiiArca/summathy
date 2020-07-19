@@ -13,14 +13,15 @@
 	\newpage
 	\section{Rings}
 	\subsection{Rings}
+
 	\begin{definition}
-		A \textbf{(commutative, unital) ring} is a set $R$ together with a \textbf{addition} $+: R \times R --> R$ and a \textbf{multiplication} $\cdot: R \times R --> R$ such that 
+		A \textbf{(unital) ring} is a set $R$ together with a \textbf{addition} $+: R \times R --> R$ and a \textbf{multiplication} $\cdot: R \times R --> R$ such that 
 		\begin{enumerate}
 			\item{
 				$(R,+)$ is an \textit{abelian group}, i.e. $+$ is associative and commutative, any element $a$ has a unique additive inverse $-a$ and there is an additive identity element $0$. 
 			}
 			\item{
-				$(R,\cdot)$ is a commutative \textit{monoid}, i.e. $\cdot$ is associative and commutative and there is a multiplicative identity element $1$.
+				$(R,\cdot)$ is a \textit{monoid}, i.e. $\cdot$ is associative and there is a multiplicative identity element $1$.
 			}
 			\item{
 				the following \textit{distributive law} holds for any $a,b,c \in R$:
@@ -30,24 +31,36 @@
 			}
 		\end{enumerate}
 
+		A ring $R$ is said to be \textbf{commutative}, if its multiplication is.
+
 		If $0 = 1$ the ring necessessarily becomes $R = \{0\}$, which is called the \textbf{zero ring} or \textbf{trivial ring}.
 	\end{definition}
-	%\footnotetext{Some authors drop the requirement of a multiplicative identity and mark its presence by saying unital ring.}
-	%\footnotetext{For binary operators like $+$ it is common to use infix notation $a+b$ instead of $+(a,b)$. Moreover we use the convention \enquote{multiplication before addition}.}
-	\TODO{examples: Z, End(A), subring}
 
-	\TODO{infix notation, dropping $\cdot$}
+	For sake of intuition we state the following examples, even if we will define them thoroughly in later sections.
+	\begin{enumerate}[$\bullet$]
+		\item{
+			The integer numbers $\Z$, the rational numbers $\Q$, the real numbers $\R$ and the complex numbers $\C$ are commutative rings, equipped with their standard addition and multiplication.
+		}
+		\item{
+			The set $\ncat{Set}(X,R)$ of functions from a set $X$ to a (commutative) ring $R$ is a (commutative) ring, when equipped with pointwise addition and pointwise multiplication. The identities are the corresponding constant maps.
+		}
+		\item{
+			The set of endomorphisms $\End(A)$ of an abelian group, together with pointwise addition and composition as multiplication. In general it will be a non-commutative ring.
+		}
+	\end{enumerate}
+
+	To compare different rings we need to have a definition of structure preserving map.
 
 	\begin{definition}
-		A \textbf{morphism of rings} is a function $f:R --> S$ between rings $R$ and $S$, which satisfies
+		A \textbf{morphism of rings} is a function $f:R --> S$ between rings $R$ and $S$, which satisfies for all $a,b,c \in R$ that
 		\begin{equation*}
 			f(ab + c) = f(a)f(b) + f(c) \;\;\;\;\text{and}\;\;\;\; f(1_R) = 1_S.
 		\end{equation*}
-		As the identity function $1_R: R --> R$ is a morphism of rings for any ring $R$ and morphisms of rings are closed under composition, we get a category $\ncat{CRing}$.
+		As the identity function $1_R: R --> R$ is a morphism of rings for any ring $R$ and morphisms of rings are closed under composition, we get a category $\ncat{Ring}$. The full subcategory of commutative rings will be denoted $\ncat{CRing}$.
 	\end{definition}
 
-	\begin{lemma}[Properties of $\ncat{CRing}$]
-		In $\ncat{CRing}$ the following holds.
+	\begin{lemma}[Properties of $\ncat{Ring}$ and $\ncat{CRing}$]
+		In $\ncat{Ring}$ we have the following.
 		\begin{enumerate}[(i)]
 			\item{
 				A morphism of rings $f:R-->S$ is a morphism of the underlying \textit{abelian groups} $(R,+)$ and $(S,+)$, i.e. there is a forgetful functor $\fun{U}:\ncat{CRing} --> \ncat{Ab}$. In particular it holds that
@@ -56,27 +69,18 @@
 				\end{equation*}
 			}
 			\item{
-				\TODO{A morphism of rings $f:R --> S$ is epi if and only if it is surjective. WRONG see localization}
-			}
-			\item{
 				A morphism of rings $f:R --> S$ is mono if and only if it is injective. Using (i) this is equivalent to the equation $\ker f := \{r \in R \mid f(r) = 0\} = \{0\}$.
 			}
 			\item{
-				The trivial ring $1$ is terminal and the ring of integers $\Z$ is initial.
+				The trivial ring $1$ is terminal and the ring of integers $\Z$ is initial, both in $\ncat{Ring}$ and $\ncat{CRing}$.
 			}
-			\item{
-				$\ncat{CRing}$ has arbitrary products, where the ring structure on the underlying set $\Product \limits_{i \in I} R_i$ is defined componentwise. It has equalizers
-				\begin{equation*}
-					\eq(
-					\begin{diagram}
-						\twobyone{R}{S}
-						\arrow[higher]{w}{e}{f_1}[above]
-						\arrow[lower]{w}{e}{f_1}[below]
-					\end{diagram}
-					)
-				\end{equation*}
-				\TODO{given by the subring $\{r \in R \mid f_1(r) = f_2(r)\}$ wrong?} and its inclusion. Thus $\ncat{CRing}$ is \textit{complete}.
-			}
+			\vbox{\item{
+				Both $\ncat{Ring}$ and $\ncat{CRing}$ are complete categories.
+
+				Products of rings $(R_i)_{i \in I}$ are given by componentwise ring structure on the product $\smash{\Prod \limits_{i \in I} R_i}$ of the underlying sets.
+
+				The equalizer of morphisms $f_1,f_2:R --> S$ is the subring given by the equalizer of the underlying functions $\{r \in R \mid f_1(r) = f_2(r)\}$.
+			}}
 		\end{enumerate}
 	\end{lemma}
 	\begin{sketch}
@@ -85,10 +89,7 @@
 				By definition.
 			}
 			\item{
-				Clearly surjective implies epi. \TODO{converse?}
-			}
-			\item{
-				Injective implies mono. \TODO{converse?}
+				Follows from the analogous statement for abelian groups.
 			}
 			\item{
 				The first statement holds by definition. For the second note that $n = 1 + ... + 1$ in $\Z$ and use a morphism of rings has to preserve $1$.
@@ -673,11 +674,15 @@
 
 		(ii)$\implies$(iii) $\checkmark$
 
-		(iii)$\implies$(i) Since in an integral domain every prime element is irreducible, it suffices to show uniqueness of the factorization. So given two factorizations with $m \leq n$
+		(iii)$\implies$(i) Since in an integral domain every prime element is irreducible, it suffices to show uniqueness of the factorization. We can restrict ourselves to the comparison of two factorizations with primes $p_i$ and irreducibles $q_j$
 		\begin{equation*}
 			u\cdot p_1\cdot ...\cdot p_m = v \cdot q_1 \cdot ... \cdot q_n
 		\end{equation*}
-		we find that $p_i \divides q_{j_i}$
+		By definition of primality we find up to reordering $p_1 \divides q_1$, ie. $q_1 = v_1q_1$ and by definition of irreducability $v_1 \in R^\times$, so $p_1$ and $q_1$ are associate. Using the cancellation rule for integral domains yields
+		\begin{equation*}
+			u\cdot p_2\cdot ...\cdot p_m = vv_1 \cdot q_2 \cdot ... \cdot q_n.
+		\end{equation*}
+		By induction (and contradiction to deduce $m=n$) we get the desired uniqueness property.
 	\end{sketch}
 
 	\begin{lemma}[Properties of Factorial Rings]
