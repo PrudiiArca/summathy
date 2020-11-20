@@ -1,0 +1,328 @@
+\input{../header.tex}
+
+\title{A Student's Notes on Linear Algebra}
+\author{Jonas Linßen}
+
+\DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator{\incl}{in}
+\DeclareMathOperator{\Eq}{Eq}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+
+	\newpage
+	\section{Foundations}
+	Foundational issues $==>$ have to start somewhere
+
+	\subsection{Propositional Logic}
+
+	\newpage
+	\subsection{The Category of Sets}
+
+	In this section we want to axiomatize the most basic object of study, that of a \textit{set}. Naively a set is merely more than a collection of distinguishable elements and there are a few basic operations we want to be able to perform on such collections. One example of such an operation is to form a so called \textit{subset} by picking certain elements of a set and omitting others. As it stands this naive approach is flawed though, in that it leads to paradoxes. Let us give an example.
+
+	Let us ask, whether we can speak about a set of all sets. From an intuitive standpoint this should be perfectly fine, yet \textit{Russel's paradox} challenges this believe:
+
+	\begin{center}
+		Assume there exists a set of all sets and consider
+		the\\ subset $X$ of all sets, who do not contain themselves.\\
+		Does $X$ contain itsself as a subset?
+	\end{center}
+
+	This question cannot be resolved in either way. Hence a consistent theory of sets, meaning a theory which doesn't involve paradoxes, has to at least restrict the possible size of sets to avoid speaking about a set of all sets.
+
+	It is a huge accomplishment of 20th centuries' mathematicians to come up with consistent set theories, laying the foundation of formal mathematics based on sets. Arguably the most famous one is the \textit{Zermelo-Fraenkel} set theory with \textit{choice}, $\mathsf{ZFC}$ for short, commonly treated as \textit{the} set theory underlying modern mathematics. But despite its importance, one rarely finds an axiomatic treatment in introductory texts on mathematics. One reason for this might be that its axioms and constructions revolve around elements of sets being sets themselves. While this leads to a theory of sets working incredibly well, it throws up weird questions like \enquote{what are the elements of the set $2$?}, not suitable for an introductory course aimed on other topics than set theory. %The fact, that $\mathsf{ZFC}$ requires a fairly good understanding of higher order logic to appreciate its constructions, may be another reason for its abundance.
+
+	Instead of merely mentioning $\mathsf{ZFC}$ and starting to handwave set theoretical foundations by using naive sets, we want to use the next paragraphs to give an axiomatic treatment of another kind of set theory. This theory, Lawvere's \textit{Elementary Theory of the Category of Sets}, $\mathsf{ETCS}$ for short, can be made equivalent to $\mathsf{ZFC}$ in a precise sense, but differs in its design. A very notable difference lies in making a distinction between elements and sets making the axioms closely resemble naive set theory. But even more important is the change in mentality. While $\mathsf{ZFC}$ revolves around studying sets being elements of each other, $\mathsf{ETCS}$ focuses on more general behaviour of sets with respect to each other. %It emphasizes the categorical viewpoint that an object is determined by its relation to other objects. 
+
+	% To introduce $\mathsf{ETCS}$ it is convenient (but not necessary!) to have the most basic terminology of categories at hand. The following definition of a metacategory makes precise that we want to consider some sort of abstract structure, in which distinct objects can be related in a compatible way. It is a rather abstract definition and might be hard to grasp on a first read. But just considering the titles of the chapters of this book suggests that it is a very convenient definition to have. For starters we suggest thinking of naive sets and assignments between them to get a feeling for why the following definition makes sense.
+
+	% \begin{definition}
+	% 	A \textbf{(meta)category} $\cat{C}$ consists of
+	% 	\begin{enumerate}[$\bullet$]
+	% 		\item{
+	% 			A collection $\Ob \cat{C}$ of \textbf{objects}
+	% 		}
+	% 		\item{
+	% 			A collection $\cat{C}(X,Y)$ of \textbf{arrows} (commonly called \textbf{morphisms}) $X --> Y$ for any two objects $X$ and $Y$ (in particular every arrow $X--> Y$ comes with a dedicated \textbf{domain} $X$ and \textbf{codomain} $Y$)
+	% 		}
+	% 	\end{enumerate}
+	% 	such that the following requirements are satisfied.
+	% 	\begin{enumerate}[$\bullet$]
+	% 		\item{
+	% 			For any two arrows $f:X--> Y$, $g:Y--> Z$ there is a specified \textbf{composite morphism} $gf: X --> Z$
+	% 		}
+	% 		\item{
+	% 			This notion of composition is associative ie. independent of the order. For any three morphisms $f:X--> Y$, $g:Y--> Z$, $h:Z --> W$ the composites $h(gf)$ and $(hg)f$ are equal.
+	% 		}
+	% 		\item{
+	% 			Any object $X$ comes with a dedicated \textbf{identity morphism} $\id_X:X--> X$, which has the property that for every morphism $f:X --> Y$ it holds that $f\circ \id_X$ equals $f$ and for every morphism $g: W --> X$ it holds that $\id_X \circ\; g$ equals $g$.
+	% 		}
+	% 	\end{enumerate}
+	% \end{definition}
+
+	% Note that we used inuitive notions of \textit{collection}, \textit{existence}, \textit{distinctness} and \textit{equality} to make this definition. As we are on a quest to give a formal treatment of such notions this might rightfully feel like cheating. However one has to start somewhere and this philosophical problem arises whenever we try to lie foundations formally. In retrospect we will find a hack, but at this point we only want to acknowledge this problem and choose to ignore it for the time being.
+
+	% Enough remarks now, let us begin.
+
+	\partitle{The Axioms}
+
+	In the following we will list axioms for what we call the \textit{category of sets}. In doing this we will be forced to use intuitive notions of \textit{collection}, \textit{existence}, \textit{distinctness} and \textit{equality}, as well as \textit{forall} and \textit{exists}. As we are on a quest to give a formal treatment of such notions this might rightfully feel like cheating. However one has to start somewhere and this philosophical problem arises whenever we try to lie foundations formally. In retrospect we might be able to circumvent this problem, but at this point we only want to acknowledge this problem and choose to ignore it for the time being.
+
+	Instead of giving the axioms in a condensed form and introducing terminology and consequences afterwards, we will make a separate remark for each of them.
+
+	\begin{definition}
+		The \textbf{category of sets}, denoted $\ncat{Set}$, consists of
+		\begin{enumerate}[$\bullet$]
+			\item{
+				A collection of abstract objects called \textbf{sets}
+			}
+			\item{
+				For any two sets $X,Y$ a collection $\ncat{Set}(X,Y)$ of abstract objects, called \textbf{functions} from $X$ to $Y$. Such a function is denoted $f:X-->Y$ and we call $X$ the \textbf{domain} and $Y$ the \textbf{codomain} of $f$.
+			}
+		\end{enumerate}
+		subject to the axioms listed in the rest of this section.
+	\end{definition}
+
+	The first axiom is about how functions interact with each other. Thinking of naive assignments we want to be able to perform a number of assignments after another. Moreover we certainly want to have those assignments, which map everything to itsself.
+
+	\begin{mdframed}[skipabove=1em,skipbelow=1em]
+		\textbf{Axiom: $\ncat{Set}$ is a category}
+
+		For any three sets $X,Y,Z$ and any two functions $f:X-->Y$ and $g:Y-->Z$ there is a dedicated function $gf:X-->Y$ (sometimes written $g\circ f:X-->Y$) called the \textbf{composite} function.
+	
+		The order of taking the composite does not matter in the following sense: Given four sets $X,Y,Z,W$ and functions $f:X-->Y$, $g:Y-->Z$ and $h:Z-->W$ the composite of $h$ with $gf$ is equal to the composite of $hg$ with $f$. We say \textit{composition is associative}.
+	
+		Any set $X$ has a dedicated \textbf{identity function}, denoted $\id_X: X --> X$.
+
+		Taking the composite with the identity function \textit{does nothing} in the following sense: Given the identity function $\id_X:X-->X$ on a set $X$ and any function $f:X-->Y$ the composite $f\id_X$ is equal to $f$. Likewise given any function $g:U-->X$ the composite $\id_Xg$ is equals $g$.
+	\end{mdframed}
+
+	So far we only have very abstract notions of sets and functions. The following axiom is meant to make them contain elements, but as we don't have a formal notion of element yet, we have to work with abstract functions and abstract sets only. The idea behind the following definition is that naively there is no choice when describing an assignment from a collection of things to a collection with just one element. 
+	Moreover it will turn out useful to have a set without any elements as well. There are several reasons for its definition and we will see a good one later. At this point the best reason is that having no elements is in some sense the opposite of having elements. 
+
+	\begin{mdframed}[skipabove=1em, skipbelow=1em]
+		\textbf{Axiom: $\ncat{Set}$ has an empty set and a singleton set}
+
+		There is a \textbf{singleton set} $*$, which is characterized by the property that for every set $X$ there is a unique function $!:X --> *$.
+
+		There exists an \textbf{empty set}. It has the property that for every set $X$ there is a unique function $?:\emptyset --> X$. \TODO{just set without element and initial as consequence?}
+	\end{mdframed}
+
+	Finally we are in the position to speak of elements of a set. The idea behing the following definition is that naively any assignment from a collection of one element to another collection picks out a dedicated element.
+
+	\begin{definition}
+		Let $X$ be a set. A function $x:* --> X$ is called an \textbf{element} of $X$ and is denoted $x \in X$.\\
+		If $f:X-->Y$ is a function, we will denote the composite $fx:*-->Y$ by $f(x) \in Y$ and call it the \textbf{value of $f$ at $x$}. 
+	\end{definition}
+
+	So by definition elements of sets are given by certain functions. But we want to have more compatibility of elements and functions. The following axiom shouldn't be surprising.
+
+	\begin{mdframed}[skipabove=1em, skipbelow=1em]
+		\textbf{Axiom: Functions are determined on their values}
+
+		Given any two functions $f:X-->Y$ and $g:X-->Y$ the following holds: If $f$ and $g$ are equal, then for every element $x\in X$ the values $f(x)$ and $g(x)$ are equal. Conversely, if $f$ and $g$ are distinct, then there exists an element $x \in X$ such that $f(x)$ and $g(x)$ are distinct values.
+
+		Moreover the following holds. Given any two set $X,Y$ and assigning to every element $x \in X$ a single element $y_x \in Y$ there exists a unique function $f:X --> Y$ with the property that for every element $x\in X$ the value $f(x)$ equals $y_x$. We will write this function
+		\begin{equation*}
+			\begin{array}{rcl}
+				f:X & \longrightarrow & Y\\
+				x & \longmapsto & y_x
+			\end{array}
+		\end{equation*}
+	\end{mdframed}
+
+	Of cause being able to distinguish functions is useful, but the full power of the 
+
+	\begin{mdframed}[skipabove=1em, skipbelow=1em]
+		\textbf{Axiom: $\ncat{Set}$ has finite products}
+		
+		For any two sets $X,Y$ there is the \textbf{product set} $X \times Y$, which is characterized the property that any two elements $x\in X$ and $y \in Y$ give rise to a unique element $(x,y) \in X \times Y$ and that all elements of $X \times Y$ arise in this manner.
+	\end{mdframed}
+
+	In the presence of the \textit{constructing functions axiom} any product $X \times Y$ induces \textbf{projection functions}
+	\begin{equation*}
+		\begin{array}{rcl}
+			\pr_X:X \times Y & \longrightarrow & X\\
+			(x,y) & \longmapsto & x
+		\end{array}
+		\hspace{1cm}\text{and}\hspace{1cm}
+		\begin{array}{rcl}
+			\pr_Y:X \times Y & \longrightarrow & Y\\
+			(x,y) & \longmapsto & y.
+		\end{array}
+	\end{equation*}
+	Using this functions we can write the characterizing property of the product set in another way: for any two elements $x \in X$ and $y \in Y$ there is a unique element $(x,y) \in X \times Y$ such that $\pr_X(x,y)$ equals $x$ and $\pr_Y(x,y)$ equals $y$. Somewhat surprisingly this property generalizes to arbitrary functions $f:T --> X$ and $g: T --> Y$ in the following way.
+
+	\begin{lemma}[Universal Property of the Product]
+		Let $X,Y$ be sets and $X \times Y$ be the product set of $X$ and $Y$. Then for any set $T$ and for any two functions $f:T --> X$ and $g: T --> Y$ there is a unique function $(f,g): T --> X \times Y$ such that $\pr_X(f,g)=f$ and $\pr_Y(f,g)=g$.
+	\end{lemma}
+	\begin{proof}
+		Existence: For an element $t \in T$ the functions $f$ and $g$ have values $f(t) \in X$ and $g(t) \in Y$. Hence $t \in T$ induces a unique element $(f(t),g(t)) \in X \times Y$. Thus we can construct a function
+		\begin{equation*}
+			\begin{array}{ccc}
+				T & \longrightarrow & X \times Y\\
+				t & \longmapsto & (f(t),g(t))
+			\end{array}
+		\end{equation*}
+		with the property that for every element $t \in T$ we find $\pr_X(f,g)(t) = \pr_X(f(t),g(t)) = f(t)$ and $\pr_Y(f,g)(t) = \pr_Y(f(t),g(t)) = g(t)$. This shows $\pr_X(f,g) = f$ and $\pr_Y(f,g) = g$.
+	\end{proof}
+
+	\begin{remark}
+		To keep the axioms independent from each other, one usually states the \textit{product axiom} in the form of the universal mapping property, making the projection maps part of the axiom. We chose to put an emphasis on the \textit{constructing functions axiom}, so we didn't need the full universal mapping property as an axiom.
+	\end{remark}
+
+	In preparation of the next axiom let us single out the following special class of functions, which do not exhibit any collisions when mapping elements of the domain to elements in the codomain.
+
+	\begin{definition}
+		A function $f:X --> Y$ is \textbf{injective}, if for any two elements $x,x' \in X$ it holds that $f(x)=f(x')$ implies that $x=x'$. 
+
+		We also say that $f$ exhibits $X$ as a \textbf{subset} of $Y$ or that $f$ is the inclusion of the subset $X$ of $Y$. We write $X \subseteq Y$, if the explicit form of $f$ is clear from context. 
+	\end{definition}
+
+	As the definition suggests this class of functions allows us to speak of certain subcollections of sets. It was mentioned in the introduction of this section that we have to be careful about which subsets exists in our theory. Before we start to axiomatize and investigate means to obtain subsets, we would like to state the following characterization of injective functions.
+
+	\begin{lemma}[Left Cancellation Rule]
+		A function $f:X --> Y$ is injective if and only if for every set $T$ and any two functions $g,g': T --> X$ it holds that $fg = fg'$ implies that $g=g'$.
+	\end{lemma}
+	\begin{proof}
+		\begin{enumerate}
+			\item[($\Leftarrow$)]{
+				is immediate by letting $T=*$.
+			}
+			\item[($\Rightarrow$)]{
+				Let $g,g':T --> X$ be functions satisfying $fg=fg'$. In particular for every $t \in T$ we find $f(g(t)) = fg(t) = fg'(t) = f(g'(t))$. As $f$ is injective we thus have $g(t)=g'(t)$. By the \textit{constructing functions axiom} $g=g'$ follows.
+			}\vspace{-1.5em}
+		\end{enumerate}
+	\end{proof}
+
+	\begin{mdframed}[skipabove=1em, skipbelow=1em]
+		\textbf{Axiom: $\ncat{Set}$ has Equalizers}
+
+		For any two functions $f,g:X--> Y$ there is a set $\Eq(f,g)$ (called the \textbf{equalizer} of $f$ and $g$) with the property that if $x \in X$ is an element in $X$ satisfying $f(x)=g(x)$, then it induces a unique element $x \in \Eq(f,g)$ and every element of $\Eq(f,g)$ arises in this manner. The fact that both elements $x\in X$ and $x \in \Eq(f,g)$ have the same name is on purpose and its advantage will become apparent via the following observations. At this point let us emphasize, that $x \in X$ and $x \in \Eq(f,g)$ can still be distinguished by their codomain ie. the set they are elements of!
+
+		We will often write $\{x \in X \mid f(x)=g(x)\}$ instead of $\Eq(f,g)$.
+	\end{mdframed}
+
+	In the presence of the \textit{constructing functions axiom} we obtain the function
+	\begin{equation*}
+		\begin{array}{rcl}
+			\incl:\Eq(f,g) & \longrightarrow & X\\
+			x & \longmapsto & x,
+		\end{array}
+	\end{equation*}
+	which is injective as $\incl(x) = \incl(x') = t: * --> X$ implies $f(t) = g(t): * --> Y$, so $x \in \Eq(f,g)$ and $x' \in Eq(f,g)$ have to agree by definition of $\Eq(f,g)$. Hence we may simply write $\Eq(f,g) \subseteq X$ respectively $\{x \in X \mid f(x) = g(x)\} \subseteq X$ instead of having to give it a name.
+
+	As for products we note that this map satisfies a seemingly stronger property.
+
+	\begin{lemma}[Universal Mapping Property of Equalizers]
+		Let $f,g:X --> Y$ be two functions. Then for every set $T$ and function $t: T --> X$ satisfying $ft = gt$ there is a unique function $t': T --> \Eq(f,g)$ such that $\incl \circ \, t' = t$ (and in particular $f\circ\incl\circ \;t' = g \circ \incl \circ \;t'$).
+	\end{lemma}
+
+	Having products and equalizers we can start to construct a quite a few sets.
+
+	\begin{definition}
+		Let $X$ be a set and $f:A --> X$, $g:B --> X$ be two functions. The \textbf{pullback} of $X$ along $f$ and $g$ is the equalizer \begin{equation*}
+			\{(a,b) \in A \times B \mid f(a) = f \circ \pr_A (a,b) = g \circ \pr_B(a,b) = g(b)\}.
+		\end{equation*}
+	\end{definition}
+
+	\begin{definition}
+		Let $X$ be a set and $\incl_A:A \longrightincl X$, $\incl_B:B \longrightincl X$ be two injective functions exhibiting $A$ and $B$ as subsets of $X$. The \textbf{intersection} of $A$ and $B$ is the pullback of $X$ along $\incl_A$ and $\incl_B$. 
+
+		$$\{(a,b) \in A \times B \mid \incl_A(a) = \incl_A \circ \pr_A (a,b) = \incl_B \circ \pr_B(a,b) = \incl_B(b)\}$$
+	\end{definition}
+
+	\begin{mdframed}[skipabove=1em, skipbelow=1em]
+		\textbf{Axiom: Powersets}
+
+		temp
+	\end{mdframed}
+
+	teaasdkl
+
+	\begin{mdframed}[skipabove=1em, skipbelow=1em]
+		\textbf{Axiom: Recursion}
+
+		temp
+	\end{mdframed}
+
+	teaasdkl
+
+	\begin{mdframed}[skipabove=1em, skipbelow=1em]
+		\textbf{Axiom: Choice}
+
+		temp
+	\end{mdframed}
+
+
+	\partitle{Internalizing Logic}
+
+	\partitle{Categories and Universes}
+
+
+	\partitle{The Axiom of Equalizers and Intersections}
+	leading to Pullbacks (intersections)
+
+	\partitle{The Axiom of Choice}
+	Choice\\
+	Injections and Surjections
+
+	\partitle{The Axiom of Cartesian Closure}
+	Cartesian Closure: natural isos $Set(T\times X, Y) \isom Set(T,[X,Y])$
+
+	\partitle{The Axiom Disjoint Unions}
+	Finite Coproducts
+
+	\partitle{The Axiom of Powersets}
+	Power sets: $\mathcal{P}(X) = [X,\{0,1\}]$
+
+	\partitle{The Axiom of Coequalizers and Quotients}
+	todo
+
+	\partitle{The Axiom of Recursion}
+
+	\partitle{The Axiom of Universes}
+
+	\newpage
+	\subsection{Order and Relations}
+	\subsection{Numbers}
+
+	\newpage
+	\section{Ring Theory}
+	\subsection{The Category of Rings}
+	\subsection{Polynomials}
+	\subsection{Factorial Domains}
+	\subsection{Euclidean Domains}
+
+	\newpage
+	\section{Module Theory}
+	\subsection{The Category of Modules}
+	lin syst of eqns $\implies$ classify matrices as lin maps $\implies$ generalize $R^n$ to modules
+	\subsection{Exact Sequences}
+	\subsection{Tensor Products}
+
+	\newpage
+	\section{Vector Space Theory}
+	\subsection{The Category of Vector Spaces}
+	Dimension
+	\subsection{Volume and the Determinant}
+	\subsection{Eigenspaces and Diagonizability}
+	diag makes powers easy
+	\subsection{Angles and Scalar Products}
+
+	\newpage
+	\section{Matrix Theory}
+	\subsection{Frobenius Normal Form}
+	\subsection{Jordan Normal Form}
+
+	\newpage
+	\section{TODO: Other Topics}
+	\subsection{QR-Decomposition}
+	\subsection{LU-Decomposition}
+	\subsection{Gershgorin}
+	\subsection{Duals and Exterior Powers}
+	\subsection{Formal Derivatives}
+	\subsection{Quaternions and Rotation}
+\end{document}
